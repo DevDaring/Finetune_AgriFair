@@ -7,4 +7,4 @@ checkpoints/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-Dataset/*.jsonl
+# Dataset/*.jsonl  -- raw AgriFair data is intentionally tracked in this repo
