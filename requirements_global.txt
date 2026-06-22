@@ -1,0 +1,23 @@
+# Pinned global requirements for the AgriFair XLoRA-Bias study (no virtual environment;
+# install with: pip install -r requirements_global.txt --break-system-packages).
+# Flash-attention is installed separately from a pre-built wheel by
+# GPU_Run/common/flash_attn_setup.py (never compiled from source); sdpa is the fallback.
+
+torch>=2.3
+transformers>=4.44
+peft>=0.12
+datasets>=2.20
+accelerate>=0.33
+bitsandbytes>=0.43          # 4-bit NF4 QLoRA arm (CUDA only)
+huggingface_hub>=0.24
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.3
+pandas>=2.0
+matplotlib>=3.7
+sacrebleu>=2.4
+rouge-score>=0.1.2
+python-dotenv>=1.0
+requests>=2.31
+sentence-transformers>=2.7  # optional: only if MULTILINGUAL_EMBED_MODEL is set
+captum>=0.7                 # optional: Integrated Gradients cross-check

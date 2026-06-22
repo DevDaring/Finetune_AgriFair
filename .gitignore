@@ -1,0 +1,10 @@
+.env
+results/
+data/
+models/
+checkpoints/
+*.pdf
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+Dataset/*.jsonl
