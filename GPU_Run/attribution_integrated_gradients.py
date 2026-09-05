@@ -30,6 +30,7 @@ from typing import Dict, List, Optional, Sequence
 import numpy as np
 
 from GPU_Run.common import model_registry
+from GPU_Run.common import training as T
 from GPU_Run.common import prompts as P
 from GPU_Run.common.checkpointing import read_jsonl
 from GPU_Run.common.logging_utils import append_csv_row, get_logger, log_run_metadata
@@ -344,7 +345,7 @@ def main(smoke: bool = False):
                         label, held_out, top, stab["mean_pairwise_spearman"])
             log_run_metadata("attribution_integrated_gradients",
                              {"tier": label, "held_out_axis": held_out or "", "top_layers": top, **stab})
-        del model
+        T.release_model(model)
 
 
 if __name__ == "__main__":

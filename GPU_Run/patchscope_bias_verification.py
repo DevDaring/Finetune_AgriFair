@@ -30,6 +30,7 @@ import numpy as np
 from GPU_Run.common import model_registry
 from GPU_Run.common import prompts as P
 from GPU_Run.common import targets as TG
+from GPU_Run.common import training as T
 from GPU_Run.common.checkpointing import read_jsonl
 from GPU_Run.common.logging_utils import append_csv_row, get_logger, log_run_metadata
 from GPU_Run.common.patchscopes import (
@@ -140,7 +141,7 @@ def main(smoke: bool = False):
                                 label, method, cond_name, overall if overall == overall else float("nan"), len(layers))
             finally:
                 TG.remove_steering(model)
-                del model
+                T.release_model(model)
 
     log_run_metadata("patchscope_bias_verification", {"summary": str(summary_path)})
 

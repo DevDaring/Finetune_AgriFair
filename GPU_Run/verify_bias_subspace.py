@@ -34,6 +34,7 @@ from GPU_Run.common import metrics as M
 from GPU_Run.common import model_registry
 from GPU_Run.common import prompts as P
 from GPU_Run.common import targets as TG
+from GPU_Run.common import training as T
 from GPU_Run.common.checkpointing import read_jsonl
 from GPU_Run.common.logging_utils import append_csv_row, get_logger, log_run_metadata
 from GPU_Run.common.patchscopes import capture_last_hidden_states
@@ -149,10 +150,16 @@ def main(smoke: bool = False):
         for target in TG.discover_targets(label, include_steering=True, exclude_prefixes=("ablation_",),
                                           first_seed_only=True):
             method, seed = target.method, target.seed
+            model = None
             try:
                 model, tok, meta = TG.load_target(tier, target, smoke=smoke)
             except Exception as e:
+                # Release whatever was allocated before the failure. Leaving it resident is
+                # what turned one out-of-memory error into a run of them, and a card under
+                # pressure also produces confusing secondary errors such as a dispatched
+                # model missing prepare_inputs_for_generation.
                 logger.error("verify load failed for %s (%s); skipping.", method, e)
+                T.release_model(model)
                 continue
             try:
                 probe_mcq = _probe_mcq(model, tok)
@@ -185,7 +192,7 @@ def main(smoke: bool = False):
                             probe_adv if probe_adv == probe_adv else float("nan"))
             finally:
                 TG.remove_steering(model)
-                del model
+                T.release_model(model)
 
     log_run_metadata("verify_bias_subspace", {"rows": n_rows})
 
