@@ -1,8 +1,10 @@
-"""Aggregate the main comparison, difference-awareness, external, and quantization tables.
+"""Aggregate the main comparison, difference-awareness, transfer, and quantization tables.
 
 Reads results/main_evaluation_results.csv and produces seed-averaged tables with mean and
-standard deviation on the primary endpoint and the difference-awareness metrics
-(Instruction.md Section 17). Runs on CPU; no GPU required.
+standard deviation on the primary endpoint and on the difference-awareness metrics. The
+frozen test set carries two slices, so every table is produced per slice as well as pooled:
+a method's in-distribution number and its number on the structure-novel slice answer
+different questions and are never averaged together.
 
 Run:  python CPU_Run/aggregate_results.py
 """
@@ -20,48 +22,96 @@ from GPU_Run.common.paths import MAIN_EVALUATION, RESULTS_DIR
 
 logger = get_logger("aggregate_results")
 
-PRIMARY = "contextual_fairness_score_harmonic_mean_of_neq_and_eq_accuracy"
+PRIMARY = "balanced_awareness_score_harmonic_mean_of_diff_and_equal_accuracy"
+VALUE_COLUMNS = [
+    PRIMARY,
+    "accuracy_on_diff_condition",
+    "accuracy_on_equal_condition",
+    "gap_erasure_rate_on_diff_items",
+    "gap_fabrication_rate_on_equal_items",
+    "difference_aware_metric_wang_2025_recall_style",
+    "contextual_awareness_metric_wang_2025_precision_style",
+    "capability_retention_accuracy_on_external_probe",
+    "identity_swap_unlicensed_flip_rate",
+    "identity_swap_invariance_rate_on_equal_items",
+    "identity_swap_equivariance_rate_on_diff_items",
+    "option_rotation_canonical_consistency_rate",
+    "option_rotation_position_following_rate",
+]
+
+
+def _numeric(df, cols):
+    for c in cols:
+        if c in df.columns:
+            df[c] = pd.to_numeric(df[c], errors="coerce")
+    return df
 
 
 def _agg(df, value_cols):
-    g = df.groupby(["tier", "method"], as_index=False)
-    out = g[value_cols].agg(["mean", "std"])
-    out.columns = ["_".join([c for c in col if c]).strip("_") for col in out.columns.to_flat_index()]
-    return out
+    cols = [c for c in value_cols if c in df.columns]
+    grouped = df.groupby(["tier", "method"], as_index=False)[cols].agg(["mean", "std", "count"])
+    grouped.columns = ["_".join([c for c in col if c]).strip("_") for col in grouped.columns.to_flat_index()]
+    return grouped
 
 
 def main():
     if not MAIN_EVALUATION.exists():
         raise SystemExit("Run GPU_Run/evaluate_all.py first (main_evaluation_results.csv missing).")
-    df = pd.read_csv(MAIN_EVALUATION)
+    df = _numeric(pd.read_csv(MAIN_EVALUATION), VALUE_COLUMNS)
     overall = df[df["scope"].astype(str).str.endswith("|all")].copy()
-    for c in [PRIMARY, "accuracy_on_neq_condition", "accuracy_on_eq_condition",
-              "difference_aware_metric_wang_2025_recall_style",
-              "contextual_awareness_metric_wang_2025_precision_style",
-              "utility_retention_accuracy_on_held_out_general_set"]:
-        overall[c] = pd.to_numeric(overall[c], errors="coerce")
+    if overall.empty:
+        raise SystemExit("No overall-scope rows in the evaluation results.")
 
-    main_table = _agg(overall, [PRIMARY, "accuracy_on_neq_condition", "accuracy_on_eq_condition"])
-    main_table.to_csv(RESULTS_DIR / "aggregated_main_comparison_table.csv", index=False)
-    logger.info("Main comparison table: %d (tier,method) rows.", len(main_table))
+    in_dist = overall[overall["scope"].astype(str).str.startswith("agrifacts_frozen_test")]
+    _agg(in_dist, VALUE_COLUMNS).to_csv(RESULTS_DIR / "aggregated_main_comparison_table.csv", index=False)
+    logger.info("Main comparison table: %d (tier,method) rows.", in_dist["method"].nunique())
 
-    diff_table = _agg(overall, ["accuracy_on_neq_condition", "accuracy_on_eq_condition",
-                                "difference_aware_metric_wang_2025_recall_style",
-                                "contextual_awareness_metric_wang_2025_precision_style"])
-    diff_table.to_csv(RESULTS_DIR / "difference_awareness_preservation_table.csv", index=False)
+    # per-slice tables, where the slice is carried on the per-item predictions
+    from GPU_Run.common.checkpointing import read_jsonl
+    from GPU_Run.common.paths import TEST_INSTANCES_FROZEN, per_item_prediction_paths
+    from GPU_Run.common import metrics as M
 
-    # external generalization = the held-out axis slice (cross-axis transfer)
-    ext = df[df["scope"].astype(str).str.contains("axis:gender")].copy()
-    ext[PRIMARY] = pd.to_numeric(ext[PRIMARY], errors="coerce")
-    if not ext.empty:
-        _agg(ext, [PRIMARY]).to_csv(RESULTS_DIR / "aggregated_external_generalization_cross_axis_gender.csv", index=False)
+    slice_of = {r["id"]: r.get("test_slice", "") for r in read_jsonl(TEST_INSTANCES_FROZEN)}
+    slice_rows = []
+    for (tier, method, seed), path in sorted(per_item_prediction_paths().items()):
+        preds = read_jsonl(path)
+        for slice_name in ("structure_familiar", "structure_novel"):
+            sub = [p for p in preds if slice_of.get(p["id"], "") == slice_name]
+            if not sub:
+                continue
+            slice_rows.append({
+                "tier": tier, "method": method, "random_seed": seed, "test_slice_name": slice_name,
+                "number_of_items": len(sub),
+                "balanced_awareness_score_harmonic_mean_of_diff_and_equal_accuracy": round(M.balanced_awareness_score(sub), 4),
+                "accuracy_on_diff_condition": round(M.condition_accuracy(sub, "diff"), 4),
+                "accuracy_on_equal_condition": round(M.condition_accuracy(sub, "equal"), 4),
+                "gap_erasure_rate_on_diff_items": round(M.gap_erasure_rate(sub), 4),
+                "gap_fabrication_rate_on_equal_items": round(M.gap_fabrication_rate(sub), 4),
+            })
+    if slice_rows:
+        pd.DataFrame(slice_rows).to_csv(RESULTS_DIR / "structure_slice_comparison_table.csv", index=False)
+        logger.info("Structure-slice table: %d rows.", len(slice_rows))
 
-    # quantization study
-    quant = overall[overall["method"].astype(str).str.contains("qlora", case=False)].copy()
+    diff_cols = ["accuracy_on_diff_condition", "accuracy_on_equal_condition",
+                 "difference_aware_metric_wang_2025_recall_style",
+                 "contextual_awareness_metric_wang_2025_precision_style"]
+    _agg(in_dist, diff_cols).to_csv(RESULTS_DIR / "difference_awareness_preservation_table.csv", index=False)
+
+    transfer = overall[overall["scope"].astype(str).str.startswith("held_out_axis:")].copy()
+    if not transfer.empty:
+        transfer.to_csv(RESULTS_DIR / "leave_one_axis_out_transfer_table.csv", index=False)
+        logger.info("Leave-one-axis-out transfer rows: %d.", len(transfer))
+
+    per_axis = df[df["scope"].astype(str).str.contains(r"\|axis:", regex=True)].copy()
+    if not per_axis.empty:
+        per_axis.to_csv(RESULTS_DIR / "per_axis_breakdown_table.csv", index=False)
+
+    quant = in_dist[in_dist["method"].astype(str).str.contains("qlora", case=False)]
     if not quant.empty:
-        _agg(quant, [PRIMARY]).to_csv(RESULTS_DIR / "quantization_study_table.csv", index=False)
+        _agg(quant, [PRIMARY, "capability_retention_accuracy_on_external_probe"]).to_csv(
+            RESULTS_DIR / "quantization_study_table.csv", index=False)
 
-    log_run_metadata("aggregate_results", {"methods": sorted(overall["method"].unique().tolist())})
+    log_run_metadata("aggregate_results", {"methods": sorted(in_dist["method"].unique().tolist())})
 
 
 if __name__ == "__main__":

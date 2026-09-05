@@ -1,7 +1,6 @@
 """Global seed control and deterministic-algorithm setup.
 
-Default seed 42; three-seed list 42/43/44 for the primary models (Instruction.md
-Sections 7.4, 18).
+Default seed 42; three-seed list 42/43/44 for the primary models, as preregistered.
 """
 from __future__ import annotations
 

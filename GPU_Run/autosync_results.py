@@ -2,7 +2,7 @@
 
 Force-pushes to the gpu-run-artifacts branch via a separate git index and orphan commits,
 so main is never touched; models/ is excluded (re-downloadable). Best-effort: if not a git
-repository, it logs and idles (Instruction.md Section 13).
+repository, it logs and idles.
 
 Run (background):  nohup python GPU_Run/autosync_results.py >> results/autosync.log 2>&1 &
 """

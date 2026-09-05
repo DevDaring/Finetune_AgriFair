@@ -1,7 +1,6 @@
 """Restore results/, checkpoints/, data/ from the gpu-run-artifacts branch.
 
-Run on a fresh VM after pre-emption, or on the CPU machine before CPU_Run
-(Instruction.md Sections 12, 13).
+Run on a fresh VM after pre-emption, or on the CPU machine before CPU_Run.
 
 Run:  python GPU_Run/restore_artifacts.py
 """

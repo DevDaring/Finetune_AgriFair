@@ -1,7 +1,7 @@
 """Logging, CSV writing with descriptive-name enforcement, run-metadata jsonl.
 
 Every results CSV must use full descriptive column names with no abbreviations
-(Instruction.md Sections 7, 11, 24.4). `write_csv` enforces this.
+so a table stays readable years later. `write_csv` enforces this.
 """
 from __future__ import annotations
 
@@ -45,7 +45,7 @@ def _check_descriptive(columns: Sequence[str]) -> None:
             bad.append(c)
     if bad:
         raise ValueError(
-            f"Non-descriptive CSV column names (use full names, Instruction.md 24.4): {bad}"
+            f"Non-descriptive CSV column names; write them out in full: {bad}"
         )
 
 

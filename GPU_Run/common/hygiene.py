@@ -3,7 +3,7 @@
 `validate_and_dedup` drops exact-duplicate rows by content hash, detects corrupted
 rows, logs counts, and returns the cleaned list. `scan_repo_for_hardcoded_keys`
 fails loudly (without printing any value) if an API-key pattern appears in tracked
-source (Instruction.md Sections 10, 18, 24).
+source.
 """
 from __future__ import annotations
 

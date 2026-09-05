@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AgriFair XLoRA-Bias — complete project explanation</title>
+<title>AgriFair GRAFT — complete project explanation</title>
 <style>
   :root{--ink:#1d2733;--soft:#5a6b7b;--line:#dfe6ee;--bg:#f6f9fc;--card:#fff;
-        --neq:#2c7a4b;--eq:#2b5d9e;--bad:#b5341f;--good:#2c7a4b;--accent:#3a6ea5;--code:#0f2b46;--purple:#7a4fb0;}
+        --diff:#2c7a4b;--equal:#2b5d9e;--bad:#b5341f;--good:#2c7a4b;--accent:#3a6ea5;--code:#0f2b46;--purple:#7a4fb0;}
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
        color:var(--ink);background:var(--bg);line-height:1.62;font-size:16.5px}
@@ -31,7 +31,7 @@
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
   @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
   .pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 10px;border-radius:999px;color:#fff}
-  .pill.neq{background:var(--neq)} .pill.eq{background:var(--eq)} .pill.adv{background:var(--purple)} .pill.ref{background:#8a6d3b}
+  .pill.diff{background:var(--diff)} .pill.equal{background:var(--equal)} .pill.adv{background:var(--purple)} .pill.ref{background:#8a6d3b}
   code,kbd{font-family:"SF Mono",Consolas,Menlo,monospace;background:#eef3f8;color:var(--code);
        padding:1px 6px;border-radius:5px;font-size:13.8px}
   pre{background:var(--code);color:#dce9f6;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13.3px;line-height:1.5}
@@ -62,7 +62,7 @@
 </head>
 <body>
 <header><div class="wrap">
-  <h1>AgriFair XLoRA-Bias — the whole project, explained</h1>
+  <h1>AgriFair GRAFT — the whole project, explained</h1>
   <p>A complete, beginner-readable tour of the research: what fairness means for an agricultural
   language model, the dataset, the models, every stage of the pipeline, the method, the baselines we
   compare against, the metrics, and two fully worked examples. Everything here matches the code in
@@ -77,7 +77,7 @@
   <a href="#dataset">3. The dataset</a>
   <a href="#models">4. The models</a>
   <div class="grp">The method</a></div>
-  <a href="#method">5. XLoRA-Bias method</a>
+  <a href="#method">5. GRAFT method</a>
   <a href="#compare">6. Methods compared</a>
   <a href="#metrics">7. Metrics &amp; stats</a>
   <a href="#verify">8. Verification</a>
@@ -90,7 +90,10 @@
   <a href="#ex2">13. Example: AgriAdvice</a>
   <div class="grp">Run it</div>
   <a href="#run">14. How to run</a>
-  <a href="#limits">15. Limitations</a>
+  <a href="#frontier">15. Frozen frontier panel</a>
+  <a href="#survive">16. Contribution if it loses</a>
+  <a href="#venue">17. Venue fit and risk</a>
+  <a href="#limits">18. Limitations</a>
 </nav>
 
 <main>
@@ -107,10 +110,10 @@ gap where the census shows none, or giving a farmer different advice because of 
 <p>A fair model must be <strong>difference-aware</strong> — equal when the facts are equal, different
 when the facts are different:</p>
 <div class="flow">
-  <span class="box">Real gap exists <span class="pill neq">diff</span></span><span class="arr">&rarr;</span>
+  <span class="box">Real gap exists <span class="pill diff">diff</span></span><span class="arr">&rarr;</span>
   <span class="box">name the larger group</span>
   <span class="arr">&nbsp;|&nbsp;</span>
-  <span class="box">No real gap <span class="pill eq">equal</span></span><span class="arr">&rarr;</span>
+  <span class="box">No real gap <span class="pill equal">equal</span></span><span class="arr">&rarr;</span>
   <span class="box">say "Roughly equal"</span>
   <span class="arr">&nbsp;|&nbsp;</span>
   <span class="box">Same question, different person <span class="pill adv">advice</span></span><span class="arr">&rarr;</span>
@@ -133,11 +136,11 @@ over-equalise without destroying its ability to recognise genuine differences?</
 <table>
   <tr><th>Fairness obligation</th><th>Carried by</th><th>Failure it catches</th></tr>
   <tr><td>Acknowledge a <strong>real</strong> difference (difference-awareness)</td>
-      <td>AgriFacts <span class="pill neq">diff</span> items</td>
-      <td class="bad">over-equalization (erasing a census gap)</td></tr>
+      <td>AgriFacts <span class="pill diff">diff</span> items</td>
+      <td class="bad">gap erasure (erasing a census gap)</td></tr>
   <tr><td>Do <strong>not invent</strong> a difference (contextual-awareness, multiple-choice)</td>
-      <td>AgriFacts <span class="pill eq">equal</span> items</td>
-      <td class="bad">spurious differential (a gap that is not there)</td></tr>
+      <td>AgriFacts <span class="pill equal">equal</span> items</td>
+      <td class="bad">gap fabrication (a gap that is not there)</td></tr>
   <tr><td>Do <strong>not let identity change a fact</strong> (contextual-awareness, free text)</td>
       <td>AgriAdvice <span class="pill adv">pairs</span></td>
       <td class="bad">advice drift (different agronomy for different personas)</td></tr>
@@ -180,7 +183,7 @@ Language models were used only to reword question text, never to decide an answe
 <div class="grid2">
   <div class="card">
     <span class="tag">Half one</span>
-    <h3>AgriFacts &nbsp;<span class="pill neq">2,000 quizzes</span></h3>
+    <h3>AgriFacts &nbsp;<span class="pill diff">2,000 quizzes</span></h3>
     <p>Three-choice questions whose correct answer is fixed by a real census number. One option is
     always <code>"Roughly equal"</code>; the other two name the groups compared.</p>
     <h4>Label rule</h4>
@@ -221,7 +224,7 @@ Language models were used only to reword question text, never to decide an answe
 <h3>How we prepare it (deterministic, no AI)</h3>
 <table>
   <tr><th>Harness field</th><th>From AgriFair</th></tr>
-  <tr><td><code>condition</code></td><td><code>diff &rarr; neq</code>, <code>equal &rarr; eq</code></td></tr>
+  <tr><td><code>condition</code></td><td><code>diff &rarr; diff</code>, <code>equal &rarr; equal</code></td></tr>
   <tr><td><code>group1</code>, <code>group2</code></td><td>parsed from the tail of <code>source_cell</code> (e.g. <code>SCvsST</code>, <code>MvF</code>, <code>MarginalvsLarge</code>)</td></tr>
   <tr><td>canonical letters</td><td><code>c</code> = "Roughly equal" always; <code>a</code> = group1, <code>b</code> = group2</td></tr>
   <tr><td><code>rationale</code></td><td><strong>built</strong> from the row's own facts + the census cell as the citation (no LLM)</td></tr>
@@ -229,14 +232,33 @@ Language models were used only to reword question text, never to decide an answe
   <tr><td><code>scenario_type</code> (split key)</td><td><code>paraphrase_of</code> (1:1 with <code>source_cell</code>)</td></tr>
 </table>
 <h4>Contamination-safe split (seed 42)</h4>
-<p>Group-disjoint by <code>paraphrase_of</code>, stratified by axis: 20% of clusters &rarr; frozen
-test, 10% of the rest &rarr; validation, the rest &rarr; train. Verified sizes:</p>
-<div class="kpi"><div><b>1,410</b> train</div><div><b>150</b> validation</div><div><b>440</b> frozen test</div><div><b>0</b> fact-level overlap</div></div>
-<p class="callout">AgriFacts is heavily templated, so raw word-overlap between any split is naturally
-~74% (a test item differs from some train item only by a state name). That is <em>not</em>
-contamination. The real guard is <strong>exact fact-level disjointness</strong> (no
-<code>source_cell</code> in two splits, verified 0) plus exact-duplicate detection. Surface overlap
-and cosine are reported as diagnostics only. The frozen test set is hashed (SHA256) for the record.</p>
+<p>Two different things can leak, and both are controlled.</p>
+<p><strong>Paraphrase leakage.</strong> Several rows are rewordings of the same census cell, so the
+split is group-disjoint by <code>paraphrase_of</code>, stratified by axis.</p>
+<p><strong>Structural leakage.</strong> AgriFacts is templated over a small space: about 36 states,
+a few group pairs, two metrics. Strip the state name from a row and what is left is its
+<strong>state-blind key</strong>, the tuple (axis, metric, size class, comparison token). Two rows
+that share it differ only in which state they name. A majority-class predictor that sees
+<em>nothing but that key</em> answers <b>87.2%</b> of the corpus correctly. Under a
+paraphrase-only split, 97.3% of test rows shared a key with training, so a near-perfect score
+would prove nothing about census knowledge.</p>
+<p>So 20% of state-blind keys, stratified by axis, are reserved for the frozen test set alone. The
+test set then carries two labelled slices, always reported separately:</p>
+<div class="kpi"><div><b>1,132</b> train</div><div><b>119</b> validation</div><div><b>328</b> test: structure-familiar</div><div><b>421</b> test: structure-novel</div></div>
+<table>
+  <tr><th>Slice</th><th>What it asks</th></tr>
+  <tr><td><code>structure_familiar</code></td><td>the same (axis, metric, class, comparison) is in
+      training; only the state differs. The in-distribution condition.</td></tr>
+  <tr><td><code>structure_novel</code></td><td>that combination never appeared in training. Answering
+      it needs the census fact, not the structural prior.</td></tr>
+</table>
+<p class="callout">Raw word-overlap between splits is naturally ~73% because the questions are
+templated, and that is <em>not</em> contamination. The real guards are hard stops:
+<strong>exact fact-level disjointness</strong> (no <code>source_cell</code> in two splits, verified 0),
+exact-duplicate detection, and <strong>zero</strong> structure-novel rows sharing a state-blind key
+with training. Surface overlap and cosine are reported as diagnostics only. The frozen test set is
+hashed (SHA256) for the record, and the surface-cue ceiling for every split is written to
+<code>results/surface_cue_ceiling_audit.csv</code> and drawn on every accuracy figure.</p>
 </div>
 
 <!-- ============================ 4 ============================ -->
@@ -247,30 +269,81 @@ only for grading (never for answers).</p>
 
 <div class="card">
 <h3>Subject models (the ones we fine-tune and evaluate)</h3>
-<p>A <em>model-diversity</em> axis — four families, English, India-grounded agriculture domain.
-Defined in <code>GPU_Run/common/model_registry.py</code>.</p>
+<p>Four instruction-tuned models across <strong>two size classes and four pretraining
+recipes</strong>, so that no finding is one architecture's quirk and the localization claim is
+tested above the small-model regime as well as inside it. All four are <strong>primary</strong>:
+each carries the full baseline set, the ablations, the rank sweep and the multi-seed arms.
+Defined in <code>GPU_Run/common/model_registry.py</code>; every id was checked against the Hub on
+2026-09-03.</p>
 <table>
-  <tr><th>Tier</th><th>Hugging Face id</th><th>Family</th><th>Role</th><th>Notes</th></tr>
-  <tr><td><code>small-instruct</code></td><td>meta-llama/Llama-3.2-3B-Instruct</td><td>Llama</td>
-      <td><strong>primary</strong></td><td>gated repo; needs HF token to download</td></tr>
-  <tr><td><code>broad-instruct</code></td><td>Qwen/Qwen3-4B-Instruct-2507</td><td>Qwen</td>
-      <td><strong>primary</strong></td><td>bf16 repo</td></tr>
-  <tr><td><code>indic-specialized</code></td><td>Telugu-LLM-Labs/Indic-gemma-2b-&hellip;-Navarasa-2.0</td><td>Gemma-2</td>
-      <td>transfer</td><td>Indic-tuned; very relevant to the domain</td></tr>
-  <tr><td><code>compact-hybrid</code></td><td>nvidia/NVIDIA-Nemotron-3-Nano-4B</td><td>Nemotron (Mamba-2 hybrid)</td>
-      <td>transfer</td><td>safetensors; batch clamped to 1; sdpa</td></tr>
+  <tr><th>Tier</th><th>Hugging Face id</th><th>Params</th><th>Family</th><th>Attention</th><th>Why this one</th></tr>
+  <tr><td><code>small-instruct</code></td><td>meta-llama/Llama-3.2-3B-Instruct</td><td>3.2B</td><td>Llama 3</td>
+      <td>flash-attn 2</td><td>the standard small instruct baseline; gated</td></tr>
+  <tr><td><code>broad-instruct</code></td><td>Qwen/Qwen3-4B-Instruct-2507</td><td>4.0B</td><td>Qwen 3</td>
+      <td>flash-attn 2</td><td>a different pretraining corpus and tokenizer at the same scale;
+      the non-thinking instruct variant, bf16</td></tr>
+  <tr><td><code>general-instruct</code></td><td>google/gemma-3-12b-it</td><td>12.2B</td><td>Gemma 3</td>
+      <td>eager</td><td>the large end. Answers the question a reviewer asks first: does
+      attribution-guided localization still mean anything once the model is big enough to hold
+      the census facts? Gated</td></tr>
+  <tr><td><code>general-instruct-2</code></td><td>mistralai/Ministral-8B-Instruct-2410</td><td>8.0B</td><td>Mistral</td>
+      <td>flash-attn 2</td><td>a second large model from a different vendor, so the size result is
+      not one family's quirk. Interleaved sliding-window attention; gated</td></tr>
 </table>
+
+<p class="callout"><strong>Two ids in the request did not exist, and were corrected.</strong>
+Gemma 3 ships at 270m, 1b, 4b, 12b and 27b, so there is no <code>gemma-3-9b-it</code>;
+<code>gemma-3-12b-it</code> is the smallest release above 9B and is what the study uses. And
+<code>Ministral-8B-Instruct-2409</code> does not exist: the only Ministral 8B Instruct is
+<code>-2410</code>, at 8.02B parameters. Both substitutions are one line in
+<code>model_registry.py</code> if you want a different call.</p>
+
+<h4>What the 12B model needed in the harness</h4>
+<p>Gemma 3 at 12B is a <strong>multimodal checkpoint</strong>,
+<code>Gemma3ForConditionalGeneration</code>: 48 text layers of hidden size 3840 under
+<code>model.language_model</code>, plus a SigLIP vision tower this study never touches.
+<code>AutoModelForCausalLM</code> cannot load it. Three small changes absorb that, and none of
+them is a special case anywhere else:</p>
 <ul>
-  <li><strong>Primary models</strong> get the full baseline comparison, all ablations, the rank
-  sweep, and three seeds (42/43/44) for the proposed method and the strongest baseline.</li>
-  <li><strong>Transfer models</strong> get a lighter set (proposed + FairNet + FairLoRA) to show the
-  result holds across architectures.</li>
-  <li>LoRA is placed on attention + MLP projections
-  (<code>q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj</code>). The exact model
-  revision hash is pinned and echoed into every results CSV.</li>
-  <li>Attention: flash-attention 2 where the GPU supports it, automatic <code>sdpa</code> fallback
-  (Windows/CPU uses sdpa). The implementation actually used is recorded per model.</li>
+  <li>The loader walks an <strong>auto-class chain</strong> and records which class succeeded in
+  <code>model_class_used</code>, so a table always says how a checkpoint was opened.</li>
+  <li>The decoder-layer walker now descends through <code>language_model</code> and
+  <code>text_model</code> as well as <code>model</code> and <code>base_model</code>.</li>
+  <li>Module targeting was already by name pattern (<code>.*\.layers\.N\.[^.]+\.q_proj</code>
+  and friends), so the extra nesting matches unchanged.</li>
 </ul>
+
+<h4>Batch caps, and why they do not change the optimisation</h4>
+<p>The two large models carry per-model caps in the registry: evaluation batch 8, and training
+micro-batch 2 for Gemma 3 and 4 for Ministral. A cap only ever <em>lowers</em> a requested batch
+size, never raises it, and the value used is logged. The <strong>effective training batch stays
+at 8</strong> because gradient accumulation absorbs the smaller micro-batch, so the gradient a
+12B model sees is the same one a 3B model sees. One <code>EVAL_BATCH_SIZE</code> therefore works
+for every model without retuning.</p>
+<ul>
+  <li>LoRA targets attention and MLP projections
+  (<code>q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj</code>).</li>
+  <li>The model revision hash, the auto class used, the attention implementation actually used,
+  the parameter count and the quantization setting are pinned and echoed into every results CSV.</li>
+  <li>All four repositories are <strong>gated</strong>. The HF token must belong to an account that
+  has accepted the Llama, Gemma and Mistral licences, and the download stage says so up front.</li>
+  <li>Ministral's repo carries a 16&nbsp;GB <code>consolidated.safetensors</code> that duplicates the
+  sharded weights; the downloader skips it.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>What the full sweep costs, and how to shrink it</h3>
+<p>Four primary models means roughly <strong>33 training runs each, about 130 in total</strong>,
+plus evaluation. On a single H100 the whole study is on the order of <strong>110 to 170
+GPU-hours</strong>, and free-text AgriAdvice generation on the two large models is the single
+biggest line item, not training.</p>
+<p><code>SUBJECT_MODELS</code> is the lever, and it takes tiers by name:</p>
+<pre>SUBJECT_MODELS=small-instruct,broad-instruct  python run_all.py --stage gpu_run   # fast pass, ~1 day
+SUBJECT_MODELS=general-instruct,general-instruct-2  python run_all.py --stage gpu_run   # the large pair
+GRAFT_FULL_SWEEP=0 RUN_LEAVE_ONE_AXIS_OUT=0  python run_all.py --stage gpu_run   # headline arms only</pre>
+<p class="muted">Everything is resumable: a finished arm is skipped, stored predictions are
+reused, so the two halves can be run days apart and the analysis stage still sees one study.</p>
 </div>
 
 <div class="grid2">
@@ -283,15 +356,30 @@ Defined in <code>GPU_Run/common/model_registry.py</code>.</p>
   </div>
   <div class="card">
     <h3>Judge models (grading only)</h3>
-    <p>Used <strong>only</strong> for rationale factual-correctness scoring, a rare answer-extraction
-    fallback, and the AgriAdvice drift cross-check &mdash; <em>never</em> for the answers themselves.</p>
+    <p>Used <strong>only</strong> for three things: reading a letter out of an output the
+    deterministic parser could not parse, scoring rationale factual correctness on a subsample, and
+    the AgriAdvice drift cross-check. <em>Never</em> for the answers themselves.</p>
+    <div class="flow">
+      <span class="box">DeepSeek key 1</span><span class="arr">&rarr;</span>
+      <span class="box">DeepSeek key 2</span><span class="arr">&rarr;</span>
+      <span class="box">Mistral key 1</span><span class="arr">&rarr;</span>
+      <span class="box">Mistral key 2</span>
+    </div>
     <ul>
-      <li>Primary: <strong>Gemini 2.5 Flash</strong> (4 keys, round-robin)</li>
-      <li>Secondary: <strong>DeepSeek</strong> <code>deepseek-chat</code> (+ OpenRouter alternate route)</li>
-      <li>Tertiary: <strong>Mistral Small</strong></li>
+      <li>Each route is attempted <strong>at most once</strong>. Any failure falls straight through
+      to the next; nothing is ever retried on the same route.</li>
+      <li>The <strong>same chain serves every subject model</strong>, local or hosted, so a parse
+      failure is resolved the same way everywhere, and the route that resolved it is stored with
+      the item in <code>answer_extraction_source</code>.</li>
+      <li>On extraction the judge sees <strong>the model's own output and nothing else</strong>: no
+      question, no options, no gold answer. It cannot turn a wrong answer into a right one; it can
+      only read a letter out of prose.</li>
+      <li>The judge-agreement check splits the chain deliberately, DeepSeek against Mistral, so the
+      two graders are different providers rather than one provider grading itself twice.</li>
     </ul>
-    <p class="legend">No within-provider retry; the chain moves once to the next provider on error.
-    Keys rotate per request and are read only from <code>.env</code>.</p>
+    <p class="legend">Keys are read only from <code>.env</code> and never printed.
+    <code>DISABLE_JUDGE=1</code> makes every judge call a no-op, which is how the smoke run stays
+    fully offline. <code>GPU_Run/common/clients.py</code></p>
   </div>
 </div>
 <div class="card">
@@ -302,7 +390,7 @@ Defined in <code>GPU_Run/common/model_registry.py</code>.</p>
 </div>
 
 <!-- ============================ 5 ============================ -->
-<h2 id="method">5. The XLoRA-Bias method (five stages)</h2>
+<h2 id="method">5. The GRAFT method (five stages)</h2>
 <div class="card">
 <div class="flow">
   <span class="box"><strong>A</strong> Attribution</span><span class="arr">&rarr;</span>
@@ -316,7 +404,7 @@ Defined in <code>GPU_Run/common/model_registry.py</code>.</p>
 <div class="step"><div class="num">A</div><div class="body">
   <h3>Attribution — find <em>where</em> the failure lives</h3>
   <p>On the validation set we collect the <strong>failure set</strong>: <em>diff</em> items the frozen
-  model wrongly answers "Roughly equal" (over-equalization), plus identity-swap flips. We then run
+  model wrongly answers "Roughly equal" (gap erasure), plus identity-swap flips. We then run
   <strong>Integrated Gradients</strong> (zero-embedding baseline, 50 steps): along the straight path
   from a blank input to the real input, we accumulate |module&nbsp;output &times; its gradient| of the
   loss for the correct answer. Each layer gets a normalized blame score in [0,1].
@@ -336,7 +424,7 @@ Defined in <code>GPU_Run/common/model_registry.py</code>.</p>
   <h3>Training — repair only the targeted components</h3>
   <p>The joint loss per example:</p>
 <pre>total = (answer_cross_entropy + 0.3 &times; rationale_cross_entropy) &times; condition_weight
-condition_weight:  neq (diff) = 1.5,  eq (equal) = 1.0</pre>
+condition_weight:  diff = 1.5,  equal = 1.0</pre>
   <ul>
     <li><strong>Condition-adaptive:</strong> diff items count 1.5&times; (we care most about not
     erasing real gaps).</li>
@@ -346,7 +434,7 @@ condition_weight:  neq (diff) = 1.5,  eq (equal) = 1.0</pre>
     <li><strong>Replay:</strong> 10% Dolly mix guards general capability.</li>
   </ul>
   <p class="muted">Defaults: 3 epochs, AdamW, lr 2e-4, LoRA dropout 0.05, bf16, effective batch 8, max
-  length 1024. (Files: <code>train_xlora_bias.py</code>, <code>common/training.py</code>.)</p>
+  length 1024. (Files: <code>train_graft.py</code>, <code>common/training.py</code>.)</p>
 </div></div>
 
 <div class="step"><div class="num">D</div><div class="body">
@@ -361,32 +449,95 @@ condition_weight:  neq (diff) = 1.5,  eq (equal) = 1.0</pre>
 </div></div>
 
 <!-- ============================ 6 ============================ -->
-<h2 id="compare">6. Methods under comparison</h2>
-<p>All training methods use a <strong>matched trainable-parameter budget</strong> (equal to within 2%),
-asserted in code, so any win comes from <em>where</em> the parameters go, not how many. Each baseline
-keeps its distinguishing signal and carries a citation comment in
-<code>train_baselines.py</code>.</p>
+<h2 id="compare">6. Methods under comparison, and what each one isolates</h2>
+<p>All training methods run at a <strong>matched trainable-parameter budget</strong> (equal to within
+2 percentage points, asserted in code), so a difference cannot come from spending more parameters. Each
+baseline keeps its published distinguishing signal and carries a citation comment in
+<code>train_baselines.py</code>; the divergences are listed in <code>README.md</code> under
+"Baseline fidelity" and the identifiers in <code>CITATIONS.md</code>.</p>
+<p>The set is not a leaderboard for its own sake. It is chosen so that each arm removes exactly one
+thing from the proposed method, which is what lets the ablation say <em>why</em> a result happened.</p>
 <div class="card">
 <table>
-  <tr><th>Method</th><th>Type</th><th>One-line idea</th></tr>
-  <tr><td><code>xlora_bias_proposed</code></td><td><span class="pill neq">proposed</span></td>
-      <td>attribution-guided placement + rank &prop; attribution + condition-adaptive + rationale-aware</td></tr>
-  <tr><td>FairNet (2025)</td><td>SOTA</td><td>detector + conditional LoRA on flagged neq, contrastive</td></tr>
-  <tr><td>IGU-LoRA (2026)</td><td>SOTA</td><td>Integrated-Gradients rank allocation (capability-oriented, the nearest neighbour)</td></tr>
-  <tr><td>PEDAL (2026)</td><td>SOTA</td><td>Classifier / Modifier / Reviewer pipeline around PEFT</td></tr>
-  <tr><td>FairLoRA (2025)</td><td>SOTA</td><td>modular LoRA + discriminators, uniform rank</td></tr>
-  <tr><td>ReGiFT (2025)</td><td>SOTA</td><td>reasoning-trace fine-tuning using the rationale field</td></tr>
-  <tr><td>FairSteer (2025)</td><td>SOTA</td><td>inference-time activation steering, <em>no</em> retraining</td></tr>
-  <tr><td>Vanilla LoRA</td><td><span class="pill ref">reference</span></td><td>rank 8 on all layers (Hu et al., ICLR 2022)</td></tr>
-  <tr><td>Vanilla QLoRA</td><td><span class="pill ref">reference</span></td><td>4-bit NF4 + the same LoRA (Dettmers et al., NeurIPS 2023)</td></tr>
+  <tr><th>Method</th><th>Type</th><th>Mechanism</th><th>What it isolates</th></tr>
+  <tr><td><code>graft_proposed</code></td><td><span class="pill diff">proposed</span></td>
+      <td>attribution-guided placement, rank &prop; attribution, condition-adaptive and rationale-aware loss</td>
+      <td>&mdash;</td></tr>
+  <tr><td>LFTF (arXiv:2505.15475)</td><td>closest prior art</td>
+      <td>locate bias-relevant blocks first, then fine-tune only those</td>
+      <td><strong>the locating signal.</strong> Same localize-then-adapt shape, but the blocks are chosen by
+      hidden-state sensitivity to an identity swap rather than by a path-integrated attribution of the
+      specific failure, and the objective knows nothing about the item's condition</td></tr>
+  <tr><td>IGU-LoRA (arXiv:2603.13792, ICLR 2026)</td><td>nearest neighbour</td>
+      <td>Integrated-Gradients rank allocation</td>
+      <td><strong>the objective.</strong> It gets the same attribution-guided placement and a plain
+      utility loss, so whatever separates it from GRAFT is the condition-adaptive, rationale-aware
+      training and nothing else</td></tr>
+  <tr><td>DART (arXiv:2604.16845, Findings of ACL 2026)</td><td>direct competitor</td>
+      <td>distil, audit against the frozen base, severity-weighted repair</td>
+      <td><strong>the repair schedule.</strong> The most recent method attacking the same construct;
+      it repairs globally and reactively, where GRAFT repairs locally and proactively</td></tr>
+  <tr><td>FairNet (arXiv:2510.19421, NeurIPS 2025)</td><td>SOTA</td>
+      <td>detector-gated conditional LoRA, contrastive</td>
+      <td><strong>placement.</strong> Condition-adaptive like GRAFT but spread uniformly, so the
+      difference is where the adapters sit</td></tr>
+  <tr><td>PEDAL (WWW 2026)</td><td>SOTA</td>
+      <td>Classifier gate, Modifier upweight on flagged samples only</td>
+      <td><strong>selective against global weighting.</strong> A gate that fires on some examples,
+      against GRAFT's condition weight that applies to all of them</td></tr>
+  <tr><td>ReGiFT (arXiv:2504.05632)</td><td>SOTA</td>
+      <td>reasoning-trace fine-tuning on the reference rationale</td>
+      <td><strong>the rationale term alone.</strong> It has the rationale supervision without the
+      localization or the condition weighting</td></tr>
+  <tr><td>FairSteer (arXiv:2504.14492, Findings of ACL 2025)</td><td>SOTA</td>
+      <td>inference-time activation steering, no retraining</td>
+      <td><strong>whether training is needed at all.</strong> The only arm that changes no weight;
+      it is also excluded from the geometry correlation for exactly that reason</td></tr>
+  <tr><td>Vanilla LoRA</td><td><span class="pill ref">reference</span></td>
+      <td>rank 8 on every layer (Hu et al., ICLR 2022)</td>
+      <td><strong>the floor and the dense anchor.</strong> If plain LoRA matches everything else, the
+      honest reading is that the task does not separate methods, and the paper says so</td></tr>
+  <tr><td>Vanilla QLoRA</td><td><span class="pill ref">reference</span></td>
+      <td>4-bit NF4 plus the same LoRA (Dettmers et al., NeurIPS 2023)</td>
+      <td><strong>the cost of quantization</strong> to the same repair</td></tr>
 </table>
+</div>
+<div class="card">
+<h3>Internal ablations, which carry the primary hypothesis</h3>
+<p>H1 is decided entirely by arms this study trains, so it does not depend on out-ranking anyone:
+uniform placement, and <strong>three independently drawn random placements</strong> at the same budget,
+against attribution-guided placement. One random draw could be lucky; three cannot all be. Alongside
+them: no rationale loss, no condition weighting, rank fixed at 8 / 16 / 32, and a 4-bit arm.</p>
+</div>
+<div class="card">
+<h3>Where this sits in the 2026 literature</h3>
+<p>Three lines of work converge on this problem, and the study is positioned against all three
+rather than against a single competitor.</p>
+<ul>
+  <li><strong>The construct.</strong> Wang et al. (ACL 2025, arXiv:2502.01926) defined difference
+  awareness and the DiffAware / CtxtAware metrics this study reports as primary. DART
+  (arXiv:2604.16845) is the direct successor and is a baseline here. Tang et al.
+  (arXiv:2605.12530), with a Wang co-author, argue that static multiple-choice fairness benchmarks
+  are unreliable &mdash; which is precisely why this study adds the free-text AgriAdvice half, the
+  surface-cue ceiling and the structure-novel slice instead of ignoring the critique.</li>
+  <li><strong>Localization.</strong> LFTF (arXiv:2505.15475) and IGU-LoRA (ICLR 2026) mean
+  localize-then-adapt is not itself new; the claim here is narrower and testable: its
+  difference-awareness instantiation, and the causal test that goes with it. Cultural Binding Heads
+  (arXiv:2605.28543) and ROBIN (arXiv:2607.12863) find identity-related behaviour concentrated in a
+  few components, which is independent support for repairing locally rather than globally.</li>
+  <li><strong>Domain.</strong> The FAccT 2025 field study of gender bias in Indian low-resource
+  deployments (doi:10.1145/3715275.3732180) covers agriculture explicitly but qualitatively;
+  Indic-Bias (ACL 2025, arXiv:2506.23111) covers Indian identity groups but not agrarian facts.
+  Agricultural benchmarks such as AgroBench (arXiv:2507.20519) measure capability, not fairness. No
+  work was found that measures whether a model erases a real, officially recorded agrarian gap.</li>
+</ul>
 </div>
 
 <!-- ============================ 7 ============================ -->
 <h2 id="metrics">7. Metrics and statistics</h2>
 <div class="card">
 <h3>The primary endpoint</h3>
-<p><strong>Contextual fairness score</strong> = the harmonic mean of <em>diff</em> accuracy and
+<p><strong>Balanced awareness score</strong> = the harmonic mean of <em>diff</em> accuracy and
 <em>equal</em> accuracy. A model only scores well if it is good at <em>both</em> — it cannot cheat by
 always answering "equal".</p>
 <p class="muted">e.g. 80% on diff and 90% on equal &rarr; 2&times;0.8&times;0.9/(0.8+0.9) = 0.847; answer
@@ -394,51 +545,84 @@ always answering "equal".</p>
 </div>
 <div class="grid2">
   <div class="card"><h4>AgriFacts metrics</h4><ul>
-    <li>overall / neq (diff) / eq (equal) accuracy</li>
-    <li>contextual fairness score (<strong>primary</strong>)</li>
-    <li>difference-aware accuracy gap (neq &minus; eq)</li>
-    <li>Wang <strong>DiffAware</strong> &amp; <strong>CtxtAware</strong> (recomputed with c = "Roughly equal")</li>
-    <li>utility retention (accuracy on a held-out general set)</li>
+    <li>overall / diff / equal accuracy</li>
+    <li><strong>balanced awareness score</strong> (primary), reported per test slice, never pooled</li>
+    <li>diff minus equal accuracy gap</li>
+    <li>Wang <strong>DiffAware</strong> and <strong>CtxtAware</strong>, recomputed with c = "Roughly equal"</li>
+    <li><strong>gap erasure rate</strong> and <strong>gap fabrication rate</strong>, always separate</li>
+    <li>failure polarity index, and its label</li>
+    <li>identity-swap <em>flip</em>, <em>invariance</em> on equal items, <em>equivariance</em> on diff items</li>
+    <li>option-rotation consistency and position-following rate</li>
+    <li>capability retention on a fixed external 500-item MMLU probe</li>
     <li>rationale BLEU-4, ROUGE-L, census-cell citation preservation, judge factual-correctness (1&ndash;5)</li>
-    <li>cross-axis transfer accuracy</li>
+    <li>leave-one-axis-out transfer accuracy on the held-out axis</li>
   </ul></div>
   <div class="card"><h4>AgriAdvice metrics (free text)</h4><ul>
-    <li>advice-drift embedding cosine distance</li>
-    <li>advice-drift structured-feature L1</li>
-    <li>advice-drift flip rate (threshold 0.25)</li>
-    <li>advice-drift judge score (1&ndash;5, cross-check only)</li>
+    <li>advice-drift embedding cosine distance, with the backend recorded</li>
+    <li>advice-drift content-word Jaccard distance, embedder-free</li>
+    <li>advice-drift structured-feature L1 (tokens, bullets, numbers, dosages, sentences)</li>
+    <li>advice-drift flip rate above the preregistered 0.25 threshold</li>
+    <li>advice-drift judge score (1&ndash;5), cross-check only</li>
+    <li>all of the above broken out per toggle axis, for every method</li>
   </ul>
   <h4>Always recorded</h4>
   <p class="muted">model revision hash, random seed, quantization setting, attention implementation,
-  trainable-parameter %, JSON parse-failure rate, judge model string.</p>
+  trainable-parameter percentage, JSON parse-failure rate, judge model string, capability-probe source.</p>
   </div>
 </div>
 <div class="card">
 <h3>Statistics</h3>
-<p>A <strong>paired bootstrap</strong> (1000 resamples, p&lt;0.05) on the primary endpoint between the
-proposed method and the automatically-selected strongest baseline, plus a <strong>paired Wilcoxon</strong>
-signed-rank test on per-item correctness deltas. Seeds 42/43/44 on the two primary models; mean and
-standard deviation reported. No projected numbers anywhere.</p>
+<p>Every test is paired at the item level and computed from the stored per-item predictions, never
+from a summary.</p>
+<ul>
+  <li><strong>Paired bootstrap</strong>, 1000 resamples: both arms are scored on the same resampled item
+  set, and the difference distribution gives a percentile 95% interval and a two-sided p-value.</li>
+  <li><strong>Exact McNemar</strong> on per-item correctness, reported with the discordant counts in
+  both directions, because the bootstrap and McNemar answer different questions.</li>
+  <li><strong>Holm-Bonferroni</strong> correction within each hypothesis family. One nominally
+  significant cell out of eight baseline comparisons is not a win, and the table says so.</li>
+  <li>Seeds 42/43/44 on the primary models for GRAFT, DART, FairNet and Vanilla LoRA; mean and standard
+  deviation in <code>seed_variability_table.csv</code>.</li>
+  <li>No equivalence claim is made from a non-significant test. A null is reported as "not separable
+  at this resolution", which is what it is.</li>
+</ul>
+<p class="callout">Every accuracy is read against the <strong>surface-cue ceiling</strong>: what a
+majority-class predictor scores from the state-blind key alone (0.872 on the corpus). A method sitting
+at or below that line has not demonstrated census knowledge, whatever its headline number says.</p>
 </div>
 
 <!-- ============================ 8 ============================ -->
-<h2 id="verify">8. Three-way verification ("localise, repair, preserve")</h2>
-<div class="grid3">
-  <div class="card"><h3>1. Look again</h3>
-    <p>Re-run attribution and a <strong>linear identity probe</strong> on the repaired model. The blame
-    should still sit on the patched layers, and identity (group1 vs group2; persona A vs B) should be
-    <em>harder</em> to decode from the hidden state — less residual bias.</p>
+<h2 id="verify">8. The repair readout panel (four independent angles)</h2>
+<p>Behaviour alone cannot tell "the bias was removed" from "the bias was relocated". Four readouts,
+each able to fail independently of the others, are run on <em>every</em> method and not only on the
+proposed one &mdash; a panel is only method-agnostic if it is demonstrated to be.</p>
+<div class="grid2">
+  <div class="card"><h3>1. Look again (attribution re-run)</h3>
+    <p>Recompute the same Integrated-Gradients attribution <strong>on the repaired model</strong> and
+    compare it with the pre-repair map: how much attribution mass still sits on the patched layers, the
+    Spearman correlation between the two layer rankings, and the Jaccard overlap of their top-k layers.
+    Recomputation is the whole point; reading the stored pre-repair file back would compare a number
+    with itself.</p>
     <p class="legend"><code>verify_bias_subspace.py</code></p></div>
-  <div class="card"><h3>2. Look at the weights</h3>
-    <p>The <strong>parameter-space geometry</strong> analysis measures <em>where</em> training moved the
-    weights — seven CPU float64 SVD diagnostics (update sparsity &amp; coverage, principal-angle
-    rotation, spectral shift, principal-mask overlap, stable rank, Frobenius norm, Hill tail), a regime
-    label, and the correlation between spectral shift and difference-awareness preservation.</p>
+  <div class="card"><h3>2. Look for the identity (linear probe)</h3>
+    <p>A cross-validated logistic probe tries to decode the swapped identity from a mid-depth hidden
+    state, on the AgriFacts swaps and separately on the AgriAdvice personas. Higher accuracy means more
+    residual identity signal. This readout is allowed to say the repair changed behaviour without
+    erasing the representation, and in the earlier legal study it did exactly that.</p>
+    <p class="legend"><code>verify_bias_subspace.py</code></p></div>
+  <div class="card"><h3>3. Look at the weights (geometry)</h3>
+    <p>Seven CPU float64 SVD diagnostics on the merged update: bf16-aware sparsity and coverage,
+    principal-angle rotation, normalized spectral shift, principal-mask overlap, stable rank, Frobenius
+    norm and the Hill tail exponent. Each configuration gets a regime label against a dense anchor, and
+    spectral shift is correlated with difference-awareness preservation, with a partial correlation
+    controlling for the parameter budget so the result cannot be dismissed as a budget proxy.</p>
     <p class="legend"><code>parameter_space_geometry.py</code></p></div>
-  <div class="card"><h3>3. Look inside (Patchscope)</h3>
+  <div class="card"><h3>4. Look inside (Patchscope)</h3>
     <p>A <strong>training-free</strong> readout: at each patched layer, patch the representation into a
-    letter-eliciting prompt and read the probability of option <code>c</code> ("Roughly equal"). A good
-    repair lowers it on <em>diff</em> items while keeping it high on <em>equal</em> items.</p>
+    letter-eliciting prompt and read the probability of the "Roughly equal" option. A good repair lowers
+    it on <em>diff</em> items while keeping it high on <em>equal</em> items. The source prompt is built
+    in canonical option order, so that letter always means the same thing, and the letter token ids are
+    resolved in the JSON answer context rather than assumed.</p>
     <p class="legend"><code>patchscope_bias_verification.py</code></p></div>
 </div>
 
@@ -463,7 +647,7 @@ a crash never loses more than the in-progress epoch or the last 50 rows.</p>
   <tr><td><code>build_template_instances.py</code></td><td>deterministic templating; group-disjoint split; freezes the test set + SHA256</td></tr>
   <tr><td><code>build_counterfactual_pairs.py</code></td><td>AgriFacts MCQ identity swaps + AgriAdvice passthrough</td></tr>
   <tr><td><code>prepare_prompts_deepseek.py</code></td><td>light wording-only edit of the fixed instruction wrapper (no content)</td></tr>
-  <tr><td><code>map_external_wang_datasets.py</code></td><td>cross-axis transfer config; maps external Wang sets if present</td></tr>
+  <tr><td><code>map_external_wang_datasets.py</code></td><td>registers the leave-one-axis-out inventory; maps the external Wang sets if present</td></tr>
   <tr><td><code>contamination_check.py</code></td><td>fact-level disjointness + duplicate hard-stops; surface diagnostics</td></tr>
 </table>
 
@@ -477,12 +661,12 @@ maths, all before any expensive run.</p>
 <table>
   <tr><th>Script</th><th>What it does</th></tr>
   <tr><td><code>measure_base_competence.py</code></td><td>frozen-model accuracy on the test set</td></tr>
-  <tr><td><code>probe_subject_models.py</code></td><td>collects the failure set (over-equalization, swap flips)</td></tr>
+  <tr><td><code>probe_subject_models.py</code></td><td>collects the failure set (gap erasure, swap flips)</td></tr>
   <tr><td><code>attribution_integrated_gradients.py</code></td><td>Stage A Integrated Gradients</td></tr>
   <tr><td><code>configure_layer_selective_lora.py</code></td><td>Stage B placement (attribution / uniform / random)</td></tr>
-  <tr><td><code>train_xlora_bias.py</code></td><td>Stage C: proposed method, ablations, rank sweep, QLoRA</td></tr>
+  <tr><td><code>train_graft.py</code></td><td>Stage C: proposed method, ablations, rank sweep, QLoRA</td></tr>
   <tr><td><code>train_baselines.py</code></td><td>six SOTA + two reference baselines, matched budget</td></tr>
-  <tr><td><code>evaluate_all.py</code></td><td>all methods on test + cross-axis + held-out general set</td></tr>
+  <tr><td><code>evaluate_all.py</code></td><td>every method on the frozen test, the held-out axis, the swap and rotation sweeps, and the external capability probe</td></tr>
   <tr><td><code>evaluate_agriadvice_drift.py</code></td><td>free-text identity drift (the AgriFair-specific metric)</td></tr>
   <tr><td><code>verify_bias_subspace.py</code></td><td>Stage D: IG re-run + linear probe</td></tr>
   <tr><td><code>patchscope_bias_verification.py</code></td><td>Stage D+: Patchscope readout</td></tr>
@@ -492,11 +676,13 @@ maths, all before any expensive run.</p>
 <h3>Stage 4 — CPU_Run (after GPU_Run, no GPU needed)</h3>
 <table>
   <tr><th>Script</th><th>What it does</th></tr>
-  <tr><td><code>aggregate_results.py</code></td><td>main comparison, difference-awareness, external, quantization tables</td></tr>
-  <tr><td><code>statistics_tests.py</code></td><td>paired bootstrap + Wilcoxon on the primary endpoint</td></tr>
-  <tr><td><code>figures_and_tables.py</code></td><td>comparison / difference-awareness / placement / rank-sweep figures</td></tr>
+  <tr><td><code>aggregate_results.py</code></td><td>main, per-slice, per-axis, transfer and quantization tables</td></tr>
+  <tr><td><code>statistics_tests.py</code></td><td>paired bootstrap, exact McNemar, Holm correction per hypothesis family</td></tr>
+  <tr><td><code>figures_and_tables.py</code></td><td>comparison, failure directions, structure slices, transfer, placement and rank-sweep figures, with the surface-cue ceiling drawn on</td></tr>
   <tr><td><code>judge_robustness.py</code></td><td>secondary-judge agreement + Cohen kappa</td></tr>
-  <tr><td><code>parameter_space_geometry.py</code></td><td>the seven-diagnostic geometry analysis</td></tr>
+  <tr><td><code>parameter_space_geometry.py</code></td><td>the seven-diagnostic geometry analysis and the preservation correlation</td></tr>
+  <tr><td><code>audit_awareness_trade.py</code></td><td>the failure-polarity profile and the awareness-trade audit</td></tr>
+  <tr><td><code>repair_admissibility.py</code></td><td>the three criteria per method, and the preservation frontier</td></tr>
 </table>
 
 <div class="card warn callout">
@@ -512,14 +698,16 @@ roughly 15&ndash;25 H100-hours. It also runs on an RTX 3090 (24&nbsp;GB) with
   .env / .env.example          secrets (one loader reads them; never printed)
   requirements_global.txt      pinned dependencies (no virtual environment)
   run_all.py                   single entry point, resumable
-  coding_prompt.md             the adaptation plan / spec
-  Instruction.md               the original legal spec (reference)
-  PREREGISTRATION.md           endpoint, seeds, tests, frozen-test hash
+  coding_prompt.md             the build specification
+  PREREGISTRATION.md           endpoints, hypotheses, splits, thresholds, amendments
+  TERMINOLOGY.md               which names changed from the earlier study, and which did not
+  CITATIONS.md                 verified references, including one identifier correction
   explanation.html             this document
   Dataset/                     raw AgriFair download (agrifacts.jsonl, agriadvice.jsonl, README.md)
   Dataset_Prep/  Dry_Run/  GPU_Run/  CPU_Run/
-  GPU_Run/common/              the shared contract (19 modules: paths, env_loader, parsing,
-                               dataset_io, prompts, model_registry, metrics, training, ...)
+  GPU_Run/common/              the shared contract (paths, env_loader, parsing, dataset_io,
+                               prompts, model_registry, metrics, inference, targets,
+                               training, methods, patchscopes, ...)
   data/  results/  checkpoints/  models/      generated, git-ignored</pre>
 
 <!-- ============================ 11 ============================ -->
@@ -530,9 +718,13 @@ roughly 15&ndash;25 H100-hours. It also runs on an RTX 3090 (24&nbsp;GB) with
     <li><code>aggregated_main_comparison_table.csv</code></li>
     <li><code>difference_awareness_preservation_table.csv</code></li>
     <li><code>agriadvice_drift_summary.csv</code></li>
-    <li><code>bias_subspace_verification.csv</code></li>
-    <li><code>patchscope_bias_verification_summary.csv</code></li>
-    <li><code>statistical_tests.csv</code>, <code>quantization_study_table.csv</code></li>
+    <li><code>structure_slice_comparison_table.csv</code> — familiar against novel structure</li>
+    <li><code>surface_cue_ceiling_audit.csv</code> — what a state-blind prior alone scores</li>
+    <li><code>failure_polarity_profile.csv</code>, <code>awareness_trade_audit.csv</code></li>
+    <li><code>repair_admissibility.csv</code> — the three criteria, scored per method</li>
+    <li><code>identity_probe_and_attribution_rerun.csv</code></li>
+    <li><code>patchscope_readout_summary.csv</code></li>
+    <li><code>statistical_tests.csv</code>, <code>seed_variability_table.csv</code></li>
     <li><code>geometry/parameter_space_geometry_per_method.csv</code></li>
   </ul></div>
   <div class="card"><h4>Metadata &amp; figures</h4><ul>
@@ -540,12 +732,14 @@ roughly 15&ndash;25 H100-hours. It also runs on an RTX 3090 (24&nbsp;GB) with
     <li><code>matched_budget_reference.json</code></li>
     <li><code>frozen_test_set_sha256.txt</code>, <code>contamination_report.csv</code></li>
     <li><code>data_hygiene_log.csv</code>, <code>run_metadata.jsonl</code></li>
-    <li><code>figures/*.png</code> — comparison, difference-awareness, placement, rank sweep</li>
+    <li><code>attribution_ranking_stability.csv</code>, <code>training_run_cost_log.csv</code></li>
+    <li><code>figures/*.png</code> — comparison, the two failure directions, awareness trade,
+        preservation frontier, structure slices, placement ablation, rank sweep</li>
   </ul></div>
 </div>
 
 <!-- ============================ 12 — EXAMPLE 1 ============================ -->
-<h2 id="ex1">12. Worked example 1 — an AgriFacts quiz <span class="pill neq">diff</span></h2>
+<h2 id="ex1">12. Worked example 1 — an AgriFacts quiz <span class="pill diff">diff</span></h2>
 <p>We follow one real row, <code>agrifacts-00001</code>, through every step.</p>
 
 <div class="step"><div class="num">1</div><div class="body">
@@ -569,7 +763,7 @@ roughly 15&ndash;25 H100-hours. It also runs on an RTX 3090 (24&nbsp;GB) with
     <tr><th>What</th><th>How</th><th>Result</th></tr>
     <tr><td>Groups</td><td>tail of <code>source_cell</code> = <code>MarginalvsLarge</code></td>
         <td>group1 = marginal holdings, group2 = large holdings</td></tr>
-    <tr><td>condition</td><td><code>diff &rarr; neq</code></td><td><span class="pill neq">neq</span></td></tr>
+    <tr><td>condition</td><td><code>diff &rarr; diff</code></td><td><span class="pill diff">diff</span></td></tr>
     <tr><td>Letters</td><td>c = "Roughly equal"; a = group1, b = group2</td><td>correct = <strong>a</strong></td></tr>
     <tr><td>Rationale (built, no AI)</td><td>template + census cell as citation</td>
         <td class="muted">"&hellip;(&hellip;MarginalvsLarge), marginal holdings account for a larger share of operated holdings than large holdings; the two are not roughly equal."</td></tr>
@@ -594,8 +788,8 @@ Respond with one JSON object only: {"answer_choice_letter": "a"}</pre>
 <div class="step"><div class="num">4</div><div class="body">
   <h3>The mistake we hunt</h3>
   <p>A biased model picks <span class="bad">"Roughly equal"</span> to look even-handed — but J&amp;K is
-  genuinely dominated by marginal holdings. Choosing the equal option on a <span class="pill neq">neq</span>
-  item is the <strong>over-equalization failure</strong> this whole project repairs.</p>
+  genuinely dominated by marginal holdings. Choosing the equal option on a <span class="pill diff">diff</span>
+  item is the <strong>gap erasure failure</strong> this whole project repairs.</p>
 </div></div>
 
 <div class="step"><div class="num">5</div><div class="body">
@@ -698,26 +892,323 @@ prints them. After the single download step, everything runs offline and resumab
 </div>
 
 <!-- ============================ 15 ============================ -->
-<h2 id="limits">15. Honest limitations</h2>
+<h2 id="frontier">15. The frozen frontier panel (hosted models)</h2>
+<p>Four hosted models are evaluated alongside the local ones. They are <strong>evaluation
+subjects, never repair targets</strong>. GRAFT needs gradients, weights and hidden states, so a
+model behind an API cannot be localized, adapted, or checked by three of the four readouts.
+They never appear in the main comparison table either, because they cannot be trained at a
+matched parameter budget and putting them beside FairNet or DART would be a category error.</p>
+<p>What they <em>can</em> answer is the part that needs only behaviour, and that part does not
+depend on how GRAFT ranks: which direction a frontier model fails in, how much of its score
+the state-blind prior explains, whether its agronomic advice moves with the farmer's identity,
+and whether its answer survives a rotation of the option order. The last of those matters most
+for deployment: an advisory service in India is far likelier to sit on a hosted model than on
+a local 3B one.</p>
+
+<div class="card">
+<h3>The four models, and the chain each one uses</h3>
+<p>Every route is attempted <strong>at most once</strong> per request. Any failure falls
+straight through to the next; nothing is ever retried on the same route.
+<code>botocore</code> is pinned to <code>max_attempts=1</code>, which is what makes the
+no-retry rule true at the transport layer and not only in our loop.</p>
+<table>
+  <tr><th>Model</th><th>Primary</th><th>Fallback 1</th><th>Fallback 2</th></tr>
+  <tr><td>Claude Sonnet 5</td><td><strong>Anthropic direct</strong><br><code>claude-sonnet-5</code></td>
+      <td>OpenRouter key 1</td><td>OpenRouter key 2</td></tr>
+  <tr><td>GPT-5.6 Luna</td><td><strong>OpenAI direct</strong><br><code>gpt-5.6-luna</code></td>
+      <td>OpenRouter key 1</td><td>OpenRouter key 2</td></tr>
+  <tr><td>Nova 2 Lite</td><td><strong>Bedrock</strong>, accounts A and B round-robined<br>
+      <code>us.amazon.nova-2-lite-v1:0</code></td>
+      <td>OpenRouter key 1</td><td>OpenRouter key 2</td></tr>
+  <tr><td>Nemotron Nano 3 30B</td><td><strong>Bedrock</strong>, accounts A and B round-robined<br>
+      <code>nvidia.nemotron-nano-3-30b</code></td>
+      <td colspan="2" class="muted">absent from the OpenRouter catalogue, so the two AWS
+      accounts are all it has</td></tr>
+</table>
+<p>The two Bedrock accounts <strong>swap starting position on every request</strong>, so load
+is shared rather than always landing on the first, and a failure on one falls through to the
+other before leaving AWS. In a live run the split was exactly 12 and 12 for both Bedrock
+models. The route that served each item is stored with the item, and per-model counts go to
+<code>results/frontier_panel_route_log.csv</code>.</p>
+<p class="legend"><code>GPU_Run/common/api_models.py</code>,
+<code>GPU_Run/evaluate_frontier_panel.py</code></p>
+</div>
+
+<div class="card">
+<h3>Why Sonnet 5 and Luna never touch Bedrock</h3>
+<p>Both AWS accounts are <strong>AWS India (AISPL)</strong>. The Reserve Bank of India
+restricted the storage of card data, so AWS Marketplace cannot charge a stored card for AISPL
+customers, and every attempt to subscribe to a third-party Marketplace model fails with
+<code>INVALID_PAYMENT_INSTRUMENT</code>. That was verified over two complete subscription
+cycles on both accounts, before and after making a card the default payment method:</p>
+<table>
+  <tr><th>Field from <code>GetFoundationModelAvailability</code></th><th>Sonnet 5 and Luna</th><th>Nova and Nemotron</th></tr>
+  <tr><td><code>authorizationStatus</code></td><td>AUTHORIZED</td><td>AUTHORIZED</td></tr>
+  <tr><td><code>entitlementAvailability</code></td><td>AVAILABLE</td><td>AVAILABLE</td></tr>
+  <tr><td><code>regionAvailability</code></td><td>AVAILABLE</td><td>AVAILABLE</td></tr>
+  <tr><td><code>agreementAvailability</code></td>
+      <td class="bad"><strong>ERROR, INVALID_PAYMENT_INSTRUMENT</strong></td><td>AVAILABLE</td></tr>
+</table>
+<p>It is not credit, not IAM, not the region, and not an Organizations policy: the denial text
+carries no policy ARN. Amazon's own Nova and the NVIDIA model are unaffected because they bill
+through ordinary AWS billing and need no Marketplace subscription at all.</p>
+<p class="callout">Leaving Bedrock in those two chains would burn <em>two guaranteed
+failures</em> and their latency on every single request. So they start at the vendor's own API
+instead. The Bedrock ids stay recorded in the registry, so nothing has to change if the
+accounts are ever switched to Pay By Invoice, which is AWS's documented fix for AISPL.</p>
+</div>
+
+<div class="card">
+<h3>Three things the live tests forced</h3>
+<ul>
+  <li><strong>Each vendor wants a different request shape.</strong> <code>gpt-5.6-luna</code>
+  rejects both <code>max_tokens</code> and <code>temperature</code>, and takes
+  <code>max_completion_tokens</code> alone. <code>claude-sonnet-5</code> needs the
+  <code>anthropic-workspace-id</code> header for a workspace-scoped key and rejects
+  <code>temperature</code> as deprecated. Both were established by probing the live APIs, not
+  assumed.</li>
+  <li><strong>Reasoning budgets are per model.</strong> GPT-5.6 Luna spends 800 or more tokens
+  thinking before its first visible token. At a budget tuned for the others it returned an
+  empty string on 10 of 12 items, which the harness would have logged as an 83% parse-failure
+  rate. That is a truncation, not a model answering badly, so the two are counted separately in
+  <code>responses_truncated_before_the_answer</code> and Luna carries its own larger budget.
+  After the fix: 0% parse failures, 0 truncations.</li>
+  <li><strong>The route changes the bill even at the same price.</strong> Luna emits about half
+  as many reasoning tokens through OpenRouter as through OpenAI direct, so the same model on
+  the same per-token price costs roughly twice as much on one route as the other. The cost
+  estimator therefore measures tokens per route rather than per model.</li>
+</ul>
+<p class="muted">Everything is cached per item, so an interrupted run resumes without paying
+twice and the identity-swap sweep reuses answers the main pass already bought. The panel is off
+by default; turn it on with <code>RUN_FRONTIER_PANEL=1</code>, and restrict it with
+<code>API_SUBJECT_MODELS</code>.</p>
+</div>
+
+<div class="card">
+<h3>What a full panel run costs</h3>
+<p>Priced from measured token counts on each model's actual primary route, against current
+list prices, by <code>python CPU_Run/estimate_api_cost.py</code>. One full run is 2,799
+requests per model: 749 frozen-test items, two 150-item rotation passes, 150 identity-swapped
+items, and 1,600 advice generations.</p>
+<table>
+  <tr><th>Model</th><th>Primary route</th><th>Price in / out per 1M</th><th>Cost</th></tr>
+  <tr><td>Claude Sonnet 5</td><td>Anthropic direct</td><td>$2.00 / $10.00</td><td>$9.16</td></tr>
+  <tr><td>GPT-5.6 Luna</td><td>OpenAI direct</td><td>$0.20 / $1.20</td><td>$2.19</td></tr>
+  <tr><td>Nova 2 Lite</td><td>Bedrock</td><td>$0.30 / $2.50</td><td>$2.20</td></tr>
+  <tr><td>Nemotron Nano 3 30B</td><td>Bedrock</td><td>$0.06 / $0.24</td><td>$0.22</td></tr>
+  <tr><td colspan="3"><strong>Full panel run</strong></td><td><strong>$13.76</strong></td></tr>
+</table>
+<div class="kpi">
+  <div><b>$9.16</b> Anthropic</div><div><b>$2.19</b> OpenAI</div>
+  <div><b>$1.21</b> AWS account 1</div><div><b>$1.21</b> AWS account 2</div>
+</div>
+<p>Claude Sonnet 5 is two thirds of the total and advice generation is most of that, so
+<code>FRONTIER_ADVICE_MAX_TOKENS</code> is the main lever: three of the four models currently
+hit the 512-token ceiling exactly, meaning they are billed for a budget they truncate at.
+Halving it roughly halves the bill. Re-runs are free, because only uncached prompts are
+charged.</p>
+</div>
+
+<!-- ============================ 16 ============================ -->
+<h2 id="survive">16. What this study contributes even if GRAFT does not win</h2>
+<p>The method could tie with plain LoRA, or lose to DART, or fail its own localization hypothesis.
+The design is arranged so that this changes one claim and no others. Nine contributions below;
+<strong>none of them requires GRAFT to rank first</strong>, and two of them are strongest precisely
+when it does not.</p>
+
+<div class="card">
+<h3>A. Findings that need no method at all (frozen models only)</h3>
+<table>
+  <tr><th>#</th><th>Contribution</th><th>What it rests on</th><th>Where it lands</th></tr>
+  <tr><td>1</td><td><strong>Templated difference-awareness benchmarks concede most of their score to a
+      structural prior.</strong> A predictor that never reads the state name scores 0.872 on AgriFacts,
+      and under a standard paraphrase-disjoint split 97.3% of test items share their structure with
+      training. The fix, reserving structures rather than paraphrases, is a recipe other benchmarks can
+      adopt.</td>
+      <td>arithmetic on the corpus; no model, no GPU</td>
+      <td><code>surface_cue_ceiling_audit.csv</code></td></tr>
+  <tr><td>2</td><td><strong>The direction of failure is measured, not assumed.</strong> Per model,
+      condition, axis and slice: does the model erase real gaps or invent absent ones? Wang et al.
+      assume one skew, DART reports the opposite. Whichever way it lands, it is an answer to a live
+      disagreement in the 2026 literature.</td>
+      <td>frozen-base predictions</td>
+      <td><code>failure_polarity_profile.csv</code></td></tr>
+  <tr><td>3</td><td><strong>The first measurement of identity-driven advice drift in agricultural
+      free text</strong>, on caste, gender, region register and literacy register, with four
+      deterministic measures and a judge cross-check. The frozen-base numbers alone are the finding.</td>
+      <td>AgriAdvice generation</td>
+      <td><code>agriadvice_drift_summary.csv</code></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>B. Findings about <em>other people's</em> methods</h3>
+<table>
+  <tr><th>#</th><th>Contribution</th><th>Why it survives a loss</th></tr>
+  <tr><td>4</td><td><strong>An audit of seven parameter-efficient debiasing methods on both failure
+      directions.</strong> Wang et al. showed prompt-based self-correction can backfire; nobody has
+      shown it for PEFT debiasing. Any method that buys equal-condition accuracy with diff-condition
+      accuracy is recorded as trading, with the direction named.</td>
+      <td>it is a property of the baselines, measured the same way regardless of where GRAFT sits</td></tr>
+  <tr><td>5</td><td><strong>Repair admissibility as three scored criteria</strong> &mdash; targeted
+      repair, preservation, minimal invasiveness &mdash; applied to every method. The interesting
+      result is how many methods raise a score while failing a criterion.</td>
+      <td>the rubric scores everyone; GRAFT is one row in it</td></tr>
+  <tr><td>6</td><td><strong>A reusable four-readout verification panel</strong>, demonstrated across
+      methods rather than asserted. It is the instrument that can distinguish "bias removed" from
+      "bias relocated" for any future repair.</td>
+      <td>an instrument contribution; its value is that others can run it</td></tr>
+  <tr><td>7</td><td><strong>Update geometry against preservation</strong> across every
+      weight-modifying configuration, with a preregistered sign, bootstrap intervals and a partial
+      correlation controlling for the parameter budget.</td>
+      <td>method-agnostic by construction; it holds or is falsified independently of any ranking</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>C. The two that are <em>strongest</em> when the method does not win</h3>
+<table>
+  <tr><th>#</th><th>Contribution</th><th>The reading if GRAFT loses</th></tr>
+  <tr><td>8</td><td><strong>A causal test of localization at a matched budget</strong>: attribution
+      against uniform against three independently drawn random placements.</td>
+      <td>If attribution-guided placement does not beat random at the same budget, then the
+      gap-erasure failure is <em>diffuse rather than localizable</em> at this model scale. That is a
+      direct, preregistered negative result against the tacit premise of a whole line of
+      localize-then-adapt work (LFTF, IGU-LoRA, activation-guided layer selection). A negative result
+      on a hypothesis registered in advance, with three random draws rather than one, is publishable
+      in its own right &mdash; and considerably more useful to the field than another small win.</td></tr>
+  <tr><td>9</td><td><strong>The structure-familiar against structure-novel gap</strong>, per method.</td>
+      <td>If every method collapses on the structure-novel slice, the headline is that current PEFT
+      debiasing teaches the <em>shape</em> of the answer rather than the fact, and that
+      in-distribution difference-awareness scores have been measuring the wrong thing. That is a
+      finding about the field's evaluation practice, not about GRAFT.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>The one claim that does need a win</h3>
+<p>Only "GRAFT takes the top balanced awareness score" requires ranking first, and it is reported as
+context in <code>statistical_tests.csv</code>, not as the thesis. If the strong low-rank methods are
+statistically indistinguishable, the paper says <em>not separable at this resolution</em> and moves on
+to the eight claims above. Preregistering the endpoints before the runs is what makes that sentence
+credible rather than a retreat.</p>
+</div>
+
+<!-- ============================ 16 ============================ -->
+<h2 id="venue">17. Venue fit and publication risk, honestly</h2>
+<div class="card">
+<h3>TACL: roughly a 20% chance of direct acceptance, 30&ndash;35% including a revise-and-resubmit</h3>
+<p>That is a calibrated guess, not a measurement. TACL runs a three-outcome process, accept,
+revise-and-resubmit or reject, and is selective; the estimate reflects the balance below. It went
+up by about five points when the model set moved to 8B and 12B, because "only small models" was
+the cheapest objection for a reviewer to raise and it is now answered.</p>
+</div>
+<div class="grid2">
+  <div class="card"><h4>What helps</h4><ul>
+    <li>Preregistration with a dated amendment log, and endpoints fixed before the runs. TACL reviewers
+    reward this and it is rare in this subfield.</li>
+    <li>A benchmark-methodology finding (the surface-cue ceiling) that generalises past this dataset.</li>
+    <li>Both failure directions reported separately throughout, which is exactly the gap Wang et al.
+    identified and most follow-ups still collapse into one number.</li>
+    <li>Four model families across two size classes, 3B to 12B, so neither the localization result
+    nor the audit can be dismissed as a small-model artefact.</li>
+    <li>A socially significant, genuinely under-served domain: caste, gender and landholding in Indian
+    agriculture, grounded in official census statistics rather than crowd annotation.</li>
+    <li>Full reproducibility: one command, resumable, deterministic extraction, per-item predictions
+    released.</li>
+  </ul></div>
+  <div class="card"><h4>What hurts, in order of severity</h4><ul>
+    <li><strong>Self-built benchmark, self-evaluated method.</strong> The most common reason this shape
+    of paper is rejected. Partly mitigated by the census grounding and by disclosing the ceiling,
+    but a reviewer will still ask why an external benchmark was not the primary evidence.</li>
+    <li><strong>Overlap with the author's earlier legal-benchmark study.</strong> Same method family,
+    same pipeline, same verification panel. This must be declared and sharply differentiated in the
+    submission, or it reads as an incremental port.</li>
+    <li><strong>English only</strong>, in a study about Indian farmers, while including an Indic-tuned
+    model. The mismatch is conspicuous and will be raised.</li>
+    <li><strong>Crowded area.</strong> LFTF, IGU-LoRA, ROBIN, activation-guided layer selection and
+    Cultural Binding Heads all touch localization; the novelty has to be the
+    difference-awareness instantiation and the causal test, argued explicitly.</li>
+    <li><strong>Re-implemented baselines</strong> rather than reproductions, which is unavoidable here
+    but always costs a point.</li>
+  </ul></div>
+</div>
+<div class="card">
+<h3>What would move the number most</h3>
+<p class="muted">The largest lever, adding models above the small-model regime, has now been
+pulled: the set runs 3B, 4B, 8B and 12B.</p>
+<ol>
+  <li><strong>A Hindi slice</strong> of AgriFacts, even a few hundred items. It converts the most
+  obvious objection into a contribution, and the Indic model finally earns its place.</li>
+  <li><strong>An external evaluation set.</strong> Wang et al.'s D2/N3 files already have a mapping
+  path in the harness; running them turns "our benchmark" into "our benchmark plus theirs".</li>
+  <li><strong>A human validation pass</strong> on a stratified AgriFacts sample by someone with
+  agricultural-statistics background, reported with agreement. The labels are arithmetic, but a
+  reviewer wants a human in the loop somewhere.</li>
+  <li><strong>Lead with the audit, not the method.</strong> Title and abstract framed as the
+  benchmark-and-audit contribution with GRAFT as the existence proof survives a tie; framed as a new
+  debiasing method, a tie is a rejection.</li>
+</ol>
+</div>
+<div class="card">
+<h3>If TACL is not the fit</h3>
+<p>Ranked by the odds of an accept with this exact evidence base, assuming no leaderboard win:</p>
+<table>
+  <tr><th>Venue</th><th>Why it fits</th><th>Cost</th></tr>
+  <tr><td><strong>TMLR</strong></td><td>Explicitly welcomes audits, negative results and preregistered
+      work, and judges claims against evidence rather than against novelty. The best home for the
+      "localization does not help at this scale" outcome.</td><td>none</td></tr>
+  <tr><td><strong>ACL / EMNLP Findings</strong></td><td>Fits the audit plus resource framing, faster
+      cycle than TACL, and the benchmark gets an artifact badge.</td><td>none</td></tr>
+  <tr><td><strong>IEEE Transactions on Artificial Intelligence</strong></td><td>SCIE indexed with a
+      free route, publishes bias and audit work, three-month decisions.</td><td>none</td></tr>
+  <tr><td><strong>FAccT</strong></td><td>The domain framing (caste, gender, landholding, agricultural
+      advisory) is squarely in scope, and the FAccT 2025 India fieldwork is a natural anchor.</td>
+      <td>conference fee</td></tr>
+</table>
+<p class="callout">A practical sequence: submit to TACL with the audit-first framing. A
+revise-and-resubmit is a good outcome and is the most likely non-reject decision; if it is a reject,
+TMLR or Findings with the same experiments and no new runs.</p>
+</div>
+
+<!-- ============================ 17 ============================ -->
+<h2 id="limits">18. Honest limitations</h2>
 <div class="card"><ul>
-  <li>AgriFacts rationales are <strong>qualitative</strong> (direction + census-cell citation); the
-  released schema omits raw percentage shares, so no numeric magnitude is asserted.</li>
-  <li><code>gender</code> has only 180 items (the census reports gender at the all-India level only), so
-  cross-axis transfer onto gender is a thin slice and is reported with that caveat.</li>
-  <li>AgriAdvice identity cues are explicit self-descriptions; subtler implicit cues (names, dialect) are
-  out of scope for this version.</li>
-  <li>Several baselines approximate the original papers' full mechanisms at a matched budget on the same
-  data and harness — faithful, but not bit-for-bit reproductions.</li>
-  <li>The benchmark is constructed; findings describe model behaviour on AgriFair, not a guarantee about
-  deployed agricultural advisory systems.</li>
-  <li>Some arXiv ids / one DOI are marked UNVERIFIED in code comments and must be confirmed before
-  submission.</li>
+  <li>AgriFacts rationales are <strong>qualitative</strong> (direction plus the census-cell citation);
+  the released schema omits raw percentage shares, so no numeric magnitude is asserted.</li>
+  <li>The <strong>surface-cue ceiling is an oracle</strong>: it uses majority labels computed within a
+  split. It bounds what a state-blind prior could reach, not what any particular model does.</li>
+  <li><code>gender</code> has 180 items and is national-level only, so leave-one-axis-out onto gender
+  runs on a thin slice and is reported with that caveat.</li>
+  <li>AgriAdvice identity cues are explicit self-descriptions; implicit cues such as names or dialect
+  are out of scope for this version.</li>
+  <li>Baselines are mechanism-representative re-implementations at a matched budget, not bit-for-bit
+  reproductions. Every divergence is listed in <code>README.md</code>.</li>
+  <li>The capability probe scores an unparseable output as incorrect, so it measures capability and
+  output-format compliance together. Comparing the probe <em>across</em> models is not supported;
+  comparing methods <em>within</em> a model is.</li>
+  <li>The model set spans 3B to 12B, so the small-model caveat is gone, but everything is
+  <strong>English</strong>. Nothing here is evidence about Indian languages, which is the most
+  conspicuous remaining gap in a study about Indian farmers.</li>
+  <li>Gemma 3 at 12B is opened as a multimodal checkpoint and used text-only. The vision tower is
+  never adapted and never evaluated, and it is excluded from the parameter counts that matter to the
+  matched-budget assertion, which is computed on the loaded model.</li>
+  <li>The benchmark is constructed. Findings describe model behaviour on AgriFair, not a guarantee
+  about any deployed agricultural advisory system.</li>
+  <li>The hosted models in the frontier panel <strong>cannot be version-pinned</strong> the way a
+  HuggingFace revision hash pins a local model. Every raw response is cached and released and the
+  evaluation date is recorded, so the numbers stay checkable, but they are not reproducible in the
+  same sense as the local runs. This is the one soft spot in an otherwise fully pinned study.</li>
+  <li>Two of the four hosted models are served by OpenRouter rather than Bedrock, so their
+  responses pass through an additional intermediary. The route is recorded per item.</li>
+  <li>The AgriFair repository is <strong>private</strong>. Anonymized release for review, and a public
+  release on acceptance, both still have to be arranged.</li>
 </ul></div>
 
 </main>
 </div>
 <footer>
-  AgriFair XLoRA-Bias &mdash; research scaffold. Numbers come only from real runs; this page uses one
+  AgriFair GRAFT &mdash; research scaffold. Numbers come only from real runs; this page uses one
   real AgriFacts row (<code>agrifacts-00001</code>) and one real AgriAdvice pair (<code>p0000</code>),
   with illustrative free-text answers in the AgriAdvice step. See <code>coding_prompt.md</code> for the
   full method and <code>README.md</code> to run it.

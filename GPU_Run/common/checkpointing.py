@@ -1,8 +1,7 @@
 """Resumable jsonl runners and epoch checkpoint helpers.
 
 Every API/evaluation loop saves progress every 50 rows and skips completed ids on
-restart; every training script saves a LoRA checkpoint each epoch and supports resume
-(Instruction.md Section 18).
+restart; every training script saves a LoRA checkpoint each epoch and supports resume.
 """
 from __future__ import annotations
 

@@ -1,9 +1,12 @@
-"""The ONLY networked script: downloads the subject models, the AgriFair dataset (if
-absent), and the general-replay set; pins revisions (Instruction.md Section 11, 12).
+"""The only networked script: downloads the subject models, the AgriFair dataset if it is
+absent, the general-replay set, and the external capability probe, and pins revisions.
 
-Reads the HF token only here, via env_loader (never printed). Idempotent: skips what is
-already present. The AgriFair dataset is normally already in Dataset/; this script
-re-fetches it only if missing.
+The HF token is read only here and in Dataset/_download_agrifair.py, via env_loader, and is
+never printed. Idempotent: whatever is already present is skipped. After this stage the
+whole pipeline runs offline.
+
+Debk/AgriFair is a private repository, so the token must have read access to it; without
+one the dataset cannot be re-fetched and the script says so instead of failing silently.
 
 Run:  python Dataset_Prep/download_models_and_data.py
 """
@@ -31,17 +34,31 @@ logger = get_logger("download_models_and_data")
 
 AGRIFAIR_REPO = env_loader.get("PRIMARY_DATASET_REPO", "Debk/AgriFair")
 GENERAL_REPLAY_REPO = env_loader.get("GENERAL_REPLAY_REPO", "databricks/databricks-dolly-15k")
-GENERAL_REPLAY_ROWS = 500
+GENERAL_REPLAY_ROWS = int(env_loader.get("GENERAL_REPLAY_ROWS", "500"))
 
 
 def _download_dataset_if_missing(token):
     if AGRIFACTS_RAW.exists() and AGRIADVICE_RAW.exists():
         logger.info("AgriFair already present in %s; skipping dataset download.", DATASET_DIR)
         return
+    if not token:
+        logger.error("AgriFair is missing and no HuggingFace token is available. %s is a private "
+                     "repository, so the token is required to fetch it.", AGRIFAIR_REPO)
+        return
     from huggingface_hub import snapshot_download
 
     logger.info("Downloading %s into %s", AGRIFAIR_REPO, DATASET_DIR)
     snapshot_download(repo_id=AGRIFAIR_REPO, repo_type="dataset", local_dir=str(DATASET_DIR), token=token)
+
+
+def _dataset_revision(token):
+    try:
+        from huggingface_hub import HfApi
+
+        return HfApi(token=token).dataset_info(AGRIFAIR_REPO).sha
+    except Exception as e:
+        logger.warning("Could not read the AgriFair revision (%s).", type(e).__name__)
+        return "unknown"
 
 
 def _download_general_replay(token):
@@ -58,15 +75,15 @@ def _download_general_replay(token):
                 ctx = row.get("context", "")
                 resp = row.get("response", "")
                 prompt = (instr + ("\n\n" + ctx if ctx else "")).strip()
-                f.write(json.dumps({"prompt": prompt, "response": resp}, ensure_ascii=False) + "\n")
-        logger.info("Wrote %d general-replay rows.", GENERAL_REPLAY_ROWS)
+                if prompt and resp:
+                    f.write(json.dumps({"prompt": prompt, "response": resp}, ensure_ascii=False) + "\n")
+        logger.info("Wrote the general-replay set from %s.", GENERAL_REPLAY_REPO)
     except Exception as e:
         logger.warning("General-replay download failed (%s); training replay will be empty.", e)
 
 
 def _download_models(token):
     from huggingface_hub import snapshot_download
-    from transformers import AutoConfig
 
     revisions = {}
     for tier in model_registry.active_tiers():
@@ -77,9 +94,11 @@ def _download_models(token):
         else:
             try:
                 logger.info("Downloading model %s", spec.hf_id)
-                snapshot_download(repo_id=spec.hf_id, local_dir=str(local), token=token)
+                ignore = ["*.gguf", "*.pth", "original/*"] + list(spec.download_ignore_patterns)
+                snapshot_download(repo_id=spec.hf_id, local_dir=str(local), token=token,
+                                  ignore_patterns=ignore)
             except Exception as e:
-                logger.warning("Model %s download failed (%s); skipping.", spec.hf_id, e)
+                logger.error("Model %s download failed (%s); this tier will be skipped downstream.", spec.hf_id, e)
                 continue
         try:
             from huggingface_hub import HfApi
@@ -95,11 +114,25 @@ def _download_models(token):
 def main():
     token = env_loader.hf_token()
     if not token:
-        logger.warning("No HF token in .env; gated models and dataset re-fetch will fail.")
+        logger.warning("No HuggingFace token in .env; gated models and the private AgriFair repo "
+                       "cannot be fetched.")
+    else:
+        gated = [s.hf_id for s in (model_registry.get_spec(t) for t in model_registry.active_tiers())
+                 if any(k in s.hf_id for k in ("meta-llama/", "google/gemma", "mistralai/"))]
+        if gated:
+            logger.info("These repositories are gated and need the licence accepted on the Hub by "
+                        "the account owning this token: %s", ", ".join(gated))
     _download_dataset_if_missing(token)
     _download_general_replay(token)
+    from Dataset_Prep import build_capability_probe
+
+    build_capability_probe.main()
     revisions = _download_models(token)
-    DATASET_REVISIONS.write_text(json.dumps({"agrifair_repo": AGRIFAIR_REPO}, indent=2), encoding="utf-8")
+    DATASET_REVISIONS.write_text(json.dumps({
+        "agrifair_repo": AGRIFAIR_REPO,
+        "agrifair_revision": _dataset_revision(token),
+        "general_replay_repo": GENERAL_REPLAY_REPO,
+    }, indent=2), encoding="utf-8")
     log_run_metadata("download_models_and_data", {"model_revisions": revisions})
     logger.info("Download stage complete.")
 

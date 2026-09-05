@@ -1,11 +1,16 @@
-"""Stage D+: training-free, layer-resolved Patchscope verification.
+"""Training-free, layer-resolved Patchscope readout of the pull toward "Roughly equal".
 
-Adapted from Patchscopes (Ghandeharioun et al., ICML 2024; arXiv:2401.06102). For the frozen
-base and the proposed adapter, at each attribution-targeted layer, patch that layer's last-
-position representation into a letter-eliciting target prompt (same model, identity mapping,
-single deterministic forward) and read the renormalized probability of option c ("Roughly
-equal"). A successful localized repair LOWERS over-equalization on neq (diff) while KEEPING
-it high on eq (equal) (Instruction.md Section 8.3).
+Adapted from Patchscopes (Ghandeharioun et al., ICML 2024; arXiv:2401.06102). For the
+frozen base and every trained method, at each attribution-targeted layer, the last-position
+representation of an AgriFacts item is patched into a short letter-eliciting prompt in the
+same model and the renormalized probability of the option letter standing for "Roughly
+equal" is read. A successful localized repair LOWERS that probability on diff items while
+KEEPING it high on equal items.
+
+Two conventions make the number interpretable. The source prompt is built in canonical
+option order, so the displayed letter c is always "Roughly equal" rather than whichever
+option the shuffle happened to place third. And the letter token ids are resolved in the
+JSON answer context, because tokenizers split a quoted letter differently from a bare one.
 
 Run:  python GPU_Run/patchscope_bias_verification.py
 """
@@ -18,91 +23,126 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import json
 import os
+from typing import Dict, List
+
+import numpy as np
 
 from GPU_Run.common import model_registry
-from GPU_Run.common.checkpointing import read_jsonl
-from GPU_Run.common.logging_utils import append_csv_row, get_logger, log_run_metadata, write_csv
-from GPU_Run.common.patchscopes import capture_last_hidden_states, letter_token_ids, patch_and_read_letter_prob
 from GPU_Run.common import prompts as P
-from GPU_Run.common.paths import CHECKPOINTS_DIR, RESULTS_DIR, TEST_INSTANCES_FROZEN
+from GPU_Run.common import targets as TG
+from GPU_Run.common.checkpointing import read_jsonl
+from GPU_Run.common.logging_utils import append_csv_row, get_logger, log_run_metadata
+from GPU_Run.common.patchscopes import (
+    capture_last_hidden_states,
+    layer_output_state,
+    letter_token_ids,
+    number_of_layers,
+    patch_and_read_letter_prob,
+)
+from GPU_Run.common.paths import RESULTS_DIR, TEST_INSTANCES_FROZEN, lora_config_path, split_loao_method
 from GPU_Run.common.seeds import set_global_determinism
 
 logger = get_logger("patchscope_bias_verification")
 
 PATCHSCOPE_MAX_ITEMS = int(os.environ.get("PATCHSCOPE_MAX_ITEMS", "48"))
-TARGET_PROMPT = (
-    'Answer with one option letter. Respond with one JSON object only: '
-    '{"answer_choice_letter": "'
-)
+TARGET_PROMPT_BODY = "Give the option letter for the correct answer."
 
-PER_LAYER_COLUMNS = ["tier", "method", "condition", "layer_index", "mean_probability_of_option_c"]
-SUMMARY_COLUMNS = ["tier", "method", "condition", "mean_probability_of_option_c_over_targeted_layers"]
+PER_LAYER_COLUMNS = ["tier", "method", "random_seed", "condition", "layer_index",
+                     "mean_probability_of_roughly_equal_option", "items_used"]
+SUMMARY_COLUMNS = ["tier", "method", "random_seed", "condition",
+                   "mean_probability_of_roughly_equal_option_over_targeted_layers",
+                   "targeted_layers_used"]
 
 
-def _targeted_layers(label, n_layers):
-    cfg_path = RESULTS_DIR / f"lora_config_{label}.json"
+def canonical_record(rec: Dict) -> Dict:
+    """The item with its options in canonical order, so displayed c is "Roughly equal"."""
+    return dict(rec, on_disk_choices=[rec["choice_a"], rec["choice_b"], rec["choice_c"]])
+
+
+def targeted_layers(label: str, method: str, n_layers: int) -> List[int]:
+    _, held_out = split_loao_method(method)
+    cfg_path = lora_config_path(label, held_out)
     if cfg_path.exists():
         layers = json.loads(cfg_path.read_text(encoding="utf-8"))["attribution_guided"]["selected_layers"]
+        layers = [l for l in layers if l < n_layers]
         if layers:
             return sorted(layers)
-    return list(range(n_layers))  # all-layer fallback
+    stride = max(1, n_layers // 8)
+    return list(range(0, n_layers, stride))
 
 
 def main(smoke: bool = False):
     set_global_determinism()
     test = read_jsonl(TEST_INSTANCES_FROZEN)
-    neq = [r for r in test if r["condition"] == "neq"][:PATCHSCOPE_MAX_ITEMS]
-    eq = [r for r in test if r["condition"] == "eq"][:PATCHSCOPE_MAX_ITEMS]
+    diff_items = [canonical_record(r) for r in test if r["condition"] == "diff"][:PATCHSCOPE_MAX_ITEMS]
+    equal_items = [canonical_record(r) for r in test if r["condition"] == "equal"][:PATCHSCOPE_MAX_ITEMS]
 
-    per_layer_path = RESULTS_DIR / "patchscope_bias_verification_per_layer.csv"
-    if per_layer_path.exists():
-        per_layer_path.unlink()
-    summary_rows = []
+    per_layer_path = RESULTS_DIR / "patchscope_readout_per_layer.csv"
+    summary_path = RESULTS_DIR / "patchscope_readout_summary.csv"
+    for p in (per_layer_path, summary_path):
+        if p.exists():
+            p.unlink()
+
+    wanted = os.environ.get("PATCHSCOPE_METHODS")
+    method_filter = [m.strip() for m in wanted.split(",") if m.strip()] if wanted else None
 
     tiers = ["smoke"] if smoke else model_registry.active_tiers()
     for tier in tiers:
         label = "smoke" if smoke else tier
-        proposed = CHECKPOINTS_DIR / label / "xlora_bias_proposed"
-        adapters = [("frozen_base", None)]
-        if proposed.exists():
-            sdir = sorted(proposed.glob("seed_*"))
-            if sdir:
-                final = sdir[0] / "final"
-                adapters.append(("xlora_bias_proposed", final if final.exists() else sdir[0]))
-
-        for method, adapter in adapters:
+        for target in TG.discover_targets(label, methods=method_filter, include_steering=False,
+                                          exclude_prefixes=("ablation_",), first_seed_only=True):
+            method, seed = target.method, target.seed
             try:
-                model, tok, meta = model_registry.load_model_and_tokenizer(tier, smoke=smoke)
-                if adapter is not None and Path(adapter).exists():
-                    from peft import PeftModel
-
-                    model = PeftModel.from_pretrained(model, str(adapter))
-                    model.eval()
+                model, tok, meta = TG.load_target(tier, target, smoke=smoke)
             except Exception as e:
-                logger.warning("patchscope load failed (%s); skipping.", e)
+                logger.error("patchscope load failed for %s (%s); skipping.", method, e)
                 continue
-            n_layers = len(capture_last_hidden_states(model, tok, "x")) - 1
-            layers = _targeted_layers(label, n_layers)
-            lids = letter_token_ids(tok)
+            try:
+                n_layers = number_of_layers(model)
+                layers = targeted_layers(label, method, n_layers)
+                lids = letter_token_ids(tok)
+                add_special = P.prompt_add_special_tokens(tok)
+                target_prompt = P.render_chat(tok, TARGET_PROMPT_BODY) + P.answer_prefix_text()
 
-            for cond_name, items in (("neq", neq), ("eq", eq)):
-                layer_means = {}
-                for layer in layers:
-                    probs = []
+                for cond_name, items in (("diff", diff_items), ("equal", equal_items)):
+                    if not items:
+                        continue
+                    sources = []
                     for rec in items:
-                        src = capture_last_hidden_states(model, tok, P.build_mcq_prompt(rec)["prompt"])
-                        pc = patch_and_read_letter_prob(model, tok, src[min(layer + 1, len(src) - 1)], TARGET_PROMPT, layer, lids, read_letter="c")
-                        probs.append(pc)
-                    mean_pc = sum(probs) / len(probs) if probs else float("nan")
-                    layer_means[layer] = mean_pc
-                    append_csv_row(per_layer_path, {"tier": label, "method": method, "condition": cond_name, "layer_index": layer, "mean_probability_of_option_c": round(mean_pc, 4) if mean_pc == mean_pc else ""}, PER_LAYER_COLUMNS)
-                overall = sum(layer_means.values()) / len(layer_means) if layer_means else float("nan")
-                summary_rows.append({"tier": label, "method": method, "condition": cond_name, "mean_probability_of_option_c_over_targeted_layers": round(overall, 4) if overall == overall else ""})
-                logger.info("tier=%s method=%s cond=%s mean P(c)=%.3f", label, method, cond_name, overall if overall == overall else float("nan"))
-            del model
+                        text = P.render_chat(tok, P.build_mcq_prompt(rec)["prompt"]) + P.answer_prefix_text()
+                        sources.append(capture_last_hidden_states(model, tok, text, add_special))
+                    layer_means = {}
+                    for layer in layers:
+                        probs = []
+                        for hs in sources:
+                            pc = patch_and_read_letter_prob(
+                                model, tok, layer_output_state(hs, layer), target_prompt, layer, lids,
+                                read_letter="c", add_special_tokens=add_special)
+                            if pc == pc:
+                                probs.append(pc)
+                        mean_pc = float(np.mean(probs)) if probs else float("nan")
+                        layer_means[layer] = mean_pc
+                        append_csv_row(per_layer_path, {
+                            "tier": label, "method": method, "random_seed": seed, "condition": cond_name,
+                            "layer_index": layer,
+                            "mean_probability_of_roughly_equal_option": round(mean_pc, 4) if mean_pc == mean_pc else "",
+                            "items_used": len(probs),
+                        }, PER_LAYER_COLUMNS)
+                    vals = [v for v in layer_means.values() if v == v]
+                    overall = float(np.mean(vals)) if vals else float("nan")
+                    append_csv_row(summary_path, {
+                        "tier": label, "method": method, "random_seed": seed, "condition": cond_name,
+                        "mean_probability_of_roughly_equal_option_over_targeted_layers":
+                            round(overall, 4) if overall == overall else "",
+                        "targeted_layers_used": ";".join(str(l) for l in layers),
+                    }, SUMMARY_COLUMNS)
+                    logger.info("tier=%s method=%s condition=%s mean P(Roughly equal)=%.3f over %d layers",
+                                label, method, cond_name, overall if overall == overall else float("nan"), len(layers))
+            finally:
+                TG.remove_steering(model)
+                del model
 
-    write_csv(RESULTS_DIR / "patchscope_bias_verification_summary.csv", summary_rows, SUMMARY_COLUMNS)
-    log_run_metadata("patchscope_bias_verification", {"summary_rows": len(summary_rows)})
+    log_run_metadata("patchscope_bias_verification", {"summary": str(summary_path)})
 
 
 if __name__ == "__main__":

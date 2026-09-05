@@ -1,7 +1,7 @@
-"""The only reader of .env for the AgriFair XLoRA-Bias study.
+"""The only reader of .env for the AgriFair GRAFT study.
 
 Accepts the canonical variable names and a set of legacy aliases so the .env
-that ships with the project works unchanged (Instruction.md, Section 10). Never
+that ships with the project works unchanged. Never
 prints a value. Keys are read only through this module.
 """
 from __future__ import annotations
@@ -29,6 +29,17 @@ _ALIASES: Dict[str, List[str]] = {
     "OPENROUTER_KEY1": ["OPENROUTER_KEY1", "OPENROUTER_API_KEY_1"],
     "OPENROUTER_KEY2": ["OPENROUTER_KEY2", "OPENROUTER_API_KEY_2"],
     "GITHUB_TOKEN": ["GITHUB_TOKEN", "Github_Classic_Token"],
+    # native provider keys for the frontier panel, primary route for two of the models
+    "OPENAI_DIRECT_KEY": ["OPENAI_DIRECT_KEY", "Open_AI_2009_Key", "OPENAI_API_KEY"],
+    "ANTHROPIC_DIRECT_KEY": ["ANTHROPIC_DIRECT_KEY", "Calude_2009_API_Key",
+                             "Claude_2009_API_Key", "ANTHROPIC_API_KEY"],
+    "ANTHROPIC_WORKSPACE_ID": ["ANTHROPIC_WORKSPACE_ID", "Claude_workspace_id"],
+    "XAI_DIRECT_KEY": ["XAI_DIRECT_KEY", "Grok_API_KEY", "GROK_API_KEY"],
+    "AWS_ACCESS_KEY_1": ["AWS_ACCESS_KEY"],
+    "AWS_SECRET_KEY_1": ["AWS_SECRET_KEY"],
+    "AWS_ACCESS_KEY_2": ["AWS_ACCESS_KEY2"],
+    "AWS_SECRET_KEY_2": ["AWS_SECRET_KEY2"],
+    "AWS_REGION": ["AWS_REGION", "AWS_DEFAULT_REGION"],
     # provider model strings / base urls (non-secret, but read here too)
     "DEEPSEEK_API_BASE_URL": ["DEEPSEEK_API_BASE_URL"],
     "DEEPSEEK_JUDGE_MODEL_NAME": ["DEEPSEEK_JUDGE_MODEL_NAME", "DEEPSEEK_PRIMARY_MODEL_NAME"],

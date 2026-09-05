@@ -1,23 +1,27 @@
 """Reader and normalizer for the AgriFair dataset.
 
 Turns each raw AgriFacts row into the harness record the rest of the pipeline
-expects (the legal-benchmark schema of Instruction.md Section 4.1), and reads the
-AgriAdvice paired free-text set. All derivations are deterministic; no language
-model is involved (AgriFair rule: "no label comes from a language model";
-Instruction.md Section 4.2 anti-synthetic rule).
+expects, and reads the AgriAdvice paired free-text set. All derivations are
+deterministic; no language model is involved (AgriFair rule: "no label comes from a
+language model").
 
 Key mappings (see coding_prompt.md Sections 2-4):
-  condition  diff -> neq,  equal -> eq
+  condition  diff and equal are kept as the dataset ships them
   choices    one is always "Roughly equal" (canonical letter c);
              the two others are the compared groups (canonical a, b)
   group1/2   parsed from the source_cell comparison token, in left->right order
   category   <- axis     form <- metric     scenario_type <- paraphrase_of
   law_reference <- source_cell
   rationale  constructed deterministically from the row's own ground truth
+
+The two failure directions the study measures, in AgriFair's own vocabulary:
+  gap erasure      a diff item answered "Roughly equal" (a real census gap is erased)
+  gap fabrication  an equal item answered with a group name (a gap is invented)
 """
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -35,12 +39,13 @@ _SOCIAL = {
     "Others": "Other social groups",
 }
 _GENDER = {"M": "men", "F": "women"}
-_SIZE_WORDS = {"marginal", "small", "semi-medium", "medium", "large"}
+_SIZE_WORDS = ["marginal", "small", "semi-medium", "medium", "large"]
 
 REQUIRED_AGRIFACTS = ["id", "question", "choices", "answer", "condition", "axis", "metric"]
 REQUIRED_AGRIADVICE = ["pair_id", "base_query", "toggle_axis", "version_A", "version_B"]
 
-CONDITION_MAP = {"diff": "neq", "equal": "eq"}
+CONDITION_MAP = {"diff": "diff", "equal": "equal"}
+AXES = ["social_group", "landholding", "gender"]
 
 
 def read_jsonl(path: Path) -> List[Dict]:
@@ -51,17 +56,6 @@ def read_jsonl(path: Path) -> List[Dict]:
             if line:
                 rows.append(json.loads(line))
     return rows
-
-
-def _resolve_side(side: str) -> Optional[str]:
-    s = side.strip()
-    if s in _SOCIAL:
-        return _SOCIAL[s]
-    if s in _GENDER:
-        return _GENDER[s]
-    if s.lower() in _SIZE_WORDS:
-        return f"{s.lower()} holdings"
-    return None
 
 
 def parse_comparison_token(source_cell: str) -> Optional[Tuple[str, str]]:
@@ -77,19 +71,45 @@ def parse_comparison_token(source_cell: str) -> Optional[Tuple[str, str]]:
     return None
 
 
+def _resolve_side(side: str, choices: List[str]) -> Optional[str]:
+    """Map a census token to the choice string that carries it.
+
+    Social-group and gender tokens map to fixed surface forms. Size-class tokens are
+    matched by prefix against the non-equal choices, because the released choices use
+    two wordings for the same class ("marginal holdings" for the number metric and
+    "marginal operated area" for the area metric). An unresolvable token returns None."""
+    s = side.strip()
+    if s in _SOCIAL and _SOCIAL[s] in choices:
+        return _SOCIAL[s]
+    if s in _GENDER and _GENDER[s] in choices:
+        return _GENDER[s]
+    low = s.lower()
+    if low in _SIZE_WORDS:
+        # longest-prefix match so "medium" does not capture "semi-medium"
+        for c in choices:
+            if c == EQUAL_CHOICE:
+                continue
+            first = re.split(r"\s+", c.strip().lower(), maxsplit=1)[0]
+            if first == low:
+                return c
+    return None
+
+
 def derive_groups(row: Dict) -> Tuple[str, str]:
     """Return (group1, group2) as the exact surface strings, in census-token order.
 
     Falls back to the on-disk order of the two non-equal choices if the token
-    cannot be resolved, so the function never fails."""
+    cannot be resolved, and records the fallback on the row for the audit log."""
     non_equal = [c for c in row["choices"] if c != EQUAL_CHOICE]
     parsed = parse_comparison_token(row.get("source_cell", ""))
     if parsed is not None:
-        g1, g2 = _resolve_side(parsed[0]), _resolve_side(parsed[1])
-        if g1 in row["choices"] and g2 in row["choices"]:
+        g1 = _resolve_side(parsed[0], row["choices"])
+        g2 = _resolve_side(parsed[1], row["choices"])
+        if g1 is not None and g2 is not None and g1 != g2:
+            row["_group_order_source"] = "census_token"
             return g1, g2
-    # deterministic fallback: keep on-disk order
     if len(non_equal) == 2:
+        row["_group_order_source"] = "on_disk_fallback"
         return non_equal[0], non_equal[1]
     raise ValueError(f"Cannot derive two groups for row {row.get('id')}: choices={row['choices']}")
 
@@ -119,10 +139,23 @@ def build_rationale(row: Dict, group1: str, group2: str) -> str:
     )
 
 
+def state_blind_key(row: Dict) -> str:
+    """The row's answer-relevant structure with the state removed.
+
+    source_cell reads 'AgCensus2015-16 T2-4 <State>/<class>/<metric>/<token>'. Dropping the
+    state leaves (axis, metric, class, comparison token), the key a model could learn as a
+    prior without knowing the specific census cell. Used by the surface-cue ceiling."""
+    parts = (row.get("source_cell") or "").split("/")
+    size_class = parts[1] if len(parts) > 2 else ""
+    token = parts[-1] if parts else ""
+    return "|".join([row.get("axis", ""), row.get("metric", ""), size_class, token])
+
+
 def normalize_agrifacts_row(row: Dict) -> Dict:
     """Map one raw AgriFacts row to the harness record."""
+    row = dict(row)
     group1, group2 = derive_groups(row)
-    condition = CONDITION_MAP[row["condition"]]  # diff->neq, equal->eq
+    condition = CONDITION_MAP[row["condition"]]  # dataset labels kept verbatim
     if row["condition"] == "equal":
         correct_letter = "c"
     else:
@@ -147,6 +180,8 @@ def normalize_agrifacts_row(row: Dict) -> Dict:
         "axis_raw": row["axis"],
         "metric_raw": row["metric"],
         "source_cell": row.get("source_cell", ""),
+        "state_blind_key": state_blind_key(row),
+        "group_order_source": row.get("_group_order_source", "unknown"),
         "on_disk_choices": row["choices"],
     }
 
@@ -157,13 +192,17 @@ def load_agrifacts_normalized(path: Optional[Path] = None) -> List[Dict]:
     out = [normalize_agrifacts_row(r) for r in raw]
     # invariants asserted (coding_prompt.md Section 12.16)
     for r in out:
-        assert r["condition"] in ("neq", "eq")
+        assert r["condition"] in ("diff", "equal")
         assert r["choice_c"] == EQUAL_CHOICE
-        if r["condition"] == "eq":
+        assert r["group1"] in r["on_disk_choices"] and r["group2"] in r["on_disk_choices"]
+        assert r["group1"] != r["group2"]
+        if r["condition"] == "equal":
             assert r["correct_answer"] == "c"
         else:
             assert r["correct_answer"] in ("a", "b")
-    logger.info("Loaded %d AgriFacts rows -> normalized harness records.", len(out))
+    fallbacks = sum(1 for r in out if r["group_order_source"] != "census_token")
+    logger.info("Loaded %d AgriFacts rows -> normalized harness records (%d used the on-disk "
+                "group order because the census token did not resolve).", len(out), fallbacks)
     return out
 
 

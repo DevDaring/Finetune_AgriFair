@@ -2,18 +2,18 @@
 
 `json_repair_parse` strips code fences, fixes trailing commas, extracts the first
 balanced JSON object, and reads fields directly. No judge model is used for answer
-extraction (Instruction.md Section 9). The judge chain is a fallback only when this
-parser fails on a specific item.
+extraction. The judge chain is a fallback only when this parser fails on a specific
+item, and the free-text heuristic is the last resort after both.
 """
 from __future__ import annotations
 
 import json
 import re
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Sequence, Tuple
 
 _FENCE = re.compile(r"^```(?:json)?|```$", re.MULTILINE)
 _TRAILING_COMMA = re.compile(r",(\s*[}\]])")
-_LETTER = re.compile(r"\b([abc])\b", re.IGNORECASE)
+_THINK_BLOCK = re.compile(r"<think>.*?</think>", re.DOTALL)
 
 
 def _first_balanced_object(text: str) -> Optional[str]:
@@ -48,7 +48,8 @@ def json_repair_parse(text: str) -> Optional[Dict]:
     """Best-effort deterministic parse of a JSON object out of model output."""
     if text is None:
         return None
-    cleaned = _FENCE.sub("", text).strip()
+    cleaned = _THINK_BLOCK.sub("", text)
+    cleaned = _FENCE.sub("", cleaned).strip()
     candidate = _first_balanced_object(cleaned)
     if candidate is None:
         candidate = cleaned
@@ -60,15 +61,19 @@ def json_repair_parse(text: str) -> Optional[Dict]:
                 return obj
         except Exception:
             continue
+    # an unterminated object (generation cut off) whose first field is complete
+    m = re.search(r'"answer_choice_letter"\s*:\s*"([A-Za-z])"', cleaned)
+    if m:
+        return {"answer_choice_letter": m.group(1)}
     return None
 
 
-def extract_answer_letter(text: str) -> Tuple[Optional[str], bool]:
-    """Return (letter in {a,b,c}, parse_ok). parse_ok is False if JSON parse failed."""
+def extract_answer_letter(text: str, letters: Sequence[str] = ("a", "b", "c")) -> Tuple[Optional[str], bool]:
+    """Return (letter in `letters`, parse_ok). parse_ok is False if JSON parse failed."""
     obj = json_repair_parse(text)
     if obj is not None and "answer_choice_letter" in obj:
-        val = str(obj["answer_choice_letter"]).strip().lower()
-        if val in ("a", "b", "c"):
+        val = str(obj["answer_choice_letter"]).strip().lower().strip("()")
+        if val in letters:
             return val, True
     return None, False
 
@@ -83,9 +88,10 @@ def extract_rationale(text: str) -> Dict:
     return {"rationale": rationale, "law_references": [str(r) for r in refs]}
 
 
-def fallback_letter_from_freetext(text: str) -> Optional[str]:
+def fallback_letter_from_freetext(text: str, letters: Sequence[str] = ("a", "b", "c")) -> Optional[str]:
     """Last-resort heuristic; only used after json parse AND judge both unavailable."""
     if not text:
         return None
-    m = _LETTER.search(text.strip())
+    pattern = re.compile(r"\(?\b([%s])\b\)?" % "".join(letters), re.IGNORECASE)
+    m = pattern.search(_THINK_BLOCK.sub("", text).strip())
     return m.group(1).lower() if m else None
