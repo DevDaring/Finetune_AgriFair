@@ -89,9 +89,12 @@ def probe(tier: str, records) -> dict:
     tokenised = [make_example_tensors(tok, r, cfg) for r in records]
     longest = min(int(cfg.max_length), max(len(e["input_ids"]) for e in tokenised))
     ordered = sorted(tokenised, key=lambda e: -len(e["input_ids"]))
-    examples = [{k: list(v) for k, v in e.items()} for e in ordered[:micro]]
+    def _copy(example):
+        return {k: (list(v) if isinstance(v, list) else v) for k, v in example.items()}
+
+    examples = [_copy(e) for e in ordered[:micro]]
     while len(examples) < micro:
-        examples.append({k: list(v) for k, v in examples[0].items()})
+        examples.append(_copy(examples[0]))
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else 0
     for e in examples:
         short = longest - len(e["input_ids"])
