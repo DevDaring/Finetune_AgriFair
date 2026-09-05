@@ -10,3 +10,6 @@ __pycache__/
 # Dataset/*.jsonl  -- raw AgriFair data is intentionally tracked in this repo
 Instruction.md     # kept local only; not published to the repo
 _stale_artifacts_before_2026-09-03/
+
+# Authoring material for the paper submission: kept out of the code repository on purpose.
+Submission1/
