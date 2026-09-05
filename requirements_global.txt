@@ -31,4 +31,4 @@ boto3>=1.35                 # AWS Bedrock, for the frozen frontier panel only
 # Optional. sentence-transformers is used only when MULTILINGUAL_EMBED_MODEL is set, for
 # the AgriAdvice drift embedding; without it the drift falls back to TF-IDF cosine and the
 # results CSV records which backend produced each number.
-sentence-transformers>=2.7
+sentence-transformers>=2.7,<6   # >=6 requires transformers 5.x, which this study is not validated on
