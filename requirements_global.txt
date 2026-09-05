@@ -9,6 +9,9 @@ transformers>=4.51,<5       # Qwen3 and Gemma 3 support. Upper bound is delibera
                             # whole study was validated on the 4.5x line, and transformers 5
                             # changes generation and auto-class behaviour. A one-shot run on a
                             # rented GPU is not the place to discover which of those matter.
+einops>=0.7                 # REQUIRED by flash_attn.bert_padding; without it transformers
+                            # rejects attn_implementation="flash_attention_2" with a bare
+                            # ModuleNotFoundError and silently falls back to sdpa
 jinja2>=3.1.0               # REQUIRED: transformers treats it as optional, but apply_chat_template
                             # raises ImportError below 3.1 and the study would then send every
                             # prompt as raw text with no chat template and no BOS token

@@ -50,18 +50,29 @@ def probe(tier: str, records) -> dict:
     if cap > 0:
         micro = min(micro, cap)
 
-    # A dense placement over every layer: the largest adapter the study ever builds, so the
-    # probe measures the worst case rather than the proposed method's sparse one.
+    # The densest placement the study ACTUALLY builds. Feeding an attribution of 1.0 for every
+    # layer makes rank_for() return RANK_MAX everywhere, which is an adapter far larger than
+    # any real arm: it rejected configurations that run fine. A realistic attribution profile
+    # (scores decaying across depth) reproduces the rank spread the study trains, and the
+    # uniform ablation spreads that same budget over the whole depth.
     cfg_obj = getattr(model, "config", None)
     # Gemma 3 is a multimodal checkpoint: its text tower's depth lives under text_config, and
     # the top-level attribute is absent. Reading 32 there would build an adapter over the
     # first 32 of 48 layers and understate the largest adapter the study trains.
     n_layers = getattr(cfg_obj, "num_hidden_layers", None) or getattr(
         getattr(cfg_obj, "text_config", None), "num_hidden_layers", None) or 32
-    placement = build_configs(
-        {"layer_scores_normalized": {str(i): 1.0 for i in range(n_layers)}}, draws=1
-    )["uniform"]
+    scores = {str(i): max(0.0, 1.0 - i / max(1, n_layers - 1)) for i in range(n_layers)}
+    configs = build_configs({"layer_scores_normalized": scores}, draws=1)
+    # Whichever of the real placements trains the most parameters.
+    best, placement = -1.0, None
+    for key in ("attribution_guided", "uniform"):
+        candidate = build_lora_model(model, configs[key], cfg)
+        pct = sum(p.numel() for p in candidate.parameters() if p.requires_grad)
+        if pct > best:
+            best, placement = pct, configs[key]
+        candidate.unload()
     peft_model = build_lora_model(model, placement, cfg)
+    trainable = sum(p.numel() for p in peft_model.parameters() if p.requires_grad)
     optimizer = torch.optim.AdamW(
         [p for p in peft_model.parameters() if p.requires_grad], lr=cfg.learning_rate)
 
@@ -102,6 +113,7 @@ def probe(tier: str, records) -> dict:
         "total_gigabytes": total,
         "fits": peak < SAFE_FRACTION * total,
         "attention": meta.get("attention_implementation_used", ""),
+        "trainable_millions": trainable / 1e6,
     }
 
 
@@ -136,6 +148,7 @@ def main() -> int:
         rows.append(row)
         verdict = "fits" if row["fits"] else "DOES NOT FIT"
         print(f"  {row['tier']:<22s} micro={row['micro_batch']} len={row['sequence_length']:<5d}"
+              f" lora={row['trainable_millions']:.0f}M attn={row['attention']:<18s}"
               f" peak {row['peak_gigabytes']:.1f} / {row['total_gigabytes']:.0f} GiB"
               f"  ({100 * row['peak_gigabytes'] / row['total_gigabytes']:.0f}%)  {verdict}")
         if not row["fits"]:
