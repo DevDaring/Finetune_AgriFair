@@ -76,7 +76,8 @@ REGISTRY: Dict[str, ModelSpec] = {
         parameter_count_billions=3.2,
         notes="Gated repo; needs the HF token at download.",
         # Sized for a 40 GB A100 (3.2B, 128k vocabulary); an uncapped micro-batch of 8 does not fit.
-        max_eval_batch_size=16,
+        # Evaluation batch, 3.2B: 6.4 GB of weights leaves most of a 40 GB card for KV cache. generate_batch halves this on OOM.
+        max_eval_batch_size=48,
         max_train_micro_batch_size=4,
     ),
     "broad-instruct": ModelSpec(
@@ -88,7 +89,8 @@ REGISTRY: Dict[str, ModelSpec] = {
         parameter_count_billions=4.0,
         notes="bf16 repo, never FP8; the non-thinking instruct variant.",
         # Sized for a 40 GB A100 (4.0B, 152k vocabulary); an uncapped micro-batch of 8 does not fit.
-        max_eval_batch_size=16,
+        # Evaluation batch, 4.0B: 8 GB of weights. generate_batch halves this on OOM.
+        max_eval_batch_size=48,
         max_train_micro_batch_size=4,
     ),
     "general-instruct": ModelSpec(
@@ -107,7 +109,8 @@ REGISTRY: Dict[str, ModelSpec] = {
         is_multimodal_checkpoint=True,
         # Sized for a 40 GB A100. Weights alone are 24.4 GB in bf16, and Gemma 3's 262k
         # vocabulary makes the loss tensor 2.7 GB per micro-batch item at length 1024.
-        max_eval_batch_size=4,
+        # Evaluation batch, 12.2B: 24.4 GB of weights leaves about 13 GB for KV cache. generate_batch halves this on OOM.
+        max_eval_batch_size=16,
         max_train_micro_batch_size=1,
     ),
     # Not a subject model. A genuinely small but REAL instruction-tuned checkpoint, used to
@@ -137,7 +140,8 @@ REGISTRY: Dict[str, ModelSpec] = {
         notes="Interleaved sliding-window attention. The repo carries both sharded HF "
               "weights and a 16 GB consolidated copy of the same weights; the consolidated "
               "file is skipped at download. Gated under the Mistral research licence.",
-        max_eval_batch_size=8,
+        # Evaluation batch, 8.0B: 16 GB of weights. generate_batch halves this on OOM.
+        max_eval_batch_size=24,
         max_train_micro_batch_size=2,
         download_ignore_patterns=["consolidated.safetensors", "params.json"],
     ),

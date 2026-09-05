@@ -13,6 +13,7 @@ import os
 from typing import Dict, List, Optional, Sequence
 
 from GPU_Run.common import prompts as P
+from GPU_Run.common.logging_utils import get_logger
 from GPU_Run.common.parsing import extract_answer_letter, extract_rationale, fallback_letter_from_freetext
 
 _SEQUENTIAL_MODEL_TYPES = {"nemotron_h", "mamba", "mamba2", "jamba", "zamba", "zamba2", "falcon_mamba"}
@@ -23,6 +24,9 @@ def eval_batch_size(default: int = 16) -> int:
         return int(os.environ.get("EVAL_BATCH_SIZE", default))
     except ValueError:
         return default
+
+
+logger = get_logger("inference")
 
 
 def _effective_batch_size(model, requested: Optional[int]) -> int:
@@ -57,22 +61,38 @@ def generate_batch(
     texts = [P.render_chat(tokenizer, t) if render else t for t in prompt_texts]
     add_special = P.prompt_add_special_tokens(tokenizer) if render else True
     outputs: List[str] = []
-    for start in range(0, len(texts), bs):
+    start = 0
+    while start < len(texts):
         chunk = texts[start : start + bs]
-        enc = tokenizer(
-            list(chunk), return_tensors="pt", padding=True, truncation=True, max_length=1024,
-            add_special_tokens=add_special,
-        ).to(model.device)
-        with torch.no_grad():
-            out = model.generate(
-                **enc,
-                max_new_tokens=max_new_tokens,
-                do_sample=False,
-                num_beams=1,
-                pad_token_id=tokenizer.pad_token_id,
-            )
+        try:
+            enc = tokenizer(
+                list(chunk), return_tensors="pt", padding=True, truncation=True, max_length=1024,
+                add_special_tokens=add_special,
+            ).to(model.device)
+            with torch.no_grad():
+                out = model.generate(
+                    **enc,
+                    max_new_tokens=max_new_tokens,
+                    do_sample=False,
+                    num_beams=1,
+                    pad_token_id=tokenizer.pad_token_id,
+                )
+        except torch.cuda.OutOfMemoryError:
+            # Halve and retry rather than lose the stage. Generation is greedy and each
+            # sequence is left-padded with an attention mask, so the batch size changes
+            # throughput and not what the model produces. Without this the batch size has to
+            # be set for the worst case everywhere, which roughly doubled the generation
+            # budget for the whole study.
+            if bs == 1:
+                raise
+            torch.cuda.empty_cache()
+            bs = max(1, bs // 2)
+            logger.warning("Generation ran out of memory; retrying at batch size %d.", bs)
+            continue
         gen = out[:, enc["input_ids"].shape[1]:]
         outputs.extend(tokenizer.batch_decode(gen, skip_special_tokens=True))
+        start += len(chunk)
+        del enc, out
     return outputs
 
 
