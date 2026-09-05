@@ -266,6 +266,7 @@ def main(smoke: bool = False):
                     cfg.pedal_classifier_fn = _pedal_classifier
                 quantized = bool(overrides.get("quantized"))
                 logger.info("Training baseline tier=%s method=%s seed=%d", label, method, seed)
+                model = None
                 try:
                     model, tok, meta = model_registry.load_model_and_tokenizer(
                         tier, smoke=smoke, quantized_4bit=quantized, for_training=True)
@@ -285,10 +286,13 @@ def main(smoke: bool = False):
                         audit_hook=audit_hook,
                     )
                     runs.append({"tier": label, "method": method, "seed": seed, **result})
-                    del model
                 except Exception as e:
                     logger.error("Baseline failed (tier=%s method=%s seed=%d): %s", label, method, seed, e)
                     runs.append({"tier": label, "method": method, "seed": seed, "error": str(e)})
+                finally:
+                    # See train_graft.train_one: releasing only on the success path let one
+                    # failed arm cascade into every arm that followed it on the same tier.
+                    T.release_model(model)
 
         # FairSteer changes no weight; it is prepared here and applied at evaluation.
         compute_fairsteer_vector(tier, smoke, label)

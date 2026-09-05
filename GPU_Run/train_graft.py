@@ -177,6 +177,7 @@ def train_one(tier, label, method, placement, overrides, seed, train, replay, re
     quantized = bool(overrides.get("quantized"))
     logger.info("Training tier=%s method=%s seed=%d quantized=%s layers=%s",
                 label, method, seed, quantized, placement.get("selected_layers"))
+    model = None
     try:
         model, tok, meta = model_registry.load_model_and_tokenizer(
             tier, smoke=smoke, quantized_4bit=quantized, for_training=True)
@@ -188,12 +189,16 @@ def train_one(tier, label, method, placement, overrides, seed, train, replay, re
                          "quantization_setting": meta["quantization_setting"]},
         )
         runs.append({"tier": label, "method": method, "seed": seed, "quantized": quantized, **result})
-        del model
         return result["trainable_parameter_percentage"]
     except Exception as e:
         logger.error("Training arm failed (tier=%s method=%s seed=%d): %s", label, method, seed, e)
         runs.append({"tier": label, "method": method, "seed": seed, "error": str(e)})
         return None
+    finally:
+        # In finally, not at the end of the try: an arm that raised used to leave its model
+        # resident, so the next arm loaded a second copy on top of it and failed too. One
+        # out-of-memory error became five.
+        T.release_model(model)
 
 
 def main(smoke: bool = False):

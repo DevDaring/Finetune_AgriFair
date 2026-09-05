@@ -30,6 +30,10 @@ unset EVAL_SUBSET_SIZE BASE_COMPETENCE_SUBSET_SIZE ADVICE_SUBSET_SIZE CAPABILITY
       ADVICE_TARGET_SCOPE BEHAVIOURAL_SWEEP_SCOPE PATCHSCOPE_METHODS DISABLE_JUDGE \
       RATIONALE_JUDGE_FRACTION ADVICE_JUDGE_FRACTION ADVICE_MAX_NEW_TOKENS
 
+# Expandable segments let the allocator grow and shrink a single arena instead of pinning
+# fixed blocks, which is what stranded 15.7 GiB as "reserved but unallocated" between arms on
+# the 12B model and made the next arm fail to allocate 2 MiB.
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
 export SUBJECT_MODELS="$TIERS"
 export GRAFT_FULL_SWEEP=1          # every arm, not the reduced set
 export RUN_LEAVE_ONE_AXIS_OUT=1    # the transfer study is part of the claim

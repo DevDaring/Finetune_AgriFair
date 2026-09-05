@@ -18,6 +18,10 @@ CODE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$CODE_DIR"
 mkdir -p results
 
+# Expandable segments let the allocator grow and shrink a single arena instead of pinning
+# fixed blocks, which is what stranded 15.7 GiB as "reserved but unallocated" between arms on
+# the 12B model and made the next arm fail to allocate 2 MiB.
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
 export SUBJECT_MODELS="$TIERS"
 # TWO DATA SAMPLES per stage. The point is coverage, not statistics: every GPU-bound code
 # path executes against real weights, every arm type is built, and nothing is skipped. The

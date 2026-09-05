@@ -363,6 +363,29 @@ def _reset_peak_memory():
         pass
 
 
+def release_model(*objects) -> None:
+    """Drop references to a finished arm's model and return its memory to the GPU.
+
+    `del model` alone is not enough. It drops one reference while the PEFT wrapper, the
+    optimiser and local frames may hold others, and even once everything is collected PyTorch's
+    caching allocator keeps the freed blocks reserved. On a 40 GB card that showed up as
+    "23 GiB allocated, 15.7 GiB reserved but unallocated" and the next arm could not allocate
+    2 MiB. Collect, then empty the cache, so each arm starts from a clean card."""
+    import gc
+
+    for obj in objects:
+        del obj
+    gc.collect()
+    try:
+        import torch
+
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.reset_peak_memory_stats()
+    except Exception:
+        pass
+
+
 def _drop_cost_rows(cost_record: Dict) -> None:
     """Remove any earlier row for this (tier, method, seed) from the cost log."""
     import csv
