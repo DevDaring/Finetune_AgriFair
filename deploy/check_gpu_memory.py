@@ -71,23 +71,28 @@ def probe(tier: str, records) -> dict:
         if pct > best:
             best, placement = pct, configs[key]
         candidate.unload()
+        del candidate
+        torch.cuda.empty_cache()
     peft_model = build_lora_model(model, placement, cfg)
     trainable = sum(p.numel() for p in peft_model.parameters() if p.requires_grad)
     optimizer = torch.optim.AdamW(
         [p for p in peft_model.parameters() if p.requires_grad], lr=cfg.learning_rate)
 
+    torch.cuda.empty_cache()
     torch.cuda.reset_peak_memory_stats()
-    # Take the longest examples in the corpus, then extend them to cfg.max_length. Real
-    # instances run to about 380 tokens against a configured maximum of 1024, so probing them
-    # as-is would measure roughly a third of the activation and logit memory the configuration
-    # permits, and pass a card the study could still overflow. Padding positions carry label
-    # -100 and weight 0, so they change no gradient while occupying the full tensor shape.
-    ordered = sorted(records, key=lambda r: -len(str(r.get("question", "")) + str(r.get("rationale", ""))))
-    examples = [make_example_tensors(tok, r, cfg) for r in ordered[:micro]]
+    # Pad to the longest example the STUDY can actually produce, which is the longest
+    # tokenised training record, not cfg.max_length. cfg.max_length is a truncation ceiling of
+    # 1024; real instances run to roughly 380 tokens, so padding to the ceiling measures a
+    # batch almost three times larger than any that will occur and fails a card that runs the
+    # study comfortably. Padding positions carry label -100 and weight 0, so they occupy the
+    # tensor shape without changing a gradient.
+    tokenised = [make_example_tensors(tok, r, cfg) for r in records]
+    longest = min(int(cfg.max_length), max(len(e["input_ids"]) for e in tokenised))
+    ordered = sorted(tokenised, key=lambda e: -len(e["input_ids"]))
+    examples = [{k: list(v) for k, v in e.items()} for e in ordered[:micro]]
     while len(examples) < micro:
         examples.append({k: list(v) for k, v in examples[0].items()})
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else 0
-    longest = int(cfg.max_length)
     for e in examples:
         short = longest - len(e["input_ids"])
         if short > 0:
