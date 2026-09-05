@@ -29,6 +29,15 @@ import subprocess
 import sys
 from typing import Dict, List, Optional
 
+# Runnable as a script (deploy/bootstrap.sh calls it directly), so the repository root has
+# to be on sys.path before the package imports below; running "python3 GPU_Run/common/x.py"
+# puts only GPU_Run/common there.
+if __package__ in (None, ""):
+    import sys as _sys
+    from pathlib import Path as _Path
+
+    _sys.path.insert(0, str(_Path(__file__).resolve().parents[2]))
+
 from GPU_Run.common.logging_utils import get_logger
 from GPU_Run.common.paths import RESULTS_DIR
 
