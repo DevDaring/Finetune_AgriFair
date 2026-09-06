@@ -363,6 +363,27 @@ def _reset_peak_memory():
         pass
 
 
+def free_gpu_memory() -> None:
+    """Collect Python garbage, then return the freed blocks to the GPU.
+
+    Call this AFTER the caller has dropped its own reference (model = None). Passing the model
+    to a helper does not release it: the helper deletes its local parameter while the caller's
+    variable still holds the object, so gc cannot collect it and empty_cache() runs before the
+    memory is releasable. That is why a loop that reused one `model` variable across targets
+    kept the whole model resident while a function-scoped caller looked fine."""
+    import gc
+
+    gc.collect()
+    try:
+        import torch
+
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.reset_peak_memory_stats()
+    except Exception:
+        pass
+
+
 def release_model(*objects) -> None:
     """Drop references to a finished arm's model and return its memory to the GPU.
 

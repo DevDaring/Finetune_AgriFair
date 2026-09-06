@@ -159,7 +159,8 @@ def main(smoke: bool = False):
                 # pressure also produces confusing secondary errors such as a dispatched
                 # model missing prepare_inputs_for_generation.
                 logger.error("verify load failed for %s (%s); skipping.", method, e)
-                T.release_model(model)
+                model = None
+                T.free_gpu_memory()
                 continue
             try:
                 probe_mcq = _probe_mcq(model, tok)
@@ -192,7 +193,8 @@ def main(smoke: bool = False):
                             probe_adv if probe_adv == probe_adv else float("nan"))
             finally:
                 TG.remove_steering(model)
-                T.release_model(model)
+                model = None          # drop THIS scope's reference before collecting
+                T.free_gpu_memory()
 
     log_run_metadata("verify_bias_subspace", {"rows": n_rows})
 

@@ -101,7 +101,8 @@ def main(smoke: bool = False):
                 # releasing is what turned a single out-of-memory error into 13 consecutive
                 # ones: each failed load left its partial model resident for the next.
                 logger.error("patchscope load failed for %s (%s); skipping.", method, e)
-                T.release_model(model)
+                model = None
+                T.free_gpu_memory()
                 continue
             try:
                 n_layers = number_of_layers(model)
@@ -146,7 +147,8 @@ def main(smoke: bool = False):
                                 label, method, cond_name, overall if overall == overall else float("nan"), len(layers))
             finally:
                 TG.remove_steering(model)
-                T.release_model(model)
+                model = None
+                T.free_gpu_memory()
 
     log_run_metadata("patchscope_bias_verification", {"summary": str(summary_path)})
 
