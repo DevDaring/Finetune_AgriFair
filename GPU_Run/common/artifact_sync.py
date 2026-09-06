@@ -64,11 +64,23 @@ def _is_git_repo() -> bool:
     return r.returncode == 0 and r.stdout.strip() == "true"
 
 
+SNAPSHOT_IDENTITY_NAME = os.environ.get("GIT_SNAPSHOT_NAME", "AgriFair run")
+SNAPSHOT_IDENTITY_EMAIL = os.environ.get("GIT_SNAPSHOT_EMAIL", "agrifair-run@localhost")
+
+
 def _git(args: List[str], extra_env: Optional[dict] = None) -> subprocess.CompletedProcess:
     env = os.environ.copy()
     if extra_env:
         env.update(extra_env)
     env.setdefault("GIT_TERMINAL_PROMPT", "0")
+    # Snapshots are written with commit-tree, which refuses to run without a committer
+    # identity ("Author identity unknown"). A freshly provisioned GPU box has no git config,
+    # so every snapshot failed there while the preflight reported ready. Supplying the
+    # identity here makes the snapshot independent of machine configuration.
+    env.setdefault("GIT_AUTHOR_NAME", SNAPSHOT_IDENTITY_NAME)
+    env.setdefault("GIT_AUTHOR_EMAIL", SNAPSHOT_IDENTITY_EMAIL)
+    env.setdefault("GIT_COMMITTER_NAME", SNAPSHOT_IDENTITY_NAME)
+    env.setdefault("GIT_COMMITTER_EMAIL", SNAPSHOT_IDENTITY_EMAIL)
     return subprocess.run(["git"] + args, cwd=REPO_ROOT, capture_output=True, text=True, env=env)
 
 
@@ -129,9 +141,11 @@ def snapshot(message: str = "autosync snapshot") -> bool:
         if not tree:
             logger.warning("write-tree produced nothing; snapshot aborted.")
             return False
-        commit = _git(["commit-tree", tree, "-m", message], env).stdout.strip()
+        made = _git(["commit-tree", tree, "-m", message], env)
+        commit = made.stdout.strip()
         if not commit:
-            logger.warning("commit-tree produced nothing; snapshot aborted.")
+            logger.error("commit-tree produced nothing; snapshot aborted. git said: %s",
+                         _redact(made.stderr).strip()[:200] or "(no stderr)")
             return False
         _git(["update-ref", f"refs/heads/{_branch()}", commit], env)
 
