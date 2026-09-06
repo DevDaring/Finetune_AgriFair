@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -214,7 +215,10 @@ def main() -> int:
     logger.info("Found %d adapters across %d tiers.",
                 manifest["count"], len({e["model_tier"] for e in manifest["adapters"]}))
 
-    staging = RESULTS_DIR / "huggingface_upload"
+    # Deliberately NOT under results/: staging copies every adapter, which is several
+    # gigabytes, and results/ is snapshotted to the artifacts branch under a size cap. Staging
+    # there pushes the directory over the cap and silently stops all result snapshots.
+    staging = Path(os.environ.get("HF_STAGING_DIR", "/tmp/agrifair_hf_upload"))
     if staging.exists():
         import shutil
 
@@ -248,6 +252,8 @@ def main() -> int:
                       commit_message=f"AgriFair GRAFT adapters: {manifest['count']} adapters")
     logger.info("Pushed %d adapters to https://huggingface.co/%s (%s).",
                 manifest["count"], args.repo, "public" if args.public else "private")
+    # Reclaim the staging copy: on a rented box the disk is finite and this is several GB.
+    shutil.rmtree(staging, ignore_errors=True)
     return 0
 
 
