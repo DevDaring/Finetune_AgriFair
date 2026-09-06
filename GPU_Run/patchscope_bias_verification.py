@@ -93,10 +93,15 @@ def main(smoke: bool = False):
         for target in TG.discover_targets(label, methods=method_filter, include_steering=False,
                                           exclude_prefixes=("ablation_",), first_seed_only=True):
             method, seed = target.method, target.seed
+            model = None
             try:
                 model, tok, meta = TG.load_target(tier, target, smoke=smoke)
             except Exception as e:
+                # Release whatever was allocated before the failure. Skipping without
+                # releasing is what turned a single out-of-memory error into 13 consecutive
+                # ones: each failed load left its partial model resident for the next.
                 logger.error("patchscope load failed for %s (%s); skipping.", method, e)
+                T.release_model(model)
                 continue
             try:
                 n_layers = number_of_layers(model)
