@@ -98,7 +98,13 @@ def _authenticated_remote() -> Optional[str]:
     url = r.stdout.strip()
     if not url.startswith("https://"):
         return None
-    return "https://" + token + "@" + url[len("https://"):]
+    host_and_path = url[len("https://"):]
+    # The origin may ALREADY carry credentials (a clone done with a token in the URL).
+    # Prepending another produced https://token@token@github.com/..., which git rejects as
+    # "URL using bad/illegal format", so every push failed while the commit itself succeeded.
+    if "@" in host_and_path:
+        host_and_path = host_and_path.split("@", 1)[1]
+    return "https://" + token + "@" + host_and_path
 
 
 def snapshot(message: str = "autosync snapshot") -> bool:
