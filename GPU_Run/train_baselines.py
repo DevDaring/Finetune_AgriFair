@@ -120,7 +120,10 @@ def compute_lftf_placement(tier: str, smoke: bool, configs: Dict, label: str) ->
         hb = capture_last_hidden_states(model, tok, P.render_chat(tok, P.build_mcq_prompt(c["swapped"])["prompt"]), add_special)
         d = np.array([float(np.linalg.norm(np.asarray(a) - np.asarray(b))) for a, b in zip(ha[1:], hb[1:])])
         scores = d if scores is None else scores + d
-    del model
+    # Drop this scope's reference, then return the blocks to the GPU. A bare `del model`
+    # leaves the allocator holding a whole 12B model, and the arm's own load then fails.
+    model = None
+    T.free_gpu_memory()
     scores = scores / max(1, len(pairs))
     mx = scores.max() if scores.size else 0.0
     norm = (scores / mx) if mx > 0 else scores
@@ -238,7 +241,18 @@ def main(smoke: bool = False):
             if key == "lftf":
                 if lftf_placement is None:
                     lftf_placement = compute_lftf_placement(tier, smoke, configs, label)
-                placement = lftf_placement or configs["uniform"]
+                if lftf_placement is None:
+                    # Substituting uniform here and still calling the arm "baseline_lftf"
+                    # publishes a duplicate of the uniform placement under a published
+                    # method's name. Skip it instead, so the results table is missing a row
+                    # rather than carrying a mislabelled one.
+                    logger.error("LFTF block location failed for %s; SKIPPING baseline_lftf "
+                                 "rather than training uniform placement under its name. "
+                                 "Re-run this tier once the cause is fixed.", label)
+                    runs.append({"tier": label, "method": method,
+                                 "error": "lftf_block_location_failed_arm_skipped"})
+                    continue
+                placement = lftf_placement
             elif key is None:
                 placement = all_layer_uniform_placement(configs, overrides["vanilla_rank"])
             else:
