@@ -197,8 +197,10 @@ def train_one(tier, label, method, placement, overrides, seed, train, replay, re
     finally:
         # In finally, not at the end of the try: an arm that raised used to leave its model
         # resident, so the next arm loaded a second copy on top of it and failed too. One
-        # out-of-memory error became five.
-        T.release_model(model)
+        # out-of-memory error became five. And the reference must be dropped HERE, not inside
+        # a helper, or gc cannot collect it before empty_cache() runs.
+        model = None
+        T.free_gpu_memory()
 
 
 def main(smoke: bool = False):

@@ -304,9 +304,13 @@ def main(smoke: bool = False):
                     logger.error("Baseline failed (tier=%s method=%s seed=%d): %s", label, method, seed, e)
                     runs.append({"tier": label, "method": method, "seed": seed, "error": str(e)})
                 finally:
-                    # See train_graft.train_one: releasing only on the success path let one
-                    # failed arm cascade into every arm that followed it on the same tier.
-                    T.release_model(model)
+                    # Drop THIS scope's reference before collecting. Passing the model to a
+                    # helper only deletes the helper's parameter; the loop variable still
+                    # holds it, so gc cannot free it and empty_cache() runs too early. That
+                    # left memory creeping up across arms and cost two arms on the larger
+                    # tiers before it was caught.
+                    model = None
+                    T.free_gpu_memory()
 
         # FairSteer changes no weight; it is prepared here and applied at evaluation.
         compute_fairsteer_vector(tier, smoke, label)
