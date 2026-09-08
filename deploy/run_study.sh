@@ -27,13 +27,20 @@ unset EVAL_SUBSET_SIZE BASE_COMPETENCE_SUBSET_SIZE ADVICE_SUBSET_SIZE CAPABILITY
       VERIFY_ATTRIBUTION_MAX_ITEMS VERIFY_ATTRIBUTION_RIEMANN_STEPS TRAIN_MICRO_BATCH_SIZE \
       EVAL_BATCH_SIZE FRONTIER_EVAL_SUBSET_SIZE FRONTIER_ROTATION_SUBSET_SIZE \
       FRONTIER_SWAP_SUBSET_SIZE GEOMETRY_LAYER_STRIDE GEOMETRY_BOOTSTRAP_RESAMPLES \
-      ADVICE_TARGET_SCOPE BEHAVIOURAL_SWEEP_SCOPE PATCHSCOPE_METHODS DISABLE_JUDGE \
+      BEHAVIOURAL_SWEEP_SCOPE PATCHSCOPE_METHODS DISABLE_JUDGE \
       RATIONALE_JUDGE_FRACTION ADVICE_JUDGE_FRACTION ADVICE_MAX_NEW_TOKENS
 
 # Expandable segments let the allocator grow and shrink a single arena instead of pinning
 # fixed blocks, which is what stranded 15.7 GiB as "reserved but unallocated" between arms on
 # the 12B model and made the next arm fail to allocate 2 MiB.
 export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
+# ADVICE_TARGET_SCOPE is deliberately NOT unset above. It is a declared scope decision
+# (recorded in PREREGISTRATION.md), not a workload cap left over from verification, and
+# wiping it silently forced the expensive exhaustive drift sweep even when headline was asked
+# for. Its value is echoed below so the log always says which scope actually ran.
+export ADVICE_TARGET_SCOPE="${ADVICE_TARGET_SCOPE:-all}"
+echo "study: advice drift scope = $ADVICE_TARGET_SCOPE"
+
 export SUBJECT_MODELS="$TIERS"
 export GRAFT_FULL_SWEEP=1          # every arm, not the reduced set
 export RUN_LEAVE_ONE_AXIS_OUT=1    # the transfer study is part of the claim
