@@ -137,13 +137,34 @@ def _num(v, nd=4):
     return round(float(v), nd) if (v is not None and v == v) else ""
 
 
+def _drop_rows_for_tiers(path, tiers_in_scope: set) -> None:
+    """Remove only the given tiers' rows, so a tier-scoped rerun cannot erase other tiers'
+    results - the same class of bug fixed in evaluate_all.py's MAIN_EVALUATION.unlink()."""
+    if not path.exists():
+        return
+    import csv
+
+    with open(path, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        rows = list(reader)
+    if not fieldnames:
+        path.unlink()
+        return
+    kept = [r for r in rows if r.get("tier") not in tiers_in_scope]
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        w.writeheader()
+        for r in kept:
+            w.writerow(r)
+
+
 def main(smoke: bool = False):
     set_global_determinism()
     out_path = RESULTS_DIR / "identity_probe_and_attribution_rerun.csv"
-    if out_path.exists():
-        out_path.unlink()
-    n_rows = 0
     tiers = ["smoke"] if smoke else model_registry.active_tiers()
+    _drop_rows_for_tiers(out_path, set(tiers))
+    n_rows = 0
     for tier in tiers:
         label = "smoke" if smoke else tier
         base_probe: Optional[float] = None

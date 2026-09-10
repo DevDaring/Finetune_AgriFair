@@ -339,6 +339,32 @@ def _reusable_predictions(pred_file, test, target=None):
     return None
 
 
+def _drop_evaluation_rows(tiers_in_scope: set) -> None:
+    """Remove rows for the given tiers from main_evaluation_results.csv, keeping every other
+    tier's rows untouched. A full unlink() is only correct when every tier is being rewritten
+    in the same run; a tier-scoped run (a single-tier remediation, most commonly) must not
+    erase tiers it never touches."""
+    if not MAIN_EVALUATION.exists():
+        return
+    import csv
+
+    with open(MAIN_EVALUATION, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        rows = list(reader)
+    if not fieldnames:
+        MAIN_EVALUATION.unlink()
+        return
+    kept = [r for r in rows if r.get("tier") not in tiers_in_scope]
+    with open(MAIN_EVALUATION, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        w.writeheader()
+        for r in kept:
+            w.writerow(r)
+    logger.info("Cleared %d row(s) for tier(s) %s; kept %d row(s) from other tiers.",
+               len(rows) - len(kept), sorted(tiers_in_scope), len(kept))
+
+
 def main(smoke: bool = False):
     set_global_determinism()
     test_all = _subset(read_jsonl(TEST_INSTANCES_FROZEN))
@@ -347,10 +373,12 @@ def main(smoke: bool = False):
     judge_fraction = float(os.environ.get("RATIONALE_JUDGE_FRACTION", "0.1"))
     judge = JudgeChain()
     trainable = _trainable_percentages()
-    if MAIN_EVALUATION.exists():
-        MAIN_EVALUATION.unlink()
-
     tiers = ["smoke"] if smoke else model_registry.active_tiers()
+    # Drop only the rows for the tiers about to be (re-)written, not the whole table. A
+    # tier-scoped rerun (SUBJECT_MODELS=one_tier, used to re-evaluate a single corrected arm)
+    # used to unlink the file unconditionally, silently discarding every other tier's rows -
+    # 554 of 715 rows were lost this way during a routine remediation run.
+    _drop_evaluation_rows(set(tiers))
     for tier in tiers:
         label = "smoke" if smoke else tier
         targets = TG.discover_targets(label)

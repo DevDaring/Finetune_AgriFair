@@ -72,6 +72,28 @@ def targeted_layers(label: str, method: str, n_layers: int) -> List[int]:
     return list(range(0, n_layers, stride))
 
 
+def _drop_rows_for_tiers(path, tiers_in_scope: set) -> None:
+    """Remove only the given tiers' rows, so a tier-scoped rerun cannot erase other tiers'
+    results - the same class of bug fixed in evaluate_all.py's MAIN_EVALUATION.unlink()."""
+    if not path.exists():
+        return
+    import csv
+
+    with open(path, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        rows = list(reader)
+    if not fieldnames:
+        path.unlink()
+        return
+    kept = [r for r in rows if r.get("tier") not in tiers_in_scope]
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        w.writeheader()
+        for r in kept:
+            w.writerow(r)
+
+
 def main(smoke: bool = False):
     set_global_determinism()
     test = read_jsonl(TEST_INSTANCES_FROZEN)
@@ -80,9 +102,9 @@ def main(smoke: bool = False):
 
     per_layer_path = RESULTS_DIR / "patchscope_readout_per_layer.csv"
     summary_path = RESULTS_DIR / "patchscope_readout_summary.csv"
-    for p in (per_layer_path, summary_path):
-        if p.exists():
-            p.unlink()
+    _scope_tiers = {"smoke"} if smoke else set(model_registry.active_tiers())
+    for _p in (per_layer_path, summary_path):
+        _drop_rows_for_tiers(_p, _scope_tiers)
 
     wanted = os.environ.get("PATCHSCOPE_METHODS")
     method_filter = [m.strip() for m in wanted.split(",") if m.strip()] if wanted else None
