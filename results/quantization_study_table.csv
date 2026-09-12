@@ -1,0 +1,9 @@
+tier,method,balanced_awareness_score_harmonic_mean_of_diff_and_equal_accuracy_mean,balanced_awareness_score_harmonic_mean_of_diff_and_equal_accuracy_std,balanced_awareness_score_harmonic_mean_of_diff_and_equal_accuracy_count,capability_retention_accuracy_on_external_probe_mean,capability_retention_accuracy_on_external_probe_std,capability_retention_accuracy_on_external_probe_count
+broad-instruct,graft_proposed_qlora_nf4,0.9106,,1,0.628,,1
+broad-instruct,reference_vanilla_qlora,0.9491,,1,0.656,,1
+general-instruct,graft_proposed_qlora_nf4,0.9289,,1,0.642,,1
+general-instruct,reference_vanilla_qlora,0.9545,,1,0.652,,1
+general-instruct-2,graft_proposed_qlora_nf4,0.9359,,1,0.404,,1
+general-instruct-2,reference_vanilla_qlora,0.9314,,1,0.52,,1
+small-instruct,graft_proposed_qlora_nf4,0.9493,,1,0.544,,1
+small-instruct,reference_vanilla_qlora,0.9479,,1,0.538,,1

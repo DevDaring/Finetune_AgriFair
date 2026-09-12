@@ -1,0 +1,17 @@
+tier,held_out_axis,failure_items_used,riemann_steps,bootstrap_resamples,mean_pairwise_spearman_of_layer_ranking_across_resamples,selected_layer_set_agreement_rate_across_resamples
+small-instruct,none,64,50,200,0.9996,1.0
+small-instruct,social_group,44,50,200,0.9994,1.0
+small-instruct,landholding,51,50,200,0.9995,1.0
+small-instruct,gender,64,50,200,0.9995,1.0
+broad-instruct,none,64,50,200,0.9996,1.0
+broad-instruct,social_group,41,50,200,0.9991,1.0
+broad-instruct,landholding,42,50,200,0.9998,1.0
+broad-instruct,gender,64,50,200,0.9997,1.0
+general-instruct,none,64,50,200,0.9995,0.7885
+general-instruct,social_group,44,50,200,0.9989,0.6125
+general-instruct,landholding,41,50,200,0.9991,1.0
+general-instruct,gender,63,50,200,0.9995,0.8405
+general-instruct-2,none,64,50,200,0.9997,1.0
+general-instruct-2,social_group,39,50,200,0.9996,0.9905
+general-instruct-2,landholding,40,50,200,0.9994,0.9565
+general-instruct-2,gender,64,50,200,0.9997,0.991

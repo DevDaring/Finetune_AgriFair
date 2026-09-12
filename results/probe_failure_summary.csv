@@ -1,0 +1,5 @@
+tier,validation_items,wrong_items,gap_erasure_failures_diff_answered_roughly_equal,gap_fabrication_failures_equal_answered_with_a_group,identity_swap_unlicensed_flips,answers_recovered_by_judge,answers_left_unresolved,failure_items_by_axis
+small-instruct,119,70,41,21,44,0,0,gender=12;landholding=47;social_group=55
+broad-instruct,119,63,11,38,40,0,0,gender=10;landholding=46;social_group=47
+general-instruct,119,63,4,48,42,0,0,gender=11;landholding=48;social_group=46
+general-instruct-2,119,52,18,28,47,0,0,gender=7;landholding=41;social_group=51

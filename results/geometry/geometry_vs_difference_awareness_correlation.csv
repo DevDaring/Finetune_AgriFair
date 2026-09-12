@@ -1,0 +1,11 @@
+base_model_name,geometry_metric_name,preservation_metric_name,pearson_correlation,pearson_p_value,spearman_correlation,spearman_p_value,bootstrap_confidence_interval_lower,bootstrap_confidence_interval_upper,partial_correlation_controlling_for_trainable_parameter_percentage,number_of_configurations,predicted_sign_preregistered
+small-instruct,normalized_spectral_shift_mean,contextual_awareness_preservation_relative_to_base,-0.2613,0.1881,-0.0946,0.6389,-0.7114,0.1926,0.0786,27,negative
+small-instruct,update_mask_overlap_with_principal_mask_mean,contextual_awareness_preservation_relative_to_base,-0.3567,0.0678,-0.157,0.4343,-0.6016,-0.0111,-0.3133,27,negative
+broad-instruct,normalized_spectral_shift_mean,contextual_awareness_preservation_relative_to_base,0.0983,0.6256,0.1175,0.5594,-0.1742,0.3672,0.5398,27,negative
+broad-instruct,update_mask_overlap_with_principal_mask_mean,contextual_awareness_preservation_relative_to_base,-0.0357,0.8598,0.2083,0.2971,-0.2892,0.25,0.2063,27,negative
+general-instruct-2,normalized_spectral_shift_mean,contextual_awareness_preservation_relative_to_base,-0.3989,0.0393,0.2105,0.2919,-0.769,0.662,-0.0295,27,negative
+general-instruct-2,update_mask_overlap_with_principal_mask_mean,contextual_awareness_preservation_relative_to_base,-0.1824,0.3626,0.2324,0.2435,-0.5345,0.3161,0.1507,27,negative
+general-instruct,normalized_spectral_shift_mean,contextual_awareness_preservation_relative_to_base,-0.0972,0.6297,-0.104,0.6056,-0.4492,0.1766,-0.0806,27,negative
+general-instruct,update_mask_overlap_with_principal_mask_mean,contextual_awareness_preservation_relative_to_base,-0.0903,0.6543,-0.15,0.4553,-0.3566,0.2248,-0.0734,27,negative
+pooled_across_models,normalized_spectral_shift_mean,contextual_awareness_preservation_relative_to_base,-0.0975,0.3156,0.0608,0.5318,-0.2298,0.0878,0.0489,108,negative
+pooled_across_models,update_mask_overlap_with_principal_mask_mean,contextual_awareness_preservation_relative_to_base,-0.2165,0.0244,-0.0521,0.5925,-0.4033,-0.0375,-0.0292,108,negative

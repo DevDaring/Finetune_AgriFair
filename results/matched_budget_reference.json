@@ -1,0 +1,8 @@
+{
+  "reference_trainable_parameter_percentage_by_tier": {
+    "small-instruct": 0.8259313815361078,
+    "broad-instruct": 1.375057918615542,
+    "general-instruct": 0.8000489688755357,
+    "general-instruct-2": 0.7008640160504681
+  }
+}

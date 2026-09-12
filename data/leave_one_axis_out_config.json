@@ -1,0 +1,45 @@
+{
+  "axes": [
+    "social_group",
+    "landholding",
+    "gender"
+  ],
+  "per_axis": {
+    "social_group": {
+      "held_out_test_items": 364,
+      "training_items_when_this_axis_is_held_out": 641,
+      "held_out_condition_mix": {
+        "equal": 192,
+        "diff": 172
+      },
+      "held_out_slice_mix": {
+        "structure_familiar": 149,
+        "structure_novel": 215
+      }
+    },
+    "landholding": {
+      "held_out_test_items": 315,
+      "training_items_when_this_axis_is_held_out": 590,
+      "held_out_condition_mix": {
+        "equal": 156,
+        "diff": 159
+      },
+      "held_out_slice_mix": {
+        "structure_novel": 164,
+        "structure_familiar": 151
+      }
+    },
+    "gender": {
+      "held_out_test_items": 70,
+      "training_items_when_this_axis_is_held_out": 1033,
+      "held_out_condition_mix": {
+        "diff": 40,
+        "equal": 30
+      },
+      "held_out_slice_mix": {
+        "structure_familiar": 28,
+        "structure_novel": 42
+      }
+    }
+  }
+}

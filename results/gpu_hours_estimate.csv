@@ -1,0 +1,9 @@
+gpu_name,memory_gigabytes,fits_every_model_in_bf16,training_hours,generation_hours,overhead_hours,total_hours,typical_usd_per_hour,estimated_usd
+RTX 4090 24GB,24,no,62.8,29.9,6.8,99.5,0.35,35.0
+L4 24GB,24,no,85.6,100.5,6.8,192.9,0.25,48.0
+A6000 48GB,48,yes,66.8,39.2,6.8,112.9,0.404,46.0
+L40S 48GB,48,yes,28.6,34.9,6.8,70.3,0.541,38.0
+A100 40GB,40,yes,33.2,19.4,6.8,59.4,0.668,40.0
+A100 80GB,80,yes,33.2,14.8,6.8,54.8,0.873,48.0
+H100 80GB,80,yes,10.5,9.0,6.8,26.3,2.002,53.0
+H200 141GB,141,yes,10.5,6.3,6.8,23.5,2.9,68.0

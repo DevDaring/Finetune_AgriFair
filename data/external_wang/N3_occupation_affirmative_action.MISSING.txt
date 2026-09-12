@@ -1,0 +1,1 @@
+N3_occupation_affirmative_action not present. Place the official Wang et al. (2025, arXiv:2502.01926) release file at /home/Debz/Research/Finetune_AgriFair/Codes/data/external_wang/N3_occupation_affirmative_action.jsonl to enable out-of-domain transfer evaluation. Nothing is fabricated.
