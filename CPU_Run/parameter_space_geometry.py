@@ -54,6 +54,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+import json
 import os
 import re
 
@@ -627,18 +628,50 @@ def _analyse_adapter(base_model, adapter_dir):
     return per_matrix, total_modules, adapted_modules
 
 
+def _tier_cache_path(tier):
+    return GEOMETRY_DIR / f"_tier_cache_{tier}.json"
+
+
 def main():
-    tiers = [d.name for d in CHECKPOINTS_DIR.iterdir() if d.is_dir()] if CHECKPOINTS_DIR.exists() else []
+    # Dot-directories are never tiers (snapshot_download leaves a .cache/ behind). Smallest
+    # base model first, so that if the box runs out of memory it happens on the largest model,
+    # after the others have already been measured and cached to disk.
+    tiers = ([d.name for d in CHECKPOINTS_DIR.iterdir() if d.is_dir() and not d.name.startswith(".")]
+             if CHECKPOINTS_DIR.exists() else [])
     if not tiers:
         tiers = list(model_registry.PRIMARY_TIERS)
+    tiers.sort(key=lambda t: model_registry.get_spec(t).parameter_count_billions if t in model_registry.REGISTRY else 0)
+    only = os.environ.get("GEOMETRY_TIERS", "").strip()
+    if only:
+        wanted = {t.strip() for t in only.split(",") if t.strip()}
+        tiers = [t for t in tiers if t in wanted]
 
     evaluation = _evaluation_join()
     trainable = _trainable_percentage_table()
     method_rows = []
     layer_rows = []
     run_log = []
+    GEOMETRY_DIR.mkdir(parents=True, exist_ok=True)
 
     for tier in tiers:
+        # A tier measured on an earlier run is loaded from its cache rather than recomputed.
+        # This is what makes the stage survive an OOM kill on this 31GB box: the per-tier rows
+        # land on disk the moment each tier finishes, and a SIGKILL on the next tier cannot
+        # take them with it. Delete the cache file to force a recompute.
+        cache = _tier_cache_path(tier)
+        if cache.exists():
+            cached = json.loads(cache.read_text(encoding="utf-8"))
+            # JSON has no NaN; nulls come back as None, which np.isfinite() cannot take.
+            # Restore NaN so the correlation code sees exactly what a fresh run produces.
+            def _denull(rows):
+                return [{k: (float("nan") if v is None else v) for k, v in r.items()} for r in rows]
+            method_rows.extend(_denull(cached["method_rows"]))
+            layer_rows.extend(_denull(cached["layer_rows"]))
+            run_log.extend(cached["run_log"])
+            logger.info("Geometry: %s loaded from cache (%d method rows).", tier, len(cached["method_rows"]))
+            continue
+        n_method0, n_layer0, n_log0 = len(method_rows), len(layer_rows), len(run_log)
+
         ckpt_root = CHECKPOINTS_DIR / tier
         if not ckpt_root.exists():
             run_log.append({"base_model_name": tier, "method_name": "", "random_seed": "",
@@ -746,6 +779,18 @@ def main():
             r["regime_anchor_method_name"] = anchor_name
         method_rows.extend(tier_rows)
         del base_model
+
+        # Persist this tier before touching the next base model. NaN is not JSON, so it is
+        # written as null and read back as None; the correlation code below treats non-finite
+        # values identically either way.
+        def _jsonable(rows):
+            return [{k: (None if isinstance(v, float) and v != v else v) for k, v in r.items()} for r in rows]
+        _tier_cache_path(tier).write_text(json.dumps({
+            "method_rows": _jsonable(method_rows[n_method0:]),
+            "layer_rows": _jsonable(layer_rows[n_layer0:]),
+            "run_log": run_log[n_log0:],
+        }), encoding="utf-8")
+        logger.info("Geometry: %s measured and cached (%d method rows).", tier, len(method_rows) - n_method0)
 
     # correlations, per model and pooled across models
     corr_rows = []

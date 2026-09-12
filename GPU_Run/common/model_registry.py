@@ -323,7 +323,13 @@ def load_model_and_tokenizer(
         base_kwargs["torch_dtype"] = torch.bfloat16
         base_kwargs["device_map"] = {"": 0}
     else:
-        base_kwargs["torch_dtype"] = torch.float32  # CPU smoke
+        # fp32 was chosen for the tiny CPU smoke model. The post-teardown geometry stage
+        # (parameter_space_geometry, H3) loads the full-size bases on CPU too, and at fp32 an
+        # 8B model is ~32GB - more than this box has - which OOM-kills the process silently
+        # mid-load. bf16 halves that and loses nothing here: the geometry maths already casts
+        # each matrix bf16 -> fp32 on its own. Opt-in so the smoke path is untouched.
+        cpu_dtype = os.environ.get("CPU_LOAD_DTYPE", "float32")
+        base_kwargs["torch_dtype"] = torch.bfloat16 if cpu_dtype == "bfloat16" else torch.float32
     if quantized:
         from transformers import BitsAndBytesConfig
 

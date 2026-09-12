@@ -64,6 +64,31 @@ def _subset(rows):
     return rows[:n] if n > 0 else rows
 
 
+def _drop_rows_for_tiers(path: Path, tiers_in_scope: set) -> None:
+    """Remove rows for the given tiers from a per-tier results CSV, keeping every other
+    tier's rows untouched. A tier-scoped rerun (SUBJECT_MODELS=<tier>) must not wipe the
+    other tiers' already-computed rows the way an unconditional unlink() would."""
+    if not path.exists():
+        return
+    import csv
+
+    with open(path, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        rows = list(reader)
+    if not fieldnames:
+        path.unlink()
+        return
+    kept = [r for r in rows if r.get("tier") not in tiers_in_scope]
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        w.writeheader()
+        for r in kept:
+            w.writerow(r)
+    logger.info("Cleared %d row(s) for tier(s) %s; kept %d row(s) from other tiers.",
+                len(rows) - len(kept), sorted(tiers_in_scope), len(kept))
+
+
 def _embedder():
     """(callable, backend_name). Sentence embeddings when MULTILINGUAL_EMBED_MODEL is set
     and loadable; otherwise None, which makes the metric fall back to TF-IDF."""
@@ -90,10 +115,9 @@ def main(smoke: bool = False):
     embedder, backend = _embedder()
 
     summary_path = RESULTS_DIR / "agriadvice_drift_summary.csv"
-    if summary_path.exists():
-        summary_path.unlink()
 
     tiers = ["smoke"] if smoke else model_registry.active_tiers()
+    _drop_rows_for_tiers(summary_path, set(tiers))
     for tier in tiers:
         label = "smoke" if smoke else tier
         # Advice drift runs on every arm by default, including the ablations. That is
