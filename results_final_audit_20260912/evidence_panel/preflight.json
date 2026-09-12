@@ -1,0 +1,8 @@
+{
+  "bundles": 0,
+  "ok": false,
+  "reasons": [
+    "gpu_enabled is false",
+    "no bundles"
+  ]
+}

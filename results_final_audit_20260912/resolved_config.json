@@ -1,0 +1,70 @@
+{
+  "allow_new_attribution": false,
+  "allow_paid_api": false,
+  "allow_training": false,
+  "analysis_seed": 20260912,
+  "audit_sample_stage1": 60,
+  "audit_sample_stage2_total": 120,
+  "bootstrap_draws": 10000,
+  "comparison_rule": {
+    "diff_if_abs_gap_at_least": null,
+    "equal_if_abs_gap_at_most": null,
+    "metric_unit": "percentage_points"
+  },
+  "evidence_panel": {
+    "bundles_per_axis": 32,
+    "configurations": [
+      "frozen_base",
+      "graft_proposed",
+      "ablation_rank_sweep_8"
+    ],
+    "max_new_tokens": 16,
+    "model_tiers": [
+      "small-instruct",
+      "broad-instruct"
+    ],
+    "nested_subset_per_axis": 16,
+    "pilot_bundles": 8,
+    "safety_factor": 1.5,
+    "seed": 42
+  },
+  "frozen_test_sha256": "2d40a81f15ca1836acfa4e61af79b8e215365c380a858385dbd46fa42f1a172b",
+  "gpu_enabled": false,
+  "gpu_total_deadline_minutes": 120,
+  "human_study": {
+    "conditions": [
+      "frozen_base",
+      "graft_proposed"
+    ],
+    "model_tiers": [
+      "small-instruct",
+      "broad-instruct"
+    ],
+    "pilot_questions": 8,
+    "questions_per_axis": 12,
+    "seed": 42
+  },
+  "localisation_controls": [
+    "ablation_placement_uniform",
+    "ablation_placement_random",
+    "ablation_placement_random_draw2",
+    "ablation_placement_random_draw3"
+  ],
+  "localisation_reference": "graft_proposed",
+  "output_directory": "results_final_audit_20260912",
+  "overwrite_legacy_inputs": false,
+  "permutation_draws": 10000,
+  "secondary_comparators": [
+    "frozen_base",
+    "reference_vanilla_lora",
+    "reference_vanilla_qlora",
+    "ablation_rank_sweep_8",
+    "baseline_dart",
+    "baseline_fairnet",
+    "baseline_fairsteer",
+    "baseline_igu_lora",
+    "baseline_lftf",
+    "baseline_pedal",
+    "baseline_regift"
+  ]
+}

@@ -1,0 +1,78 @@
+# Final bounded audit round - configuration.
+#
+# Every default here is the conservative one from Submission1/Future_PLan.md section 10.
+# The three gates that spend money are all OFF and must be flipped deliberately, in this
+# file, by a person. No stage flips them for you.
+
+analysis_seed: 20260912
+
+# ---- spend gates: all default to no spend --------------------------------------------
+allow_paid_api: false           # advice judging, secondary judges: never called from Next_Run
+allow_training: false           # no fine-tuning of any kind
+allow_new_attribution: false    # no attribution / probe / geometry sweeps
+gpu_enabled: false              # evidence_panel inference stays off until this is true
+gpu_total_deadline_minutes: 120 # hard cap across pilot + loading + panel (plan section 9.2)
+
+# ---- statistics --------------------------------------------------------------------
+bootstrap_draws: 10000
+permutation_draws: 10000
+
+# ---- safety ------------------------------------------------------------------------
+overwrite_legacy_inputs: false  # Next_Run never writes into results/ or data/
+output_directory: results_final_audit_20260912
+
+# ---- frozen inputs (relative to Codes/) -------------------------------------------
+frozen_test_sha256: 2d40a81f15ca1836acfa4e61af79b8e215365c380a858385dbd46fa42f1a172b
+
+# ---- comparison families (plan section 7.2) ---------------------------------------
+# The localisation family is GRAFT versus the placement controls on each model. Controls
+# exist only at seed 42, so the family is a seed-42 paired comparison; do not call it a
+# three-seed result.
+localisation_reference: graft_proposed
+localisation_controls:
+  - ablation_placement_uniform
+  - ablation_placement_random
+  - ablation_placement_random_draw2
+  - ablation_placement_random_draw3
+secondary_comparators:
+  - frozen_base
+  - reference_vanilla_lora
+  - reference_vanilla_qlora
+  - ablation_rank_sweep_8
+  - baseline_dart
+  - baseline_fairnet
+  - baseline_fairsteer
+  - baseline_igu_lora
+  - baseline_lftf
+  - baseline_pedal
+  - baseline_regift
+
+# ---- source ledger (plan section 6) ------------------------------------------------
+# The comparison rule is NOT in this repository and must be declared by the authors from
+# their construction records before gold can be recomputed. Leave null to keep
+# verify_sources in skeleton-only mode; it will refuse to recompute gold.
+comparison_rule:
+  metric_unit: percentage_points   # or relative_percent - declare, do not guess
+  equal_if_abs_gap_at_most: null   # e.g. 2.0
+  diff_if_abs_gap_at_least: null   # e.g. 5.0 ; the band between is the excluded band
+audit_sample_stage1: 60
+audit_sample_stage2_total: 120
+
+# ---- advice human study (plan section 8.2) ----------------------------------------
+human_study:
+  questions_per_axis: 12           # 48 total
+  pilot_questions: 8
+  model_tiers: [small-instruct, broad-instruct]   # Llama and Qwen, chosen in advance
+  conditions: [frozen_base, graft_proposed]
+  seed: 42
+
+# ---- evidence panel (plan section 9) -----------------------------------------------
+evidence_panel:
+  bundles_per_axis: 32             # 96 total
+  nested_subset_per_axis: 16       # 48 total, used only if the full panel does not fit
+  pilot_bundles: 8
+  model_tiers: [small-instruct, broad-instruct]
+  configurations: [frozen_base, graft_proposed, ablation_rank_sweep_8]
+  seed: 42
+  max_new_tokens: 16
+  safety_factor: 1.5
