@@ -1,0 +1,53 @@
+# Smoke configuration: every stage on two samples, in a separate output directory.
+#
+# Purpose: prove the code path runs end to end in a clean environment - including the
+# evidence-panel inference that the real configuration keeps gated - without spending on a
+# GPU or touching real outputs. Everything the smoke run needs that the real run lacks
+# (source values, a manual bundle check) is SYNTHESISED and labelled as such; nothing here
+# is a scientific result.
+
+analysis_seed: 20260912
+allow_paid_api: false
+allow_training: false
+allow_new_attribution: false
+gpu_enabled: true                  # smoke only: inference runs on CPU with a 0.5B model
+gpu_total_deadline_minutes: 20
+bootstrap_draws: 50
+permutation_draws: 50
+overwrite_legacy_inputs: false
+output_directory: results_final_audit_SMOKE
+frozen_test_sha256: 2d40a81f15ca1836acfa4e61af79b8e215365c380a858385dbd46fa42f1a172b
+
+localisation_reference: graft_proposed
+localisation_controls: [ablation_placement_uniform]
+secondary_comparators: [frozen_base]
+
+comparison_rule:                   # SYNTHETIC thresholds for the smoke ledger only
+  metric_unit: percentage_points
+  equal_if_abs_gap_at_most: 5.0
+  diff_if_abs_gap_at_least: 10.0
+audit_sample_stage1: 6
+audit_sample_stage2_total: 12
+
+human_study:
+  questions_per_axis: 2
+  pilot_questions: 2
+  model_tiers: [small-instruct, broad-instruct]
+  conditions: [frozen_base, graft_proposed]
+  seed: 42
+
+evidence_panel:
+  bundles_per_axis: 2
+  nested_subset_per_axis: 2
+  pilot_bundles: 1
+  model_tiers: [cpu-preflight]     # Qwen2.5-0.5B, ungated, CPU
+  configurations: [frozen_base]
+  seed: 42
+  max_new_tokens: 16
+  safety_factor: 1.5
+
+smoke:
+  enabled: true
+  max_arms_per_tier: 2             # graft_proposed + one control always kept
+  synthetic_ledger: true           # fabricate values INTO THE SMOKE DIR ONLY, clearly labelled
+  auto_mark_bundles_checked: true  # bypass the human check, smoke only

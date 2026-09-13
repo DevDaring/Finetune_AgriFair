@@ -1,0 +1,13 @@
+source_cell,axis,frozen_condition,audit_stage,order_in_stratum
+AgCensus2015-16 T14-16 All/Marginal/area/MvF,gender,diff,1,1
+AgCensus2015-16 T14-16 All/Medium/area/MvF,gender,diff,2,2
+AgCensus2015-16 T14-16 All/femaleShare/number/LargevsMedium,gender,equal,1,1
+AgCensus2015-16 T14-16 All/femaleShare/number/MarginalvsMedium,gender,equal,2,2
+AgCensus2015-16 T2-4 Tamil Nadu/All/number/MarginalvsMedium,landholding,diff,1,1
+AgCensus2015-16 T2-4 Maharashtra/All/number/MarginalvsLarge,landholding,diff,2,2
+AgCensus2015-16 T2-4 Andhra Pradesh/All/area/MarginalvsSemi-medium,landholding,equal,1,1
+AgCensus2015-16 T2-4 Punjab/SC/number/SmallvsSemi-medium,landholding,equal,2,2
+AgCensus2015-16 T2-4 Nagaland/All Classes/number/SCvsST,social_group,diff,1,1
+AgCensus2015-16 T2-4 Himachal Pradesh/Medium/number/STvsOthers,social_group,diff,2,2
+AgCensus2015-16 T2-4 Maharashtra/Marginal/number/SCvsST,social_group,equal,1,1
+AgCensus2015-16 T2-4 Maharashtra/Small/area/SCvsST,social_group,equal,2,2

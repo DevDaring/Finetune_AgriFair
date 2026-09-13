@@ -1,0 +1,47 @@
+[
+  {
+    "artifact": "inventory/manifest.json:frozen_test_hash_matches_config",
+    "claim": "Frozen test set is the preregistered one",
+    "status": "supported"
+  },
+  {
+    "artifact": "sources/discrepancy_report.csv",
+    "claim": "Census-derived labels were independently verified",
+    "status": "supported"
+  },
+  {
+    "artifact": "cpu_baselines/cpu_baseline_summary.csv",
+    "claim": "Simple train-only baselines reach a stated fraction of neural novel-test B",
+    "status": "supported"
+  },
+  {
+    "artifact": "paired/comparison_families.csv",
+    "claim": "GRAFT vs placement controls, with dependence-aware uncertainty (localisation family)",
+    "status": "supported"
+  },
+  {
+    "artifact": "paired/loao_error_taxonomy.csv",
+    "claim": "Transfer failures are characterised by error type, not only accuracy",
+    "status": "supported"
+  },
+  {
+    "artifact": "advice/advice_paired_summary.json",
+    "claim": "Advice drift reduction coincides with shorter, more duplicated answers (association)",
+    "status": "supported"
+  },
+  {
+    "artifact": "advice/human_study/ratings_analysis.json",
+    "claim": "Blinded expert assessment links automated consistency to correctness/usefulness",
+    "status": "unsupported (study not completed - narrow the claim)"
+  },
+  {
+    "artifact": "evidence_panel/evidence_panel_scores.csv",
+    "claim": "Evidence-sensitivity panel results",
+    "status": "supported"
+  },
+  {
+    "artifact": "\u2014",
+    "claim": "GRAFT is superior to ordinary adapters / localisation is necessary",
+    "status": "do_not_claim (preregistered hypothesis unsupported; report as such)"
+  }
+]

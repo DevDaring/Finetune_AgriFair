@@ -1,0 +1,2813 @@
+{
+  "advice": {
+    "axes": {
+      "gender": 200,
+      "literacy_register": 200,
+      "region_register": 200,
+      "social_group": 200
+    },
+    "cached_arms": [
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_dart_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_fairnet_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_fairsteer_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_igu_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_lftf_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_pedal_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_baseline_regift_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_frozen_base_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_graft_proposed_qlora_nf4_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_graft_proposed_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_reference_vanilla_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_broad-instruct_reference_vanilla_qlora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_dart_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_fairnet_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_fairsteer_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_igu_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_lftf_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_pedal_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_baseline_regift_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_frozen_base_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_graft_proposed_qlora_nf4_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_graft_proposed_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_reference_vanilla_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct-2_reference_vanilla_qlora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_dart_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_fairnet_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_fairsteer_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_igu_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_lftf_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_pedal_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_baseline_regift_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_frozen_base_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_graft_proposed_qlora_nf4_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_graft_proposed_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_reference_vanilla_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_general-instruct_reference_vanilla_qlora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_ablation_no_condition_adaptive_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_ablation_no_rationale_loss_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_ablation_placement_random_draw2_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_ablation_placement_random_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_dart_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_fairnet_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_fairsteer_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_igu_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_lftf_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_pedal_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_baseline_regift_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_frozen_base_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_graft_proposed_qlora_nf4_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_graft_proposed_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_reference_vanilla_lora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      },
+      {
+        "file": "agriadvice_drift_small-instruct_reference_vanilla_qlora_seed42.jsonl",
+        "has_token_counts": false,
+        "judge_scored": 80,
+        "missing_pairs": 0,
+        "pairs": 800
+      }
+    ],
+    "distinct_base_query": 800,
+    "pairs": 800
+  },
+  "analysis_seed": 20260912,
+  "checkpoints": {
+    "arms_with_config": 132,
+    "arms_with_weights": 132,
+    "missing_weights": [],
+    "root_exists": true
+  },
+  "config_sha256": "79629bc2e44357eccce3e12738bcab06a1b5ac2de0f8a7eaf05b8e7655366877",
+  "created_utc": "2026-09-13T03:36:58Z",
+  "findings": [],
+  "frozen_test_hash_matches_config": true,
+  "inputs": {
+    "agriadvice_pairs.jsonl": "8a6ecfeb8b0c2c0f231e762223a115368cd3481ccd43427263ae5c587a973b69",
+    "counterfactual_pairs.jsonl": "0efb42940f044ebc6e4989b7c9fa0d24ab413b8fc968f7ef2b140a995e4b25a3",
+    "external_capability_probe.jsonl": "3dce6bcf7ddede4d6881524d9be35957232a7ea0b4c60ab6f6cc69d848fba2ed",
+    "general_replay.jsonl": "0bbbd3db019e7bda871bd3c7e4bacd9ed4ad7bf5b2a0bd1fab5bc5156595f098",
+    "probe_failures_cpu-preflight.jsonl": "9bf77a45eb77aee7888e79d44f2ace7f97dfb787951e79fbf8ea70ebe406cc7e",
+    "probe_failures_smoke.jsonl": "938a6ae3c49d867e2030ee121a624158cc8ecae2cc50e6fa4e6db2fdc6b8f796",
+    "templated_all_instances.jsonl": "1dbf9e5130c2c2635e262bb8514bf76af56f722039ade087a9bd6864d57d634e",
+    "test_instances_frozen.jsonl": "2d40a81f15ca1836acfa4e61af79b8e215365c380a858385dbd46fa42f1a172b",
+    "train_instances.jsonl": "78c2fe09b5277801f5b6ff9a70763416bcd5d8fc083d7446794e1bac810ad844",
+    "validation_instances.jsonl": "447c5df97c2c566a7c9fc7dde1c2d327aebdd023ea12287b0e1747d62ac25cfc"
+  },
+  "predictions": {
+    "coverage": [
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_no_condition_adaptive_seed42.jsonl",
+        "method": "ablation_no_condition_adaptive",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_no_rationale_loss_seed42.jsonl",
+        "method": "ablation_no_rationale_loss",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_placement_random_seed42.jsonl",
+        "method": "ablation_placement_random",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_placement_random_draw2_seed42.jsonl",
+        "method": "ablation_placement_random_draw2",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_placement_random_draw3_seed42.jsonl",
+        "method": "ablation_placement_random_draw3",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_placement_uniform_seed42.jsonl",
+        "method": "ablation_placement_uniform",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_rank_sweep_16_seed42.jsonl",
+        "method": "ablation_rank_sweep_16",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_rank_sweep_32_seed42.jsonl",
+        "method": "ablation_rank_sweep_32",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_ablation_rank_sweep_8_seed42.jsonl",
+        "method": "ablation_rank_sweep_8",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_dart_seed42.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_dart_seed43.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_dart_seed44.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_fairnet_seed42.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_fairnet_seed43.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_fairnet_seed44.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_fairsteer_seed42.jsonl",
+        "method": "baseline_fairsteer",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_igu_lora_seed42.jsonl",
+        "method": "baseline_igu_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_lftf_seed42.jsonl",
+        "method": "baseline_lftf",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_pedal_seed42.jsonl",
+        "method": "baseline_pedal",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_baseline_regift_seed42.jsonl",
+        "method": "baseline_regift",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_frozen_base_seed42.jsonl",
+        "method": "frozen_base",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_seed42.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_seed43.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_seed44.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_loao_gender_seed42.jsonl",
+        "method": "graft_proposed_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_loao_landholding_seed42.jsonl",
+        "method": "graft_proposed_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_loao_social_group_seed42.jsonl",
+        "method": "graft_proposed_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_graft_proposed_qlora_nf4_seed42.jsonl",
+        "method": "graft_proposed_qlora_nf4",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_lora_seed42.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_lora_seed43.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_lora_seed44.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_lora_loao_gender_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_lora_loao_landholding_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 313,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_lora_loao_social_group_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_broad-instruct_reference_vanilla_qlora_seed42.jsonl",
+        "method": "reference_vanilla_qlora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "broad-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_no_condition_adaptive_seed42.jsonl",
+        "method": "ablation_no_condition_adaptive",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_no_rationale_loss_seed42.jsonl",
+        "method": "ablation_no_rationale_loss",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_placement_random_seed42.jsonl",
+        "method": "ablation_placement_random",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_placement_random_draw2_seed42.jsonl",
+        "method": "ablation_placement_random_draw2",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_placement_random_draw3_seed42.jsonl",
+        "method": "ablation_placement_random_draw3",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_placement_uniform_seed42.jsonl",
+        "method": "ablation_placement_uniform",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_rank_sweep_16_seed42.jsonl",
+        "method": "ablation_rank_sweep_16",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_rank_sweep_32_seed42.jsonl",
+        "method": "ablation_rank_sweep_32",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_ablation_rank_sweep_8_seed42.jsonl",
+        "method": "ablation_rank_sweep_8",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_dart_seed42.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_dart_seed43.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_dart_seed44.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_fairnet_seed42.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_fairnet_seed43.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_fairnet_seed44.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_fairsteer_seed42.jsonl",
+        "method": "baseline_fairsteer",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 747,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_igu_lora_seed42.jsonl",
+        "method": "baseline_igu_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_lftf_seed42.jsonl",
+        "method": "baseline_lftf",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_pedal_seed42.jsonl",
+        "method": "baseline_pedal",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_baseline_regift_seed42.jsonl",
+        "method": "baseline_regift",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_frozen_base_seed42.jsonl",
+        "method": "frozen_base",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_graft_proposed_seed42.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_graft_proposed_seed43.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_graft_proposed_seed44.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct_graft_proposed_loao_gender_seed42.jsonl",
+        "method": "graft_proposed_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct_graft_proposed_loao_landholding_seed42.jsonl",
+        "method": "graft_proposed_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct_graft_proposed_loao_social_group_seed42.jsonl",
+        "method": "graft_proposed_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_graft_proposed_qlora_nf4_seed42.jsonl",
+        "method": "graft_proposed_qlora_nf4",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_lora_seed42.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_lora_seed43.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_lora_seed44.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_lora_loao_gender_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_lora_loao_landholding_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_lora_loao_social_group_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct_reference_vanilla_qlora_seed42.jsonl",
+        "method": "reference_vanilla_qlora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_no_condition_adaptive_seed42.jsonl",
+        "method": "ablation_no_condition_adaptive",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_no_rationale_loss_seed42.jsonl",
+        "method": "ablation_no_rationale_loss",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_placement_random_seed42.jsonl",
+        "method": "ablation_placement_random",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_placement_random_draw2_seed42.jsonl",
+        "method": "ablation_placement_random_draw2",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_placement_random_draw3_seed42.jsonl",
+        "method": "ablation_placement_random_draw3",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_placement_uniform_seed42.jsonl",
+        "method": "ablation_placement_uniform",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_rank_sweep_16_seed42.jsonl",
+        "method": "ablation_rank_sweep_16",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_rank_sweep_32_seed42.jsonl",
+        "method": "ablation_rank_sweep_32",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_ablation_rank_sweep_8_seed42.jsonl",
+        "method": "ablation_rank_sweep_8",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_dart_seed42.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_dart_seed43.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_dart_seed44.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_fairnet_seed42.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_fairnet_seed43.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_fairnet_seed44.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_fairsteer_seed42.jsonl",
+        "method": "baseline_fairsteer",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_igu_lora_seed42.jsonl",
+        "method": "baseline_igu_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_lftf_seed42.jsonl",
+        "method": "baseline_lftf",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 748,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_pedal_seed42.jsonl",
+        "method": "baseline_pedal",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_baseline_regift_seed42.jsonl",
+        "method": "baseline_regift",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_frozen_base_seed42.jsonl",
+        "method": "frozen_base",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_seed42.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_seed43.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_seed44.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_loao_gender_seed42.jsonl",
+        "method": "graft_proposed_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_loao_landholding_seed42.jsonl",
+        "method": "graft_proposed_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_loao_social_group_seed42.jsonl",
+        "method": "graft_proposed_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_graft_proposed_qlora_nf4_seed42.jsonl",
+        "method": "graft_proposed_qlora_nf4",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_lora_seed42.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_lora_seed43.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_lora_seed44.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_lora_loao_gender_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_lora_loao_landholding_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_lora_loao_social_group_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_general-instruct-2_reference_vanilla_qlora_seed42.jsonl",
+        "method": "reference_vanilla_qlora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "general-instruct-2",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_no_condition_adaptive_seed42.jsonl",
+        "method": "ablation_no_condition_adaptive",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_no_rationale_loss_seed42.jsonl",
+        "method": "ablation_no_rationale_loss",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_placement_random_seed42.jsonl",
+        "method": "ablation_placement_random",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_placement_random_draw2_seed42.jsonl",
+        "method": "ablation_placement_random_draw2",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_placement_random_draw3_seed42.jsonl",
+        "method": "ablation_placement_random_draw3",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_placement_uniform_seed42.jsonl",
+        "method": "ablation_placement_uniform",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_rank_sweep_16_seed42.jsonl",
+        "method": "ablation_rank_sweep_16",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_rank_sweep_32_seed42.jsonl",
+        "method": "ablation_rank_sweep_32",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_ablation_rank_sweep_8_seed42.jsonl",
+        "method": "ablation_rank_sweep_8",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_dart_seed42.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_dart_seed43.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_dart_seed44.jsonl",
+        "method": "baseline_dart",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_fairnet_seed42.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_fairnet_seed43.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_fairnet_seed44.jsonl",
+        "method": "baseline_fairnet",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_fairsteer_seed42.jsonl",
+        "method": "baseline_fairsteer",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_igu_lora_seed42.jsonl",
+        "method": "baseline_igu_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_lftf_seed42.jsonl",
+        "method": "baseline_lftf",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_pedal_seed42.jsonl",
+        "method": "baseline_pedal",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_baseline_regift_seed42.jsonl",
+        "method": "baseline_regift",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_frozen_base_seed42.jsonl",
+        "method": "frozen_base",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_graft_proposed_seed42.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_graft_proposed_seed43.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_graft_proposed_seed44.jsonl",
+        "method": "graft_proposed",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_small-instruct_graft_proposed_loao_gender_seed42.jsonl",
+        "method": "graft_proposed_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_small-instruct_graft_proposed_loao_landholding_seed42.jsonl",
+        "method": "graft_proposed_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_small-instruct_graft_proposed_loao_social_group_seed42.jsonl",
+        "method": "graft_proposed_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_graft_proposed_qlora_nf4_seed42.jsonl",
+        "method": "graft_proposed_qlora_nf4",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_lora_seed42.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_lora_seed43.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 43,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_lora_seed44.jsonl",
+        "method": "reference_vanilla_lora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 44,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_lora_loao_gender_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_gender",
+        "missing_ids": 0,
+        "normalised_records": 70,
+        "parse_ok": 70,
+        "raw_rows": 70,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_lora_loao_landholding_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_landholding",
+        "missing_ids": 0,
+        "normalised_records": 315,
+        "parse_ok": 315,
+        "raw_rows": 315,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "held_out_axis",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_lora_loao_social_group_seed42.jsonl",
+        "method": "reference_vanilla_lora_loao_social_group",
+        "missing_ids": 0,
+        "normalised_records": 364,
+        "parse_ok": 364,
+        "raw_rows": 364,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      },
+      {
+        "duplicate_ids": 0,
+        "expected_scope": "full_test",
+        "file": "per_item_predictions_small-instruct_reference_vanilla_qlora_seed42.jsonl",
+        "method": "reference_vanilla_qlora",
+        "missing_ids": 0,
+        "normalised_records": 749,
+        "parse_ok": 749,
+        "raw_rows": 749,
+        "schema_issues": {},
+        "seed": 42,
+        "tier": "small-instruct",
+        "unknown_ids": 0
+      }
+    ],
+    "files": 140,
+    "seeds_per_arm": {
+      "broad-instruct/ablation_no_condition_adaptive": [
+        42
+      ],
+      "broad-instruct/ablation_no_rationale_loss": [
+        42
+      ],
+      "broad-instruct/ablation_placement_random": [
+        42
+      ],
+      "broad-instruct/ablation_placement_random_draw2": [
+        42
+      ],
+      "broad-instruct/ablation_placement_random_draw3": [
+        42
+      ],
+      "broad-instruct/ablation_placement_uniform": [
+        42
+      ],
+      "broad-instruct/ablation_rank_sweep_16": [
+        42
+      ],
+      "broad-instruct/ablation_rank_sweep_32": [
+        42
+      ],
+      "broad-instruct/ablation_rank_sweep_8": [
+        42
+      ],
+      "broad-instruct/baseline_dart": [
+        42,
+        43,
+        44
+      ],
+      "broad-instruct/baseline_fairnet": [
+        42,
+        43,
+        44
+      ],
+      "broad-instruct/baseline_fairsteer": [
+        42
+      ],
+      "broad-instruct/baseline_igu_lora": [
+        42
+      ],
+      "broad-instruct/baseline_lftf": [
+        42
+      ],
+      "broad-instruct/baseline_pedal": [
+        42
+      ],
+      "broad-instruct/baseline_regift": [
+        42
+      ],
+      "broad-instruct/frozen_base": [
+        42
+      ],
+      "broad-instruct/graft_proposed": [
+        42,
+        43,
+        44
+      ],
+      "broad-instruct/graft_proposed_loao_gender": [
+        42
+      ],
+      "broad-instruct/graft_proposed_loao_landholding": [
+        42
+      ],
+      "broad-instruct/graft_proposed_loao_social_group": [
+        42
+      ],
+      "broad-instruct/graft_proposed_qlora_nf4": [
+        42
+      ],
+      "broad-instruct/reference_vanilla_lora": [
+        42,
+        43,
+        44
+      ],
+      "broad-instruct/reference_vanilla_lora_loao_gender": [
+        42
+      ],
+      "broad-instruct/reference_vanilla_lora_loao_landholding": [
+        42
+      ],
+      "broad-instruct/reference_vanilla_lora_loao_social_group": [
+        42
+      ],
+      "broad-instruct/reference_vanilla_qlora": [
+        42
+      ],
+      "general-instruct-2/ablation_no_condition_adaptive": [
+        42
+      ],
+      "general-instruct-2/ablation_no_rationale_loss": [
+        42
+      ],
+      "general-instruct-2/ablation_placement_random": [
+        42
+      ],
+      "general-instruct-2/ablation_placement_random_draw2": [
+        42
+      ],
+      "general-instruct-2/ablation_placement_random_draw3": [
+        42
+      ],
+      "general-instruct-2/ablation_placement_uniform": [
+        42
+      ],
+      "general-instruct-2/ablation_rank_sweep_16": [
+        42
+      ],
+      "general-instruct-2/ablation_rank_sweep_32": [
+        42
+      ],
+      "general-instruct-2/ablation_rank_sweep_8": [
+        42
+      ],
+      "general-instruct-2/baseline_dart": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct-2/baseline_fairnet": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct-2/baseline_fairsteer": [
+        42
+      ],
+      "general-instruct-2/baseline_igu_lora": [
+        42
+      ],
+      "general-instruct-2/baseline_lftf": [
+        42
+      ],
+      "general-instruct-2/baseline_pedal": [
+        42
+      ],
+      "general-instruct-2/baseline_regift": [
+        42
+      ],
+      "general-instruct-2/frozen_base": [
+        42
+      ],
+      "general-instruct-2/graft_proposed": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct-2/graft_proposed_loao_gender": [
+        42
+      ],
+      "general-instruct-2/graft_proposed_loao_landholding": [
+        42
+      ],
+      "general-instruct-2/graft_proposed_loao_social_group": [
+        42
+      ],
+      "general-instruct-2/graft_proposed_qlora_nf4": [
+        42
+      ],
+      "general-instruct-2/reference_vanilla_lora": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct-2/reference_vanilla_lora_loao_gender": [
+        42
+      ],
+      "general-instruct-2/reference_vanilla_lora_loao_landholding": [
+        42
+      ],
+      "general-instruct-2/reference_vanilla_lora_loao_social_group": [
+        42
+      ],
+      "general-instruct-2/reference_vanilla_qlora": [
+        42
+      ],
+      "general-instruct/ablation_no_condition_adaptive": [
+        42
+      ],
+      "general-instruct/ablation_no_rationale_loss": [
+        42
+      ],
+      "general-instruct/ablation_placement_random": [
+        42
+      ],
+      "general-instruct/ablation_placement_random_draw2": [
+        42
+      ],
+      "general-instruct/ablation_placement_random_draw3": [
+        42
+      ],
+      "general-instruct/ablation_placement_uniform": [
+        42
+      ],
+      "general-instruct/ablation_rank_sweep_16": [
+        42
+      ],
+      "general-instruct/ablation_rank_sweep_32": [
+        42
+      ],
+      "general-instruct/ablation_rank_sweep_8": [
+        42
+      ],
+      "general-instruct/baseline_dart": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct/baseline_fairnet": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct/baseline_fairsteer": [
+        42
+      ],
+      "general-instruct/baseline_igu_lora": [
+        42
+      ],
+      "general-instruct/baseline_lftf": [
+        42
+      ],
+      "general-instruct/baseline_pedal": [
+        42
+      ],
+      "general-instruct/baseline_regift": [
+        42
+      ],
+      "general-instruct/frozen_base": [
+        42
+      ],
+      "general-instruct/graft_proposed": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct/graft_proposed_loao_gender": [
+        42
+      ],
+      "general-instruct/graft_proposed_loao_landholding": [
+        42
+      ],
+      "general-instruct/graft_proposed_loao_social_group": [
+        42
+      ],
+      "general-instruct/graft_proposed_qlora_nf4": [
+        42
+      ],
+      "general-instruct/reference_vanilla_lora": [
+        42,
+        43,
+        44
+      ],
+      "general-instruct/reference_vanilla_lora_loao_gender": [
+        42
+      ],
+      "general-instruct/reference_vanilla_lora_loao_landholding": [
+        42
+      ],
+      "general-instruct/reference_vanilla_lora_loao_social_group": [
+        42
+      ],
+      "general-instruct/reference_vanilla_qlora": [
+        42
+      ],
+      "small-instruct/ablation_no_condition_adaptive": [
+        42
+      ],
+      "small-instruct/ablation_no_rationale_loss": [
+        42
+      ],
+      "small-instruct/ablation_placement_random": [
+        42
+      ],
+      "small-instruct/ablation_placement_random_draw2": [
+        42
+      ],
+      "small-instruct/ablation_placement_random_draw3": [
+        42
+      ],
+      "small-instruct/ablation_placement_uniform": [
+        42
+      ],
+      "small-instruct/ablation_rank_sweep_16": [
+        42
+      ],
+      "small-instruct/ablation_rank_sweep_32": [
+        42
+      ],
+      "small-instruct/ablation_rank_sweep_8": [
+        42
+      ],
+      "small-instruct/baseline_dart": [
+        42,
+        43,
+        44
+      ],
+      "small-instruct/baseline_fairnet": [
+        42,
+        43,
+        44
+      ],
+      "small-instruct/baseline_fairsteer": [
+        42
+      ],
+      "small-instruct/baseline_igu_lora": [
+        42
+      ],
+      "small-instruct/baseline_lftf": [
+        42
+      ],
+      "small-instruct/baseline_pedal": [
+        42
+      ],
+      "small-instruct/baseline_regift": [
+        42
+      ],
+      "small-instruct/frozen_base": [
+        42
+      ],
+      "small-instruct/graft_proposed": [
+        42,
+        43,
+        44
+      ],
+      "small-instruct/graft_proposed_loao_gender": [
+        42
+      ],
+      "small-instruct/graft_proposed_loao_landholding": [
+        42
+      ],
+      "small-instruct/graft_proposed_loao_social_group": [
+        42
+      ],
+      "small-instruct/graft_proposed_qlora_nf4": [
+        42
+      ],
+      "small-instruct/reference_vanilla_lora": [
+        42,
+        43,
+        44
+      ],
+      "small-instruct/reference_vanilla_lora_loao_gender": [
+        42
+      ],
+      "small-instruct/reference_vanilla_lora_loao_landholding": [
+        42
+      ],
+      "small-instruct/reference_vanilla_lora_loao_social_group": [
+        42
+      ],
+      "small-instruct/reference_vanilla_qlora": [
+        42
+      ]
+    }
+  },
+  "source_snapshot": "8a81252a99fe4d965df9bfa08b3567d3b5490629",
+  "splits": {
+    "test": {
+      "axis": {
+        "gender": 70,
+        "landholding": 315,
+        "social_group": 364
+      },
+      "condition": {
+        "diff": 371,
+        "equal": 378
+      },
+      "distinct_source_cells": 431,
+      "distinct_state_blind_keys": 89,
+      "duplicate_ids": 0,
+      "items": 749,
+      "schema_issues": {},
+      "test_slice": {
+        "structure_familiar": 328,
+        "structure_novel": 421
+      },
+      "unparseable_source_cells": 0,
+      "unparseable_state_blind_keys": 0
+    },
+    "train": {
+      "axis": {
+        "gender": 99,
+        "landholding": 542,
+        "social_group": 491
+      },
+      "condition": {
+        "diff": 561,
+        "equal": 571
+      },
+      "distinct_source_cells": 672,
+      "distinct_state_blind_keys": 85,
+      "duplicate_ids": 0,
+      "items": 1132,
+      "schema_issues": {},
+      "test_slice": {
+        "": 1132
+      },
+      "unparseable_source_cells": 0,
+      "unparseable_state_blind_keys": 0
+    },
+    "train_vs_test": {
+      "shared_ids": 0,
+      "shared_source_cells": 0
+    },
+    "train_vs_validation": {
+      "shared_ids": 0,
+      "shared_source_cells": 0
+    },
+    "validation": {
+      "axis": {
+        "gender": 11,
+        "landholding": 56,
+        "social_group": 52
+      },
+      "condition": {
+        "diff": 68,
+        "equal": 51
+      },
+      "distinct_source_cells": 75,
+      "distinct_state_blind_keys": 49,
+      "duplicate_ids": 0,
+      "items": 119,
+      "schema_issues": {},
+      "test_slice": {
+        "": 119
+      },
+      "unparseable_source_cells": 0,
+      "unparseable_state_blind_keys": 0
+    },
+    "validation_vs_test": {
+      "shared_ids": 0,
+      "shared_source_cells": 0
+    }
+  },
+  "versions": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "peft": "0.20.0",
+    "python": "3.12.13",
+    "scipy": "1.18.0",
+    "sklearn": "1.9.0",
+    "torch": "2.13.0+cpu",
+    "transformers": "4.51.3"
+  }
+}

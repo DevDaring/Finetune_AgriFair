@@ -44,6 +44,26 @@ def load_config(path: Path = CONFIG_PATH) -> Dict:
     return cfg
 
 
+def smoke(cfg: Dict) -> Dict:
+    """The smoke section, or an empty dict. Stages call this to decide whether to shrink."""
+    sm = cfg.get("smoke") or {}
+    return sm if sm.get("enabled") else {}
+
+
+def limit_arms(arms: Dict, cfg: Dict, always_keep=("graft_proposed", "frozen_base", "ablation_placement_uniform")):
+    """Smoke only: keep at most N arms per tier, always including the reference and one control
+    so that every family has at least one computable contrast."""
+    n = smoke(cfg).get("max_arms_per_tier")
+    if not n:
+        return arms
+    out, per_tier = {}, {}
+    for arm in sorted(arms, key=lambda a: (a.tier, a.method not in always_keep, a.method, a.seed)):
+        if arm.method in always_keep or per_tier.get(arm.tier, 0) < n:
+            out[arm] = arms[arm]
+            per_tier[arm.tier] = per_tier.get(arm.tier, 0) + (arm.method not in always_keep)
+    return out
+
+
 def output_dir(cfg: Dict) -> Path:
     out = CODES_ROOT / cfg["output_directory"]
     out.mkdir(parents=True, exist_ok=True)

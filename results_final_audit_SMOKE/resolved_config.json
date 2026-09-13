@@ -1,0 +1,60 @@
+{
+  "allow_new_attribution": false,
+  "allow_paid_api": false,
+  "allow_training": false,
+  "analysis_seed": 20260912,
+  "audit_sample_stage1": 6,
+  "audit_sample_stage2_total": 12,
+  "bootstrap_draws": 50,
+  "comparison_rule": {
+    "diff_if_abs_gap_at_least": 10.0,
+    "equal_if_abs_gap_at_most": 5.0,
+    "metric_unit": "percentage_points"
+  },
+  "evidence_panel": {
+    "bundles_per_axis": 2,
+    "configurations": [
+      "frozen_base"
+    ],
+    "max_new_tokens": 16,
+    "model_tiers": [
+      "cpu-preflight"
+    ],
+    "nested_subset_per_axis": 2,
+    "pilot_bundles": 1,
+    "safety_factor": 1.5,
+    "seed": 42
+  },
+  "frozen_test_sha256": "2d40a81f15ca1836acfa4e61af79b8e215365c380a858385dbd46fa42f1a172b",
+  "gpu_enabled": true,
+  "gpu_total_deadline_minutes": 20,
+  "human_study": {
+    "conditions": [
+      "frozen_base",
+      "graft_proposed"
+    ],
+    "model_tiers": [
+      "small-instruct",
+      "broad-instruct"
+    ],
+    "pilot_questions": 2,
+    "questions_per_axis": 2,
+    "seed": 42
+  },
+  "localisation_controls": [
+    "ablation_placement_uniform"
+  ],
+  "localisation_reference": "graft_proposed",
+  "output_directory": "results_final_audit_SMOKE",
+  "overwrite_legacy_inputs": false,
+  "permutation_draws": 50,
+  "secondary_comparators": [
+    "frozen_base"
+  ],
+  "smoke": {
+    "auto_mark_bundles_checked": true,
+    "enabled": true,
+    "max_arms_per_tier": 2,
+    "synthetic_ledger": true
+  }
+}

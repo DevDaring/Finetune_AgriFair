@@ -1,0 +1,22 @@
+{
+  "billable_minutes_measured": 1.32,
+  "cap_minutes": 20,
+  "configs": [
+    [
+      "cpu-preflight",
+      "frozen_base"
+    ]
+  ],
+  "decision": "full panel (5 bundles)",
+  "finished_utc": "2026-09-13T03:38:40Z",
+  "pilot": [
+    {
+      "load_s": 4.3,
+      "method": "frozen_base",
+      "per_bundle_s": 11.31,
+      "tier": "cpu-preflight"
+    }
+  ],
+  "remaining_seconds_at_decision": 1184.3,
+  "started_utc": "2026-09-13T03:37:21Z"
+}

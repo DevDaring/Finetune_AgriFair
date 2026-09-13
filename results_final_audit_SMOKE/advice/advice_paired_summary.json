@@ -1,0 +1,1706 @@
+[
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.1938,
+    "comparator_judge": {
+      "mean": 2.3375,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.1
+    },
+    "comparator_possible_truncation_rate": 0.1388,
+    "comparator_tfidf_distance": {
+      "mean": 0.3623,
+      "median": 0.3652,
+      "n": 800,
+      "p10": 0.0,
+      "p90": 0.7389
+    },
+    "comparator_words_mean": 58.5969,
+    "frozen_exact_dup_rate": 0.0012,
+    "frozen_judge": {
+      "mean": 1.7,
+      "median": 1.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.9312,
+    "frozen_tfidf_distance": {
+      "mean": 0.4614,
+      "median": 0.4557,
+      "n": 800,
+      "p10": 0.2648,
+      "p90": 0.6796
+    },
+    "frozen_words_mean": 170.3244,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 800,
+    "subset": "complete",
+    "tier": "broad-instruct",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.265,
+    "comparator_judge": {
+      "mean": 2.1304,
+      "median": 2.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.13,
+    "comparator_tfidf_distance": {
+      "mean": 0.2817,
+      "median": 0.252,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.6353
+    },
+    "comparator_words_mean": 57.91,
+    "frozen_exact_dup_rate": 0.005,
+    "frozen_judge": {
+      "mean": 1.3913,
+      "median": 1.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.905,
+    "frozen_tfidf_distance": {
+      "mean": 0.3924,
+      "median": 0.3884,
+      "n": 200,
+      "p10": 0.2452,
+      "p90": 0.5497
+    },
+    "frozen_words_mean": 169.94,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "broad-instruct",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.095,
+    "comparator_judge": {
+      "mean": 2.7273,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 5.0
+    },
+    "comparator_possible_truncation_rate": 0.115,
+    "comparator_tfidf_distance": {
+      "mean": 0.4517,
+      "median": 0.4843,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.8445
+    },
+    "comparator_words_mean": 55.425,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.9545,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.975,
+    "frozen_tfidf_distance": {
+      "mean": 0.5897,
+      "median": 0.5893,
+      "n": 200,
+      "p10": 0.4172,
+      "p90": 0.7625
+    },
+    "frozen_words_mean": 174.1625,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "broad-instruct",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.325,
+    "comparator_judge": {
+      "mean": 2.1818,
+      "median": 2.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 5.0
+    },
+    "comparator_possible_truncation_rate": 0.14,
+    "comparator_tfidf_distance": {
+      "mean": 0.2961,
+      "median": 0.2697,
+      "n": 200,
+      "p10": -0.0,
+      "p90": 0.7131
+    },
+    "comparator_words_mean": 57.58,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.4545,
+      "median": 1.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.91,
+    "frozen_tfidf_distance": {
+      "mean": 0.3945,
+      "median": 0.3876,
+      "n": 200,
+      "p10": 0.1939,
+      "p90": 0.5903
+    },
+    "frozen_words_mean": 166.955,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "broad-instruct",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.09,
+    "comparator_judge": {
+      "mean": 2.25,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.17,
+    "comparator_tfidf_distance": {
+      "mean": 0.4197,
+      "median": 0.4522,
+      "n": 200,
+      "p10": 0.0231,
+      "p90": 0.7403
+    },
+    "comparator_words_mean": 63.4725,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.875,
+      "median": 1.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.935,
+    "frozen_tfidf_distance": {
+      "mean": 0.4692,
+      "median": 0.4598,
+      "n": 200,
+      "p10": 0.2981,
+      "p90": 0.6437
+    },
+    "frozen_words_mean": 170.24,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "broad-instruct",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.4186,
+    "comparator_judge": {
+      "mean": 2.1667,
+      "median": 1.5,
+      "n": 6,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.2367,
+      "median": 0.1134,
+      "n": 43,
+      "p10": -0.0,
+      "p90": 0.6314
+    },
+    "comparator_words_mean": 37.4651,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.3333,
+      "median": 1.0,
+      "n": 6,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3403,
+      "median": 0.3462,
+      "n": 43,
+      "p10": 0.1077,
+      "p90": 0.5139
+    },
+    "frozen_words_mean": 144.3488,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 757,
+    "pairs_retained": 43,
+    "subset": "non_flagged",
+    "tier": "broad-instruct",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.625,
+    "comparator_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.1691,
+      "median": 0.0,
+      "n": 16,
+      "p10": -0.0,
+      "p90": 0.6031
+    },
+    "comparator_words_mean": 27.7812,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3066,
+      "median": 0.3433,
+      "n": 16,
+      "p10": 0.0661,
+      "p90": 0.4537
+    },
+    "frozen_words_mean": 138.625,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 784,
+    "pairs_retained": 16,
+    "subset": "non_flagged",
+    "tier": "broad-instruct",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.0,
+    "comparator_judge": {
+      "mean": 2.0,
+      "median": 2.0,
+      "n": 1,
+      "p10": 2.0,
+      "p90": 2.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.5379,
+      "median": 0.5509,
+      "n": 4,
+      "p10": 0.4497,
+      "p90": 0.6156
+    },
+    "comparator_words_mean": 68.5,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.4275,
+      "median": 0.5095,
+      "n": 4,
+      "p10": 0.2189,
+      "p90": 0.5704
+    },
+    "frozen_words_mean": 154.375,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 796,
+    "pairs_retained": 4,
+    "subset": "non_flagged",
+    "tier": "broad-instruct",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.2667,
+    "comparator_judge": {
+      "mean": 5.0,
+      "median": 5.0,
+      "n": 1,
+      "p10": 5.0,
+      "p90": 5.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.277,
+      "median": 0.1694,
+      "n": 15,
+      "p10": 0.0,
+      "p90": 0.6328
+    },
+    "comparator_words_mean": 39.3667,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3207,
+      "median": 0.2929,
+      "n": 15,
+      "p10": 0.1547,
+      "p90": 0.4835
+    },
+    "frozen_words_mean": 151.1333,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 785,
+    "pairs_retained": 15,
+    "subset": "non_flagged",
+    "tier": "broad-instruct",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.5,
+    "comparator_judge": {
+      "mean": 1.6667,
+      "median": 1.0,
+      "n": 3,
+      "p10": 1.0,
+      "p90": 2.6
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.146,
+      "median": 0.0125,
+      "n": 8,
+      "p10": -0.0,
+      "p90": 0.4152
+    },
+    "comparator_words_mean": 37.75,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.6667,
+      "median": 2.0,
+      "n": 3,
+      "p10": 1.2,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.4007,
+      "median": 0.3891,
+      "n": 8,
+      "p10": 0.297,
+      "p90": 0.4935
+    },
+    "frozen_words_mean": 138.0625,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 792,
+    "pairs_retained": 8,
+    "subset": "non_flagged",
+    "tier": "broad-instruct",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.19,
+    "comparator_judge": {
+      "mean": 2.1625,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.1
+    },
+    "comparator_possible_truncation_rate": 0.2537,
+    "comparator_tfidf_distance": {
+      "mean": 0.3823,
+      "median": 0.3765,
+      "n": 800,
+      "p10": 0.0,
+      "p90": 0.8021
+    },
+    "comparator_words_mean": 78.8263,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.875,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.9412,
+    "frozen_tfidf_distance": {
+      "mean": 0.5495,
+      "median": 0.5514,
+      "n": 800,
+      "p10": 0.3206,
+      "p90": 0.7713
+    },
+    "frozen_words_mean": 165.815,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 800,
+    "subset": "complete",
+    "tier": "general-instruct",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.295,
+    "comparator_judge": {
+      "mean": 2.087,
+      "median": 2.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 3.8
+    },
+    "comparator_possible_truncation_rate": 0.225,
+    "comparator_tfidf_distance": {
+      "mean": 0.2825,
+      "median": 0.2674,
+      "n": 200,
+      "p10": -0.0,
+      "p90": 0.6679
+    },
+    "comparator_words_mean": 76.95,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.4783,
+      "median": 1.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.945,
+    "frozen_tfidf_distance": {
+      "mean": 0.495,
+      "median": 0.4999,
+      "n": 200,
+      "p10": 0.2911,
+      "p90": 0.7107
+    },
+    "frozen_words_mean": 166.2725,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.085,
+    "comparator_judge": {
+      "mean": 2.2727,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 4.9
+    },
+    "comparator_possible_truncation_rate": 0.295,
+    "comparator_tfidf_distance": {
+      "mean": 0.5037,
+      "median": 0.532,
+      "n": 200,
+      "p10": 0.0394,
+      "p90": 0.8845
+    },
+    "comparator_words_mean": 84.6375,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.4091,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.935,
+    "frozen_tfidf_distance": {
+      "mean": 0.7054,
+      "median": 0.716,
+      "n": 200,
+      "p10": 0.5676,
+      "p90": 0.8392
+    },
+    "frozen_words_mean": 165.9525,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.255,
+    "comparator_judge": {
+      "mean": 1.8182,
+      "median": 2.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "comparator_possible_truncation_rate": 0.185,
+    "comparator_tfidf_distance": {
+      "mean": 0.2913,
+      "median": 0.2869,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.6896
+    },
+    "comparator_words_mean": 68.1,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.5455,
+      "median": 2.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.93,
+    "frozen_tfidf_distance": {
+      "mean": 0.4511,
+      "median": 0.4381,
+      "n": 200,
+      "p10": 0.2533,
+      "p90": 0.6653
+    },
+    "frozen_words_mean": 163.9225,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.125,
+    "comparator_judge": {
+      "mean": 2.2917,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 4.7
+    },
+    "comparator_possible_truncation_rate": 0.31,
+    "comparator_tfidf_distance": {
+      "mean": 0.4517,
+      "median": 0.4486,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.8265
+    },
+    "comparator_words_mean": 85.6175,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.9167,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.955,
+    "frozen_tfidf_distance": {
+      "mean": 0.5465,
+      "median": 0.5404,
+      "n": 200,
+      "p10": 0.372,
+      "p90": 0.7481
+    },
+    "frozen_words_mean": 167.1125,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.2571,
+    "comparator_judge": {
+      "mean": 1.2,
+      "median": 1.0,
+      "n": 5,
+      "p10": 1.0,
+      "p90": 1.6
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.2728,
+      "median": 0.1943,
+      "n": 35,
+      "p10": -0.0,
+      "p90": 0.6897
+    },
+    "comparator_words_mean": 39.5714,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.0,
+      "median": 1.0,
+      "n": 5,
+      "p10": 1.0,
+      "p90": 3.8
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.5089,
+      "median": 0.4991,
+      "n": 35,
+      "p10": 0.2298,
+      "p90": 0.7771
+    },
+    "frozen_words_mean": 148.9143,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 765,
+    "pairs_retained": 35,
+    "subset": "non_flagged",
+    "tier": "general-instruct",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.4444,
+    "comparator_judge": {
+      "mean": 1.5,
+      "median": 1.5,
+      "n": 2,
+      "p10": 1.1,
+      "p90": 1.9
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.1975,
+      "median": 0.0923,
+      "n": 9,
+      "p10": -0.0,
+      "p90": 0.4498
+    },
+    "comparator_words_mean": 37.1667,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 2,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.4496,
+      "median": 0.4223,
+      "n": 9,
+      "p10": 0.2066,
+      "p90": 0.7311
+    },
+    "frozen_words_mean": 150.1667,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 791,
+    "pairs_retained": 9,
+    "subset": "non_flagged",
+    "tier": "general-instruct",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.2222,
+    "comparator_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.2908,
+      "median": 0.2242,
+      "n": 9,
+      "p10": -0.0,
+      "p90": 0.6963
+    },
+    "comparator_words_mean": 31.8333,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 5.0,
+      "median": 5.0,
+      "n": 1,
+      "p10": 5.0,
+      "p90": 5.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.6946,
+      "median": 0.7187,
+      "n": 9,
+      "p10": 0.5434,
+      "p90": 0.833
+    },
+    "frozen_words_mean": 140.0,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 791,
+    "pairs_retained": 9,
+    "subset": "non_flagged",
+    "tier": "general-instruct",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.0909,
+    "comparator_judge": {
+      "n": 0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.2867,
+      "median": 0.1882,
+      "n": 11,
+      "p10": 0.041,
+      "p90": 0.4601
+    },
+    "comparator_words_mean": 40.1818,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "n": 0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.4007,
+      "median": 0.424,
+      "n": 11,
+      "p10": 0.2203,
+      "p90": 0.6113
+    },
+    "frozen_words_mean": 150.4091,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 789,
+    "pairs_retained": 11,
+    "subset": "non_flagged",
+    "tier": "general-instruct",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.3333,
+    "comparator_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 2,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.3331,
+      "median": 0.3439,
+      "n": 6,
+      "p10": 0.0,
+      "p90": 0.6553
+    },
+    "comparator_words_mean": 53.6667,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 1.5,
+      "median": 1.5,
+      "n": 2,
+      "p10": 1.1,
+      "p90": 1.9
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.5178,
+      "median": 0.475,
+      "n": 6,
+      "p10": 0.373,
+      "p90": 0.7055
+    },
+    "frozen_words_mean": 157.6667,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 794,
+    "pairs_retained": 6,
+    "subset": "non_flagged",
+    "tier": "general-instruct",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.3025,
+    "comparator_judge": {
+      "mean": 2.075,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.0512,
+    "comparator_tfidf_distance": {
+      "mean": 0.2518,
+      "median": 0.1941,
+      "n": 800,
+      "p10": 0.0,
+      "p90": 0.6162
+    },
+    "comparator_words_mean": 44.0831,
+    "frozen_exact_dup_rate": 0.01,
+    "frozen_judge": {
+      "mean": 1.7875,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 3.0
+    },
+    "frozen_possible_truncation_rate": 0.8875,
+    "frozen_tfidf_distance": {
+      "mean": 0.3306,
+      "median": 0.3261,
+      "n": 800,
+      "p10": 0.0974,
+      "p90": 0.5487
+    },
+    "frozen_words_mean": 171.4544,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 800,
+    "subset": "complete",
+    "tier": "general-instruct-2",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.44,
+    "comparator_judge": {
+      "mean": 1.7391,
+      "median": 2.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "comparator_possible_truncation_rate": 0.03,
+    "comparator_tfidf_distance": {
+      "mean": 0.1936,
+      "median": 0.0506,
+      "n": 200,
+      "p10": -0.0,
+      "p90": 0.5928
+    },
+    "comparator_words_mean": 42.9475,
+    "frozen_exact_dup_rate": 0.015,
+    "frozen_judge": {
+      "mean": 1.5217,
+      "median": 2.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.895,
+    "frozen_tfidf_distance": {
+      "mean": 0.2766,
+      "median": 0.2667,
+      "n": 200,
+      "p10": 0.0539,
+      "p90": 0.5022
+    },
+    "frozen_words_mean": 172.1175,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct-2",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.23,
+    "comparator_judge": {
+      "mean": 1.8182,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 2.9
+    },
+    "comparator_possible_truncation_rate": 0.06,
+    "comparator_tfidf_distance": {
+      "mean": 0.2893,
+      "median": 0.2798,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.6162
+    },
+    "comparator_words_mean": 46.28,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.0909,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 3.0
+    },
+    "frozen_possible_truncation_rate": 0.85,
+    "frozen_tfidf_distance": {
+      "mean": 0.4238,
+      "median": 0.4176,
+      "n": 200,
+      "p10": 0.2386,
+      "p90": 0.6085
+    },
+    "frozen_words_mean": 169.7125,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct-2",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.385,
+    "comparator_judge": {
+      "mean": 2.0,
+      "median": 1.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.05,
+    "comparator_tfidf_distance": {
+      "mean": 0.2025,
+      "median": 0.0892,
+      "n": 200,
+      "p10": -0.0,
+      "p90": 0.5741
+    },
+    "comparator_words_mean": 43.3375,
+    "frozen_exact_dup_rate": 0.025,
+    "frozen_judge": {
+      "mean": 1.1818,
+      "median": 1.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.92,
+    "frozen_tfidf_distance": {
+      "mean": 0.2515,
+      "median": 0.2399,
+      "n": 200,
+      "p10": 0.0473,
+      "p90": 0.4643
+    },
+    "frozen_words_mean": 172.8875,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct-2",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.155,
+    "comparator_judge": {
+      "mean": 2.6667,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 4.7
+    },
+    "comparator_possible_truncation_rate": 0.065,
+    "comparator_tfidf_distance": {
+      "mean": 0.3217,
+      "median": 0.3007,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.6498
+    },
+    "comparator_words_mean": 43.7675,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.0417,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 3.7
+    },
+    "frozen_possible_truncation_rate": 0.885,
+    "frozen_tfidf_distance": {
+      "mean": 0.3707,
+      "median": 0.357,
+      "n": 200,
+      "p10": 0.1919,
+      "p90": 0.5874
+    },
+    "frozen_words_mean": 171.1,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "general-instruct-2",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.5,
+    "comparator_judge": {
+      "mean": 1.2727,
+      "median": 1.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.1386,
+      "median": 0.0,
+      "n": 88,
+      "p10": -0.0,
+      "p90": 0.4391
+    },
+    "comparator_words_mean": 22.25,
+    "frozen_exact_dup_rate": 0.0455,
+    "frozen_judge": {
+      "mean": 2.1818,
+      "median": 2.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.2811,
+      "median": 0.2851,
+      "n": 88,
+      "p10": 0.0347,
+      "p90": 0.5848
+    },
+    "frozen_words_mean": 117.858,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 712,
+    "pairs_retained": 88,
+    "subset": "non_flagged",
+    "tier": "general-instruct-2",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.7143,
+    "comparator_judge": {
+      "n": 0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.0915,
+      "median": 0.0,
+      "n": 21,
+      "p10": -0.0,
+      "p90": 0.2885
+    },
+    "comparator_words_mean": 17.2619,
+    "frozen_exact_dup_rate": 0.0952,
+    "frozen_judge": {
+      "n": 0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.1605,
+      "median": 0.0737,
+      "n": 21,
+      "p10": 0.0155,
+      "p90": 0.3273
+    },
+    "frozen_words_mean": 113.7857,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 779,
+    "pairs_retained": 21,
+    "subset": "non_flagged",
+    "tier": "general-instruct-2",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.5172,
+    "comparator_judge": {
+      "mean": 1.1667,
+      "median": 1.0,
+      "n": 6,
+      "p10": 1.0,
+      "p90": 1.5
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.1379,
+      "median": 0.0,
+      "n": 29,
+      "p10": -0.0,
+      "p90": 0.473
+    },
+    "comparator_words_mean": 23.4483,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.5,
+      "median": 2.5,
+      "n": 6,
+      "p10": 1.5,
+      "p90": 3.5
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3831,
+      "median": 0.3325,
+      "n": 29,
+      "p10": 0.2255,
+      "p90": 0.6865
+    },
+    "frozen_words_mean": 116.7241,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 771,
+    "pairs_retained": 29,
+    "subset": "non_flagged",
+    "tier": "general-instruct-2",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.5,
+    "comparator_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 2,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.1681,
+      "median": 0.011,
+      "n": 16,
+      "p10": 0.0,
+      "p90": 0.5473
+    },
+    "comparator_words_mean": 22.25,
+    "frozen_exact_dup_rate": 0.125,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 2,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.1754,
+      "median": 0.145,
+      "n": 16,
+      "p10": 0.0115,
+      "p90": 0.3227
+    },
+    "frozen_words_mean": 119.0312,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 784,
+    "pairs_retained": 16,
+    "subset": "non_flagged",
+    "tier": "general-instruct-2",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.2727,
+    "comparator_judge": {
+      "mean": 1.6667,
+      "median": 1.0,
+      "n": 3,
+      "p10": 1.0,
+      "p90": 2.6
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.163,
+      "median": 0.0625,
+      "n": 22,
+      "p10": 0.0,
+      "p90": 0.423
+    },
+    "comparator_words_mean": 25.4318,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.3333,
+      "median": 2.0,
+      "n": 3,
+      "p10": 1.2,
+      "p90": 3.6
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3385,
+      "median": 0.2996,
+      "n": 22,
+      "p10": 0.1978,
+      "p90": 0.6568
+    },
+    "frozen_words_mean": 122.3864,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 778,
+    "pairs_retained": 22,
+    "subset": "non_flagged",
+    "tier": "general-instruct-2",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.1475,
+    "comparator_judge": {
+      "mean": 2.2375,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.1688,
+    "comparator_tfidf_distance": {
+      "mean": 0.3555,
+      "median": 0.3533,
+      "n": 800,
+      "p10": 0.0,
+      "p90": 0.7023
+    },
+    "comparator_words_mean": 69.4431,
+    "frozen_exact_dup_rate": 0.0088,
+    "frozen_judge": {
+      "mean": 2.0875,
+      "median": 2.0,
+      "n": 80,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.9088,
+    "frozen_tfidf_distance": {
+      "mean": 0.3782,
+      "median": 0.3738,
+      "n": 800,
+      "p10": 0.1642,
+      "p90": 0.5916
+    },
+    "frozen_words_mean": 172.4206,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 800,
+    "subset": "complete",
+    "tier": "small-instruct",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.225,
+    "comparator_judge": {
+      "mean": 1.8261,
+      "median": 1.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.17,
+    "comparator_tfidf_distance": {
+      "mean": 0.2832,
+      "median": 0.2664,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.6546
+    },
+    "comparator_words_mean": 70.765,
+    "frozen_exact_dup_rate": 0.015,
+    "frozen_judge": {
+      "mean": 1.5217,
+      "median": 2.0,
+      "n": 23,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.89,
+    "frozen_tfidf_distance": {
+      "mean": 0.3133,
+      "median": 0.3009,
+      "n": 200,
+      "p10": 0.1279,
+      "p90": 0.5047
+    },
+    "frozen_words_mean": 173.9125,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "small-instruct",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.065,
+    "comparator_judge": {
+      "mean": 2.2727,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "comparator_possible_truncation_rate": 0.185,
+    "comparator_tfidf_distance": {
+      "mean": 0.4316,
+      "median": 0.4263,
+      "n": 200,
+      "p10": 0.0803,
+      "p90": 0.7621
+    },
+    "comparator_words_mean": 73.6225,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.2727,
+      "median": 2.0,
+      "n": 22,
+      "p10": 1.0,
+      "p90": 4.0
+    },
+    "frozen_possible_truncation_rate": 0.94,
+    "frozen_tfidf_distance": {
+      "mean": 0.4668,
+      "median": 0.466,
+      "n": 200,
+      "p10": 0.2799,
+      "p90": 0.6474
+    },
+    "frozen_words_mean": 176.7725,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "small-instruct",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.21,
+    "comparator_judge": {
+      "mean": 1.6364,
+      "median": 1.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "comparator_possible_truncation_rate": 0.135,
+    "comparator_tfidf_distance": {
+      "mean": 0.3074,
+      "median": 0.2876,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.6339
+    },
+    "comparator_words_mean": 65.66,
+    "frozen_exact_dup_rate": 0.02,
+    "frozen_judge": {
+      "mean": 1.6364,
+      "median": 1.0,
+      "n": 11,
+      "p10": 1.0,
+      "p90": 2.0
+    },
+    "frozen_possible_truncation_rate": 0.92,
+    "frozen_tfidf_distance": {
+      "mean": 0.3127,
+      "median": 0.3101,
+      "n": 200,
+      "p10": 0.0794,
+      "p90": 0.5238
+    },
+    "frozen_words_mean": 173.8925,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "small-instruct",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.09,
+    "comparator_judge": {
+      "mean": 2.875,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 5.0
+    },
+    "comparator_possible_truncation_rate": 0.185,
+    "comparator_tfidf_distance": {
+      "mean": 0.3997,
+      "median": 0.3975,
+      "n": 200,
+      "p10": 0.0,
+      "p90": 0.7379
+    },
+    "comparator_words_mean": 67.725,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 2.6667,
+      "median": 2.0,
+      "n": 24,
+      "p10": 1.0,
+      "p90": 5.0
+    },
+    "frozen_possible_truncation_rate": 0.885,
+    "frozen_tfidf_distance": {
+      "mean": 0.42,
+      "median": 0.403,
+      "n": 200,
+      "p10": 0.2162,
+      "p90": 0.6386
+    },
+    "frozen_words_mean": 165.105,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 0,
+    "pairs_retained": 200,
+    "subset": "complete",
+    "tier": "small-instruct",
+    "toggle_axis": "social_group"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.4706,
+    "comparator_judge": {
+      "mean": 1.8571,
+      "median": 1.0,
+      "n": 7,
+      "p10": 1.0,
+      "p90": 3.2
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.2129,
+      "median": 0.0,
+      "n": 51,
+      "p10": -0.0,
+      "p90": 0.6842
+    },
+    "comparator_words_mean": 21.1961,
+    "frozen_exact_dup_rate": 0.0588,
+    "frozen_judge": {
+      "mean": 3.5714,
+      "median": 4.0,
+      "n": 7,
+      "p10": 1.0,
+      "p90": 5.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3748,
+      "median": 0.3919,
+      "n": 51,
+      "p10": 0.081,
+      "p90": 0.6006
+    },
+    "frozen_words_mean": 106.3137,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 749,
+    "pairs_retained": 51,
+    "subset": "non_flagged",
+    "tier": "small-instruct",
+    "toggle_axis": "all"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.6316,
+    "comparator_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.129,
+      "median": 0.0,
+      "n": 19,
+      "p10": -0.0,
+      "p90": 0.4325
+    },
+    "comparator_words_mean": 14.1579,
+    "frozen_exact_dup_rate": 0.1053,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.2748,
+      "median": 0.2732,
+      "n": 19,
+      "p10": 0.0528,
+      "p90": 0.5148
+    },
+    "frozen_words_mean": 107.1316,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 781,
+    "pairs_retained": 19,
+    "subset": "non_flagged",
+    "tier": "small-instruct",
+    "toggle_axis": "gender"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.1818,
+    "comparator_judge": {
+      "mean": 1.3333,
+      "median": 1.0,
+      "n": 3,
+      "p10": 1.0,
+      "p90": 1.8
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.3711,
+      "median": 0.3141,
+      "n": 11,
+      "p10": 0.0,
+      "p90": 0.8782
+    },
+    "comparator_words_mean": 26.4545,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 4.3333,
+      "median": 4.0,
+      "n": 3,
+      "p10": 4.0,
+      "p90": 4.8
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.5197,
+      "median": 0.5386,
+      "n": 11,
+      "p10": 0.3757,
+      "p90": 0.6352
+    },
+    "frozen_words_mean": 104.2727,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 789,
+    "pairs_retained": 11,
+    "subset": "non_flagged",
+    "tier": "small-instruct",
+    "toggle_axis": "literacy_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.6,
+    "comparator_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.1552,
+      "median": 0.0,
+      "n": 10,
+      "p10": -0.0,
+      "p90": 0.4128
+    },
+    "comparator_words_mean": 23.6,
+    "frozen_exact_dup_rate": 0.1,
+    "frozen_judge": {
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 1,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.3185,
+      "median": 0.3475,
+      "n": 10,
+      "p10": 0.0717,
+      "p90": 0.4787
+    },
+    "frozen_words_mean": 140.25,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 790,
+    "pairs_retained": 10,
+    "subset": "non_flagged",
+    "tier": "small-instruct",
+    "toggle_axis": "region_register"
+  },
+  {
+    "comparator": "graft_proposed",
+    "comparator_exact_dup_rate": 0.3636,
+    "comparator_judge": {
+      "mean": 3.5,
+      "median": 3.5,
+      "n": 2,
+      "p10": 2.3,
+      "p90": 4.7
+    },
+    "comparator_possible_truncation_rate": 0.0,
+    "comparator_tfidf_distance": {
+      "mean": 0.2522,
+      "median": 0.273,
+      "n": 11,
+      "p10": -0.0,
+      "p90": 0.5252
+    },
+    "comparator_words_mean": 25.9091,
+    "frozen_exact_dup_rate": 0.0,
+    "frozen_judge": {
+      "mean": 5.0,
+      "median": 5.0,
+      "n": 2,
+      "p10": 5.0,
+      "p90": 5.0
+    },
+    "frozen_possible_truncation_rate": 0.0,
+    "frozen_tfidf_distance": {
+      "mean": 0.454,
+      "median": 0.4519,
+      "n": 11,
+      "p10": 0.2147,
+      "p90": 0.6377
+    },
+    "frozen_words_mean": 76.0909,
+    "judge_ids_identical_across_methods": true,
+    "pairs_excluded": 789,
+    "pairs_retained": 11,
+    "subset": "non_flagged",
+    "tier": "small-instruct",
+    "toggle_axis": "social_group"
+  }
+]

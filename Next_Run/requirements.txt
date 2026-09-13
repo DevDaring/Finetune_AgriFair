@@ -1,0 +1,20 @@
+# Pinned to the versions the audit was developed and validated against.
+# CPU-only torch: Next_Run never needs a GPU; the evidence panel runs on CPU in smoke mode
+# and the real panel is gated behind an explicit config flag.
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.1
+scipy==1.18.0
+pandas==3.0.3
+scikit-learn==1.9.0
+pyyaml>=6.0
+matplotlib==3.11.1
+torch==2.13.0
+transformers==4.57.6
+peft==0.20.0
+safetensors==0.8.0
+huggingface_hub==0.36.2
+accelerate==1.14.0
+tokenizers>=0.21
+sentencepiece
+python-dotenv
+pytest

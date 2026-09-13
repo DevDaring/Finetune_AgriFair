@@ -88,7 +88,8 @@ def build_bundles(cfg: Dict) -> Tuple[List[Dict], Dict]:
                     "verified_group1_value": g1, "verified_group2_value": g2, "verified_expected_gold": expected_gold(g1, g2, derive_condition(g1, g2, rule)),
                     "synthetic_group1_value": s1, "synthetic_group2_value": s2, "synthetic_condition": s_cond,
                     "synthetic_expected_gold": expected_gold(s1, s2, s_cond),
-                    "manually_checked": False, "manual_check_notes": "",
+                    "manually_checked": bool(C.smoke(cfg).get("auto_mark_bundles_checked")),
+                    "manual_check_notes": "SMOKE: auto-marked, no human check" if C.smoke(cfg) else "",
                 })
     return bundles, {"status": "built", "bundles": len(bundles), "shortfall": shortfall}
 
@@ -153,8 +154,8 @@ def preflight(cfg: Dict, bundles: List[Dict]) -> Tuple[bool, List[str]]:
     for tier in ep["model_tiers"]:
         spec = model_registry.get_spec(tier)
         local = C.CODES_ROOT / "models" / spec.hf_id.replace("/", "__")
-        if not any(local.glob("*.safetensors")):
-            reasons.append(f"base weights missing for {tier} at {local}")
+        if not any(local.glob("*.safetensors")) and not C.smoke(cfg):
+            reasons.append(f"base weights missing for {tier} at {local}")   # smoke may pull from the Hub
         for method in ep["configurations"]:
             if method == "frozen_base":
                 continue

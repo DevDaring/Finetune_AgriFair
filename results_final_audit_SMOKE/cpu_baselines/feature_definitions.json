@@ -1,0 +1,426 @@
+{
+  "feature_inspection": {
+    "always_equal": {},
+    "majority": {
+      "majority_letter": "c",
+      "train_distribution": {
+        "a": 324,
+        "b": 237,
+        "c": 571
+      }
+    },
+    "metadata": {
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "n_features": 31,
+      "top_features_by_class": {
+        "a": [
+          [
+            "comparison=MvF",
+            2.275
+          ],
+          [
+            "metric=number",
+            1.262
+          ],
+          [
+            "comparison=MarginalvsLarge",
+            0.965
+          ],
+          [
+            "comparison=SmallvsLarge",
+            0.895
+          ],
+          [
+            "axis=landholding",
+            0.729
+          ],
+          [
+            "size_class=Marginal",
+            0.695
+          ],
+          [
+            "size_class=SC",
+            0.686
+          ],
+          [
+            "axis=gender",
+            0.669
+          ],
+          [
+            "size_class=Large",
+            0.402
+          ],
+          [
+            "size_class=Small",
+            0.337
+          ],
+          [
+            "comparison=Semi-mediumvsLarge",
+            0.291
+          ],
+          [
+            "comparison=STvsOthers",
+            0.073
+          ]
+        ],
+        "b": [
+          [
+            "comparison=SCvsOthers",
+            2.324
+          ],
+          [
+            "axis=social_group",
+            1.824
+          ],
+          [
+            "comparison=STvsOthers",
+            0.618
+          ],
+          [
+            "size_class=Marginal",
+            0.602
+          ],
+          [
+            "comparison=MarginalvsMedium",
+            0.59
+          ],
+          [
+            "comparison=MarginalvsSemi-medium",
+            0.526
+          ],
+          [
+            "size_class=All Classes",
+            0.479
+          ],
+          [
+            "size_class=Large",
+            0.433
+          ],
+          [
+            "metric=area",
+            0.263
+          ],
+          [
+            "size_class=Medium",
+            0.191
+          ],
+          [
+            "comparison=SmallvsMedium",
+            0.105
+          ],
+          [
+            "size_class=Small",
+            0.059
+          ]
+        ],
+        "c": [
+          [
+            "size_class=femaleShare",
+            1.896
+          ],
+          [
+            "comparison=SCvsST",
+            1.88
+          ],
+          [
+            "comparison=SmallvsSemi-medium",
+            1.384
+          ],
+          [
+            "metric=area",
+            1.005
+          ],
+          [
+            "size_class=Semi-medium",
+            1.004
+          ],
+          [
+            "comparison=Semi-mediumvsMedium",
+            0.915
+          ],
+          [
+            "comparison=MediumvsSmall",
+            0.649
+          ],
+          [
+            "comparison=MarginalvsSmall",
+            0.584
+          ],
+          [
+            "comparison=LargevsSmall",
+            0.364
+          ],
+          [
+            "comparison=MediumvsLarge",
+            0.297
+          ],
+          [
+            "axis=landholding",
+            0.227
+          ],
+          [
+            "axis=gender",
+            0.216
+          ]
+        ]
+      }
+    },
+    "tfidf": {
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "n_features": 874,
+      "top_features_by_class": {
+        "a": [
+          [
+            "men",
+            1.507
+          ],
+          [
+            "holdings large",
+            1.267
+          ],
+          [
+            "holdings",
+            1.258
+          ],
+          [
+            "women or",
+            1.087
+          ],
+          [
+            "men women",
+            1.087
+          ],
+          [
+            "census among",
+            0.977
+          ],
+          [
+            "class accounts",
+            0.935
+          ],
+          [
+            "holdings marginal",
+            0.896
+          ],
+          [
+            "women",
+            0.854
+          ],
+          [
+            "accounts for",
+            0.82
+          ],
+          [
+            "accounts",
+            0.82
+          ],
+          [
+            "large holdings",
+            0.817
+          ]
+        ],
+        "b": [
+          [
+            "social",
+            1.881
+          ],
+          [
+            "castes other",
+            1.533
+          ],
+          [
+            "groups or",
+            1.261
+          ],
+          [
+            "census which",
+            1.261
+          ],
+          [
+            "other social",
+            1.216
+          ],
+          [
+            "other",
+            1.213
+          ],
+          [
+            "social groups",
+            1.179
+          ],
+          [
+            "group operates",
+            1.176
+          ],
+          [
+            "groups",
+            1.155
+          ],
+          [
+            "operates larger",
+            1.083
+          ],
+          [
+            "operates",
+            1.034
+          ],
+          [
+            "which social",
+            0.984
+          ]
+        ],
+        "c": [
+          [
+            "operated",
+            1.495
+          ],
+          [
+            "operated area",
+            1.365
+          ],
+          [
+            "area",
+            1.365
+          ],
+          [
+            "census in",
+            1.298
+          ],
+          [
+            "maharashtra",
+            0.944
+          ],
+          [
+            "area or",
+            0.915
+          ],
+          [
+            "in maharashtra",
+            0.905
+          ],
+          [
+            "based",
+            0.816
+          ],
+          [
+            "based on",
+            0.816
+          ],
+          [
+            "on the",
+            0.816
+          ],
+          [
+            "of operated",
+            0.808
+          ],
+          [
+            "on",
+            0.773
+          ]
+        ]
+      }
+    }
+  },
+  "fitted_on": "train_instances.jsonl only",
+  "logistic_regression": {
+    "C": 1.0,
+    "max_iter": 1000
+  },
+  "masking_examples": [
+    {
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/All Classes/area/SCvsST",
+      "state_parsed": "Maharashtra"
+    },
+    {
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/All/number/MarginalvsLarge",
+      "state_parsed": "Jammu & Kashmir"
+    },
+    {
+      "source_cell": "AgCensus2015-16 T2-4 Arunachal Pradesh/ST/number/MarginalvsMedium",
+      "state_parsed": "Arunachal Pradesh"
+    },
+    {
+      "source_cell": "AgCensus2015-16 T2-4 Karnataka/All/area/SmallvsSemi-medium",
+      "state_parsed": "Karnataka"
+    },
+    {
+      "source_cell": "AgCensus2015-16 T2-4 Arunachal Pradesh/ST/number/MarginalvsSemi-medium",
+      "state_parsed": "Arunachal Pradesh"
+    },
+    {
+      "source_cell": "AgCensus2015-16 T2-4 Telangana/Marginal/area/SCvsST",
+      "state_parsed": "Telangana"
+    }
+  ],
+  "metadata_fields": [
+    "axis",
+    "metric",
+    "size_class",
+    "comparison"
+  ],
+  "metadata_source": "state_blind_key",
+  "note": "post-hoc diagnostic reproduced in a saved pipeline (plan section 2.2); lexical associations are descriptive, not causal",
+  "state_blind_sensitivity_reported": false,
+  "state_tokens_found": [
+    "A&N Islands",
+    "All",
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "D & N Haveli",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu & Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Puducherry",
+    "Punjab",
+    "Rajasthan",
+    "SC",
+    "ST",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal"
+  ],
+  "suspicious_state_tokens": [
+    "All",
+    "Goa",
+    "SC",
+    "ST"
+  ],
+  "text_field": "question",
+  "tfidf": {
+    "max_features": 20000,
+    "min_df": 2,
+    "ngram_range": [
+      1,
+      2
+    ]
+  }
+}

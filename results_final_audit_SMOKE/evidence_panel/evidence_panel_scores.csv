@@ -1,0 +1,2 @@
+tier,method,bundles,joint_evidence_following_rate,no_evidence_acc,verified_acc,verified_minus_no_evidence,synthetic_acc,anonymised_consistent_and_correct_rate,invalid_rate
+cpu-preflight,frozen_base,5,0.0,0.4,0.2,-0.2,0.4,0.0,0.0

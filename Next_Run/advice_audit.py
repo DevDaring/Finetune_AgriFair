@@ -64,7 +64,7 @@ def _flags(t: str) -> Dict[str, bool]:
 def pair_table(cfg: Dict) -> List[Dict]:
     pairs = {p["pair_id"]: p for p in C.read_jsonl(C.legacy_data_dir() / "agriadvice_pairs.jsonl")}
     rows = []
-    for arm, path in _drift_files().items():
+    for arm, path in C.limit_arms(_drift_files(), cfg).items():
         for r in C.read_jsonl(path):
             p = pairs.get(r["pair_id"])
             if not p:

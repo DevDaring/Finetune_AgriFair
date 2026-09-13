@@ -83,8 +83,12 @@ if __name__ == "__main__":
     ap.add_argument("--stage", choices=[s[0] for s in STAGES])
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--config", default=str(C.CONFIG_PATH))
+    ap.add_argument("--smoke", action="store_true", help="two-sample end-to-end run in results_final_audit_SMOKE")
     a = ap.parse_args()
-    cfg = C.load_config(Path(a.config))
+    cfg = C.load_config(Path(a.config) if not a.smoke else C.CONFIG_PATH.with_name("config_smoke.yaml"))
+    if a.smoke:
+        assert "SMOKE" in cfg["output_directory"], "smoke config must write to a SMOKE directory"
+        print("[run] SMOKE MODE: two samples per stage, synthetic ledger, CPU inference on a 0.5B model")
     for k in ("allow_training", "allow_new_attribution"):
         if cfg[k]:
             print(f"[run] refusing to start: {k} is true and Next_Run implements no such stage"); sys.exit(2)

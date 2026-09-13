@@ -37,7 +37,7 @@ def load_all_records(cfg: Dict, include_cpu_baselines: bool = True) -> Dict[C.Ar
     items = C.test_items_by_id()
     recs: Dict[C.Arm, List[Dict]] = {}
     coverage = []
-    for arm, path in C.prediction_files().items():
+    for arm, path in C.limit_arms(C.prediction_files(), cfg).items():
         r, issues = C.normalise_predictions(arm, path, items)
         recs[arm] = r
         coverage.append({"tier": arm.tier, "method": arm.method, "seed": arm.seed, **issues})

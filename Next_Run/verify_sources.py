@@ -195,6 +195,24 @@ def main(cfg: Dict) -> Dict:
         C.write_csv(sample_path, sample)
         print(f"[verify_sources] audit sample frozen: {sum(1 for s in sample if s['audit_stage']==1)} stage-1, {len(sample)} total")
 
+    if C.smoke(cfg).get("synthetic_ledger") and not filled_path.exists():
+        # SMOKE ONLY: fabricate values consistent with each row's frozen label so the recompute
+        # and the evidence panel have something to chew on. Written to the smoke directory,
+        # labelled in every row, and never to the real ledger.
+        import random as _r
+        rng = _r.Random(cfg["analysis_seed"]); rule = cfg["comparison_rule"]
+        fake = []
+        for r in skeleton:
+            base = rng.uniform(20, 60)
+            gap = rng.uniform(0, rule["equal_if_abs_gap_at_most"]) if r["frozen_condition"] == "equal" \
+                  else rng.uniform(rule["diff_if_abs_gap_at_least"], rule["diff_if_abs_gap_at_least"] + 20)
+            g1 = base + gap if r["frozen_gold_letter"] == "a" else base
+            g2 = base if r["frozen_gold_letter"] == "a" else base + gap
+            fake.append({**r, "group1_value": round(g1, 2), "group2_value": round(g2, 2), "units": "percent",
+                         "denominator_or_stratum": "SYNTHETIC", "verification_status": "SYNTHETIC_SMOKE_VALUE",
+                         "notes": "smoke-test fabrication; not a census value"})
+        C.write_csv(filled_path, fake, LEDGER_COLUMNS)
+        print(f"[verify_sources] SMOKE: synthetic ledger written to {filled_path.name} (not real data)")
     result = {"skeleton_rows": len(skeleton), "audit_sample": len(sample), "recompute": {"status": "not_run"}}
     if filled_path.exists():
         with open(filled_path, encoding="utf-8") as f:
