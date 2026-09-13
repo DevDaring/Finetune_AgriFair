@@ -185,9 +185,12 @@ def test_missing_admissibility_readout_is_not_evaluable():
 
 
 def test_scrub_secrets():
-    s = "HUGGINGFACE_TOKEN=hf_abcdefghijklmnopqrstuvwxyz1234 and api_key: sk-abcdefghijklmnopqrstuvwxyz"
+    # fake credentials assembled at runtime so no token-shaped literal ever sits in source
+    fake_hf = "hf_" + "a" * 30
+    fake_sk = "sk-" + "b" * 30
+    s = f"HUGGINGFACE_TOKEN={fake_hf} and api_key: {fake_sk}"
     out = C.scrub_secrets(s)
-    assert "hf_abcdefghij" not in out and "sk-abcdefghij" not in out
+    assert fake_hf not in out and fake_sk not in out
 
 
 def test_refuses_to_write_into_legacy_dirs(tmp_path):

@@ -383,7 +383,7 @@
     "root_exists": true
   },
   "config_sha256": "8f16323adf9c0a868ccabeb00e4fcbb8cf14d8a957afbf5d62c271bd95a65f0d",
-  "created_utc": "2026-09-12T16:42:22Z",
+  "created_utc": "2026-09-13T03:24:28Z",
   "findings": [],
   "frozen_test_hash_matches_config": true,
   "inputs": {
@@ -2721,7 +2721,7 @@
       ]
     }
   },
-  "source_snapshot": "b0f83522a2593c1ca665db864694b6888b95df63",
+  "source_snapshot": "63007f81463a551cb51781e25c32279063256824",
   "splits": {
     "test": {
       "axis": {
