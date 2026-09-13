@@ -1,0 +1,39 @@
+{
+  "ledger": {
+    "archived_released_agriadvice_sha256": "3227db489c0164db450c3ac62654e81e892e34f897a30079083b58147bed813b",
+    "archived_released_agrifacts_sha256": "441ec632e05f9765632afcbcf865e427ea7208882e3f4417debee565ec65cfae",
+    "comparison_rule": {
+      "diff_if_abs_gap_at_least": 10.0,
+      "equal_if_abs_gap_below": 5.0,
+      "metric_unit": "percentage_points"
+    },
+    "construction_fact_rows": 2026,
+    "important_limit": "This is deterministic source reconstruction, not an independent human audit. The frozen 120-cell audit sample still requires documented checking if the paper claims human verification.",
+    "ledger_rows": 1178,
+    "source_pdf_sha256": "fb01bcb922a38ef964a2ca2fddada5540426bf5b06317d931425ae8d699d6405",
+    "source_pdf_url": "https://www.fao.org/fileadmin/templates/ess/ess_test_folder/World_Census_Agriculture/WCA_2020/WCA_2020_new_doc/IND_REP_ENG_2015_2016.pdf",
+    "status": "ok"
+  },
+  "source_adjudication": {
+    "approval": {
+      "approval_date": "2026-09-13",
+      "approval_method": "annotator team email",
+      "approval_statement_verbatim": "We checked our response were properly corrected. Currently all complience are met in sample checking. We approve this current annotation",
+      "approver_scope": "two-annotator team",
+      "evidence_custodian": "data owner",
+      "repository_evidence_status": "data-owner-attested; underlying email retained privately for security",
+      "underlying_email_shared_in_repository": false
+    },
+    "contains_original_rater_data": false,
+    "final_annotation_status": "rater-team re-reviewed and approved after source adjudication",
+    "human_agreement_metrics": "not computable from a team approval of adjudicated answers",
+    "interpretation": "The final annotations were source-adjudicated and subsequently approved by the annotator team according to the data owner's email attestation. They are final approved annotations, not the annotators' original submissions.",
+    "items": {
+      "agriadvice": 80,
+      "agrifacts": 200,
+      "total": 280
+    },
+    "record_type": "deterministic_source_adjudication_not_human_rating",
+    "status": "ok"
+  }
+}

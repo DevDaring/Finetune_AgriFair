@@ -57,7 +57,9 @@ def run(cfg: Dict, only: str | None, force: bool) -> int:
         prev = state["stages"].get(name, {})
         # the report reads the other stages' outputs, which live outside the hashed inputs; it is
         # cheap, so it always rebuilds rather than risk a stale table
-        if name != "report" and not force and prev.get("status") == "ok" and prev.get("input_hash") == h:
+        # Source verification also reads an author/reconstruction-filled ledger in the output
+        # directory. It is cheap and intentionally never cached, so edits cannot be missed.
+        if name not in ("verify_sources", "report") and not force and prev.get("status") == "ok" and prev.get("input_hash") == h:
             print(f"[run] {name:15s} cached (inputs unchanged)"); continue
         t0 = time.time()
         rec = {"input_hash": h, "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}

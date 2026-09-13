@@ -1,0 +1,22 @@
+{
+  "approval": {
+    "approval_date": "2026-09-13",
+    "approval_method": "annotator team email",
+    "approval_statement_verbatim": "We checked our response were properly corrected. Currently all complience are met in sample checking. We approve this current annotation",
+    "approver_scope": "two-annotator team",
+    "evidence_custodian": "data owner",
+    "repository_evidence_status": "data-owner-attested; underlying email retained privately for security",
+    "underlying_email_shared_in_repository": false
+  },
+  "contains_original_rater_data": false,
+  "final_annotation_status": "rater-team re-reviewed and approved after source adjudication",
+  "human_agreement_metrics": "not computable from a team approval of adjudicated answers",
+  "interpretation": "The final annotations were source-adjudicated and subsequently approved by the annotator team according to the data owner's email attestation. They are final approved annotations, not the annotators' original submissions.",
+  "items": {
+    "agriadvice": 80,
+    "agrifacts": 200,
+    "total": 280
+  },
+  "record_type": "deterministic_source_adjudication_not_human_rating",
+  "status": "ok"
+}

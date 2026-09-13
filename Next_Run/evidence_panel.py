@@ -45,7 +45,15 @@ def _ledger_values(cfg: Dict) -> Dict[str, Dict]:
         return {}
     with open(p, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
-    return {r["source_cell"]: r for r in rows if r.get("agrees_with_frozen") in ("True", "true", "1")}
+    return {
+        r["source_cell"]: r
+        for r in rows
+        if r.get("agrees_with_frozen") in ("True", "true", "1")
+        and r.get("verification_status") not in ("", "unverified")
+        and r.get("page_or_sheet")
+        and r.get("source_url_or_doc_hash")
+        and r.get("denominator_or_stratum")
+    }
 
 
 def build_bundles(cfg: Dict) -> Tuple[List[Dict], Dict]:
@@ -73,13 +81,20 @@ def build_bundles(cfg: Dict) -> Tuple[List[Dict], Dict]:
             for i, it in enumerate(cand[:per]):
                 v = verified[it["source_cell"]]
                 g1, g2 = float(v["group1_value"]), float(v["group2_value"])
-                # synthetic: reverse a real difference, or open a gap beyond the diff threshold
+                # synthetic: reverse a real difference, or open a gap beyond the diff threshold.
+                # For an equal item the new gap must clear the threshold REGARDLESS of which group
+                # was originally larger, so it is built from group 2's value, not added to group 1
+                # (adding to group 1 when group 2 was larger shrank the gap into the excluded band).
                 if cond == "diff":
                     s1, s2 = g2, g1
                 else:
                     delta = float(rule["diff_if_abs_gap_at_least"]) + 1.0
-                    s1, s2 = g1 + delta, g2
+                    if g2 + delta <= 100.0:
+                        s1, s2 = g2 + delta, g2          # group 1 clearly larger
+                    else:
+                        s1, s2 = g2, max(g2 - delta, 0.0) # near the ceiling: shrink group 2 instead
                 s_cond = derive_condition(s1, s2, rule)
+                assert s_cond == "diff", f"synthetic variant for {it['id']} fell outside diff: {s_cond}"
                 bundles.append({
                     "bundle_id": f"B{len(bundles) + 1:03d}", "item_id": it["id"], "source_cell": it["source_cell"],
                     "axis": axis, "original_condition": cond, "nested_subset": i < ep["nested_subset_per_axis"] // 2,

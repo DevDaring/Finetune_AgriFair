@@ -1,0 +1,17 @@
+# Secrets — never commit
+.env
+
+# Caches and logs
+cache/
+logs/*.csv
+__pycache__/
+*.pyc
+
+# Large raw downloads (keep provenance in DATASHEET.md, not the bytes)
+data/raw/*.pdf
+data/raw/*.zip
+data/raw/*.xlsx
+
+# Local model caches
+.cache/
+*.bin

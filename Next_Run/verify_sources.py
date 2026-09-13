@@ -1,9 +1,9 @@
 """P1 - source ledger: establish that the agricultural ground truth is trustworthy.
 
-This stage is honest about what the repository contains. There are no census tables, no
-extraction scripts and no numeric values anywhere in the frozen data: rationales are
-qualitative. So this stage cannot fill the ledger, and it must not. What it can do
-deterministically is
+The released benchmark contains qualitative rationales only.  If the separately preserved
+construction archive is unavailable, this stage cannot fill the ledger and must not invent
+values.  Codes/Next_Run/reconcile_source_records.py can import the recovered numeric records
+into a provenance-rich filled ledger.  This stage deterministically
 
   1. build the ledger SKELETON - one row per distinct source_cell across all splits, with
      the key decomposed into edition / table / state / size class / metric / comparison,
@@ -105,9 +105,12 @@ def freeze_audit_sample(rows: List[Dict], seed: int, stage1: int, stage2_total: 
 
 def _rule_ready(cfg: Dict) -> Tuple[bool, str]:
     rule = cfg.get("comparison_rule") or {}
-    if rule.get("equal_if_abs_gap_at_most") is None or rule.get("diff_if_abs_gap_at_least") is None:
+    equal_cut = rule.get("equal_if_abs_gap_below")
+    if equal_cut is None:
+        equal_cut = rule.get("equal_if_abs_gap_at_most")  # legacy smoke/config compatibility
+    if equal_cut is None or rule.get("diff_if_abs_gap_at_least") is None:
         return False, "comparison_rule thresholds are null in config - declare them from the construction records"
-    if float(rule["equal_if_abs_gap_at_most"]) > float(rule["diff_if_abs_gap_at_least"]):
+    if float(equal_cut) > float(rule["diff_if_abs_gap_at_least"]):
         return False, "equal threshold exceeds diff threshold; the excluded band would be negative"
     return True, ""
 
@@ -118,7 +121,11 @@ def derive_condition(g1: float, g2: float, rule: Dict) -> str:
     if rule.get("metric_unit") == "relative_percent":
         base = max(abs(float(g1)), abs(float(g2)), 1e-12)
         gap = 100.0 * gap / base
-    if gap <= float(rule["equal_if_abs_gap_at_most"]):
+    if rule.get("equal_if_abs_gap_below") is not None:
+        is_equal = gap < float(rule["equal_if_abs_gap_below"])
+    else:  # explicit legacy semantics
+        is_equal = gap <= float(rule["equal_if_abs_gap_at_most"])
+    if is_equal:
         return "equal"
     if gap >= float(rule["diff_if_abs_gap_at_least"]):
         return "diff"
@@ -166,8 +173,15 @@ def validate_and_recompute(ledger: List[Dict], cfg: Dict) -> Tuple[List[Dict], D
         agree += agrees; disagree += (not agrees) and cond != "excluded_band"
         report.append({**r, "recomputed_condition": cond, "recomputed_gold": gold,
                        "agrees_with_frozen": agrees, "discrepancy_type": dt})
+    missing_provenance = sum(
+        not r.get("page_or_sheet") or not r.get("source_url_or_doc_hash")
+        or not r.get("denominator_or_stratum") or not r.get("verification_status")
+        or r.get("verification_status") == "unverified"
+        for r in report
+    )
     summary = {"status": "ok", "rows_with_values": len(report), "rows_without_values": empty,
                "agree": agree, "disagree": disagree, "excluded_band": band,
+               "rows_missing_provenance_or_status": missing_provenance,
                "by_stratum": {}}
     strat = defaultdict(lambda: Counter())
     for x in report:
@@ -204,7 +218,8 @@ def main(cfg: Dict) -> Dict:
         fake = []
         for r in skeleton:
             base = rng.uniform(20, 60)
-            gap = rng.uniform(0, rule["equal_if_abs_gap_at_most"]) if r["frozen_condition"] == "equal" \
+            equal_cut = rule.get("equal_if_abs_gap_below", rule.get("equal_if_abs_gap_at_most"))
+            gap = rng.uniform(0, equal_cut * 0.999) if r["frozen_condition"] == "equal" \
                   else rng.uniform(rule["diff_if_abs_gap_at_least"], rule["diff_if_abs_gap_at_least"] + 20)
             g1 = base + gap if r["frozen_gold_letter"] == "a" else base
             g2 = base if r["frozen_gold_letter"] == "a" else base + gap

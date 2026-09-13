@@ -48,13 +48,13 @@ secondary_comparators:
   - baseline_regift
 
 # ---- source ledger (plan section 6) ------------------------------------------------
-# The comparison rule is NOT in this repository and must be declared by the authors from
-# their construction records before gold can be recomputed. Leave null to keep
-# verify_sources in skeleton-only mode; it will refuse to recompute gold.
+# Recovered on 2026-09-13 from Source_Records/Dataset.zip.  The archived build config,
+# a2_shares.py, DATASHEET.md and the private answer key all agree on this rule. Values in
+# the final evidence ledger are percentage shares on a 0--100 scale.
 comparison_rule:
-  metric_unit: percentage_points   # or relative_percent - declare, do not guess
-  equal_if_abs_gap_at_most: null   # e.g. 2.0
-  diff_if_abs_gap_at_least: null   # e.g. 5.0 ; the band between is the excluded band
+  metric_unit: percentage_points
+  equal_if_abs_gap_below: 5.0      # strict: gap < 5 is equal
+  diff_if_abs_gap_at_least: 10.0   # inclusive: gap >= 10 is different
 audit_sample_stage1: 60
 audit_sample_stage2_total: 120
 

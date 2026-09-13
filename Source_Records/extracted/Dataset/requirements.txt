@@ -1,0 +1,26 @@
+# Core
+python-dotenv>=1.0.1
+pyyaml>=6.0.2
+requests>=2.32.3
+tenacity>=9.0.0
+openai>=1.40.0          # OpenAI-compatible client for DeepSeek + OpenRouter
+mistralai>=1.2.0        # Mistral SDK
+
+# Data wrangling
+pandas>=2.2.2
+numpy>=1.26.4
+
+# Census/table extraction (PDF + Excel)
+pdfplumber>=0.11.4
+camelot-py[base]>=0.11.0
+openpyxl>=3.1.5
+tabula-py>=2.9.3
+
+# Dataset acquisition
+huggingface_hub>=0.24.0
+datasets>=2.20.0
+
+# Local embeddings + NLI (no API spend)
+sentence-transformers>=3.0.1
+transformers>=4.44.0
+torch>=2.3.0

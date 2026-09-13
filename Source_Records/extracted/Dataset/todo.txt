@@ -1,0 +1,36 @@
+=============================================================================
+ AgriFair dataset build — STATUS  (updated 2026-06-08)
+=============================================================================
+All required data was obtained programmatically. No data was fabricated.
+
+DONE (automated, no action from you):
+  [x] Models pinned + verified live: deepseek-v4-flash (primary, non-thinking),
+      mistral-small-2603 (fallback), qwen-2.5-72b-instruct (3rd judge).
+  [x] Farmer queries: KisanVaani (22,615) + BhashaBench-Krishi EN/HI (15,405, gated,
+      via your HF token) -> 38,020 rows.
+  [x] Census 2015-16 All-India Report (agcensus + FAO mirror) + Input Survey 2016-17
+      downloaded. NOTE: the Input Survey you placed (AISR_2016_17_20jan21.pdf) was the
+      WRONG file (it is the "Review of Crop Statistics", no social-group/credit data);
+      I downloaded the correct one (inputsurvey_2016_17.pdf) myself.
+  [x] AgriFacts: census extracted (648 cells, 0 consistency errors) -> 2026 validated
+      comparisons -> seeds -> 2431 paraphrase pool -> 3-family consensus filter (RUNNING)
+      -> balanced emit. Axes: social_group, landholding, gender (x number & area).
+  [x] AgriAdvice: 800 identity-toggled pairs (200/axis), content gate 0% discard.
+      data/final/agriadvice.jsonl  DONE.
+
+IN PROGRESS (no action needed; finishes on its own):
+  [~] AgriFacts 3-judge consensus filter, then a7_emit -> data/final/agrifacts.jsonl.
+
+ONE MANUAL STEP FOR YOU (after the build prints "done"):
+  [ ] Review data/interim/agrifacts_spotcheck.csv (250 stratified items). Mark the
+      'author_agrees' column y/n. Then run:
+          python agrifacts/a6_spotcheck.py --score
+      to print the agreement %. This is the only human-in-the-loop step the brief asks.
+
+DECISIONS ALREADY APPLIED (per your instructions):
+  - Census path: PATH 2 (extract from PDF).            [done]
+  - Round: 2015-16 confirmed.                          [done]
+  - Irrigation/credit axes: DROPPED, because the Input Survey breaks inputs down by
+    size-group only (no social-group/gender split). Say the word if you want them
+    added as size-class-only axes.
+=============================================================================

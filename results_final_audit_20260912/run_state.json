@@ -34,17 +34,17 @@
       "status": "ok"
     },
     "evidence_panel": {
-      "input_hash": "ad3dd3744867fd78cf9496a8caaefdc0528ec7c2c3a6b69bbe614d4222afe0cf",
+      "input_hash": "75e82da7c901cc1e3ce4cf4f762de21bf7a4eebaab59a0bf8037aa2110692ff6",
       "result": {
-        "bundles": 0,
+        "bundles": 83,
         "reasons": [
           "gpu_enabled is false",
-          "no bundles"
+          "83 bundles not manually checked"
         ],
         "run": false
       },
-      "runtime_s": 0.0,
-      "started_utc": "2026-09-13T03:27:12Z",
+      "runtime_s": 0.1,
+      "started_utc": "2026-09-13T08:27:27Z",
       "status": "ok"
     },
     "inventory": {
@@ -2939,16 +2939,42 @@
       "status": "ok"
     },
     "verify_sources": {
-      "input_hash": "e4d8e0fb203703a7d0dd93cfe26ff56ead7359550a1b91c7a26c199f02a88087",
+      "input_hash": "2f96cfb223a8742f67e369927ba7c5e96d0dfd4575cec1bfb1c009974a4fd88e",
       "result": {
         "audit_sample": 120,
         "recompute": {
-          "status": "not_run"
+          "agree": 1178,
+          "by_stratum": {
+            "gender/diff": {
+              "agree": 22
+            },
+            "gender/equal": {
+              "agree": 25
+            },
+            "landholding/diff": {
+              "agree": 455
+            },
+            "landholding/equal": {
+              "agree": 162
+            },
+            "social_group/diff": {
+              "agree": 455
+            },
+            "social_group/equal": {
+              "agree": 59
+            }
+          },
+          "disagree": 0,
+          "excluded_band": 0,
+          "rows_missing_provenance_or_status": 0,
+          "rows_with_values": 1178,
+          "rows_without_values": 0,
+          "status": "ok"
         },
         "skeleton_rows": 1178
       },
       "runtime_s": 0.1,
-      "started_utc": "2026-09-13T03:24:37Z",
+      "started_utc": "2026-09-13T08:26:24Z",
       "status": "ok"
     }
   }

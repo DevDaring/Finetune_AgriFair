@@ -1,0 +1,9 @@
+{
+  "approval_date": "2026-09-13",
+  "approval_method": "annotator team email",
+  "approval_statement_verbatim": "We checked our response were properly corrected. Currently all complience are met in sample checking. We approve this current annotation",
+  "approver_scope": "two-annotator team",
+  "evidence_custodian": "data owner",
+  "underlying_email_shared_in_repository": false,
+  "repository_evidence_status": "data-owner-attested; underlying email retained privately for security"
+}

@@ -1,7 +1,33 @@
 {
   "audit_sample": 120,
   "recompute": {
-    "status": "not_run"
+    "agree": 1178,
+    "by_stratum": {
+      "gender/diff": {
+        "agree": 22
+      },
+      "gender/equal": {
+        "agree": 25
+      },
+      "landholding/diff": {
+        "agree": 455
+      },
+      "landholding/equal": {
+        "agree": 162
+      },
+      "social_group/diff": {
+        "agree": 455
+      },
+      "social_group/equal": {
+        "agree": 59
+      }
+    },
+    "disagree": 0,
+    "excluded_band": 0,
+    "rows_missing_provenance_or_status": 0,
+    "rows_with_values": 1178,
+    "rows_without_values": 0,
+    "status": "ok"
   },
   "skeleton_rows": 1178
 }

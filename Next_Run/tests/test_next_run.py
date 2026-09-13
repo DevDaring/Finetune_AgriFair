@@ -153,8 +153,9 @@ def test_holm_preserves_order_and_ignores_nan():
 # ---------------------------------------------------------------- sources and panel
 
 def test_synthetic_table_gold_and_excluded_band():
-    rule = {"metric_unit": "percentage_points", "equal_if_abs_gap_at_most": 2.0, "diff_if_abs_gap_at_least": 5.0}
+    rule = {"metric_unit": "percentage_points", "equal_if_abs_gap_below": 2.0, "diff_if_abs_gap_at_least": 5.0}
     assert derive_condition(10, 11.5, rule) == "equal"
+    assert derive_condition(10, 12, rule) == "excluded_band"  # equal boundary is strict
     assert derive_condition(10, 16, rule) == "diff"
     assert derive_condition(10, 13, rule) == "excluded_band"
     assert expected_gold(16, 10, "diff") == "a" and expected_gold(10, 16, "diff") == "b"
@@ -197,3 +198,14 @@ def test_refuses_to_write_into_legacy_dirs(tmp_path):
     with pytest.raises(PermissionError):
         C.write_json(C.legacy_results_dir() / "x.json", {})
     C.write_json(tmp_path / "ok.json", {"a": 1})
+
+
+def test_synthetic_equal_variant_always_clears_threshold():
+    """Plan 9.1: for an originally-equal pair the synthetic table must introduce a difference
+    beyond the frozen threshold, whichever group was larger to begin with."""
+    from Next_Run.verify_sources import derive_condition
+    rule = {"metric_unit": "percentage_points", "equal_if_abs_gap_below": 5.0, "diff_if_abs_gap_at_least": 10.0}
+    delta = rule["diff_if_abs_gap_at_least"] + 1.0
+    for g1, g2 in ((40.0, 43.0), (43.0, 40.0), (2.0, 1.0), (95.0, 97.0)):
+        s1, s2 = (g2 + delta, g2) if g2 + delta <= 100.0 else (g2, max(g2 - delta, 0.0))
+        assert derive_condition(s1, s2, rule) == "diff", (g1, g2, s1, s2)

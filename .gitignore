@@ -16,3 +16,13 @@ Submission1/
 
 # user rule: no markdown is pushed to GitHub
 *.md
+
+# Source_Records: push the construction code and derived data, not third-party
+# documents (cited by URL + SHA-256 in dataset_prep) or the duplicate archive.
+Source_Records/Dataset.zip
+Source_Records/extracted/**/*.pdf
+Source_Records/extracted/**/*.parquet
+Source_Records/extracted/**/cache/
+Source_Records/extracted/**/logs/
+Source_Records/extracted/**/_hf_tmp/
+Source_Records/extracted/**/__pycache__/

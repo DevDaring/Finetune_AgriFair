@@ -1,0 +1,86 @@
+# config.yaml — central knobs for the AgriFair dataset build.
+# Model slugs verified live on 2026-06-08 against api-docs.deepseek.com,
+# docs.mistral.ai, and openrouter.ai/models. Re-verify before any large run.
+
+seed: 20260502
+
+# ---------------------------------------------------------------------------
+# Providers and pinned model slugs
+# ---------------------------------------------------------------------------
+# DeepSeek = PRIMARY (cheap bulk work + default judge family)
+# Mistral  = FALLBACK
+# OpenRouter = SPECIALIST (3rd judge family, small specialised calls)
+providers:
+  deepseek:
+    base_url_env: DEEPSEEK_API_BASE_URL          # https://api.deepseek.com/v1
+    key_envs: [DEEPSEEK_API_KEY_1, DEEPSEEK_API_KEY_2]
+    # deepseek-chat is being deprecated 2026-07-24; deepseek-v4-flash is the
+    # current cheapest flagship (non-thinking + thinking in one slug).
+    models:
+      default: deepseek-v4-flash      # bulk generation / paraphrase / persona / default judge
+      reason:  deepseek-v4-pro        # harder reasoning steps only
+    rpm: 60
+  mistral:
+    base_url: https://api.mistral.ai/v1
+    key_envs: [MISTRAL_API_KEY1, MISTRAL_API_KEY2]
+    models:
+      default: mistral-small-2603     # Mistral Small 4 — most efficient small model (v26.03)
+    rpm: 60
+  openrouter:
+    base_url_env: OPENROUTER_API_BASE_URL        # https://openrouter.ai/api/v1
+    key_envs: [OPENROUTER_API_KEY_1, OPENROUTER_API_KEY_2]
+    models:
+      # 3rd judge family must differ from DeepSeek and Mistral -> use Qwen/Llama.
+      specialist: qwen/qwen-2.5-72b-instruct
+      llama:      meta-llama/llama-3.1-8b-instruct
+      gemma:      google/gemma-3-4b-it
+    rpm: 60
+
+# Fallback order tried on error/429/timeout.
+fallback_chain: [deepseek_a, deepseek_b, mistral, openrouter]
+
+# Temperatures by task class.
+temperature:
+  paraphrase: 0.7
+  persona: 0.7
+  extraction: 0.0
+  judge: 0.0
+
+concurrency: 24         # global in-flight cap (judges fan out 3 providers/candidate)
+max_retries: 5
+timeout_s: 90
+
+# ---------------------------------------------------------------------------
+# Local models (no API spend)
+# ---------------------------------------------------------------------------
+local:
+  embedding_model: sentence-transformers/all-MiniLM-L6-v2
+  nli_model: cross-encoder/nli-deberta-v3-small
+
+# ---------------------------------------------------------------------------
+# AgriFacts
+# ---------------------------------------------------------------------------
+agrifacts:
+  target_total: 2000
+  target_diff: 1000
+  target_equal: 1000
+  gap_diff_min: 10.0      # |share_1 - share_2| >= 10 -> "diff"
+  gap_equal_max: 5.0      # |share_1 - share_2| <  5  -> "equal"; 5..10 skipped
+  paraphrases_per_seed: 15
+  spotcheck_n: 250
+  axes: [gender, social_group, landholding, irrigation, credit]
+  min_per_axis: 150
+
+# ---------------------------------------------------------------------------
+# AgriAdvice
+# ---------------------------------------------------------------------------
+agriadvice:
+  target_pairs: 800
+  toggle_axes:
+    gender: 200
+    social_group: 200
+    region_register: 200
+    literacy_register: 200
+  min_per_axis: 150
+  material_facts: [crop, growth_stage, plot_size, problem, budget]
+  discard_pause_threshold: 0.20   # pause if content-preservation discard > 20%
