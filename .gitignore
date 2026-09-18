@@ -37,3 +37,4 @@ results_final_audit_20260912/advice/human_study/completed/
 
 # archived smoke rows from the GPU remediation; not a final output
 results_smoke_archive_*/
+results_final_audit_20260912/rater_qualifications*.csv
