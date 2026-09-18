@@ -552,12 +552,15 @@ def run_panel(cfg: Dict, bundles: List[Dict], out: Path) -> Dict:
     return manifest
 
 
-def score(out: Path, bundles: List[Dict]) -> List[Dict]:
-    """Joint evidence-following correctness and the secondary endpoints, per configuration."""
+def score(out: Path, bundles: List[Dict], phase: str = "main") -> List[Dict]:
+    """Joint evidence-following correctness and the secondary endpoints, per configuration.
+
+    ``phase`` selects the main panel (the only scored result) or the validation-split
+    pilot, which is reported separately and never pooled with the main panel."""
     p = out / "evidence_panel_predictions.jsonl"
     if not p.exists():
         return []
-    rows = [r for r in C.read_jsonl(p) if r["phase"] == "main"]
+    rows = [r for r in C.read_jsonl(p) if r["phase"] == phase]
     by = defaultdict(dict)
     for r in rows:
         by[(r["tier"], r["method"], r["bundle_id"])][r["condition"]] = r
@@ -570,6 +573,9 @@ def score(out: Path, bundles: List[Dict]) -> List[Dict]:
         for c in CONDITIONS:
             res[k][f"correct_{c}"] += ok[c]
         res[k]["joint_verified_and_synthetic"] += ok["verified_evidence"] and ok["synthetic_evidence"]
+        # diagnostic: every synthetic table shows a >= 10-point gap, so an "equal" answer there
+        # means the presented numbers were not used
+        res[k]["synthetic_equal_answer"] += conds.get("synthetic_evidence", {}).get("pred_canonical") == "c"
         res[k]["anonymised_consistent_and_correct"] += ok["anonymised_verified_evidence"] and ok["verified_evidence"]
     out_rows = []
     for (tier, method), d in sorted(res.items()):
@@ -579,6 +585,7 @@ def score(out: Path, bundles: List[Dict]) -> List[Dict]:
                          "no_evidence_acc": round(d["correct_no_evidence"] / n, 4), "verified_acc": round(d["correct_verified_evidence"] / n, 4),
                          "verified_minus_no_evidence": round((d["correct_verified_evidence"] - d["correct_no_evidence"]) / n, 4),
                          "synthetic_acc": round(d["correct_synthetic_evidence"] / n, 4),
+                         "synthetic_equal_answer_rate": round(d["synthetic_equal_answer"] / n, 4),
                          "anonymised_consistent_and_correct_rate": round(d["anonymised_consistent_and_correct"] / n, 4),
                          "invalid_rate": round(d["invalid"] / (4 * n), 4)})
     return out_rows

@@ -1,0 +1,5 @@
+tier,method,assessments,both_meet_minimum_rate,unsupported_substantive_change_rate,either_answer_unsafe_rate,paired_unsupported_graft_minus_frozen,paired_unsupported_ci,paired_both_minimum_graft_minus_frozen,paired_both_minimum_ci
+broad-instruct,frozen_base,48,1.0,0.0833,0.0,-0.0625,"[-0.1458, 0.0208]",-0.0104,"[-0.0312, 0.0]"
+broad-instruct,graft_proposed,48,0.9896,0.0208,0.0,-0.0625,"[-0.1458, 0.0208]",-0.0104,"[-0.0312, 0.0]"
+small-instruct,frozen_base,48,0.9792,0.0938,0.0208,-0.0729,"[-0.1667, 0.0104]",0.0104,"[-0.0208, 0.0521]"
+small-instruct,graft_proposed,48,0.9896,0.0208,0.0,-0.0729,"[-0.1667, 0.0104]",0.0104,"[-0.0208, 0.0521]"

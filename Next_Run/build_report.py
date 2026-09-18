@@ -131,6 +131,51 @@ def claims_to_evidence(root: Path) -> List[Dict]:
     return claims
 
 
+def _wilson(k: int, n: int, z: float = 1.96):
+    if n == 0:
+        return (float("nan"), float("nan"))
+    ph = k / n; den = 1 + z * z / n
+    c = (ph + z * z / (2 * n)) / den
+    h = z * ((ph * (1 - ph) / n + z * z / (4 * n * n)) ** 0.5) / den
+    return (round(c - h, 4), round(c + h, 4))
+
+
+def table_human_study(root: Path) -> List[Dict]:
+    """P3 rubric outcomes per tier/system with the predeclared paired endpoints (48 clusters)."""
+    hs = _json(root / "advice" / "human_study" / "ratings_analysis.json")
+    if not hs:
+        return []
+    paired = {e["tier"]: e for e in hs.get("paired_endpoints", [])}
+    rows = []
+    for r in hs["rubric_outcomes"]:
+        e = paired.get(r["tier"], {})
+        rows.append({"tier": r["tier"], "method": r["method"], "assessments": r["assessments"],
+                     "both_meet_minimum_rate": r["both_meet_minimum_rate"],
+                     "unsupported_substantive_change_rate": r["unsupported_substantive_change_rate"],
+                     "either_answer_unsafe_rate": r["either_answer_unsafe_rate"],
+                     "paired_unsupported_graft_minus_frozen": e.get("unsupported_change_graft_minus_frozen"),
+                     "paired_unsupported_ci": e.get("unsupported_ci"),
+                     "paired_both_minimum_graft_minus_frozen": e.get("both_meet_minimum_graft_minus_frozen"),
+                     "paired_both_minimum_ci": e.get("both_minimum_ci")})
+    return rows
+
+
+def table_evidence_panel(root: Path) -> Dict[str, List[Dict]]:
+    """P4 endpoints for the main panel and, separately, the validation-split pilot."""
+    from . import evidence_panel as EP
+    out = root / "evidence_panel"
+    tables = {}
+    for phase in ("main", "pilot"):
+        rows = EP.score(out, [], phase=phase)
+        for r in rows:
+            n = r["bundles"]
+            for col in ("joint_evidence_following_rate", "verified_acc", "no_evidence_acc", "synthetic_acc",
+                        "anonymised_consistent_and_correct_rate"):
+                r[f"{col}_wilson95"] = _wilson(round(r[col] * n), n)
+        tables[phase] = rows
+    return tables
+
+
 def main(cfg: Dict) -> Dict:
     root = C.output_dir(cfg)
     out = root / "report"; out.mkdir(parents=True, exist_ok=True)
@@ -140,6 +185,13 @@ def main(cfg: Dict) -> Dict:
     t_src = _csv(root / "sources" / "audit_sample_frozen.csv")
     t_loao = _csv(root / "paired" / "loao_error_taxonomy.csv")
     t_cpu = _csv(root / "cpu_baselines" / "cpu_baseline_summary.csv")
+    t_human = table_human_study(root)
+    if t_human:
+        C.write_csv(out / "table_human_study.csv", t_human)
+    t_ep = table_evidence_panel(root)
+    for phase, rows in t_ep.items():
+        if rows:
+            C.write_csv(out / f"table_evidence_panel_{phase}.csv", rows)
     figs = figures(root, out / "figures")
     claims = claims_to_evidence(root)
     C.write_json(out / "claims_to_evidence.json", claims)
@@ -149,7 +201,16 @@ def main(cfg: Dict) -> Dict:
           "\n## Table 2 - main results, novel-test B, seed-explicit, with CPU controls\n", _md_table(t_main, ["tier", "method", "n_seeds", "novel_B_mean", "erasure_on_diff", "wrong_group_on_diff", "fabrication_on_equal", "invalid"]),
           "\n### CPU baselines\n", _md_table([r for r in t_cpu if r["slice"] == "structure_novel"], ["baseline", "slice", "harmonic_b", "overall_accuracy"]),
           "\n## Table 3 - transfer error taxonomy (LOAO)\n", _md_table(t_loao, ["tier", "held_out_axis", "method", "harmonic_b", "erasure_rate_on_diff", "wrong_group_rate_on_diff", "fabrication_rate_on_equal", "invalid_rate"]),
-          "\n## Table 4 - human advice outcomes\n", "_populated from advice/human_study/ratings_analysis.json when the study is complete_\n",
+          "\n## Table 4 - human advice outcomes (P3; two blinded raters, 48 question clusters)\n",
+          (_md_table(t_human, ["tier", "method", "assessments", "both_meet_minimum_rate", "unsupported_substantive_change_rate", "either_answer_unsafe_rate", "paired_unsupported_graft_minus_frozen", "paired_unsupported_ci"])
+           if t_human else "_not available: advice/human_study/ratings_analysis.json missing_\n"),
+          "\n## Table 5 - evidence-sensitivity panel (P4), MAIN panel (test split)\n",
+          (_md_table(t_ep.get("main", []), ["tier", "method", "bundles", "no_evidence_acc", "verified_acc", "synthetic_acc", "synthetic_equal_answer_rate", "joint_evidence_following_rate", "joint_evidence_following_rate_wilson95", "anonymised_consistent_and_correct_rate", "invalid_rate"])
+           if t_ep.get("main") else "_not available: P4 not run or skipped_\n"),
+          "\n### Table 5b - P4 PILOT (8 validation-split bundles; timing/parser check only, never pooled with main)\n",
+          (_md_table(t_ep.get("pilot", []), ["tier", "method", "bundles", "no_evidence_acc", "verified_acc", "synthetic_acc", "joint_evidence_following_rate", "invalid_rate"])
+           if t_ep.get("pilot") else "_not available_\n"),
+          "\n_Synthetic tables are labelled hypothetical in the prompt and are not census observations._\n",
           "\n## Figures\n" + "".join(f"- {f}\n" for f in figs),
           "\n## Claims to evidence\n", _md_table(claims, ["claim", "artifact", "status"])]
     (out / "REPORT.md").write_text("".join(md), encoding="utf-8")

@@ -7,7 +7,7 @@
   {
     "artifact": "sources/discrepancy_report.csv",
     "claim": "Census-derived labels were independently verified",
-    "status": "unsupported"
+    "status": "supported"
   },
   {
     "artifact": "cpu_baselines/cpu_baseline_summary.csv",
@@ -32,12 +32,12 @@
   {
     "artifact": "advice/human_study/ratings_analysis.json",
     "claim": "Blinded expert assessment links automated consistency to correctness/usefulness",
-    "status": "unsupported (study not completed - narrow the claim)"
+    "status": "supported"
   },
   {
     "artifact": "evidence_panel/evidence_panel_scores.csv",
     "claim": "Evidence-sensitivity panel results",
-    "status": "unsupported (P4 not run)"
+    "status": "supported"
   },
   {
     "artifact": "\u2014",

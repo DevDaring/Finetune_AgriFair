@@ -1,0 +1,7 @@
+tier,method,bundles,joint_evidence_following_rate,no_evidence_acc,verified_acc,verified_minus_no_evidence,synthetic_acc,synthetic_equal_answer_rate,anonymised_consistent_and_correct_rate,invalid_rate,joint_evidence_following_rate_wilson95,verified_acc_wilson95,no_evidence_acc_wilson95,synthetic_acc_wilson95,anonymised_consistent_and_correct_rate_wilson95
+broad-instruct,ablation_rank_sweep_8,8,0.875,0.75,0.875,0.125,1.0,0.0,0.875,0.0,"(0.5291, 0.9776)","(0.5291, 0.9776)","(0.4093, 0.9285)","(0.6756, 1.0)","(0.5291, 0.9776)"
+broad-instruct,frozen_base,8,0.625,0.5,0.625,0.125,1.0,0.0,0.625,0.0,"(0.3057, 0.8632)","(0.3057, 0.8632)","(0.2152, 0.7848)","(0.6756, 1.0)","(0.3057, 0.8632)"
+broad-instruct,graft_proposed,8,0.875,0.875,0.875,0.0,1.0,0.0,0.875,0.0,"(0.5291, 0.9776)","(0.5291, 0.9776)","(0.5291, 0.9776)","(0.6756, 1.0)","(0.5291, 0.9776)"
+small-instruct,ablation_rank_sweep_8,8,0.0,0.75,0.75,0.0,0.125,0.875,0.5,0.0,"(0.0, 0.3244)","(0.4093, 0.9285)","(0.4093, 0.9285)","(0.0224, 0.4709)","(0.2152, 0.7848)"
+small-instruct,frozen_base,8,0.125,0.375,0.25,-0.125,0.875,0.125,0.25,0.0,"(0.0224, 0.4709)","(0.0715, 0.5907)","(0.1368, 0.6943)","(0.5291, 0.9776)","(0.0715, 0.5907)"
+small-instruct,graft_proposed,8,0.0,0.75,0.875,0.125,0.0,1.0,0.625,0.0,"(0.0, 0.3244)","(0.5291, 0.9776)","(0.4093, 0.9285)","(0.0, 0.3244)","(0.3057, 0.8632)"
