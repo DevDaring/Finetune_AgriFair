@@ -1,0 +1,7 @@
+tier,method,bundles,joint_evidence_following_rate,no_evidence_acc,verified_acc,verified_minus_no_evidence,synthetic_acc,anonymised_consistent_and_correct_rate,invalid_rate
+broad-instruct,ablation_rank_sweep_8,48,0.8958,0.9792,0.8958,-0.0833,1.0,0.8542,0.0
+broad-instruct,frozen_base,48,0.5625,0.5417,0.5625,0.0208,1.0,0.5417,0.0
+broad-instruct,graft_proposed,48,0.9792,0.9583,0.9792,0.0208,1.0,0.9583,0.0052
+small-instruct,ablation_rank_sweep_8,48,0.0,0.8542,0.8542,0.0,0.0208,0.5208,0.0
+small-instruct,frozen_base,48,0.1667,0.3125,0.3125,0.0,0.6458,0.2292,0.0
+small-instruct,graft_proposed,48,0.0417,0.9792,0.9792,0.0,0.0417,0.7292,0.0052

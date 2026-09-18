@@ -1,0 +1,132 @@
+{
+  "billable_minutes_measured": 22.88,
+  "cap_minutes": 120,
+  "configs": [
+    [
+      "small-instruct",
+      "frozen_base"
+    ],
+    [
+      "small-instruct",
+      "graft_proposed"
+    ],
+    [
+      "small-instruct",
+      "ablation_rank_sweep_8"
+    ],
+    [
+      "broad-instruct",
+      "frozen_base"
+    ],
+    [
+      "broad-instruct",
+      "graft_proposed"
+    ],
+    [
+      "broad-instruct",
+      "ablation_rank_sweep_8"
+    ]
+  ],
+  "decision": "balanced fallback panel (48 bundles)",
+  "finished_utc": "2026-09-18T13:41:07Z",
+  "main_bundle_ids": [
+    "B001",
+    "B002",
+    "B003",
+    "B004",
+    "B005",
+    "B006",
+    "B007",
+    "B008",
+    "B009",
+    "B010",
+    "B011",
+    "B012",
+    "B013",
+    "B014",
+    "B015",
+    "B016",
+    "B017",
+    "B018",
+    "B019",
+    "B020",
+    "B021",
+    "B022",
+    "B023",
+    "B024",
+    "B025",
+    "B026",
+    "B027",
+    "B028",
+    "B029",
+    "B030",
+    "B031",
+    "B032",
+    "B033",
+    "B034",
+    "B035",
+    "B036",
+    "B037",
+    "B038",
+    "B039",
+    "B040",
+    "B041",
+    "B042",
+    "B043",
+    "B044",
+    "B045",
+    "B046",
+    "B047",
+    "B048"
+  ],
+  "pilot": [
+    {
+      "load_s": 11.0,
+      "method": "frozen_base",
+      "per_bundle_s": 1.89,
+      "tier": "small-instruct"
+    },
+    {
+      "load_s": 7.3,
+      "method": "graft_proposed",
+      "per_bundle_s": 4.02,
+      "tier": "small-instruct"
+    },
+    {
+      "load_s": 6.3,
+      "method": "ablation_rank_sweep_8",
+      "per_bundle_s": 3.99,
+      "tier": "small-instruct"
+    },
+    {
+      "load_s": 6.6,
+      "method": "frozen_base",
+      "per_bundle_s": 4.06,
+      "tier": "broad-instruct"
+    },
+    {
+      "load_s": 11.7,
+      "method": "graft_proposed",
+      "per_bundle_s": 6.59,
+      "tier": "broad-instruct"
+    },
+    {
+      "load_s": 8.1,
+      "method": "ablation_rank_sweep_8",
+      "per_bundle_s": 6.57,
+      "tier": "broad-instruct"
+    }
+  ],
+  "pilot_bundle_ids": [
+    "P001",
+    "P002",
+    "P003",
+    "P004",
+    "P005",
+    "P006",
+    "P007",
+    "P008"
+  ],
+  "remaining_seconds_at_decision": 6929.3,
+  "started_utc": "2026-09-18T13:18:15Z"
+}

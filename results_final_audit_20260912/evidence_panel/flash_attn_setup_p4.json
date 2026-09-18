@@ -1,0 +1,15 @@
+{
+  "installed": true,
+  "reason": "installed from a pre-built wheel.",
+  "attention_fallback": "flash_attention_2",
+  "wheel_url": "https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.5cxx11abiFALSE-cp311-cp311-linux_x86_64.whl",
+  "built_from_source": false,
+  "environment": {
+    "python_tag": "cp311",
+    "torch_version": "2.5",
+    "cuda_major": "12",
+    "cuda_full": "12.4",
+    "cxx11abi": "FALSE",
+    "machine": "x86_64"
+  }
+}
