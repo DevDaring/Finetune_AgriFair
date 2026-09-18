@@ -8,7 +8,7 @@
   "bootstrap_draws": 50,
   "comparison_rule": {
     "diff_if_abs_gap_at_least": 10.0,
-    "equal_if_abs_gap_at_most": 5.0,
+    "equal_if_abs_gap_below": 5.0,
     "metric_unit": "percentage_points"
   },
   "evidence_panel": {
@@ -37,7 +37,7 @@
       "small-instruct",
       "broad-instruct"
     ],
-    "pilot_questions": 2,
+    "pilot_questions": 4,
     "questions_per_axis": 2,
     "seed": 42
   },

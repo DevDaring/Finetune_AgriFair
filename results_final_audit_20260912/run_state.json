@@ -1,12 +1,19 @@
 {
   "stages": {
     "advice": {
-      "input_hash": "73f90af2ccda3896260c24804a14ddf4bc9377133883260733c596f8a133cb6a",
+      "input_hash": "04bdc77d62f88c906da7f32c8b33da71a44476158e78bcb73355dfb73b3b90c5",
       "result": {
         "human_study": {
           "main_assessments_per_rater": 192,
-          "pilot": 32,
-          "questions": 48,
+          "main_questions": 48,
+          "pilot_assessments_per_rater": 32,
+          "pilot_axis_counts": {
+            "gender": 2,
+            "literacy_register": 2,
+            "region_register": 2,
+            "social_group": 2
+          },
+          "pilot_questions": 8,
           "status": "prepared"
         },
         "pair_rows": 41600,
@@ -14,8 +21,8 @@
           "status": "no_ratings_file"
         }
       },
-      "runtime_s": 111.5,
-      "started_utc": "2026-09-13T03:25:21Z",
+      "runtime_s": 99.3,
+      "started_utc": "2026-09-13T08:51:47Z",
       "status": "ok"
     },
     "cpu_baselines": {
@@ -34,17 +41,17 @@
       "status": "ok"
     },
     "evidence_panel": {
-      "input_hash": "75e82da7c901cc1e3ce4cf4f762de21bf7a4eebaab59a0bf8037aa2110692ff6",
+      "input_hash": "1b4be2754646d8514b20fa11719938fd26a5e66c720e0bce4669840a4c408d3d",
       "result": {
-        "bundles": 83,
+        "bundles": 56,
         "reasons": [
           "gpu_enabled is false",
-          "83 bundles not manually checked"
+          "56 bundles not manually checked"
         ],
         "run": false
       },
-      "runtime_s": 0.1,
-      "started_utc": "2026-09-13T08:27:27Z",
+      "runtime_s": 0.0,
+      "started_utc": "2026-09-13T10:03:38Z",
       "status": "ok"
     },
     "inventory": {
@@ -2939,7 +2946,7 @@
       "status": "ok"
     },
     "verify_sources": {
-      "input_hash": "2f96cfb223a8742f67e369927ba7c5e96d0dfd4575cec1bfb1c009974a4fd88e",
+      "input_hash": "0d291d72031ce40ce99476d658496b163e0f296b385b8cfbc3c7c9b06dd9976b",
       "result": {
         "audit_sample": 120,
         "recompute": {
@@ -2973,8 +2980,8 @@
         },
         "skeleton_rows": 1178
       },
-      "runtime_s": 0.1,
-      "started_utc": "2026-09-13T08:26:24Z",
+      "runtime_s": 0.2,
+      "started_utc": "2026-09-13T10:00:52Z",
       "status": "ok"
     }
   }

@@ -217,10 +217,10 @@ def main(cfg: Dict) -> Dict:
         rng = _r.Random(cfg["analysis_seed"]); rule = cfg["comparison_rule"]
         fake = []
         for r in skeleton:
-            base = rng.uniform(20, 60)
+            base = rng.uniform(5, 35)   # shares of one total: base + gap stays under 100 so the synthetic swap is feasible
             equal_cut = rule.get("equal_if_abs_gap_below", rule.get("equal_if_abs_gap_at_most"))
             gap = rng.uniform(0, equal_cut * 0.999) if r["frozen_condition"] == "equal" \
-                  else rng.uniform(rule["diff_if_abs_gap_at_least"], rule["diff_if_abs_gap_at_least"] + 20)
+                  else rng.uniform(rule["diff_if_abs_gap_at_least"], rule["diff_if_abs_gap_at_least"] + 15)
             g1 = base + gap if r["frozen_gold_letter"] == "a" else base
             g2 = base if r["frozen_gold_letter"] == "a" else base + gap
             fake.append({**r, "group1_value": round(g1, 2), "group2_value": round(g2, 2), "units": "percent",

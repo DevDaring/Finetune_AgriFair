@@ -26,3 +26,11 @@ Source_Records/extracted/**/cache/
 Source_Records/extracted/**/logs/
 Source_Records/extracted/**/_hf_tmp/
 Source_Records/extracted/**/__pycache__/
+
+# Private study governance records and raw reviewer returns: never pushed.
+# Only derived, de-identified analysis outputs leave this machine.
+results_final_audit_20260912/RUBRIC_frozen_final.md
+results_final_audit_20260912/R*_independence_confirmation.txt
+results_final_audit_20260912/R*_main_ratings*.csv
+results_final_audit_20260912/AgriFair_Completed_Reviews.zip
+results_final_audit_20260912/advice/human_study/completed/

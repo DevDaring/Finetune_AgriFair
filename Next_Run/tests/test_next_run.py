@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from Next_Run import common as C
 from Next_Run import stats as S
 from Next_Run.verify_sources import derive_condition, expected_gold
-from Next_Run.evidence_panel import parse_answer, render_prompt, expected_for
+from Next_Run.evidence_panel import _anonymise, parse_answer, render_prompt, expected_for
 
 
 # ---------------------------------------------------------------- answers and error types
@@ -34,6 +34,23 @@ def test_three_option_canonical_remapping():
     assert d2c == {"a": "c", "b": "b", "c": "a"}          # displayed a is "Roughly equal" -> canonical c
     assert parse_answer('{"answer_choice_letter": "a"}', d2c) == "c"
     assert parse_answer("garbage", d2c) is None
+
+
+def test_anonymisation_handles_overlapping_entity_names():
+    assert _anonymise("women compared with men", "men", "women") == "Group B compared with Group A"
+
+
+def test_synthetic_prompt_removes_real_census_assertion():
+    b = {"question": "According to the 2015-16 Agriculture Census, are men or women larger?",
+         "group1": "men", "group2": "women", "choices_on_disk": ["men", "women", "Roughly equal"],
+         "units": "percentage", "denominator": "M+F", "source_location": "Table 14",
+         "verified_group1_value": 55, "verified_group2_value": 45,
+         "synthetic_group1_value": 45, "synthetic_group2_value": 55,
+         "verified_expected_gold": "a", "synthetic_expected_gold": "b"}
+    prompt, mapping = render_prompt(b, "synthetic_evidence")
+    assert "HYPOTHETICAL TABLE" in prompt
+    assert "2015-16 Agriculture Census" not in prompt
+    assert mapping == {"a": "a", "b": "b", "c": "c"}
 
 
 def test_wrong_group_vs_erasure_vs_fabrication_vs_invalid():

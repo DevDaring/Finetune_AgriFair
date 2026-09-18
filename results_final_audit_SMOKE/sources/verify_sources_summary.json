@@ -24,6 +24,7 @@
     },
     "disagree": 0,
     "excluded_band": 0,
+    "rows_missing_provenance_or_status": 1178,
     "rows_with_values": 1178,
     "rows_without_values": 0,
     "status": "ok"

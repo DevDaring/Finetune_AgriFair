@@ -1,8 +1,8 @@
 {
-  "bundles": 83,
+  "bundles": 56,
   "ok": false,
   "reasons": [
     "gpu_enabled is false",
-    "83 bundles not manually checked"
+    "56 bundles not manually checked"
   ]
 }

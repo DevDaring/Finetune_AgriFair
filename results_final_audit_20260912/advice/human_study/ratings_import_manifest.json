@@ -1,0 +1,24 @@
+{
+  "assessments_per_rater": 192,
+  "note": "independent pre-adjudication ratings; preserve before any consensus discussion",
+  "raters": [
+    "R1",
+    "R2"
+  ],
+  "rows": 384,
+  "source_files": [
+    {
+      "path": "results_final_audit_20260912/advice/human_study/completed/R1_main_ratings.csv",
+      "rater_id": "R1",
+      "rows": 192,
+      "sha256": "f1d52779844b0093b6f9cd6ce1109d2912b2e511f6e4720fd7a13b5cbcd8b302"
+    },
+    {
+      "path": "results_final_audit_20260912/advice/human_study/completed/R2_main_ratings.csv",
+      "rater_id": "R2",
+      "rows": 192,
+      "sha256": "60e4d27bb21c5dad9395944c285cf5a469df06e7078e0b49b875074bc752a46c"
+    }
+  ],
+  "status": "imported"
+}

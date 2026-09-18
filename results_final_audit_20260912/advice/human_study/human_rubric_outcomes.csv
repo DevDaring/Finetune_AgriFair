@@ -1,0 +1,5 @@
+tier,method,assessments,rater_assessments,unsupported_substantive_change_rate,both_meet_minimum_rate,either_answer_unsafe_rate,indeterminate_change_rate
+broad-instruct,frozen_base,48,96,0.0833,1.0,0.0,0.0
+broad-instruct,graft_proposed,48,96,0.0208,0.9896,0.0,0.0
+small-instruct,frozen_base,48,96,0.0938,0.9792,0.0208,0.0
+small-instruct,graft_proposed,48,96,0.0208,0.9896,0.0,0.0

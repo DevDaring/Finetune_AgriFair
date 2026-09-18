@@ -1,5 +1,5 @@
 {
-  "billable_minutes_measured": 1.32,
+  "billable_minutes_measured": 1.5,
   "cap_minutes": 20,
   "configs": [
     [
@@ -7,16 +7,27 @@
       "frozen_base"
     ]
   ],
-  "decision": "full panel (5 bundles)",
-  "finished_utc": "2026-09-13T03:38:40Z",
+  "decision": "balanced fallback panel (6 bundles)",
+  "finished_utc": "2026-09-18T13:04:27Z",
+  "main_bundle_ids": [
+    "B001",
+    "B002",
+    "B003",
+    "B004",
+    "B005",
+    "B006"
+  ],
   "pilot": [
     {
-      "load_s": 4.3,
+      "load_s": 3.1,
       "method": "frozen_base",
-      "per_bundle_s": 11.31,
+      "per_bundle_s": 15.08,
       "tier": "cpu-preflight"
     }
   ],
-  "remaining_seconds_at_decision": 1184.3,
-  "started_utc": "2026-09-13T03:37:21Z"
+  "pilot_bundle_ids": [
+    "P001"
+  ],
+  "remaining_seconds_at_decision": 1181.5,
+  "started_utc": "2026-09-18T13:02:57Z"
 }

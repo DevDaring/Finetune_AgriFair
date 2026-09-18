@@ -1,12 +1,19 @@
 {
   "stages": {
     "advice": {
-      "input_hash": "8464952367a2416508541f244c8a7bad12b2f0d06d74514f601eb9363f092e40",
+      "input_hash": "50e358a17d707e6af982a53515c65df7d92b2f04bf8caed408e355936a27229c",
       "result": {
         "human_study": {
           "main_assessments_per_rater": 32,
-          "pilot": 8,
-          "questions": 8,
+          "main_questions": 8,
+          "pilot_assessments_per_rater": 16,
+          "pilot_axis_counts": {
+            "gender": 1,
+            "literacy_register": 1,
+            "region_register": 1,
+            "social_group": 1
+          },
+          "pilot_questions": 4,
           "status": "prepared"
         },
         "pair_rows": 12800,
@@ -14,12 +21,12 @@
           "status": "no_ratings_file"
         }
       },
-      "runtime_s": 12.3,
-      "started_utc": "2026-09-13T03:37:09Z",
+      "runtime_s": 12.9,
+      "started_utc": "2026-09-18T13:02:44Z",
       "status": "ok"
     },
     "cpu_baselines": {
-      "input_hash": "29ce797de3b8750c0af28729e96b70308eecb6566d19189e3bcf10ff321bde82",
+      "input_hash": "4190dacbb7781fe51a8162e49b81d06e8f4b3be795cdbcbd2906a4e2ba4d4233",
       "result": {
         "kinds": [
           "majority",
@@ -30,22 +37,22 @@
         "state_blind_reported": false
       },
       "runtime_s": 0.4,
-      "started_utc": "2026-09-13T03:37:08Z",
+      "started_utc": "2026-09-18T13:02:43Z",
       "status": "ok"
     },
     "evidence_panel": {
-      "input_hash": "63072e5f159ea490aeb5fa8245f6edb1a00379b038d1e22a278da88c9fbd6c0e",
+      "input_hash": "ebfa9437b3f50c194370e574c152524a247cde9c3ee0389647e8755933ed44e5",
       "result": {
-        "bundles": 6,
-        "decision": "full panel (5 bundles)",
+        "bundles": 7,
+        "decision": "balanced fallback panel (6 bundles)",
         "run": true
       },
-      "runtime_s": 79.3,
-      "started_utc": "2026-09-13T03:37:21Z",
+      "runtime_s": 89.8,
+      "started_utc": "2026-09-18T13:02:57Z",
       "status": "ok"
     },
     "inventory": {
-      "input_hash": "b30e656eb23a6dd5f8aebd98f3232b1a68fe5c327050506fa946dd955ae778b5",
+      "input_hash": "a42449111546d2cacb129817f51c0c5389fd76b4dbd985cabbce4513930a82b2",
       "result": {
         "advice": {
           "axes": {
@@ -430,8 +437,8 @@
           "missing_weights": [],
           "root_exists": true
         },
-        "config_sha256": "79629bc2e44357eccce3e12738bcab06a1b5ac2de0f8a7eaf05b8e7655366877",
-        "created_utc": "2026-09-13T03:36:58Z",
+        "config_sha256": "200dcab9d4d3ce0a43000aee2fa394d44c77c1e48f17ec4fd10013b558b56783",
+        "created_utc": "2026-09-18T13:02:34Z",
         "findings": [],
         "frozen_test_hash_matches_config": true,
         "inputs": {
@@ -2769,7 +2776,7 @@
             ]
           }
         },
-        "source_snapshot": "8a81252a99fe4d965df9bfa08b3567d3b5490629",
+        "source_snapshot": "bc0dd27286641c4447c33c06b1326518dc064176",
         "splits": {
           "test": {
             "axis": {
@@ -2859,24 +2866,24 @@
           "transformers": "4.51.3"
         }
       },
-      "runtime_s": 9.6,
-      "started_utc": "2026-09-13T03:36:58Z",
+      "runtime_s": 8.9,
+      "started_utc": "2026-09-18T13:02:34Z",
       "status": "ok"
     },
     "paired": {
-      "input_hash": "cba28e5083de3ca38ad67d3545429f970248e70bed1bf3fe71075b404658597c",
+      "input_hash": "fa4f6780720332fb08716c5e2f979252f5249bacbf62cb05d663195d9911211f",
       "result": {
         "arms": 32,
         "contrasts_ok": 48,
         "contrasts_unavailable": 0,
         "significant": 0
       },
-      "runtime_s": 0.8,
-      "started_utc": "2026-09-13T03:37:08Z",
+      "runtime_s": 0.9,
+      "started_utc": "2026-09-18T13:02:44Z",
       "status": "ok"
     },
     "report": {
-      "input_hash": "9c04d70f96d7d644c753e21ee6024988dcc6ee6bb353a9ced2d9dfce476c0d0c",
+      "input_hash": "45ab56ef97978f828cb15e9662d6ee0930c733bf8a816d778b8011d70a4fe301",
       "result": {
         "claims": [
           {
@@ -2930,12 +2937,12 @@
           "fig_advice_length_vs_distance.png"
         ]
       },
-      "runtime_s": 0.9,
-      "started_utc": "2026-09-13T03:38:40Z",
+      "runtime_s": 1.1,
+      "started_utc": "2026-09-18T13:04:27Z",
       "status": "ok"
     },
     "verify_sources": {
-      "input_hash": "7b49d1bc73f14e5d5754bcdb80128f4bfe353a4ae80a2467ad4f6368a316a49a",
+      "input_hash": "8e78fd648299298b05480cec8c05f2b347b87a3378837a2c4eaacf4a4c214876",
       "result": {
         "audit_sample": 12,
         "recompute": {
@@ -2962,6 +2969,7 @@
           },
           "disagree": 0,
           "excluded_band": 0,
+          "rows_missing_provenance_or_status": 1178,
           "rows_with_values": 1178,
           "rows_without_values": 0,
           "status": "ok"
@@ -2969,7 +2977,7 @@
         "skeleton_rows": 1178
       },
       "runtime_s": 0.2,
-      "started_utc": "2026-09-13T03:37:07Z",
+      "started_utc": "2026-09-18T13:02:43Z",
       "status": "ok"
     }
   }

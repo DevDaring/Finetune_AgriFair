@@ -1,0 +1,309 @@
+bundle_id,panel_role,axis,original_condition,source_cell,source_reference,condition,prompt,expected_canonical,expected_display_letter,prompt_and_gold_sha256,review_status_pass_or_fail,reviewer_id,review_date_utc,review_notes
+B001,main,social_group,equal,AgCensus2015-16 T2-4 Andhra Pradesh/All Classes/area/SCvsST,,no_evidence,"According to the 2015-16 Agriculture Census in Andhra Pradesh, do Scheduled Castes or Scheduled Tribes operate a larger portion of the agricultural operated area, or are the two roughly equal?
+a) Scheduled Castes
+b) Scheduled Tribes
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,c,a577f57e613eb3037c10dc8c2becfa85bf067b93c4802f26ca676dbc062f772b,,,,
+B001,main,social_group,equal,AgCensus2015-16 T2-4 Andhra Pradesh/All Classes/area/SCvsST,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Scheduled Castes | 26.15 |
+| Scheduled Tribes | 26.4 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+According to the 2015-16 Agriculture Census in Andhra Pradesh, do Scheduled Castes or Scheduled Tribes operate a larger portion of the agricultural operated area, or are the two roughly equal?
+a) Scheduled Castes
+b) Scheduled Tribes
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,c,be024718a1dec499eed244f47392f60c8631becebcc7d163fb18a4628dc7dfc1,,,,
+B001,main,social_group,equal,AgCensus2015-16 T2-4 Andhra Pradesh/All Classes/area/SCvsST,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| Scheduled Castes | 37.4 |
+| Scheduled Tribes | 26.4 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—Scheduled Castes, Scheduled Tribes, or are the two roughly equal?
+a) Scheduled Castes
+b) Scheduled Tribes
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,a,1c8beca4e796d197960b9db26aa892e85e46d87755b994ec1f4e34ad6e37116f,,,,
+B001,main,social_group,equal,AgCensus2015-16 T2-4 Andhra Pradesh/All Classes/area/SCvsST,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 26.15 |
+| Group B | 26.4 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+According to the 2015-16 Agriculture Census in Andhra Pradesh, do Group A or Group B operate a larger portion of the agricultural operated area, or are the two roughly equal?
+a) Group A
+b) Group B
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,c,f7ae2c3ec9012073c79f37ab282ddfc45acf04fee1c71ef94f39bfb174e88289,,,,
+B002,main,social_group,diff,AgCensus2015-16 T2-4 Arunachal Pradesh/Semi-medium/number/STvsOthers,,no_evidence,"In Arunachal Pradesh, according to the 2015-16 Agriculture Census, which social group operates a larger share of semi-medium holdings — Scheduled Tribes, Other social groups, or are the two roughly equal?
+a) Other social groups
+b) Roughly equal
+c) Scheduled Tribes
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,744ac8ca543770f95b2b2174b6c0fb343641b0cb36197266c579558c821ca2a5,,,,
+B002,main,social_group,diff,AgCensus2015-16 T2-4 Arunachal Pradesh/Semi-medium/number/STvsOthers,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Scheduled Tribes | 52.19 |
+| Other social groups | 31.83 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+In Arunachal Pradesh, according to the 2015-16 Agriculture Census, which social group operates a larger share of semi-medium holdings — Scheduled Tribes, Other social groups, or are the two roughly equal?
+a) Other social groups
+b) Roughly equal
+c) Scheduled Tribes
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,4448bd612dbb2c48824da1e2f3acfcf8b2a1ba696a9d016bf482f398af6b7121,,,,
+B002,main,social_group,diff,AgCensus2015-16 T2-4 Arunachal Pradesh/Semi-medium/number/STvsOthers,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| Scheduled Tribes | 31.83 |
+| Other social groups | 52.19 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—Scheduled Tribes, Other social groups, or are the two roughly equal?
+a) Other social groups
+b) Roughly equal
+c) Scheduled Tribes
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",b,a,64ef42ae6578093ac9bf8b8c628476102d7c84fa8a7088fa8c5be6ba28a917f9,,,,
+B002,main,social_group,diff,AgCensus2015-16 T2-4 Arunachal Pradesh/Semi-medium/number/STvsOthers,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 52.19 |
+| Group B | 31.83 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+In Arunachal Pradesh, according to the 2015-16 Agriculture Census, which social group operates a larger share of semi-medium holdings — Group A, Group B, or are the two roughly equal?
+a) Group B
+b) Roughly equal
+c) Group A
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,cd07052649f9b0af359e27bcf430ca0e77d156e8c4ce7364479ead347621d422,,,,
+B003,main,landholding,equal,AgCensus2015-16 T2-4 Punjab/SC/area/SmallvsLarge,,no_evidence,"Based on the 2015-16 Agriculture Census in Punjab, among Scheduled Castes, does the small operated area or the large operated area account for a larger share of operated area, or are the two roughly equal?
+a) small operated area
+b) Roughly equal
+c) large operated area
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,b,f214e0cf3b704b462fee1ed40ddfa7f53a338f2e72d6c7ceda0a5f3b2d71100e,,,,
+B003,main,landholding,equal,AgCensus2015-16 T2-4 Punjab/SC/area/SmallvsLarge,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| small operated area | 14.57 |
+| large operated area | 16.58 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+Based on the 2015-16 Agriculture Census in Punjab, among Scheduled Castes, does the small operated area or the large operated area account for a larger share of operated area, or are the two roughly equal?
+a) small operated area
+b) Roughly equal
+c) large operated area
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,b,40c8e82db8835c415e2e5f73afb0397bbe2b754e7535f7e289920b758e66cebf,,,,
+B003,main,landholding,equal,AgCensus2015-16 T2-4 Punjab/SC/area/SmallvsLarge,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| small operated area | 27.58 |
+| large operated area | 16.58 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—small operated area, large operated area, or are the two roughly equal?
+a) small operated area
+b) Roughly equal
+c) large operated area
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,a,aed3d15fa2d4ca0df0fe69840e95c0a4ad65b12d49fcebab115c0730544d6d49,,,,
+B003,main,landholding,equal,AgCensus2015-16 T2-4 Punjab/SC/area/SmallvsLarge,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 14.57 |
+| Group B | 16.58 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+Based on the 2015-16 Agriculture Census in Punjab, among Scheduled Castes, does the Group A or the Group B account for a larger share of operated area, or are the two roughly equal?
+a) Group A
+b) Roughly equal
+c) Group B
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,b,168d5330e922b6933bd56ee29e7f96c64cbe8e5ced2b51eacc46f48cbdc35a59,,,,
+B004,main,landholding,diff,AgCensus2015-16 T2-4 Gujarat/SC/number/MarginalvsSemi-medium,,no_evidence,"In Gujarat, according to the 2015-16 Agriculture Census, among Scheduled Castes, which size class accounts for a larger share of holdings — marginal holdings, semi-medium holdings, or are the two roughly equal?
+a) Roughly equal
+b) marginal holdings
+c) semi-medium holdings
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,b,13e12b04351111a72441665b0df9e6f143869ece24f34eb0b19eb74b30d71b40,,,,
+B004,main,landholding,diff,AgCensus2015-16 T2-4 Gujarat/SC/number/MarginalvsSemi-medium,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| marginal holdings | 28.81 |
+| semi-medium holdings | 7.69 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+In Gujarat, according to the 2015-16 Agriculture Census, among Scheduled Castes, which size class accounts for a larger share of holdings — marginal holdings, semi-medium holdings, or are the two roughly equal?
+a) Roughly equal
+b) marginal holdings
+c) semi-medium holdings
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,b,c9476e058e3764ea87671cd6d8d70f6e7575473ae6384c7e3c81055d30479200,,,,
+B004,main,landholding,diff,AgCensus2015-16 T2-4 Gujarat/SC/number/MarginalvsSemi-medium,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| marginal holdings | 7.69 |
+| semi-medium holdings | 28.81 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—marginal holdings, semi-medium holdings, or are the two roughly equal?
+a) Roughly equal
+b) marginal holdings
+c) semi-medium holdings
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",b,c,1b879655fdc97b5237367ecceeaff96302b54a0115ca0a37e9b8b24815fb41ba,,,,
+B004,main,landholding,diff,AgCensus2015-16 T2-4 Gujarat/SC/number/MarginalvsSemi-medium,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 28.81 |
+| Group B | 7.69 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+In Gujarat, according to the 2015-16 Agriculture Census, among Scheduled Castes, which size class accounts for a larger share of holdings — Group A, Group B, or are the two roughly equal?
+a) Roughly equal
+b) Group A
+c) Group B
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,b,c97d1ad1f5158d91887db3a7916206f19a838933495e592a3ccf625b67ece977,,,,
+B005,main,gender,equal,AgCensus2015-16 T14-16 All/femaleShare/number/MarginalvsMedium,,no_evidence,"In the 2015-16 Agriculture Census across all-India, is the proportion of holdings managed by women greater for marginal holdings, for medium holdings, or approximately equal for the two?
+a) medium holdings
+b) Roughly equal
+c) marginal holdings
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,b,602daa20251dc52de94c3af21abef93aea2278b009fad1645f3cb184760709da,,,,
+B005,main,gender,equal,AgCensus2015-16 T14-16 All/femaleShare/number/MarginalvsMedium,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| marginal holdings | 8.82 |
+| medium holdings | 9.35 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+In the 2015-16 Agriculture Census across all-India, is the proportion of holdings managed by women greater for marginal holdings, for medium holdings, or approximately equal for the two?
+a) medium holdings
+b) Roughly equal
+c) marginal holdings
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,b,59df58b82d842cc99f4b739512ee9b6499b61689f640a76abdbe0cf0ef48cf68,,,,
+B005,main,gender,equal,AgCensus2015-16 T14-16 All/femaleShare/number/MarginalvsMedium,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| marginal holdings | 20.35 |
+| medium holdings | 9.35 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—marginal holdings, medium holdings, or are the two roughly equal?
+a) medium holdings
+b) Roughly equal
+c) marginal holdings
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,f837cd90652924af5ffea0461cc9305de05aa7ed0af9caaba9350c7cfe846acb,,,,
+B005,main,gender,equal,AgCensus2015-16 T14-16 All/femaleShare/number/MarginalvsMedium,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 8.82 |
+| Group B | 9.35 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+In the 2015-16 Agriculture Census across all-India, is the proportion of holdings managed by women greater for Group A, for Group B, or approximately equal for the two?
+a) Group B
+b) Roughly equal
+c) Group A
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,b,04693f0933293ff8dd6543a8e42b266488b015b33a571e074d4b5b78acc52a3d,,,,
+B006,main,gender,diff,AgCensus2015-16 T14-16 ST/Small/number/MvF,,no_evidence,"At the all-India level in the 2015-16 Agriculture Census, among Scheduled Tribes, among small holdings, who operates a larger share — men, women, or are the two roughly equal?
+a) women
+b) Roughly equal
+c) men
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,2c02b90d71ed32013464f275d23844198fc1b1f1f81ebd294dfcbd6ee6e6a2ba,,,,
+B006,main,gender,diff,AgCensus2015-16 T14-16 ST/Small/number/MvF,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| men | 36.34 |
+| women | 12.31 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+At the all-India level in the 2015-16 Agriculture Census, among Scheduled Tribes, among small holdings, who operates a larger share — men, women, or are the two roughly equal?
+a) women
+b) Roughly equal
+c) men
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,e0a59f30432214c3ce66207afa4ee43866be5b7e3b63ed37bdad435217e182ff,,,,
+B006,main,gender,diff,AgCensus2015-16 T14-16 ST/Small/number/MvF,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| men | 12.31 |
+| women | 36.34 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—men, women, or are the two roughly equal?
+a) women
+b) Roughly equal
+c) men
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",b,a,a283333e0251b2c820fa21ca30af7708eb5659c763ad1d5f5e5d2312743e5fc7,,,,
+B006,main,gender,diff,AgCensus2015-16 T14-16 ST/Small/number/MvF,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 36.34 |
+| Group B | 12.31 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+At the all-India level in the 2015-16 Agriculture Census, among Scheduled Tribes, among small holdings, who operates a larger share — Group A, Group B, or are the two roughly equal?
+a) Group B
+b) Roughly equal
+c) Group A
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,c,d8e0f175822d49feec056929b7433c21f2982339d32d8350f99eff2edb7d13b8,,,,
+P001,pilot,social_group,equal,AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsST,,no_evidence,"In Uttarakhand, according to the 2015-16 Agriculture Census, which social group operates a larger share of small operated area — Scheduled Castes, Scheduled Tribes, or are the two roughly equal?
+a) Scheduled Castes
+b) Scheduled Tribes
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,c,e3a4302ed60cba46ec7d0d614f7861f32838305af7be273b9dc40f0b1a4a166d,,,,
+P001,pilot,social_group,equal,AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsST,,verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Scheduled Castes | 33.92 |
+| Scheduled Tribes | 36.31 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+
+In Uttarakhand, according to the 2015-16 Agriculture Census, which social group operates a larger share of small operated area — Scheduled Castes, Scheduled Tribes, or are the two roughly equal?
+a) Scheduled Castes
+b) Scheduled Tribes
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,c,7c963e0a653124ef80f2158c237aa1a92d2593974c485b264b6e6476eae4358c,,,,
+P001,pilot,social_group,equal,AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsST,,synthetic_evidence,"HYPOTHETICAL TABLE (not real census data). Answer only about this table.
+| group | value (percent) |
+|---|---|
+| Scheduled Castes | 47.31 |
+| Scheduled Tribes | 36.31 |
+(denominator: hypothetical percentage scale; values are not census observations)
+
+Using only the hypothetical table, which has the larger share—Scheduled Castes, Scheduled Tribes, or are the two roughly equal?
+a) Scheduled Castes
+b) Scheduled Tribes
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",a,a,01872bc536211bad97f86b23e02fe3527f43eae6ba054ca5e3712296f4daac69,,,,
+P001,pilot,social_group,equal,AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsST,,anonymised_verified_evidence,"Table (2015-16 Agriculture Census).
+| group | value (percent) |
+|---|---|
+| Group A | 33.92 |
+| Group B | 36.31 |
+(denominator: SYNTHETIC)
+(source location: recorded in the evidence ledger)
+(Group A and Group B are anonymous labels used consistently.)
+
+In Uttarakhand, according to the 2015-16 Agriculture Census, which social group operates a larger share of small operated area — Group A, Group B, or are the two roughly equal?
+a) Group A
+b) Group B
+c) Roughly equal
+Reply with JSON only: {""answer_choice_letter"": ""<a|b|c>""}",c,c,cc88d09dc2f3c3f572e340db75112f65eea36cfcd4aefde6fd08109c4b083152,,,,

@@ -31,7 +31,7 @@ audit_sample_stage2_total: 12
 
 human_study:
   questions_per_axis: 2
-  pilot_questions: 2
+  pilot_questions: 4              # one per axis; pilot and main remain separate
   model_tiers: [small-instruct, broad-instruct]
   conditions: [frozen_base, graft_proposed]
   seed: 42

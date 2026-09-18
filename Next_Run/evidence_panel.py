@@ -7,13 +7,14 @@ gate passes. Gates, checked in order and all required:
   2. the source ledger has been filled and recomputed with zero unresolved discrepancies
      for every source cell the panel will use (a bundle built on an unverified value is
      an invalid experiment, not a model failure)
-  3. the 96 bundles, including their synthetic variants, carry a human "manually_checked"
+  3. the 48 balanced main bundles plus 8 additional pilot bundles, including their
+     synthetic variants, carry a human "manually_checked"
      flag in the bundle file
   4. base weights and the six adapter checkpoints exist on disk (config files alone do not
      count)
   5. the pilot's measured cost, times 1.5, plus remaining loads fits inside the remaining
-     minutes of the 120-minute cap; if the full panel does not fit, the predeclared nested
-     48-bundle subset is used; if that does not fit either, P4 is skipped
+     minutes of the 120-minute cap; if the balanced 48-bundle panel does not fit, P4 is
+     skipped
 
 The scorer is deterministic: expected answers come from the supplied numbers and the frozen
 rule, never from a model. The synthetic condition is labelled hypothetical in the prompt and
@@ -22,6 +23,8 @@ in every output row, and altered numbers are never written anywhere as census fa
 from __future__ import annotations
 
 import csv
+import argparse
+import gc
 import json
 import random
 import re
@@ -35,6 +38,7 @@ from Next_Run.verify_sources import derive_condition, expected_gold
 
 CONDITIONS = ("no_evidence", "verified_evidence", "synthetic_evidence", "anonymised_verified_evidence")
 ANSWER_RE = re.compile(r'"answer_choice_letter"\s*:\s*"([abc])"|\b([ABC])\b')
+BUNDLE_SPEC_VERSION = "p4-balanced-48-plus-8-pilot-v3"
 
 
 # ----------------------------------------------------------------------------- bundles
@@ -45,75 +49,174 @@ def _ledger_values(cfg: Dict) -> Dict[str, Dict]:
         return {}
     with open(p, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
+    def admissible(r):
+        agrees = r.get("agrees_with_frozen") in ("True", "true", "1")
+        status = r.get("verification_status", "")
+        if C.smoke(cfg):
+            return agrees and status == "SYNTHETIC_SMOKE_VALUE" and r.get("denominator_or_stratum")
+        return (agrees and status not in ("", "unverified") and r.get("page_or_sheet")
+                and r.get("source_url_or_doc_hash") and r.get("denominator_or_stratum"))
+    return {r["source_cell"]: r for r in rows if admissible(r)}
+
+
+def _candidate_strata(items: List[Dict], verified: Dict[str, Dict], excluded_cells=None):
+    """Return one deterministic candidate item per verified source cell and stratum."""
+    excluded_cells = set(excluded_cells or ())
+    by = defaultdict(list)
+    seen_cells = set(excluded_cells)
+    for it in sorted(items, key=lambda r: r["id"]):
+        cell = it["source_cell"]
+        if cell in verified and cell not in seen_cells:
+            by[(it["category"], it["condition"])].append(it)
+            seen_cells.add(cell)
+    return by
+
+
+def _bundle_from_item(it: Dict, verified: Dict[str, Dict], cfg: Dict, bundle_id: str,
+                      panel_role: str, source_split: str) -> Dict:
+    rule = cfg["comparison_rule"]
+    v = verified[it["source_cell"]]
+    g1, g2 = float(v["group1_value"]), float(v["group2_value"])
+    cond = it["condition"]
+    # Reverse a real difference, or open an unambiguous gap for an equal item.
+    if cond == "diff":
+        s1, s2 = g2, g1
+    else:
+        delta = float(rule["diff_if_abs_gap_at_least"]) + 1.0
+        # Use a feasible two-share construction: each value is within 0..100 and their
+        # sum never exceeds 100. This also works for comparisons with separate strata.
+        s2 = min(g2, (100.0 - delta) / 2.0)
+        s1 = s2 + delta
+    verified_condition = derive_condition(g1, g2, rule)
+    synthetic_condition = derive_condition(s1, s2, rule)
+    assert verified_condition == cond
+    assert synthetic_condition == "diff"
+    verified_gold = expected_gold(g1, g2, verified_condition)
+    synthetic_gold = expected_gold(s1, s2, synthetic_condition)
+    assert synthetic_gold != verified_gold, "synthetic evidence must change the expected answer"
     return {
-        r["source_cell"]: r
-        for r in rows
-        if r.get("agrees_with_frozen") in ("True", "true", "1")
-        and r.get("verification_status") not in ("", "unverified")
-        and r.get("page_or_sheet")
-        and r.get("source_url_or_doc_hash")
-        and r.get("denominator_or_stratum")
+        "bundle_spec_version": BUNDLE_SPEC_VERSION,
+        "bundle_id": bundle_id,
+        "panel_role": panel_role,
+        "source_split": source_split,
+        "item_id": it["id"],
+        "source_cell": it["source_cell"],
+        "axis": it["category"],
+        "original_condition": cond,
+        "nested_subset": panel_role == "main",
+        "question": it["question"],
+        "group1": it["group1"],
+        "group2": it["group2"],
+        "choices_on_disk": it["on_disk_choices"],
+        "units": v.get("units", ""),
+        "denominator": v.get("denominator_or_stratum", ""),
+        "source_location": v.get("page_or_sheet", ""),
+        "source_reference": v.get("source_url_or_doc_hash", ""),
+        "verified_group1_value": g1,
+        "verified_group2_value": g2,
+        "verified_expected_gold": verified_gold,
+        "synthetic_group1_value": s1,
+        "synthetic_group2_value": s2,
+        "synthetic_condition": synthetic_condition,
+        "synthetic_expected_gold": synthetic_gold,
+        "automated_checks_passed": False,
+        "manually_checked": bool(C.smoke(cfg).get("auto_mark_bundles_checked")),
+        "manual_check_notes": "SMOKE: auto-marked, no human check" if C.smoke(cfg) else "",
     }
 
 
 def build_bundles(cfg: Dict) -> Tuple[List[Dict], Dict]:
-    """96 bundles: 32 per axis, 16 equal + 16 diff, one item per verified source cell,
-    drawn by the analysis seed. Synthetic variants are derived by the frozen rule."""
+    """Build 48 balanced main bundles and 8 additional validation-split pilot bundles.
+
+    Every bundle uses a distinct verified source comparison. The main panel has exactly
+    eight equal and eight different cells per axis. Pilot cells are excluded from scoring.
+    """
     ep = cfg["evidence_panel"]
-    rule = cfg["comparison_rule"]
     verified = _ledger_values(cfg)
     if not verified:
         return [], {"status": "blocked", "reason": "no verified source values (run verify_sources with a filled ledger first)"}
-    items = C.load_split("test")
     rng = random.Random(cfg["analysis_seed"])
-    by = defaultdict(list)
-    seen_cells = set()
-    for it in sorted(items, key=lambda r: r["id"]):
-        if it["source_cell"] in verified and it["source_cell"] not in seen_cells:
-            by[(it["category"], it["condition"])].append(it); seen_cells.add(it["source_cell"])
-    bundles, shortfall = [], []
+    by = _candidate_strata(C.load_split("test"), verified)
+    bundles, selected_cells = [], set()
     per = ep["bundles_per_axis"] // 2
     for axis in C.AXES:
         for cond in ("equal", "diff"):
-            cand = by[(axis, cond)]; rng.shuffle(cand)
+            cand = list(by[(axis, cond)])
+            rng.shuffle(cand)
             if len(cand) < per:
-                shortfall.append({"stratum": f"{axis}/{cond}", "wanted": per, "available": len(cand)})
-            for i, it in enumerate(cand[:per]):
-                v = verified[it["source_cell"]]
-                g1, g2 = float(v["group1_value"]), float(v["group2_value"])
-                # synthetic: reverse a real difference, or open a gap beyond the diff threshold.
-                # For an equal item the new gap must clear the threshold REGARDLESS of which group
-                # was originally larger, so it is built from group 2's value, not added to group 1
-                # (adding to group 1 when group 2 was larger shrank the gap into the excluded band).
-                if cond == "diff":
-                    s1, s2 = g2, g1
-                else:
-                    delta = float(rule["diff_if_abs_gap_at_least"]) + 1.0
-                    if g2 + delta <= 100.0:
-                        s1, s2 = g2 + delta, g2          # group 1 clearly larger
-                    else:
-                        s1, s2 = g2, max(g2 - delta, 0.0) # near the ceiling: shrink group 2 instead
-                s_cond = derive_condition(s1, s2, rule)
-                assert s_cond == "diff", f"synthetic variant for {it['id']} fell outside diff: {s_cond}"
-                bundles.append({
-                    "bundle_id": f"B{len(bundles) + 1:03d}", "item_id": it["id"], "source_cell": it["source_cell"],
-                    "axis": axis, "original_condition": cond, "nested_subset": i < ep["nested_subset_per_axis"] // 2,
-                    "question": it["question"], "group1": it["group1"], "group2": it["group2"],
-                    "choices_on_disk": it["on_disk_choices"], "units": v.get("units", ""), "denominator": v.get("denominator_or_stratum", ""),
-                    "verified_group1_value": g1, "verified_group2_value": g2, "verified_expected_gold": expected_gold(g1, g2, derive_condition(g1, g2, rule)),
-                    "synthetic_group1_value": s1, "synthetic_group2_value": s2, "synthetic_condition": s_cond,
-                    "synthetic_expected_gold": expected_gold(s1, s2, s_cond),
-                    "manually_checked": bool(C.smoke(cfg).get("auto_mark_bundles_checked")),
-                    "manual_check_notes": "SMOKE: auto-marked, no human check" if C.smoke(cfg) else "",
-                })
-    return bundles, {"status": "built", "bundles": len(bundles), "shortfall": shortfall}
+                return [], {"status": "blocked", "reason": f"balanced main stratum {axis}/{cond} needs {per}, has {len(cand)}"}
+            for it in cand[:per]:
+                selected_cells.add(it["source_cell"])
+                bundles.append(_bundle_from_item(
+                    it, verified, cfg, f"B{len(bundles) + 1:03d}", "main", "test"
+                ))
+
+    # Pilot bundles are genuinely additional and come from the validation split. The smoke
+    # fixture has a synthetic test-only ledger, so its non-scientific rehearsal uses leftover
+    # test cells while retaining distinct pilot/main source comparisons.
+    pilot_split = "test" if C.smoke(cfg) else "validation"
+    pilot_by = _candidate_strata(C.load_split(pilot_split), verified, selected_cells)
+    pilot_items = []
+    for axis in C.AXES:
+        for cond in ("equal", "diff"):
+            cand = list(pilot_by[(axis, cond)])
+            rng.shuffle(cand)
+            if cand:
+                pilot_items.append(cand.pop())
+                pilot_by[(axis, cond)] = cand
+    remainder = [it for cand in pilot_by.values() for it in cand]
+    rng.shuffle(remainder)
+    pilot_items.extend(remainder[:max(0, ep["pilot_bundles"] - len(pilot_items))])
+    pilot_items = pilot_items[:ep["pilot_bundles"]]
+    if len(pilot_items) != ep["pilot_bundles"]:
+        return [], {"status": "blocked", "reason": f"pilot needs {ep['pilot_bundles']} independent validation cells, has {len(pilot_items)}"}
+    for i, it in enumerate(pilot_items, 1):
+        if it["source_cell"] in selected_cells:
+            raise AssertionError("pilot and main source cells overlap")
+        selected_cells.add(it["source_cell"])
+        bundles.append(_bundle_from_item(it, verified, cfg, f"P{i:03d}", "pilot", pilot_split))
+
+    audit = automated_bundle_audit(bundles, cfg)
+    if audit["issues"]:
+        return [], {"status": "blocked", "reason": "automated bundle audit failed", "issues": audit["issues"]}
+    for b in bundles:
+        b["automated_checks_passed"] = True
+    return bundles, {
+        "status": "built",
+        "bundle_spec_version": BUNDLE_SPEC_VERSION,
+        "main_bundles": sum(b["panel_role"] == "main" for b in bundles),
+        "pilot_bundles": sum(b["panel_role"] == "pilot" for b in bundles),
+        "total_bundles": len(bundles),
+        "main_strata": audit["main_strata"],
+    }
 
 
-def _table(g1_name, g2_name, v1, v2, units, denom, hypothetical: bool, anon: bool) -> str:
+def _fmt_value(value: float) -> str:
+    return f"{float(value):.4f}".rstrip("0").rstrip(".")
+
+
+def _anonymise(text: str, group1: str, group2: str) -> str:
+    """Replace possibly overlapping entity names (for example men/women) simultaneously."""
+    placeholders = {group1: "__P4_GROUP_A__", group2: "__P4_GROUP_B__"}
+    out = text
+    for entity in sorted(placeholders, key=len, reverse=True):
+        out = out.replace(entity, placeholders[entity])
+    return out.replace("__P4_GROUP_A__", "Group A").replace("__P4_GROUP_B__", "Group B")
+
+
+def _table(g1_name, g2_name, v1, v2, units, denom, hypothetical: bool, anon: bool,
+           citation: str = "") -> str:
     n1, n2 = ("Group A", "Group B") if anon else (g1_name, g2_name)
     head = ("HYPOTHETICAL TABLE (not real census data). Answer only about this table." if hypothetical
             else "Table (2015-16 Agriculture Census).")
-    return f"{head}\n| group | value ({units or 'as stated'}) |\n|---|---|\n| {n1} | {v1} |\n| {n2} | {v2} |\n(denominator: {denom or 'as stated'})"
+    source = "" if hypothetical else f"\n(source location: {citation or 'recorded in the evidence ledger'})"
+    anon_note = "\n(Group A and Group B are anonymous labels used consistently.)" if anon else ""
+    display_units = (units or "percentage share (0-100)").split(";", 1)[0].strip()
+    return (
+        f"{head}\n| group | value ({display_units}) |\n|---|---|\n"
+        f"| {n1} | {_fmt_value(v1)} |\n| {n2} | {_fmt_value(v2)} |\n"
+        f"(denominator: {denom or 'as stated'}){source}{anon_note}"
+    )
 
 
 def render_prompt(b: Dict, condition: str) -> Tuple[str, Dict[str, str]]:
@@ -122,19 +225,27 @@ def render_prompt(b: Dict, condition: str) -> Tuple[str, Dict[str, str]]:
     q = b["question"]; choices = list(b["choices_on_disk"])
     g1, g2 = b["group1"], b["group2"]
     if condition == "anonymised_verified_evidence":
-        q = q.replace(g1, "Group A").replace(g2, "Group B")
-        choices = [c.replace(g1, "Group A").replace(g2, "Group B") for c in choices]
+        q = _anonymise(q, g1, g2)
+        choices = [_anonymise(c, g1, g2) for c in choices]
+    elif condition == "synthetic_evidence":
+        # The original stem often asserts that values come from the real census. Replacing it
+        # avoids contradicting the explicitly hypothetical table.
+        q = (
+            f"Using only the hypothetical table, which has the larger share—{g1}, {g2}, "
+            "or are the two roughly equal?"
+        )
     display_to_canonical = {}
     for letter, c in zip("abc", choices):
         canon = "c" if c.lower().startswith("roughly equal") else ("a" if c in (g1, "Group A") or c.replace("Group A", g1) == g1 else "b")
         display_to_canonical[letter] = canon
     table = ""
     if condition == "verified_evidence":
-        table = _table(g1, g2, b["verified_group1_value"], b["verified_group2_value"], b["units"], b["denominator"], False, False)
+        table = _table(g1, g2, b["verified_group1_value"], b["verified_group2_value"], b["units"], b["denominator"], False, False, b.get("source_location", ""))
     elif condition == "synthetic_evidence":
-        table = _table(g1, g2, b["synthetic_group1_value"], b["synthetic_group2_value"], b["units"], b["denominator"], True, False)
+        table = _table(g1, g2, b["synthetic_group1_value"], b["synthetic_group2_value"], b["units"],
+                       "hypothetical percentage scale; values are not census observations", True, False)
     elif condition == "anonymised_verified_evidence":
-        table = _table(g1, g2, b["verified_group1_value"], b["verified_group2_value"], b["units"], b["denominator"], False, True)
+        table = _table(g1, g2, b["verified_group1_value"], b["verified_group2_value"], b["units"], b["denominator"], False, True, b.get("source_location", ""))
     opts = "\n".join(f"{l}) {c}" for l, c in zip("abc", choices))
     prompt = (f"{table}\n\n" if table else "") + f"{q}\n{opts}\n" + 'Reply with JSON only: {"answer_choice_letter": "<a|b|c>"}'
     return prompt, display_to_canonical
@@ -152,6 +263,138 @@ def expected_for(b: Dict, condition: str) -> str:
     return b["synthetic_expected_gold"] if condition == "synthetic_evidence" else b["verified_expected_gold"]
 
 
+def automated_bundle_audit(bundles: List[Dict], cfg: Dict) -> Dict:
+    """Exhaustive deterministic checks. This supplements but never impersonates human review."""
+    issues = []
+    seen_ids, seen_cells = set(), set()
+    main_strata = defaultdict(int)
+    for b in bundles:
+        bid = b.get("bundle_id", "")
+        if bid in seen_ids:
+            issues.append(f"duplicate bundle_id: {bid}")
+        if b.get("source_cell") in seen_cells:
+            issues.append(f"reused source cell: {b.get('source_cell')}")
+        seen_ids.add(bid); seen_cells.add(b.get("source_cell"))
+        if b.get("panel_role") == "main":
+            main_strata[f"{b['axis']}/{b['original_condition']}"] += 1
+            if b.get("source_split") != "test":
+                issues.append(f"{bid}: main bundle is not from test")
+        elif b.get("panel_role") == "pilot":
+            required_pilot_split = "test" if C.smoke(cfg) else "validation"
+            if b.get("source_split") != required_pilot_split:
+                issues.append(f"{bid}: pilot bundle is not from validation")
+        else:
+            issues.append(f"{bid}: invalid panel_role")
+        if not (0 <= float(b["verified_group1_value"]) <= 100 and 0 <= float(b["verified_group2_value"]) <= 100):
+            issues.append(f"{bid}: verified percentage outside 0..100")
+        if not (0 <= float(b["synthetic_group1_value"]) <= 100 and 0 <= float(b["synthetic_group2_value"]) <= 100):
+            issues.append(f"{bid}: synthetic percentage outside 0..100")
+        if float(b["synthetic_group1_value"]) + float(b["synthetic_group2_value"]) > 100.0 + 1e-9:
+            issues.append(f"{bid}: synthetic compared shares exceed a joint 100 percent")
+        if b["verified_expected_gold"] == b["synthetic_expected_gold"]:
+            issues.append(f"{bid}: synthetic evidence does not change the answer")
+        for condition in CONDITIONS:
+            prompt, mapping = render_prompt(b, condition)
+            if set(mapping) != set("abc") or set(mapping.values()) != set("abc"):
+                issues.append(f"{bid}/{condition}: choice mapping is not bijective")
+            if expected_for(b, condition) not in "abc":
+                issues.append(f"{bid}/{condition}: invalid expected answer")
+            if condition == "synthetic_evidence":
+                if "HYPOTHETICAL TABLE" not in prompt or "2015-16 Agriculture Census" in prompt:
+                    issues.append(f"{bid}/{condition}: hypothetical prompt is ambiguous about provenance")
+            if condition == "anonymised_verified_evidence":
+                if b["group1"] in prompt or b["group2"] in prompt or "Group A" not in prompt or "Group B" not in prompt:
+                    issues.append(f"{bid}/{condition}: entity anonymisation failed")
+            if condition in ("verified_evidence", "anonymised_verified_evidence") and "source location:" not in prompt:
+                issues.append(f"{bid}/{condition}: verified table lacks a source location")
+
+    expected_main = len(C.AXES) * int(cfg["evidence_panel"]["bundles_per_axis"])
+    expected_pilot = int(cfg["evidence_panel"]["pilot_bundles"])
+    if sum(b.get("panel_role") == "main" for b in bundles) != expected_main:
+        issues.append(f"main bundle count is not {expected_main}")
+    if sum(b.get("panel_role") == "pilot" for b in bundles) != expected_pilot:
+        issues.append(f"pilot bundle count is not {expected_pilot}")
+    per = int(cfg["evidence_panel"]["bundles_per_axis"]) // 2
+    for axis in C.AXES:
+        for condition in ("equal", "diff"):
+            if main_strata[f"{axis}/{condition}"] != per:
+                issues.append(f"unbalanced main stratum {axis}/{condition}")
+    return {"ok": not issues, "issues": issues, "main_strata": dict(sorted(main_strata.items()))}
+
+
+def manual_check_rows(bundles: List[Dict]) -> List[Dict]:
+    rows = []
+    for b in bundles:
+        for condition in CONDITIONS:
+            prompt, display_to_canonical = render_prompt(b, condition)
+            expected = expected_for(b, condition)
+            expected_display = next(letter for letter, canonical in display_to_canonical.items() if canonical == expected)
+            rows.append({
+                "bundle_id": b["bundle_id"],
+                "panel_role": b["panel_role"],
+                "axis": b["axis"],
+                "original_condition": b["original_condition"],
+                "source_cell": b["source_cell"],
+                "source_reference": b.get("source_reference", ""),
+                "condition": condition,
+                "prompt": prompt,
+                "expected_canonical": expected,
+                "expected_display_letter": expected_display,
+                "prompt_and_gold_sha256": C.sha256_obj({"prompt": prompt, "expected": expected,
+                                                         "expected_display_letter": expected_display}),
+                "review_status_pass_or_fail": "",
+                "reviewer_id": "",
+                "review_date_utc": "",
+                "review_notes": "",
+            })
+    return rows
+
+
+def validate_manual_check_rows(bundles: List[Dict], supplied: List[Dict]) -> List[str]:
+    expected = {(r["bundle_id"], r["condition"]): r for r in manual_check_rows(bundles)}
+    by_key, problems = {}, []
+    for row in supplied:
+        key = (row.get("bundle_id", ""), row.get("condition", ""))
+        if key in by_key:
+            problems.append(f"duplicate worksheet row: {key}")
+        by_key[key] = row
+    if set(by_key) != set(expected):
+        problems.append(f"worksheet keys differ: missing={len(set(expected)-set(by_key))}, unknown={len(set(by_key)-set(expected))}")
+    for key in sorted(set(expected) & set(by_key)):
+        got, exp = by_key[key], expected[key]
+        if got.get("prompt_and_gold_sha256") != exp["prompt_and_gold_sha256"]:
+            problems.append(f"{key}: prompt/gold hash changed")
+        if got.get("review_status_pass_or_fail", "").strip().lower() != "pass":
+            problems.append(f"{key}: review status is not pass")
+        if not got.get("reviewer_id", "").strip() or not got.get("review_date_utc", "").strip():
+            problems.append(f"{key}: reviewer_id/date missing")
+    return problems
+
+
+def import_manual_checks(cfg: Dict, completed_path: Path) -> Dict:
+    """Validate a completed human worksheet and unlock only fully passed bundles."""
+    out = C.output_dir(cfg) / "evidence_panel"
+    bpath = out / "bundles.jsonl"
+    if not bpath.exists():
+        raise FileNotFoundError("build evidence-panel bundles before importing checks")
+    bundles = C.read_jsonl(bpath)
+    with open(completed_path, encoding="utf-8") as f:
+        supplied = list(csv.DictReader(f))
+    problems = validate_manual_check_rows(bundles, supplied)
+    if problems:
+        raise ValueError("manual check import rejected:\n" + "\n".join(problems[:30]))
+    by_key = {(row["bundle_id"], row["condition"]): row for row in supplied}
+    for b in bundles:
+        checked = [by_key[(b["bundle_id"], c)] for c in CONDITIONS]
+        b["manually_checked"] = True
+        b["manual_check_notes"] = "; ".join(
+            sorted({f"{r['reviewer_id']} on {r['review_date_utc']}" for r in checked})
+        )
+    C.write_jsonl(bpath, bundles)
+    C.write_csv(out / "manual_checks_completed.csv", supplied)
+    return {"status": "imported", "rows": len(supplied), "bundles_unlocked": len(bundles)}
+
+
 # ----------------------------------------------------------------------------- gates
 
 def preflight(cfg: Dict, bundles: List[Dict]) -> Tuple[bool, List[str]]:
@@ -162,8 +405,21 @@ def preflight(cfg: Dict, bundles: List[Dict]) -> Tuple[bool, List[str]]:
         reasons.append("allow_paid_api must be false for this stage")
     if not bundles:
         reasons.append("no bundles")
-    elif not all(b.get("manually_checked") for b in bundles):
-        reasons.append(f"{sum(1 for b in bundles if not b.get('manually_checked'))} bundles not manually checked")
+    else:
+        audit = automated_bundle_audit(bundles, cfg)
+        if not audit["ok"] or not all(b.get("automated_checks_passed") for b in bundles):
+            reasons.append(f"automated bundle audit failed: {audit['issues'][:5]}")
+        if not all(b.get("manually_checked") for b in bundles):
+            reasons.append(f"{sum(1 for b in bundles if not b.get('manually_checked'))} bundles not manually checked")
+        elif not C.smoke(cfg):
+            completed = C.output_dir(cfg) / "evidence_panel" / "manual_checks_completed.csv"
+            if not completed.exists():
+                reasons.append("manual-check flags lack an imported completed worksheet")
+            else:
+                with open(completed, encoding="utf-8") as f:
+                    check_problems = validate_manual_check_rows(bundles, list(csv.DictReader(f)))
+                if check_problems:
+                    reasons.append(f"completed manual-check worksheet is invalid: {check_problems[:5]}")
     ep = cfg["evidence_panel"]
     from GPU_Run.common import model_registry
     for tier in ep["model_tiers"]:
@@ -216,13 +472,18 @@ def _generate(model, tok, prompt: str, max_new_tokens: int) -> str:
 def run_panel(cfg: Dict, bundles: List[Dict], out: Path) -> Dict:
     ep = cfg["evidence_panel"]
     budget = Budget(cfg["gpu_total_deadline_minutes"])
-    pilot_ids = {b["bundle_id"] for b in bundles[: ep["pilot_bundles"]]}
-    main_all = [b for b in bundles if b["bundle_id"] not in pilot_ids]
-    main_nested = [b for b in main_all if b["nested_subset"]]
+    pilot = [b for b in bundles if b["panel_role"] == "pilot"]
+    main_all = [b for b in bundles if b["panel_role"] == "main"]
     configs = [(t, m) for t in ep["model_tiers"] for m in ep["configurations"]]
     preds_path = out / "evidence_panel_predictions.jsonl"
+    if preds_path.exists():
+        raise FileExistsError(
+            f"refusing to append to an existing final prediction file: {preds_path}; "
+            "archive it and remove it deliberately before a new execution"
+        )
     manifest = {"started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "configs": configs,
-                "cap_minutes": cfg["gpu_total_deadline_minutes"], "pilot": [], "decision": None}
+                "cap_minutes": cfg["gpu_total_deadline_minutes"], "pilot_bundle_ids": [b["bundle_id"] for b in pilot],
+                "main_bundle_ids": [b["bundle_id"] for b in main_all], "pilot": [], "decision": None}
 
     # ---- pilot: measure load + per-bundle cost for every configuration
     load_times, per_bundle = {}, {}
@@ -231,7 +492,7 @@ def run_panel(cfg: Dict, bundles: List[Dict], out: Path) -> Dict:
             manifest["decision"] = "cap reached during pilot; P4 skipped"; break
         t = time.time(); model, tok = _load(tier, method, ep["seed"]); load_times[(tier, method)] = time.time() - t
         t = time.time(); n = 0
-        for b in bundles[: ep["pilot_bundles"]]:
+        for b in pilot:
             for cond in CONDITIONS:
                 prompt, d2c = render_prompt(b, cond); raw = _generate(model, tok, prompt, ep["max_new_tokens"]); n += 1
                 C.write_jsonl  # noqa (keeps the symbol referenced for readers)
@@ -239,8 +500,15 @@ def run_panel(cfg: Dict, bundles: List[Dict], out: Path) -> Dict:
                     f.write(json.dumps({"phase": "pilot", "tier": tier, "method": method, "seed": ep["seed"], "bundle_id": b["bundle_id"],
                                         "condition": cond, "is_hypothetical": cond == "synthetic_evidence",
                                         "raw_output": raw, "pred_canonical": parse_answer(raw, d2c), "expected": expected_for(b, cond)}) + "\n")
-        per_bundle[(tier, method)] = (time.time() - t) / max(1, ep["pilot_bundles"])
+        per_bundle[(tier, method)] = (time.time() - t) / max(1, len(pilot))
         del model
+        gc.collect()
+        try:
+            import torch
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+        except Exception:
+            pass
         manifest["pilot"].append({"tier": tier, "method": method, "load_s": round(load_times[(tier, method)], 1),
                                   "per_bundle_s": round(per_bundle[(tier, method)], 2)})
 
@@ -250,11 +518,9 @@ def run_panel(cfg: Dict, bundles: List[Dict], out: Path) -> Dict:
             return ep["safety_factor"] * sum(load_times[c] + nb * per_bundle[c] for c in configs) + 60.0
         rem = budget.remaining()
         if projected(len(main_all)) <= rem:
-            chosen, label = main_all, f"full panel ({len(main_all)} bundles)"
-        elif projected(len(main_nested)) <= rem:
-            chosen, label = main_nested, f"nested subset ({len(main_nested)} bundles)"
+            chosen, label = main_all, f"balanced fallback panel ({len(main_all)} bundles)"
         else:
-            chosen, label = [], "neither panel fits the remaining cap; P4 skipped"
+            chosen, label = [], "balanced 48-bundle panel does not fit the remaining cap; P4 skipped"
         manifest["decision"] = label
         manifest["remaining_seconds_at_decision"] = round(rem, 1)
 
@@ -273,6 +539,13 @@ def run_panel(cfg: Dict, bundles: List[Dict], out: Path) -> Dict:
                                             "condition": cond, "is_hypothetical": cond == "synthetic_evidence",
                                             "raw_output": raw, "pred_canonical": parse_answer(raw, d2c), "expected": expected_for(b, cond)}) + "\n")
             del model
+            gc.collect()
+            try:
+                import torch
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+            except Exception:
+                pass
     manifest["billable_minutes_measured"] = round(budget.elapsed() / 60.0, 2)
     manifest["finished_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     C.write_json(out / "evidence_panel_run_manifest.json", manifest)
@@ -315,17 +588,27 @@ def main(cfg: Dict) -> Dict:
     out = C.output_dir(cfg) / "evidence_panel"
     out.mkdir(parents=True, exist_ok=True)
     bpath = out / "bundles.jsonl"
+    expected_total = len(C.AXES) * int(cfg["evidence_panel"]["bundles_per_axis"]) + int(cfg["evidence_panel"]["pilot_bundles"])
     if bpath.exists():
         bundles = C.read_jsonl(bpath)
-        status = {"status": "loaded_existing", "bundles": len(bundles)}
+        current = len(bundles) == expected_total and all(b.get("bundle_spec_version") == BUNDLE_SPEC_VERSION for b in bundles)
+        if current:
+            status = {"status": "loaded_existing", "bundles": len(bundles), "bundle_spec_version": BUNDLE_SPEC_VERSION}
+        else:
+            bundles, status = build_bundles(cfg)
+            if bundles:
+                C.write_jsonl(bpath, bundles)
     else:
         bundles, status = build_bundles(cfg)
         if bundles:
             C.write_jsonl(bpath, bundles)
-            # a manual-check worksheet: every prompt in every condition, for a human to read
-            C.write_jsonl(out / "bundles_manual_check_worksheet.jsonl",
-                          [{"bundle_id": b["bundle_id"], "condition": c, "prompt": render_prompt(b, c)[0], "expected": expected_for(b, c)}
-                           for b in bundles for c in CONDITIONS])
+    if bundles:
+        # Exhaustive machine audit and a separate worksheet that only a real reviewer can sign.
+        audit = automated_bundle_audit(bundles, cfg)
+        C.write_json(out / "automated_bundle_audit.json", audit)
+        worksheet = manual_check_rows(bundles)
+        C.write_csv(out / "bundles_manual_check_worksheet.csv", worksheet)
+        C.write_jsonl(out / "bundles_manual_check_worksheet.jsonl", worksheet)
     print(f"[evidence_panel] bundles: {status}")
     ok, reasons = preflight(cfg, bundles)
     if not ok:
@@ -340,4 +623,12 @@ def main(cfg: Dict) -> Dict:
 
 
 if __name__ == "__main__":
-    main(C.load_config())
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--config", default=str(C.CONFIG_PATH))
+    ap.add_argument("--import-manual-checks", type=Path)
+    args = ap.parse_args()
+    config = C.load_config(Path(args.config))
+    if args.import_manual_checks:
+        print(json.dumps(import_manual_checks(config, args.import_manual_checks), indent=2))
+    else:
+        main(config)

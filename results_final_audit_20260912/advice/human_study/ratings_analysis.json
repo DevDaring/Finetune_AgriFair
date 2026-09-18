@@ -1,0 +1,135 @@
+{
+  "agreement": {
+    "both_meet_minimum": {
+      "cohen_kappa": 0.0,
+      "kappa_type": "nominal",
+      "n": 192,
+      "raw_agreement": 0.9792
+    },
+    "left_correctness": {
+      "cohen_kappa": 0.9108,
+      "kappa_type": "linear_weighted",
+      "n": 192,
+      "raw_agreement": 0.9635
+    },
+    "left_unsafe": {
+      "cohen_kappa": 0.0,
+      "kappa_type": "nominal",
+      "n": 192,
+      "raw_agreement": 0.9896
+    },
+    "left_usefulness_0_2": {
+      "cohen_kappa": 0.4983,
+      "kappa_type": "linear_weighted",
+      "n": 192,
+      "raw_agreement": 0.8802
+    },
+    "pair_change_type": {
+      "cohen_kappa": 0.9898,
+      "kappa_type": "nominal",
+      "n": 192,
+      "raw_agreement": 0.9948
+    },
+    "pair_severity_0_3": {
+      "cohen_kappa": 0.9041,
+      "kappa_type": "linear_weighted",
+      "n": 192,
+      "raw_agreement": 0.9896
+    },
+    "right_correctness": {
+      "cohen_kappa": 0.9079,
+      "kappa_type": "linear_weighted",
+      "n": 192,
+      "raw_agreement": 0.9688
+    },
+    "right_unsafe": {
+      "cohen_kappa": 0.0,
+      "kappa_type": "nominal",
+      "n": 192,
+      "raw_agreement": 0.9948
+    },
+    "right_usefulness_0_2": {
+      "cohen_kappa": 0.5419,
+      "kappa_type": "linear_weighted",
+      "n": 192,
+      "raw_agreement": 0.8906
+    }
+  },
+  "note": "at most 48 question clusters; small-sample kappa; exploratory unless the family was predeclared",
+  "paired_endpoints": [
+    {
+      "both_meet_minimum_graft_minus_frozen": -0.0104,
+      "both_minimum_ci": [
+        -0.0312,
+        0.0
+      ],
+      "n_question_clusters": 48,
+      "tier": "broad-instruct",
+      "unsupported_change_graft_minus_frozen": -0.0625,
+      "unsupported_ci": [
+        -0.1458,
+        0.0208
+      ]
+    },
+    {
+      "both_meet_minimum_graft_minus_frozen": 0.0104,
+      "both_minimum_ci": [
+        -0.0208,
+        0.0521
+      ],
+      "n_question_clusters": 48,
+      "tier": "small-instruct",
+      "unsupported_change_graft_minus_frozen": -0.0729,
+      "unsupported_ci": [
+        -0.1667,
+        0.0104
+      ]
+    }
+  ],
+  "raters": [
+    "R1",
+    "R2"
+  ],
+  "rubric_outcomes": [
+    {
+      "assessments": 48,
+      "both_meet_minimum_rate": 1.0,
+      "either_answer_unsafe_rate": 0.0,
+      "indeterminate_change_rate": 0.0,
+      "method": "frozen_base",
+      "rater_assessments": 96,
+      "tier": "broad-instruct",
+      "unsupported_substantive_change_rate": 0.0833
+    },
+    {
+      "assessments": 48,
+      "both_meet_minimum_rate": 0.9896,
+      "either_answer_unsafe_rate": 0.0,
+      "indeterminate_change_rate": 0.0,
+      "method": "graft_proposed",
+      "rater_assessments": 96,
+      "tier": "broad-instruct",
+      "unsupported_substantive_change_rate": 0.0208
+    },
+    {
+      "assessments": 48,
+      "both_meet_minimum_rate": 0.9792,
+      "either_answer_unsafe_rate": 0.0208,
+      "indeterminate_change_rate": 0.0,
+      "method": "frozen_base",
+      "rater_assessments": 96,
+      "tier": "small-instruct",
+      "unsupported_substantive_change_rate": 0.0938
+    },
+    {
+      "assessments": 48,
+      "both_meet_minimum_rate": 0.9896,
+      "either_answer_unsafe_rate": 0.0,
+      "indeterminate_change_rate": 0.0,
+      "method": "graft_proposed",
+      "rater_assessments": 96,
+      "tier": "small-instruct",
+      "unsupported_substantive_change_rate": 0.0208
+    }
+  ]
+}

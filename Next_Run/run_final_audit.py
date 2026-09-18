@@ -36,8 +36,28 @@ STAGES: List[tuple] = [
 ]
 
 
-def _input_hash(cfg: Dict, globs) -> str:
+def _input_hash(cfg: Dict, globs, module: str = "") -> str:
     parts = {"config": C.sha256_obj(cfg)}
+    # Stage caching must invalidate when its implementation changes, not only when datasets
+    # change. Otherwise a repaired bundle generator can silently leave stale outputs active.
+    if module:
+        code_path = C.CODES_ROOT / (module.replace(".", "/") + ".py")
+        if code_path.exists():
+            parts[f"code:{module}"] = C.sha256_file(code_path)
+    common_path = C.CODES_ROOT / "Next_Run" / "common.py"
+    parts["code:Next_Run.common"] = C.sha256_file(common_path)
+    # Two stages consume deliberately human-edited artifacts in the output directory. Their
+    # hashes must participate in caching so importing a manual check or ratings cannot leave a
+    # previously blocked result falsely cached.
+    output_inputs = []
+    out = C.output_dir(cfg)
+    if module == "Next_Run.evidence_panel":
+        output_inputs.append(out / "evidence_panel" / "bundles.jsonl")
+    elif module == "Next_Run.advice_audit":
+        output_inputs.append(out / "advice" / "human_study" / "ratings_independent.csv")
+    for path in output_inputs:
+        if path.exists():
+            parts[f"output-input:{path.relative_to(out)}"] = C.sha256_file(path)
     for sub, pat in globs:
         for p in sorted((C.CODES_ROOT / sub).glob(pat)):
             parts[str(p.relative_to(C.CODES_ROOT))] = f"{p.stat().st_size}:{int(p.stat().st_mtime)}"
@@ -53,7 +73,7 @@ def run(cfg: Dict, only: str | None, force: bool) -> int:
     for name, module, globs in STAGES:
         if only and name != only:
             continue
-        h = _input_hash(cfg, globs)
+        h = _input_hash(cfg, globs, module)
         prev = state["stages"].get(name, {})
         # the report reads the other stages' outputs, which live outside the hashed inputs; it is
         # cheap, so it always rebuilds rather than risk a stale table

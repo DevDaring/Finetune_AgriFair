@@ -1,0 +1,12 @@
+{
+  "issues": [],
+  "main_strata": {
+    "gender/diff": 1,
+    "gender/equal": 1,
+    "landholding/diff": 1,
+    "landholding/equal": 1,
+    "social_group/diff": 1,
+    "social_group/equal": 1
+  },
+  "ok": true
+}

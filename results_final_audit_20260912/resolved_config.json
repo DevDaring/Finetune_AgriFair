@@ -12,7 +12,7 @@
     "metric_unit": "percentage_points"
   },
   "evidence_panel": {
-    "bundles_per_axis": 32,
+    "bundles_per_axis": 16,
     "configurations": [
       "frozen_base",
       "graft_proposed",

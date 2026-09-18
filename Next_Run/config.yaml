@@ -68,9 +68,13 @@ human_study:
 
 # ---- evidence panel (plan section 9) -----------------------------------------------
 evidence_panel:
-  bundles_per_axis: 32             # 96 total
-  nested_subset_per_axis: 16       # 48 total, used only if the full panel does not fit
-  pilot_bundles: 8
+  # The frozen test split has only 9 equal and 10 different independent gender source
+  # cells, so the planned 96-bundle panel cannot be built without pseudoreplication.
+  # Use the predeclared balanced fallback: 8 equal + 8 different per axis = 48 main
+  # bundles. The 8 pilot bundles are additional validation-split cells and are excluded.
+  bundles_per_axis: 16             # 48 balanced main bundles total
+  nested_subset_per_axis: 16       # the 48-bundle fallback is now the only valid main panel
+  pilot_bundles: 8                 # additional development bundles; never part of main scores
   model_tiers: [small-instruct, broad-instruct]
   configurations: [frozen_base, graft_proposed, ablation_rank_sweep_8]
   seed: 42
