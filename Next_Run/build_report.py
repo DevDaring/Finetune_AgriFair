@@ -160,6 +160,45 @@ def table_human_study(root: Path) -> List[Dict]:
     return rows
 
 
+def table_human_answer_quality(root: Path) -> List[Dict]:
+    """P3 per-answer ratings resolved to system through the withheld mapping: correctness
+    class shares, usefulness and the pair change-type shares. 48 questions x 2 raters per
+    system; each assessment carries the two identity variants answered by one system."""
+    hs = root / "advice" / "human_study"
+    mp_path, r_path = hs / "KEEP_FROM_RATERS" / "assessment_mapping.csv", hs / "ratings_independent.csv"
+    if not (mp_path.exists() and r_path.exists()):
+        return []
+    mp = {r["assessment_id"]: r for r in _csv(mp_path)}
+    acc: Dict = defaultdict(lambda: defaultdict(int))
+    for r in _csv(r_path):
+        m = mp[r["assessment_id"]]; k = (m["tier"], m["method"])
+        acc[k]["rater_assessments"] += 1
+        acc[k]["change_" + r["pair_change_type"]] += 1
+        acc[k]["severity_sum"] += int(r["pair_severity_0_3"])
+        for side in ("left", "right"):
+            acc[k]["answers"] += 1
+            acc[k]["correctness_" + r[f"{side}_correctness"]] += 1
+            acc[k]["usefulness_sum"] += int(r[f"{side}_usefulness_0_2"])
+            acc[k]["usefulness_2"] += r[f"{side}_usefulness_0_2"] == "2"
+            acc[k]["unsafe"] += r[f"{side}_unsafe"] == "present"
+    rows = []
+    for (tier, method), d in sorted(acc.items()):
+        na, nr = d["answers"], d["rater_assessments"]
+        rows.append({"tier": tier, "method": method, "rater_assessments": nr, "answer_ratings": na,
+                     "correctness_supported_rate": round(d["correctness_supported"] / na, 4),
+                     "correctness_mixed_or_unverifiable_rate": round(d["correctness_mixed_or_unverifiable"] / na, 4),
+                     "correctness_incorrect_rate": round(d["correctness_incorrect"] / na, 4),
+                     "usefulness_mean_0_2": round(d["usefulness_sum"] / na, 4),
+                     "usefulness_2_rate": round(d["usefulness_2"] / na, 4),
+                     "unsafe_answers": d["unsafe"],
+                     "change_none_rate": round(d["change_none"] / nr, 4),
+                     "change_presentation_only_rate": round(d["change_presentation_only"] / nr, 4),
+                     "change_substantive_justified_rate": round(d["change_substantive_justified_by_context"] / nr, 4),
+                     "change_substantive_unsupported_rate": round(d["change_substantive_unsupported"] / nr, 4),
+                     "severity_mean_0_3": round(d["severity_sum"] / nr, 4)})
+    return rows
+
+
 def table_evidence_panel(root: Path) -> Dict[str, List[Dict]]:
     """P4 endpoints for the main panel and, separately, the validation-split pilot."""
     from . import evidence_panel as EP
@@ -188,6 +227,9 @@ def main(cfg: Dict) -> Dict:
     t_human = table_human_study(root)
     if t_human:
         C.write_csv(out / "table_human_study.csv", t_human)
+    t_hq = table_human_answer_quality(root)
+    if t_hq:
+        C.write_csv(out / "table_human_answer_quality.csv", t_hq)
     t_ep = table_evidence_panel(root)
     for phase, rows in t_ep.items():
         if rows:
@@ -204,6 +246,9 @@ def main(cfg: Dict) -> Dict:
           "\n## Table 4 - human advice outcomes (P3; two blinded raters, 48 question clusters)\n",
           (_md_table(t_human, ["tier", "method", "assessments", "both_meet_minimum_rate", "unsupported_substantive_change_rate", "either_answer_unsafe_rate", "paired_unsupported_graft_minus_frozen", "paired_unsupported_ci"])
            if t_human else "_not available: advice/human_study/ratings_analysis.json missing_\n"),
+          "\n### Table 4b - per-answer ratings resolved to system (P3)\n",
+          (_md_table(t_hq, ["tier", "method", "answer_ratings", "correctness_supported_rate", "correctness_mixed_or_unverifiable_rate", "correctness_incorrect_rate", "usefulness_mean_0_2", "usefulness_2_rate", "change_none_rate", "change_substantive_unsupported_rate"])
+           if t_hq else "_not available_\n"),
           "\n## Table 5 - evidence-sensitivity panel (P4), MAIN panel (test split)\n",
           (_md_table(t_ep.get("main", []), ["tier", "method", "bundles", "no_evidence_acc", "verified_acc", "synthetic_acc", "synthetic_equal_answer_rate", "joint_evidence_following_rate", "joint_evidence_following_rate_wilson95", "anonymised_consistent_and_correct_rate", "invalid_rate"])
            if t_ep.get("main") else "_not available: P4 not run or skipped_\n"),
