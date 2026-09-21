@@ -6,11 +6,12 @@ output_directory: results_submission2
 data_directory: data_submission2
 
 # ---- models (tiers are keys of GPU_Run.common.api_models.REGISTRY) ------------------
-models:
+models:                            # five: two vendor APIs + three Bedrock (probed 2026-09-21; see api_models.py notes)
   - frontier-grok-4-3
   - frontier-gpt-5-6-luna
   - frontier-nova-2-lite
-  - frontier-nemotron-nano-3-30b
+  - frontier-kimi-k2-5
+  - frontier-glm-4-7
 
 # Published list prices, USD per million tokens, on the tariff date. Re-check on run day.
 tariffs:
@@ -19,7 +20,10 @@ tariffs:
   frontier-grok-4-3:            {input: 1.25,  output: 2.50}
   frontier-gpt-5-6-luna:        {input: 2.50,  output: 10.00}
   frontier-nova-2-lite:         {input: 0.06,  output: 0.24}
-  frontier-nemotron-nano-3-30b: {input: 0.20,  output: 0.60}
+  frontier-kimi-k2-5:           {input: 0.60,  output: 3.00}
+  frontier-glm-4-7:             {input: 0.60,  output: 2.20}
+  frontier-qwen3-next-80b:      {input: 0.15,  output: 1.20}
+  frontier-nemotron-nano-3-30b: {input: 0.06,  output: 0.24}
 
 # Energy proxy: Wh per 1,000 tokens (input+output), low/high bounds from the literature.
 # These are order-of-magnitude bounds, not measured footprints; the paper says so.
@@ -28,6 +32,9 @@ energy_proxy:
   frontier-grok-4-3:            {low: 0.3, high: 3.0}
   frontier-gpt-5-6-luna:        {low: 0.3, high: 3.0}
   frontier-nova-2-lite:         {low: 0.05, high: 0.5}
+  frontier-kimi-k2-5:           {low: 0.2, high: 2.0}
+  frontier-glm-4-7:             {low: 0.2, high: 2.0}
+  frontier-qwen3-next-80b:      {low: 0.05, high: 0.5}
   frontier-nemotron-nano-3-30b: {low: 0.05, high: 0.5}
 
 # ---- prompting methods = the comparator studies (see Submission2/plan.md section 6b) ----

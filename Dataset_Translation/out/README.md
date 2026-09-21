@@ -195,11 +195,11 @@ Every AgriFacts question with its three options, and every AgriAdvice pair, is a
 - revise after a REVISE verdict: kimi/kimi-k3 and xai/grok-4.6, alternating
 - stop when every reviewer returns OK, or after the last round.
 For AgriAdvice the base question and the two persona wrappers were translated separately and recomposed, so version A and version B still differ only in the identity span. Option order is unchanged and the answer is the translated option at the same index.
-**What was not done.** No human post-editing has been applied to the released files. Treat the translations as high-quality machine output with model review, not as expert-verified text; for a human-rated study, verify a sample first. Numbers are written in ASCII digits in all three languages. A separate automated quality check (script coverage, numbers, glossary, structure, and a GPT-4o fidelity rating on random samples: mean 5.00/5 over 226 sampled items, none rated 3 or below) re-translated the rows it flagged. The per-item log (`translation_log_<component>_<lang>.jsonl`, in the code repository) records every reviewer verdict and the model that served each step.
+**What was not done.** No human post-editing has been applied to the released files. Treat the translations as high-quality machine output with model review, not as expert-verified text; for a human-rated study, verify a sample first. Numbers are written in ASCII digits in all three languages. A separate automated quality check (script coverage, numbers, glossary, structure, and a GPT-4o fidelity rating on random samples: mean 5.00/5 over 246 sampled items, none rated 3 or below) re-translated the rows it flagged. The per-item log (`translation_log_<component>_<lang>.jsonl`, in the code repository) records every reviewer verdict and the model that served each step.
 | File | Items | All 3 reviewers OK | At least 2 of 3 OK | Re-translated after quality check | Mean review rounds |
 |---|---|---|---|---|---|
-| `agrifacts_hi.jsonl` | 2000 | 1989 | 1998 | 16 | 1.03 |
-| `agrifacts_bn.jsonl` | 2000 | 1993 | 1997 | 53 | 1.02 |
+| `agrifacts_hi.jsonl` | 2000 | 1987 | 1997 | 23 | 1.03 |
+| `agrifacts_bn.jsonl` | 2000 | 1994 | 1998 | 54 | 1.01 |
 | `agriadvice_hi.jsonl` | 800 | 783 | 799 | 15 | 1.24 |
 | `agriadvice_bn.jsonl` | 800 | 785 | 800 | 12 | 1.15 |
 

@@ -125,6 +125,38 @@ REGISTRY: Dict[str, ApiModelSpec] = {
               "Marketplace subscription. Inference profile only, hence the us. prefix. Wraps "
               "JSON in code fences, which the deterministic parser already strips.",
     ),
+    "frontier-kimi-k2-5": ApiModelSpec(
+        tier="frontier-kimi-k2-5",
+        display_name="Kimi K2.5",
+        vendor="moonshot",
+        route_order=(BEDROCK, OPENROUTER),
+        bedrock_model_id="moonshotai.kimi-k2.5",
+        openrouter_model_id="moonshotai/kimi-k2.5",
+        notes="On-demand on Bedrock, both accounts. Probed 2026-09-21: Hindi/Bengali MCQ answers in "
+              "10 output tokens, advice in the target script (91% / 100%), 627 req/min sustained at "
+              "concurrency 20 with no throttling. $0.60 / $3.00 per M tokens.",
+    ),
+    "frontier-glm-4-7": ApiModelSpec(
+        tier="frontier-glm-4-7",
+        display_name="GLM-4.7",
+        vendor="zai",
+        route_order=(BEDROCK, OPENROUTER),
+        bedrock_model_id="zai.glm-4.7",
+        openrouter_model_id="z-ai/glm-4.7",
+        notes="On-demand on Bedrock, both accounts. Probed 2026-09-21: wraps the JSON in code "
+              "fences (parser strips them), Hindi 85% / Bengali 100% target script, 2,100 req/min "
+              "sustained. $0.60 / $2.20 per M tokens.",
+    ),
+    "frontier-qwen3-next-80b": ApiModelSpec(
+        tier="frontier-qwen3-next-80b",
+        display_name="Qwen3-Next 80B A3B",
+        vendor="qwen",
+        route_order=(BEDROCK, OPENROUTER),
+        bedrock_model_id="qwen.qwen3-next-80b-a3b",
+        openrouter_model_id="qwen/qwen3-next-80b-a3b-instruct",
+        notes="Registered as the cheap alternative (not in the default panel): $0.15 / $1.20, "
+              "2,900 req/min, 9-token MCQ answers, Hindi 89% / Bengali 100%.",
+    ),
     "frontier-nemotron-nano-3-30b": ApiModelSpec(
         tier="frontier-nemotron-nano-3-30b",
         display_name="Nemotron Nano 3 30B",

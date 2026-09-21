@@ -1,0 +1,4 @@
+agrifacts  hi: 1890/2000 translated | all reviewers OK: 1880 | glossary term missing: 79 | failed: 110
+agrifacts  bn: 1930/2000 translated | all reviewers OK: 1968 | glossary term missing: 79 | failed: 149
+agriadvice hi: 799/800 translated | all reviewers OK: 782 | glossary term missing: 0 | failed: 1
+agriadvice bn: 800/800 translated | all reviewers OK: 796 | glossary term missing: 1 | failed: 0

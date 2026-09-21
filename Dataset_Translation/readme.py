@@ -76,5 +76,30 @@ def updated_readme(readme: str, cfg: Dict, out: Path) -> str:
         for lang in cfg["languages"]:
             s = _log_stats(out, comp, lang)
             lines.append(f"| `{comp}_{lang}.jsonl` | {s['n']} | {s['all_ok']} | {s['majority_ok']} | {s['repaired']} | {s['mean_rounds']} |\n")
+    lines += _verification_section(out)
     lines.append("\nGlossary and pipeline code: `Codes/Dataset_Translation/` in the linked repository.\n")
     return fm + body.rstrip() + "\n" + "".join(lines)
+
+
+def _verification_section(out: Path) -> list:
+    rep_p = out.parents[1] / "Submission2" / "verification" / "verification_report.json"
+    if not rep_p.exists():
+        return []
+    rep = json.load(open(rep_p, encoding="utf-8"))
+    L = {"hi": "Hindi", "bn": "Bengali"}
+    lines = ["\n**Human verification of a sample.** Two bilingual agricultural professionals independently rated a stratified sample "
+             "(100 AgriFacts questions and 50 AgriAdvice pairs per language, drawn by seed across every axis and condition) for "
+             "meaning preservation, glossary use, identity-only difference and naturalness. Rows either rater marked as not fully "
+             "preserving meaning were corrected from the rater's text or re-translated; the `human_verified` field marks them. "
+             "A systematic defect the raters found (operated-area size classes rendered as holdings) was then fixed across all "
+             "affected rows. No other rows were altered.\n",
+             "| Language | Set | Meaning preserved R1 / R2 | Raw agreement | Cohen's kappa | Corrected |\n|---|---|---|---|---|---|\n"]
+    for lang, r in rep["languages"].items():
+        for name, key, n in (("facts", "facts", 100), ("pairs", "pairs", 50)):
+            m = r[key]["meaning"]; c = r["corrections"]
+            y1, y2 = m["R1"].get("yes", 0), m["R2"].get("yes", 0)
+            corr = sum(1 for i in c["applied_from_rater"] + c["retranslated"] if (i.startswith("agrifacts") == (key == "facts")))
+            lines.append(f"| {L[lang]} | {name} | {y1}/{r[key]['n']} / {y2}/{r[key]['n']} | {m['agreement']['raw_agreement']} | {m['agreement']['cohen_kappa']} | {corr} |\n")
+    lines.append("\nKappa on \"meaning preserved\" is low where one rater flagged items the other accepted (near-unanimous marginals); raw agreement "
+                 "is the more informative figure here. Naturalness (1-3) agreement was low in both languages, as expected for a stylistic judgement.\n")
+    return lines

@@ -12,7 +12,8 @@ import numpy as np
 from Submission2_Run import common as C
 
 DISPLAY = {"frontier-grok-4-3": "Grok 4.3", "frontier-gpt-5-6-luna": "GPT-5.6 Luna",
-           "frontier-nova-2-lite": "Nova 2 Lite", "frontier-nemotron-nano-3-30b": "Nemotron Nano 3 30B"}
+           "frontier-nova-2-lite": "Nova 2 Lite", "frontier-kimi-k2-5": "Kimi K2.5", "frontier-glm-4-7": "GLM-4.7",
+           "frontier-qwen3-next-80b": "Qwen3-Next 80B", "frontier-nemotron-nano-3-30b": "Nemotron Nano 3 30B"}
 
 
 def _csv(p: Path) -> List[Dict]:
