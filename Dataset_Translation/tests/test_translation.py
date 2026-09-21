@@ -107,3 +107,9 @@ def test_ascii_digits_and_glossary_word_boundary():
     from Dataset_Translation.glossary import ascii_digits
     assert ascii_digits("২০১৫-১৬ কৃষি শুমারি") == "2015-16 কৃষি শুমারি" and ascii_digits("२०१५-१६") == "2015-16"
     assert missing_terms("nutrient management for women", "पोषक प्रबंधन महिला", "hi") == []
+
+
+def test_jsonl_reader_keeps_last_row_per_id(tmp_path):
+    p = tmp_path / "agrifacts_hi.jsonl"
+    p.write_text('{"id":"a","question":"old"}\n{"id":"b","question":"x"}\n{"id":"a","question":"repaired"}\n', encoding="utf-8")
+    rows = R._jsonl(p); assert len(rows) == 2 and {r["id"]: r["question"] for r in rows}["a"] == "repaired"

@@ -122,8 +122,7 @@ def repair(cfg: Dict, out_dir: Path, comp: str, lang: str, ids: Dict[str, List[s
     to_item, from_item, idkey = run_module.ADAPTERS[comp]
     src = {r[idkey]: r for r in run_module._jsonl(run_module.SRC / f"{comp}.jsonl")}
     out_path = out_dir / f"{comp}_{lang}.jsonl"; log_path = out_dir / f"translation_log_{comp}_{lang}.jsonl"
-    keep = [r for r in run_module._jsonl(out_path) if r[idkey] not in ids]
-    out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in keep), encoding="utf-8")
+    # no in-place rewrite: the repaired row is appended and readers keep the last row per id
     clients = Clients(cfg); tr = Translator(cfg, clients, Cache(out_dir / "cache.sqlite"))
     status = {}
     for iid, issues in ids.items():

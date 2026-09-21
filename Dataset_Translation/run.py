@@ -37,7 +37,16 @@ _print_lock = threading.Lock()
 
 
 def _jsonl(p: Path) -> List[Dict]:
-    return [json.loads(l) for l in p.open(encoding="utf-8") if l.strip()] if p.exists() else []
+    """Rows of a jsonl file. Output files may hold a repaired row appended after the original
+    (repair never rewrites a file a worker may be appending to), so the LAST row per id wins."""
+    rows = [json.loads(l) for l in p.open(encoding="utf-8") if l.strip()] if p.exists() else []
+    key = "id" if rows and "id" in rows[0] else ("pair_id" if rows and "pair_id" in rows[0] else None)
+    if key and p.name.startswith(("agrifacts_", "agriadvice_")):
+        last = {}
+        for row in rows:
+            last[row[key]] = row
+        return list(last.values())
+    return rows
 
 
 def _append(p: Path, row: Dict) -> None:
