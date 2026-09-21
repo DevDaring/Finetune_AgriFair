@@ -46,3 +46,9 @@ results_submission2/cache/
 # third-party scheme guideline PDFs: cited by URL + SHA-256, not redistributed
 data_submission2/sources/*.pdf
 data_submission2/mandi/*.jsonl
+
+# translation run outputs and caches (final files go to the Hub; logs are committed on completion)
+Dataset_Translation/out/cache*.sqlite
+Dataset_Translation/out/source/
+Dataset_Translation/out/*.log
+Dataset_Translation/out/RUN_DONE
