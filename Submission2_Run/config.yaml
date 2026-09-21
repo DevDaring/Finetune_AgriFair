@@ -1,0 +1,91 @@
+# Submission 2 - configuration. Spend gate is OFF until a person flips it here.
+
+analysis_seed: 20260921
+api_enabled: false                 # no paid call is made while this is false
+output_directory: results_submission2
+data_directory: data_submission2
+
+# ---- models (tiers are keys of GPU_Run.common.api_models.REGISTRY) ------------------
+models:
+  - frontier-grok-4-3
+  - frontier-gpt-5-6-luna
+  - frontier-nova-2-lite
+  - frontier-nemotron-nano-3-30b
+
+# Published list prices, USD per million tokens, on the tariff date. Re-check on run day.
+tariffs:
+  tariff_date: "2026-09-21"
+  usd_inr: 84.0
+  frontier-grok-4-3:            {input: 1.25,  output: 2.50}
+  frontier-gpt-5-6-luna:        {input: 2.50,  output: 10.00}
+  frontier-nova-2-lite:         {input: 0.06,  output: 0.24}
+  frontier-nemotron-nano-3-30b: {input: 0.20,  output: 0.60}
+
+# Energy proxy: Wh per 1,000 tokens (input+output), low/high bounds from the literature.
+# These are order-of-magnitude bounds, not measured footprints; the paper says so.
+energy_proxy:
+  note: "Wh per 1k tokens; inference-only; excludes embodied and network energy."
+  frontier-grok-4-3:            {low: 0.3, high: 3.0}
+  frontier-gpt-5-6-luna:        {low: 0.3, high: 3.0}
+  frontier-nova-2-lite:         {low: 0.05, high: 0.5}
+  frontier-nemotron-nano-3-30b: {low: 0.05, high: 0.5}
+
+# ---- prompting methods = the comparator studies (see Submission2/plan.md section 6b) ----
+# Every method is inference-time only. "plain" is the study's own baseline.
+methods:
+  - plain              # single zero-shot JSON answer (Submission 1 protocol)
+  - cot                # Kojima et al. 2022, "Let's think step by step"
+  - self_consistency   # Wang et al. 2022, majority over k sampled reasoning paths
+  - self_correct       # Ganguli et al. 2023, answer -> bias check -> revised answer
+  - implication        # Furniturewala et al. 2024, structured "implication" debiasing prompt
+  - fair_instruction   # Tamkin et al. 2023, explicit non-discrimination instruction
+  - evidence           # Lewis et al. 2020 style: verified table placed in context
+self_consistency_k: 5
+self_consistency_temperature: 0.7
+
+# ---- languages ----------------------------------------------------------------------
+languages: [en, hi, bn]
+
+# ---- experiments ----------------------------------------------------------------------
+repeats: 3                         # each prompt on three different days (E7 stability)
+facts_conditions: [no_evidence, verified_evidence, hypothetical_evidence, anonymised_evidence]
+route_panel_items: 200             # E7: fixed items sent through every available route
+answer_max_tokens: 16
+advice_max_tokens: 400
+reasoning_max_tokens: 600          # cot / self_correct / implication need room to reason
+budget_usd_cap: 400                # run aborts when projected spend passes this
+
+# ---- dataset construction -------------------------------------------------------------
+kcc:
+  n_queries: 600
+  states: [Bihar, Maharashtra, Tamil Nadu, West Bengal, Punjab, Karnataka]
+  query_types: [plant_protection, nutrient_management, weather, government_schemes, market]
+  resource_id: ""                  # data.gov.in resource UUID; leave empty to use --csv
+facts:
+  n_items: 1000                    # 500 equal + 500 diff
+  comparison_rule:
+    metric_unit: percentage_points
+    equal_if_abs_gap_below: 5.0
+    diff_if_abs_gap_at_least: 10.0
+  source_name: ""                  # e.g. "Agriculture Census 2015-16 Phase II, Table 6"
+  source_url: ""
+  source_sha256: ""                # of the archived file the values were recomputed from
+pairs:
+  per_axis: 150                    # 600 English pairs; x3 languages = 1,800
+  axes: [gender, social_group, landholding, literacy_register]
+
+# ---- human study ------------------------------------------------------------------------
+human_study:
+  english_queries: 60
+  indic_queries: 20
+  pilot_queries: 10
+  raters: [R1, R2]
+  seed: 42
+
+# ---- statistics -------------------------------------------------------------------------
+bootstrap_draws: 10000
+permutation_draws: 10000
+
+smoke:
+  items_per_set: 5
+  fake_router: true                # offline deterministic responses; never spends
