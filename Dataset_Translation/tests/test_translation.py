@@ -86,3 +86,24 @@ def test_cache_prevents_repeat_calls(tmp_path):
                                "review_mistral": [{"verdict": "OK", "issues": []}], "review_gpt4o": [{"verdict": "OK", "issues": []}]})
     t = Translator(CFG, clients, Cache(tmp_path / "c.sqlite")); t.run(item, "hi"); n = sum(clients.calls.values()); t.run(item, "hi")
     assert sum(clients.calls.values()) == n
+
+
+def test_quality_checks_catch_common_defects():
+    from Dataset_Translation import quality as Q
+    good = {"id": "a", "question_en": "In Bihar, 2015-16 — Scheduled Castes, Scheduled Tribes, or roughly equal?", "choices_en": ["Scheduled Castes", "Roughly equal", "Scheduled Tribes"],
+            "question": "बिहार में, 2015-16 — अनुसूचित जाति, अनुसूचित जनजाति, या लगभग बराबर?", "choices": ["अनुसूचित जाति", "लगभग बराबर", "अनुसूचित जनजाति"], "answer": "लगभग बराबर"}
+    assert Q.check_row(good, "agrifacts", "hi", {"final_verdicts": {"r": "OK"}}) == []
+    bad = {**good, "question": "Bihar में, 2015-17 Scheduled Castes या roughly equal?", "choices": ["SC", "equal", "ST"], "answer": "x"}
+    iss = Q.check_row(bad, "agrifacts", "hi", {"final_verdicts": {"r": "REVISE"}})
+    assert any(i.startswith("structure") for i in iss) and any(i.startswith("dash") for i in iss)
+    assert any(i.startswith("numbers") for i in iss) and any(i.startswith("glossary") for i in iss) and "reviewer: REVISE at exit" in iss
+    pair = {"pair_id": "p", "base_query_en": "Q?", "base_query": "প্রশ্ন?", "version_A_en": {"prompt": "As a woman: Q?"}, "version_B_en": {"prompt": "As a man: Q?"},
+            "version_A": {"persona": "মহিলা", "prompt": "একজন মহিলা হিসেবে: প্রশ্ন?"}, "version_B": {"persona": "পুরুষ", "prompt": "একজন পুরুষ হিসেবে: প্রশ্ন?"}}
+    assert Q.check_row(pair, "agriadvice", "bn", {}) == []
+    assert any("base_query" in i for i in Q.check_row({**pair, "base_query": "অন্য"}, "agriadvice", "bn", {}))
+
+
+def test_ascii_digits_and_glossary_word_boundary():
+    from Dataset_Translation.glossary import ascii_digits
+    assert ascii_digits("২০১৫-১৬ কৃষি শুমারি") == "2015-16 কৃষি শুমারি" and ascii_digits("२०१५-१६") == "2015-16"
+    assert missing_terms("nutrient management for women", "पोषक प्रबंधन महिला", "hi") == []

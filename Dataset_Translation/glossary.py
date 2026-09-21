@@ -68,8 +68,17 @@ def glossary_block(lang: str) -> str:
 def missing_terms(source: str, translation: str, lang: str) -> list:
     """Glossary terms present in the English source whose fixed rendering is absent from the
     translation. Used as a hard check after the last round, not as a reviewer prompt."""
+    import re
     out = []
     for en, tr in GLOSSARY[lang].items():
-        if en.lower() in source.lower() and tr not in translation:
+        if re.search(r"(?<![a-z])" + re.escape(en.lower()) + r"(?![a-z])", source.lower()) and tr not in translation:
             out.append(en)
     return out
+
+
+_DIGITS = {ord(c): str(i) for script in ("\u0966", "\u09e6") for i, c in enumerate(chr(ord(script) + k) for k in range(10))}
+
+
+def ascii_digits(text: str) -> str:
+    """Devanagari and Bengali numerals -> ASCII, so numbers match the English source and the evidence tables."""
+    return (text or "").translate(_DIGITS)

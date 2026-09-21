@@ -25,6 +25,7 @@ from typing import Dict, List, Optional
 import yaml
 
 from GPU_Run.common import env_loader
+from Dataset_Translation.glossary import ascii_digits
 from Dataset_Translation.pipeline import Cache, Translator
 from Dataset_Translation.providers import Clients, ProviderError
 
@@ -52,6 +53,7 @@ def facts_to_item(row: Dict) -> Dict:
 
 
 def facts_from_item(row: Dict, tr: Dict, lang: str) -> Dict:
+    tr = {k: ascii_digits(v) for k, v in tr.items()}
     choices = [tr[f"choice_{i}"] for i in range(len(row["choices"]))]
     answer = choices[row["choices"].index(row["answer"])]          # answer is the translated choice at the same index
     return {**row, "question": tr["question"], "choices": choices, "answer": answer, "language": lang,
@@ -67,6 +69,7 @@ def advice_to_item(row: Dict) -> Dict:
 
 
 def advice_from_item(row: Dict, tr: Dict, lang: str) -> Dict:
+    tr = {k: ascii_digits(v) for k, v in tr.items()}
     q = tr["base_query"]
     if "{q}" not in tr["template_A"] or "{q}" not in tr["template_B"]:
         raise ValueError("placeholder lost in translation")
@@ -167,6 +170,17 @@ def cmd_upload() -> None:
             m = len(_jsonl(OUT / f"{comp}_{l}.jsonl"))
             if m != n:
                 raise SystemExit(f"{comp}_{l}: {m} rows but source has {n}; finish translation first")
+    # final mechanical pass: ASCII digits everywhere (rows written by workers started before the
+    # normalisation was added may still carry Bengali numerals); no worker is writing at upload time
+    def _fix(o):
+        if isinstance(o, str): return ascii_digits(o)
+        if isinstance(o, list): return [_fix(x) for x in o]
+        if isinstance(o, dict): return {k: (v if k.endswith("_en") else _fix(v)) for k, v in o.items()}
+        return o
+    for f in files:
+        rows = _jsonl(OUT / f); fixed = [_fix(r) for r in rows]
+        (OUT / f).write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in fixed), encoding="utf-8")
+        print(f"  {f}: digit-normalised {sum(1 for a, b in zip(rows, fixed) if a != b)} rows")
     readme = updated_readme((SRC / "README.md").read_text(encoding="utf-8"), CFG, OUT)
     (OUT / "README.md").write_text(readme, encoding="utf-8")
     ops = [(str(OUT / f), f) for f in files] + [(str(OUT / "README.md"), "README.md")]
@@ -177,14 +191,31 @@ def cmd_upload() -> None:
     print(f"https://huggingface.co/datasets/{CFG['hf_repo']}")
 
 
+def cmd_quality(sample: int, do_repair: bool) -> None:
+    from Dataset_Translation import quality as Q
+    rep = Q.main(CFG, OUT, sys.modules[__name__], sample=sample, do_repair=do_repair)
+    print(f"checked {rep['checked']} rows")
+    for key, fl in rep["flagged"].items():
+        print(f"  {key}: {len(fl)} flagged")
+        for iid, iss in list(fl.items())[:6]:
+            print(f"    {iid}: {iss}")
+    scores = [s["score"] for s in rep["spot"] if s["score"] > 0]
+    if scores:
+        print(f"  spot-check fidelity: mean {sum(scores)/len(scores):.2f} over {len(scores)}; <=3: {sum(1 for x in scores if x <= 3)}")
+    for key, st in rep["repaired"].items():
+        print(f"  repaired {key}: {st}")
+
+
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("download"); sub.add_parser("probe"); sub.add_parser("status"); sub.add_parser("upload")
+    q = sub.add_parser("quality"); q.add_argument("--sample", type=int, default=40); q.add_argument("--repair", action="store_true")
     t = sub.add_parser("translate"); t.add_argument("--lang", required=True, choices=list(CFG["languages"]))
     t.add_argument("--component", required=True, choices=list(ADAPTERS)); t.add_argument("--limit", type=int)
     a = ap.parse_args(argv)
     {"download": cmd_download, "probe": cmd_probe, "status": cmd_status, "upload": cmd_upload,
-     "translate": lambda: cmd_translate(a.component, a.lang, a.limit)}[a.cmd]()
+     "translate": lambda: cmd_translate(a.component, a.lang, a.limit),
+     "quality": lambda: cmd_quality(a.sample, a.repair)}[a.cmd]()
 
 
 if __name__ == "__main__":
