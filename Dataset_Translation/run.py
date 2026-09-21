@@ -213,6 +213,8 @@ def cmd_quality(sample: int, do_repair: bool) -> None:
         print(f"  spot-check fidelity: mean {sum(scores)/len(scores):.2f} over {len(scores)}; <=3: {sum(1 for x in scores if x <= 3)}")
     for key, st in rep["repaired"].items():
         print(f"  repaired {key}: {st}")
+    for key, un in rep.get("unresolved_after_2_repairs", {}).items():
+        print(f"  unresolved after 2 repairs (accepted, listed for the human sample) {key}: {list(un)}")
 
 
 def main(argv=None) -> None:

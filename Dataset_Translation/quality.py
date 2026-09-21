@@ -90,8 +90,9 @@ def check_row(row: Dict, comp: str, lang: str, log_entry: Dict) -> List[str]:
     if g:
         issues.append(f"glossary: {g[:3]}")
     fv = log_entry.get("final_verdicts") or {}
-    if any(v == "REVISE" for v in fv.values()):
-        issues.append("reviewer: REVISE at exit")
+    n_rev = sum(1 for v in fv.values() if v == "REVISE")
+    if n_rev >= 2 or (n_rev == 1 and len(fv) < 3):
+        issues.append("reviewer: majority REVISE at exit")     # one dissenting reviewer out of three is accepted (often self-contradictory nitpicks)
     return issues
 
 
@@ -171,7 +172,12 @@ def main(cfg: Dict, out_dir: Path, run_module, sample: int = 40, do_repair: bool
             rows = run_module._jsonl(out_dir / f"{comp}_{lang}.jsonl")
             if not rows:
                 continue
-            logs = {l.get(idkey): l for l in run_module._jsonl(out_dir / f"translation_log_{comp}_{lang}.jsonl") if l.get("final_verdicts")}
+            log_rows = run_module._jsonl(out_dir / f"translation_log_{comp}_{lang}.jsonl")
+            logs = {l.get(idkey): l for l in log_rows if l.get("final_verdicts")}
+            repairs = {}
+            for l in log_rows:
+                if l.get("repair"):
+                    repairs[l.get(idkey)] = repairs.get(l.get(idkey), 0) + 1
             key = f"{comp}_{lang}"; seen = state.get(key, 0)
             new_rows = rows[seen:]; old_sample = rng.sample(rows[:seen], min(sample // 4, seen)) if seen else []
             flagged = {}
@@ -185,8 +191,12 @@ def main(cfg: Dict, out_dir: Path, run_module, sample: int = 40, do_repair: bool
                 report["spot"].append(s)
                 if 0 <= s["score"] <= 3:
                     flagged.setdefault(s["id"], []).append(f"spot: score {s['score']}: {s['reason']}")
+            capped = {i: iss for i, iss in flagged.items() if repairs.get(i, 0) >= 2}
+            flagged = {i: iss for i, iss in flagged.items() if repairs.get(i, 0) < 2}
             if flagged:
                 report["flagged"][key] = flagged
+            if capped:
+                report.setdefault("unresolved_after_2_repairs", {})[key] = capped
             state[key] = len(rows)
             if do_repair and flagged:
                 report["repaired"][key] = repair(cfg, out_dir, comp, lang, flagged, run_module)

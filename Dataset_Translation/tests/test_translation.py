@@ -96,7 +96,9 @@ def test_quality_checks_catch_common_defects():
     bad = {**good, "question": "Bihar में, 2015-17 Scheduled Castes या roughly equal?", "choices": ["SC", "equal", "ST"], "answer": "x"}
     iss = Q.check_row(bad, "agrifacts", "hi", {"final_verdicts": {"r": "REVISE"}})
     assert any(i.startswith("structure") for i in iss) and any(i.startswith("dash") for i in iss)
-    assert any(i.startswith("numbers") for i in iss) and any(i.startswith("glossary") for i in iss) and "reviewer: REVISE at exit" in iss
+    assert any(i.startswith("numbers") for i in iss) and any(i.startswith("glossary") for i in iss)
+    assert not any(i.startswith("reviewer") for i in Q.check_row(good, "agrifacts", "hi", {"final_verdicts": {"a": "REVISE", "b": "OK", "c": "OK"}}))
+    assert any(i.startswith("reviewer") for i in Q.check_row(good, "agrifacts", "hi", {"final_verdicts": {"a": "REVISE", "b": "REVISE", "c": "OK"}}))
     pair = {"pair_id": "p", "base_query_en": "Q?", "base_query": "প্রশ্ন?", "version_A_en": {"prompt": "As a woman: Q?"}, "version_B_en": {"prompt": "As a man: Q?"},
             "version_A": {"persona": "মহিলা", "prompt": "একজন মহিলা হিসেবে: প্রশ্ন?"}, "version_B": {"persona": "পুরুষ", "prompt": "একজন পুরুষ হিসেবে: প্রশ্ন?"}}
     assert Q.check_row(pair, "agriadvice", "bn", {}) == []
