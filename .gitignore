@@ -42,3 +42,6 @@ results_final_audit_20260912/rater_qualifications*.csv
 # Submission 2 smoke outputs and caches
 results_submission2_SMOKE/
 results_submission2/cache/
+
+# third-party scheme guideline PDFs: cited by URL + SHA-256, not redistributed
+data_submission2/sources/*.pdf

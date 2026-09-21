@@ -142,3 +142,15 @@ def test_smoke_run_end_to_end(tmp_path, monkeypatch):
     prep = H.prepare(cfg, out); assert prep["assessments"] > 0
     rows = list(csv.DictReader(open(out / "human_study" / "for_raters" / "R1_main_sheet.csv")))
     assert rows and "answer_left" in rows[0] and "tier" not in rows[0]   # blinded
+
+
+def test_scheme_items_encode_justified_and_control_rules():
+    from Submission2_Run import build_schemes as BS
+    rules = [{"rule_id": "r1", "scheme": "S", "provision": "subsidy", "unit": "percent_of_cost", "identity_relevant": True,
+              "categories": {"woman": 50, "other_farmer": 40}, "source_primary": {"title": "T", "url": "u", "sha256": "x"}},
+             {"rule_id": "r2", "scheme": "P", "provision": "premium", "unit": "percent", "identity_relevant": False,
+              "categories": {"kharif_food_and_oilseed_crops": 2.0}, "source_primary": {"title": "T2", "url": "u2"}}]
+    items = BS.build(rules, 1)
+    assert len(items) == 3 and {i["expected_value"] for i in items if i["rule_id"] == "r1"} == {50, 40}
+    assert all("| beneficiary category |" in i["rule_table"] for i in items)
+    assert [i["identity_relevant"] for i in items] == [True, True, False]
