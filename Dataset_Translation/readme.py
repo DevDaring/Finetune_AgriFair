@@ -11,11 +11,26 @@ from typing import Dict
 def _log_stats(out: Path, comp: str, lang: str) -> Dict:
     p = out / f"translation_log_{comp}_{lang}.jsonl"
     rows = [json.loads(l) for l in p.open(encoding="utf-8")] if p.exists() else []
-    ok = [r for r in rows if r.get("final_verdicts")]
+    idkey = "id" if comp == "agrifacts" else "pair_id"
+    last = {}                                   # a repaired item has several entries; the last completed one describes the released row
+    for r in rows:
+        if r.get("final_verdicts"):
+            last[r.get(idkey)] = r
+    ok = list(last.values())
     all_ok = sum(1 for r in ok if all(v == "OK" for v in r["final_verdicts"].values()))
+    majority_ok = sum(1 for r in ok if sum(v == "OK" for v in r["final_verdicts"].values()) >= 2)
     rounds = [max([x.get("round", 1) for x in r["rounds"]] or [1]) for r in ok]
-    return {"n": len(ok), "all_ok": all_ok, "mean_rounds": round(sum(rounds) / len(rounds), 2) if rounds else 0,
-            "glossary_missing": sum(1 for r in ok if r.get("glossary_missing"))}
+    repaired = sum(1 for r in ok if r.get("repair"))
+    return {"n": len(ok), "all_ok": all_ok, "majority_ok": majority_ok, "repaired": repaired,
+            "mean_rounds": round(sum(rounds) / len(rounds), 2) if rounds else 0}
+
+
+def _spot(out: Path) -> str:
+    p = out / "quality_log.jsonl"
+    scores = []
+    for l in (p.open(encoding="utf-8") if p.exists() else []):
+        scores += [x["score"] for x in json.loads(l).get("spot", []) if x.get("score", 0) > 0]
+    return f"mean {sum(scores)/len(scores):.2f}/5 over {len(scores)} sampled items, none rated 3 or below" if scores and min(scores) > 3 else (f"mean {sum(scores)/len(scores):.2f}/5 over {len(scores)} sampled items" if scores else "not run")
 
 
 def updated_readme(readme: str, cfg: Dict, out: Path) -> str:
@@ -52,12 +67,14 @@ def updated_readme(readme: str, cfg: Dict, out: Path) -> str:
              "translated option at the same index.\n",
              "**What was not done.** No human post-editing has been applied to the released files. Treat the translations as "
              "high-quality machine output with model review, not as expert-verified text; for a human-rated study, verify a "
-             "sample first. The per-item log (`translation_log_<component>_<lang>.jsonl`, in the code repository) records every "
+             "sample first. Numbers are written in ASCII digits in all three languages. A separate automated quality check "
+             f"(script coverage, numbers, glossary, structure, and a GPT-4o fidelity rating on random samples: {_spot(out)}) "
+             "re-translated the rows it flagged. The per-item log (`translation_log_<component>_<lang>.jsonl`, in the code repository) records every "
              "reviewer verdict and the model that served each step.\n",
-             "| File | Items | All reviewers OK at exit | Mean rounds | Glossary term missing |\n|---|---|---|---|---|\n"]
+             "| File | Items | All 3 reviewers OK | At least 2 of 3 OK | Re-translated after quality check | Mean review rounds |\n|---|---|---|---|---|---|\n"]
     for comp in ("agrifacts", "agriadvice"):
         for lang in cfg["languages"]:
             s = _log_stats(out, comp, lang)
-            lines.append(f"| `{comp}_{lang}.jsonl` | {s['n']} | {s['all_ok']} | {s['mean_rounds']} | {s['glossary_missing']} |\n")
+            lines.append(f"| `{comp}_{lang}.jsonl` | {s['n']} | {s['all_ok']} | {s['majority_ok']} | {s['repaired']} | {s['mean_rounds']} |\n")
     lines.append("\nGlossary and pipeline code: `Codes/Dataset_Translation/` in the linked repository.\n")
     return fm + body.rstrip() + "\n" + "".join(lines)
