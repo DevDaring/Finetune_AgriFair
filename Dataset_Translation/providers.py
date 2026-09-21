@@ -78,6 +78,7 @@ class Clients:
             raise ProviderError(f"{provider}: no key configured")
         last = ""
         for label, key in keys:
+          for attempt in range(4):
             t0 = time.time()
             try:
                 r = requests.post(f"{self.endpoints[provider].rstrip('/')}/chat/completions",
@@ -85,6 +86,8 @@ class Clients:
                                   json={"model": model, "temperature": temperature, "max_tokens": max_tokens,
                                         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]},
                                   timeout=self.timeout)
+                if r.status_code == 429 and attempt < 3:        # rate limit: back off on the same key before switching
+                    time.sleep(2 ** (attempt + 1)); continue
                 if r.status_code >= 400:
                     raise ProviderError(f"HTTP {r.status_code}: {r.text[:160]}")
                 p = r.json()
@@ -98,7 +101,7 @@ class Clients:
                                   time.time() - t0, label)
             except (requests.RequestException, ProviderError, ValueError) as e:
                 last = f"{type(e).__name__}: {str(e)[:160]}"
-                continue
+                break                                            # next key
         raise ProviderError(f"{provider}/{model}: all keys failed ({last})")
 
     def _nova(self, model: str, system: str, user: str, max_tokens: int) -> Completion:

@@ -115,3 +115,12 @@ def test_jsonl_reader_keeps_last_row_per_id(tmp_path):
     p = tmp_path / "agrifacts_hi.jsonl"
     p.write_text('{"id":"a","question":"old"}\n{"id":"b","question":"x"}\n{"id":"a","question":"repaired"}\n', encoding="utf-8")
     rows = R._jsonl(p); assert len(rows) == 2 and {r["id"]: r["question"] for r in rows}["a"] == "repaired"
+
+
+def test_scientific_names_are_not_leakage():
+    from Dataset_Translation import quality as Q
+    pair = {"pair_id": "p", "base_query_en": "How to control Pythium aphanidermatum and check soil pH?", "base_query": "Pythium aphanidermatum को कैसे रोकें और मिट्टी का pH कैसे जाँचें?",
+            "version_A_en": {"prompt": "As a woman: How to control Pythium aphanidermatum and check soil pH?"}, "version_B_en": {"prompt": "As a man: How to control Pythium aphanidermatum and check soil pH?"},
+            "version_A": {"persona": "महिला", "prompt": "एक महिला के रूप में: Pythium aphanidermatum को कैसे रोकें और मिट्टी का pH कैसे जाँचें?"},
+            "version_B": {"persona": "पुरुष", "prompt": "एक पुरुष के रूप में: Pythium aphanidermatum को कैसे रोकें और मिट्टी का pH कैसे जाँचें?"}}
+    assert Q.check_row(pair, "agriadvice", "hi", {}) == []

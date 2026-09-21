@@ -22,9 +22,8 @@ models:
     provider: deepseek
     model: deepseek-v4-pro
     fallbacks:
-      - {provider: openrouter, model: deepseek/deepseek-v4-pro}
+      - {provider: openrouter, model: deepseek/deepseek-v4-pro-0813}
       - {provider: linkapi, model: gpt-4o}
-      - {provider: openai, model: gpt-4o}
   reviewers:                   # run in this order each round; each REVISE is followed by one enhance
     - name: review_nova
       provider: bedrock
@@ -33,11 +32,11 @@ models:
     - name: review_mistral
       provider: mistral
       model: mistral-large-latest
-      fallbacks: [{provider: openrouter, model: mistralai/mistral-large-2512}, {provider: linkapi, model: gpt-4o}]
+      fallbacks: [{provider: openrouter, model: mistralai/mistral-large}, {provider: linkapi, model: gpt-4o}]
     - name: review_gpt4o
       provider: linkapi            # OpenAI models at 0.5x; verified 2026-09-21 (served gpt-4o-2024-11-20)
       model: gpt-4o
-      fallbacks: [{provider: openai, model: gpt-4o}, {provider: openrouter, model: openai/gpt-4o}]
+      fallbacks: [{provider: openrouter, model: openai/gpt-4o}]
   enhance:                     # used alternately, in this order, across the whole run
     - {provider: kimi, model: kimi-k3, fallbacks: [{provider: openrouter, model: moonshotai/kimi-k3}, {provider: linkapi, model: gpt-4o}]}
     - {provider: xai,  model: grok-4.6, fallbacks: [{provider: openrouter, model: x-ai/grok-4.6}, {provider: linkapi, model: gpt-4o}]}
