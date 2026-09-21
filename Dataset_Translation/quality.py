@@ -77,14 +77,14 @@ def check_row(row: Dict, comp: str, lang: str, log_entry: Dict) -> List[str]:
         src_all = src + " " + row["version_A_en"]["prompt"] + " " + row["version_B_en"]["prompt"]
     joined = " ".join(texts)
     _src_words = set(re.findall(r"[A-Za-z][A-Za-z\-]+", src_all))
-    sh = script_share(" ".join(w for w in joined.split() if w.strip(".,;:()") not in _src_words), lang)
+    sh = script_share(" ".join(w for w in joined.split() if re.split(r"[-\u0980-\u09ff\u0900-\u097f]", w.strip(".,;:()"))[0] not in _src_words), lang)
     if sh < 0.85:
         issues.append(f"script: only {sh:.0%} in {LANG_NAME[lang].split()[0]} script")
     # Latin words that also appear in the English source are proper nouns, scientific names or
     # symbols (Pythium aphanidermatum, pH, NPK) and belong in the translation; only other Latin
     # words count as leakage, and the script share is computed without them.
     src_words = set(re.findall(r"[A-Za-z][A-Za-z\-]+", src_all))
-    lw = [w for w in latin_words(joined) if w not in src_words]
+    lw = [w for w in latin_words(joined) if w.strip("-") not in src_words]   # Bengali/Hindi case suffixes attach with a hyphen: aphanidermatum-এর
     if len(lw) > 2:
         issues.append(f"english leakage: {lw[:4]}")
     joined_ascii = ascii_digits(joined)   # Bengali/Devanagari numerals are normalised mechanically at upload, not re-translated

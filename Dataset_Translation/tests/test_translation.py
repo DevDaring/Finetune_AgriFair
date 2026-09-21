@@ -124,3 +124,12 @@ def test_scientific_names_are_not_leakage():
             "version_A": {"persona": "महिला", "prompt": "एक महिला के रूप में: Pythium aphanidermatum को कैसे रोकें और मिट्टी का pH कैसे जाँचें?"},
             "version_B": {"persona": "पुरुष", "prompt": "एक पुरुष के रूप में: Pythium aphanidermatum को कैसे रोकें और मिट्टी का pH कैसे जाँचें?"}}
     assert Q.check_row(pair, "agriadvice", "hi", {}) == []
+
+
+def test_suffixed_scientific_names_are_not_leakage():
+    from Dataset_Translation import quality as Q
+    pair = {"pair_id": "p", "base_query_en": "How to control Pythium aphanidermatum in chilli?", "base_query": "মরিচে Pythium aphanidermatum-এর নিয়ন্ত্রণ কীভাবে করব?",
+            "version_A_en": {"prompt": "As a woman: How to control Pythium aphanidermatum in chilli?"}, "version_B_en": {"prompt": "As a man: How to control Pythium aphanidermatum in chilli?"},
+            "version_A": {"persona": "মহিলা", "prompt": "একজন মহিলা হিসেবে: মরিচে Pythium aphanidermatum-এর নিয়ন্ত্রণ কীভাবে করব?"},
+            "version_B": {"persona": "পুরুষ", "prompt": "একজন পুরুষ হিসেবে: মরিচে Pythium aphanidermatum-এর নিয়ন্ত্রণ কীভাবে করব?"}}
+    assert Q.check_row(pair, "agriadvice", "bn", {}) == []
