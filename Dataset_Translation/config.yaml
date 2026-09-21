@@ -23,23 +23,24 @@ models:
     model: deepseek-v4-pro
     fallbacks:
       - {provider: openrouter, model: deepseek/deepseek-v4-pro}
+      - {provider: linkapi, model: gpt-4o}
       - {provider: openai, model: gpt-4o}
   reviewers:                   # run in this order each round; each REVISE is followed by one enhance
     - name: review_nova
       provider: bedrock
       model: us.amazon.nova-2-lite-v1:0
-      fallbacks: [{provider: openrouter, model: amazon/nova-2-lite-v1}, {provider: openai, model: gpt-4o}]
+      fallbacks: [{provider: openrouter, model: amazon/nova-2-lite-v1}, {provider: linkapi, model: gpt-4o}]
     - name: review_mistral
       provider: mistral
       model: mistral-large-latest
-      fallbacks: [{provider: openrouter, model: mistralai/mistral-large-2512}, {provider: openai, model: gpt-4o}]
+      fallbacks: [{provider: openrouter, model: mistralai/mistral-large-2512}, {provider: linkapi, model: gpt-4o}]
     - name: review_gpt4o
-      provider: openai
+      provider: linkapi            # OpenAI models at 0.5x; verified 2026-09-21 (served gpt-4o-2024-11-20)
       model: gpt-4o
-      fallbacks: [{provider: openrouter, model: openai/gpt-4o}]
+      fallbacks: [{provider: openai, model: gpt-4o}, {provider: openrouter, model: openai/gpt-4o}]
   enhance:                     # used alternately, in this order, across the whole run
-    - {provider: kimi, model: kimi-k3, fallbacks: [{provider: openrouter, model: moonshotai/kimi-k3}, {provider: openai, model: gpt-4o}]}
-    - {provider: xai,  model: grok-4.6, fallbacks: [{provider: openrouter, model: x-ai/grok-4.6}, {provider: openai, model: gpt-4o}]}
+    - {provider: kimi, model: kimi-k3, fallbacks: [{provider: openrouter, model: moonshotai/kimi-k3}, {provider: linkapi, model: gpt-4o}]}
+    - {provider: xai,  model: grok-4.6, fallbacks: [{provider: openrouter, model: x-ai/grok-4.6}, {provider: linkapi, model: gpt-4o}]}
 
 endpoints:
   deepseek: https://api.deepseek.com/v1
@@ -48,5 +49,7 @@ endpoints:
   mistral: https://api.mistral.ai/v1
   openrouter: https://openrouter.ai/api/v1
   openai: https://api.openai.com/v1
+  linkapi: https://linkapi.ai/v1
+  linkapi_gemini: https://linkapi.ai/v1
 
 output_directory: Dataset_Translation/out

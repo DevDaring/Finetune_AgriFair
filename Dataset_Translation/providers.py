@@ -28,6 +28,8 @@ _KEY_ALIASES = {
     "mistral": ["MISTRAL_API_KEY1", "MISTRAL_API_KEY2"],
     "openrouter": ["OPENROUTER_API_KEY_1", "OPENROUTER_API_KEY_2"],
     "openai": ["Open_AI_2009_Key", "OPENAI_API_KEY"],
+    "linkapi": ["LINKAPI_AzureOpenAI_KEY"],          # OpenAI models at 0.5x through LinkAPI; primary for GPT-4o
+    "linkapi_gemini": ["LINKAPI_Gemini_Cheap_KEY"],
 }
 
 
