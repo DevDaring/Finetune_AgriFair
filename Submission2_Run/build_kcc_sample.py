@@ -15,8 +15,9 @@ import csv
 import os
 import random
 import re
+import time
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import requests
 
@@ -30,17 +31,41 @@ TYPE_RULES = {   # query_type from free-text category / query, first match wins
     "market": r"price|market|mandi|rate|sell|msp|procure",
 }
 _QUERY_KEYS = ("querytext", "query_text", "query", "question", "farmer_query")
+_STUB = re.compile(r"^\s*(farmer|farmers?)\s+(asked|asking|enquired|wants?)\s+(about|for|regarding|information about|query on)\s*|^\s*(information about|query (on|about)|asked about|enquired about)\s*", re.I)
+_LATIN = re.compile(r"[A-Za-z]")
+
+
+def clean_query(q: str) -> str:
+    """Turn an operator summary into a question: drop the 'FARMER ASKING ABOUT' prefix, fix case, end with '?'."""
+    q = _STUB.sub("", q or "").strip(" ?.:-")
+    if not q:
+        return ""
+    if q.isupper():
+        q = q.lower(); q = q[0].upper() + q[1:]
+    return q + "?"
+
+
+def answer_script(a: str) -> str:
+    """'latin' if the reference answer is mostly Latin script, else 'indic' (Devanagari, Bengali, Tamil ...)."""
+    letters = [ch for ch in (a or "") if ch.isalpha()]
+    if not letters:
+        return "none"
+    return "latin" if sum(1 for ch in letters if _LATIN.match(ch)) / len(letters) > 0.6 else "indic"
 _ANSWER_KEYS = ("kccans", "kcc_ans", "answer", "response", "fta_answer")
+_DISTRICT_KEYS = ("districtname", "district")
+_DATE_KEYS = ("createdon", "created_on", "date")
+_STATE_API = {"Tamil Nadu": "TAMILNADU", "West Bengal": "WEST BENGAL"}   # portal spellings that differ from the display name
+_STATE_DISPLAY = {v: k for k, v in _STATE_API.items()}
 _STATE_KEYS = ("statename", "state_name", "state")
 _CROP_KEYS = ("crop", "crop_name")
 _CAT_KEYS = ("querytype", "query_type", "category", "sector")
 
 
 def _norm(row: Dict) -> Dict:
-    r = {k.lower().replace(" ", "_"): (v or "").strip() for k, v in row.items()}
+    r = {k.lower().replace(" ", "_"): str(v if v is not None else "").strip() for k, v in row.items()}
     pick = lambda keys: next((r[k] for k in keys if k in r and r[k]), "")
-    return {"state": pick(_STATE_KEYS), "crop": pick(_CROP_KEYS), "category": pick(_CAT_KEYS),
-            "query": pick(_QUERY_KEYS), "answer": pick(_ANSWER_KEYS)}
+    return {"state": _STATE_DISPLAY.get(pick(_STATE_KEYS).upper(), pick(_STATE_KEYS).title()), "district": pick(_DISTRICT_KEYS).title(), "crop": pick(_CROP_KEYS), "category": pick(_CAT_KEYS),
+            "query": pick(_QUERY_KEYS), "answer": pick(_ANSWER_KEYS), "created_on": pick(_DATE_KEYS)}
 
 
 def query_type(category: str, query: str) -> str:
@@ -51,22 +76,39 @@ def query_type(category: str, query: str) -> str:
     return "other"
 
 
-def fetch_api(resource_id: str, api_key: str, limit: int = 5000, max_rows: int = 200000) -> List[Dict]:
+def fetch_api(resource_id: str, api_key: str, limit: int = 5000, max_rows: int = 200000, filters: Optional[Dict] = None) -> List[Dict]:
+    """Page through a resource. `filters` maps field -> value (server-side filters[field]=value)."""
     rows, offset = [], 0
     while offset < max_rows:
-        r = requests.get(f"https://api.data.gov.in/resource/{resource_id}",
-                         params={"api-key": api_key, "format": "json", "limit": limit, "offset": offset}, timeout=120)
-        r.raise_for_status()
-        batch = r.json().get("records", [])
+        params = {"api-key": api_key, "format": "json", "limit": limit, "offset": offset}
+        params.update({f"filters[{k}]": v for k, v in (filters or {}).items()})
+        batch = None
+        for attempt in range(5):                     # the portal returns 502/504 under load; back off and retry
+            try:
+                r = requests.get(f"https://api.data.gov.in/resource/{resource_id}", params=params, timeout=120,
+                                 headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AgriFair-research/1.0", "Accept": "application/json"})
+                if r.status_code >= 500:
+                    raise requests.HTTPError(f"HTTP {r.status_code}")
+                r.raise_for_status()
+                batch = r.json().get("records", []); break
+            except (requests.RequestException, ValueError) as e:
+                if attempt == 4:
+                    # never re-raise the original: its message carries the full URL including the key
+                    raise SystemExit(f"data.gov.in request failed after 5 attempts ({type(e).__name__}: {str(e).split('for url')[0].strip()})")
+                time.sleep(2 ** attempt)
         if not batch:
             break
         rows += batch; offset += limit
+        if len(batch) < limit:
+            break
     return rows
 
 
 def stratified_sample(rows: List[Dict], cfg: Dict, seed: int) -> List[Dict]:
     k = cfg["kcc"]; states = set(k["states"]); types = list(k["query_types"])
-    pool = [r for r in rows if r["state"] in states and len(r["query"].split()) >= 4 and r["answer"]]
+    for r in rows:
+        r["query"] = clean_query(r["query"]); r["answer_script"] = answer_script(r["answer"])
+    pool = [r for r in rows if r["state"] in states and len(r["query"].split()) >= 4 and len(r["answer"].split()) >= 4]
     for r in pool:
         r["query_type"] = query_type(r["category"], r["query"])
     pool = [r for r in pool if r["query_type"] in types]
@@ -101,10 +143,15 @@ def main() -> None:
         rid, key = cfg["kcc"]["resource_id"], os.environ.get("DATA_GOV_IN_API_KEY", "")
         if not (rid and key):
             raise SystemExit("give --csv, or set kcc.resource_id in config.yaml and DATA_GOV_IN_API_KEY")
-        raw = [_norm(r) for r in fetch_api(rid, key)]
-        source = {"kind": "data.gov.in", "resource_id": rid}
+        # one server-side pull per state and year: the resource holds ~48M rows, so an unfiltered page-through is not an option
+        raw = []
+        for st in cfg["kcc"]["states"]:
+            for yr in cfg["kcc"].get("years", [2024, 2025]):
+                raw += [_norm(r) for r in fetch_api(rid, key, max_rows=cfg["kcc"].get("max_rows_per_state_year", 20000),
+                                                     filters={"StateName": _STATE_API.get(st, st.upper()), "year": str(yr)})]
+        source = {"kind": "data.gov.in", "resource_id": rid, "states": cfg["kcc"]["states"], "years": cfg["kcc"].get("years", [2024, 2025])}
     sample = stratified_sample(raw, cfg, cfg["analysis_seed"])
-    rows = [{"query_id": f"q{i:04d}", "state": r["state"], "crop": r["crop"], "query_type": r["query_type"],
+    rows = [{"query_id": f"q{i:04d}", "state": r["state"], "district": r["district"], "crop": r["crop"], "query_type": r["query_type"], "created_on": r["created_on"], "answer_script": r["answer_script"],
              "question_en": C.strip_personal_data(r["query"]), "reference_answer": C.strip_personal_data(r["answer"]),
              "question_hi": "", "question_bn": ""} for i, r in enumerate(sample)]
     C.write_jsonl(out, rows)

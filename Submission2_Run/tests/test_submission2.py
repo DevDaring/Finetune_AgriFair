@@ -97,7 +97,7 @@ def test_cost_and_energy_and_pii():
 def test_query_type_and_stratified_sample():
     assert BK.query_type("", "how to control aphid attack in mustard") == "plant_protection"
     assert BK.query_type("Fertilizer Use", "urea dose for wheat") == "nutrient_management"
-    rows = [{"state": s, "crop": "rice", "category": "", "query": f"{q} in rice field please tell", "answer": "a"}
+    rows = [{"state": s, "crop": "rice", "category": "", "query": f"{q} in my rice field please tell me what to do", "answer": "apply the recommended dose now"}
             for s in CFG["kcc"]["states"] for q in ("pest attack", "urea dose", "rain forecast", "pm kisan scheme", "mandi price") for _ in range(3)]
     cfg = {**CFG, "kcc": {**CFG["kcc"], "n_queries": 30}}
     s = BK.stratified_sample(rows, cfg, 1); assert len(s) == 30 and len({r["query_type"] for r in s}) == 5

@@ -60,7 +60,12 @@ kcc:
   n_queries: 600
   states: [Bihar, Maharashtra, Tamil Nadu, West Bengal, Punjab, Karnataka]
   query_types: [plant_protection, nutrient_management, weather, government_schemes, market]
-  resource_id: ""                  # data.gov.in resource UUID; leave empty to use --csv
+  resource_id: "cef25fe2-9231-4128-8aec-2c948fedd43f"   # KCC transcripts, ~48M rows; needs DATA_GOV_IN_API_KEY
+  years: [2024, 2025]
+  max_rows_per_state_year: 20000
+mandi:
+  resource_id: "9ef84268-d588-465a-a308-a864a43d0070"   # Agmarknet current daily prices; snapshot daily
+  commodities: [Potato, Onion, Tomato, Wheat, Paddy(Dhan)(Common), Maize, Soyabean, Cotton, Mustard, Gram]
 facts:
   n_items: 1000                    # 500 equal + 500 diff
   comparison_rule:

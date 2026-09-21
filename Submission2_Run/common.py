@@ -49,7 +49,7 @@ def energy_wh(cfg: Dict, tier: str, tokens: int) -> Dict[str, float]:
 
 # ------------------------------------------------------------------ text hygiene
 
-_PHONE = re.compile(r"\+?\d[\d\s\-()]{6,}\d")
+_PHONE = re.compile(r"(?:\+91[\s-]?|0)?(?<![\d/.])[6-9]\d{4}[\s-]?\d{5}(?![\d/.])")   # Indian mobile numbers only; doses and prices untouched
 _EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
 _AADHAAR = re.compile(r"\b\d{4}\s?\d{4}\s?\d{4}\b")
 
