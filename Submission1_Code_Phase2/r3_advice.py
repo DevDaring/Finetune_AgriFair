@@ -117,8 +117,25 @@ def build_prompts(cfg: Dict, out: Path) -> Dict:
 
 
 def rater_forms(cfg: Dict, out: Path) -> Dict:
-    preds = C.CODES_ROOT / cfg["output_directory"] / "predictions" / "main_predictions.jsonl"
-    rows = [r for r in C.read_jsonl(preds) if r.get("study") == "r3_advice"] if preds.exists() else []
+    # Both prediction files, not just main. run_inference deliberately excludes from the main run
+    # whatever the pilot already answered, so the cases the pilot happened to draw (the first two
+    # by case_id) live ONLY in pilot_predictions.jsonl. Reading main alone silently dropped them
+    # from the rater pack even though both readers accepted them 24/24. The two files are generated
+    # by the same code path with the same seed, ceiling and attention, so they pool directly.
+    pred_dir = C.CODES_ROOT / cfg["output_directory"] / "predictions"
+    rows, seen = [], set()
+    for name in ("main_predictions.jsonl", "pilot_predictions.jsonl"):
+        p = pred_dir / name
+        if not p.exists():
+            continue
+        for r in C.read_jsonl(p):
+            # One prompt is answered by every system, so the identity of a generation is the
+            # (prompt, system) pair. Deduplicating on prompt_id alone collapses the four systems.
+            k = (r.get("prompt_id"), r.get("system"))
+            if r.get("study") != "r3_advice" or k in seen:
+                continue
+            seen.add(k)
+            rows.append(r)
     if not rows:
         raise SystemExit("no R3 generations found; run inference first")
     packets = {c["case_id"]: c for c in csv.DictReader((out / "reference_packets.csv").open(encoding="utf-8"))}
