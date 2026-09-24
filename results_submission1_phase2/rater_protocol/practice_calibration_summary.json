@@ -1,0 +1,11 @@
+{
+  "calibrated": true,
+  "categorical_agreement": {
+    "change_type": 1.0,
+    "justified": 1.0
+  },
+  "count_gaps_over_one_point": [],
+  "note": "Calibration is judged on whether the two readers' counts are within one point and their categorical judgements match. Practice answers were hand-written and never enter a result.",
+  "practice_items": 3,
+  "readers": 2
+}

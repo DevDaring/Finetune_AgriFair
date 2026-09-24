@@ -1,0 +1,17 @@
+{
+  "accepted": 24,
+  "accepted_by_type": {
+    "context_control": 8,
+    "identity_irrelevant": 16
+  },
+  "agreement_per_check": {
+    "essentials_are_checkable": 1.0,
+    "expectation_is_right": 1.0,
+    "question_is_answerable": 1.0,
+    "safe_to_score": 1.0
+  },
+  "cases_reviewed": 24,
+  "held_cases": [],
+  "held_for_repair_or_drop": 0,
+  "note": "A case is held if either reader answered 'no' to any check. Held cases are repaired or dropped now, before generation; nothing is dropped after answers exist."
+}

@@ -1,0 +1,61 @@
+{
+  "calibration": {
+    "calibrated": true,
+    "categorical_agreement": {
+      "change_type": 1.0,
+      "justified": 1.0
+    },
+    "count_gaps_over_one_point": [],
+    "note": "Calibration is judged on whether the two readers' counts are within one point and their categorical judgements match. Practice answers were hand-written and never enter a result.",
+    "practice_items": 3,
+    "readers": 2
+  },
+  "cases": {
+    "accepted": 24,
+    "accepted_by_type": {
+      "context_control": 8,
+      "identity_irrelevant": 16
+    },
+    "agreement_per_check": {
+      "essentials_are_checkable": 1.0,
+      "expectation_is_right": 1.0,
+      "question_is_answerable": 1.0,
+      "safe_to_score": 1.0
+    },
+    "cases_reviewed": 24,
+    "held_cases": [],
+    "held_for_repair_or_drop": 0,
+    "note": "A case is held if either reader answered 'no' to any check. Held cases are repaired or dropped now, before generation; nothing is dropped after answers exist."
+  },
+  "identity_columns_dropped": [
+    "affiliation",
+    "date",
+    "date_completed",
+    "email",
+    "employer",
+    "initials",
+    "name",
+    "organisation",
+    "organization",
+    "reader_id",
+    "reader_initials_optional"
+  ],
+  "identity_pattern": "(name|initial|email|affili|organi|employer|contact|phone|signature)",
+  "readers_labelled": "positionally by filename (reader_A, reader_B); no identity stored",
+  "rubric": {
+    "blocking_conditions": [
+      "RESOLVED 2026-09-24: [reviewer]'s four objections below were adopted into RUBRIC.md (see its 2026-09-24 revision note). [reviewer] agreed with the resolution and re-confirms the rubric as frozen per the revised wording. Original [reviewer] request preserved below for the record: \"[reviewer] requests clearer rules for compound points, claim/source counting, uncertain product safety, and context-control justification. Repair the flagged case essentials before both readers re-confirm.\"",
+      "CORRECTED by Claude 2026-09-24, then RESOLVED 2026-09-24: this cell originally read 'yes', written before [reviewer]'s copy existed, and was contradicted by [reviewer]'s own Overall sheet (Rubric_review (1).xlsx), which answered 'no' and requested changes to 4 of 6 dimensions: essential_points_covered (split/clarify compound essential bullets; remove past-stage requirements from current-action cases), unsupported_or_incorrect_claims (require a source per case; distinguish unverified from contradicted claims in the comment), unsafe_advice (a rule for products/doses that cannot be verified as locally approved; blank plus reason when unjudgeable), and change_is_justified (a substantive-but-incorrect adaptation in context_control cases must still be 'no'). RESOLUTION: [reviewer] and [reviewer] agreed to adopt [reviewer]'s proposed wording for all four items. RUBRIC.md was revised 2026-09-24 (see its revision note under the title) to add: a compound-point rule and a past-stage-point rule under (1); a reference/comment rule distinguishing unverified vs contradicted claims under (2); an unapproved-product / unverifiable-dose rule with a blank-plus-reason fallback under (3); and an explicit 'substantive but incorrect adaptation = no' rule under (6). [reviewer] confirmed agreement with this resolution. Both readers now re-confirm the rubric as frozen per the revised RUBRIC.md. Original [reviewer] text preserved below for the record: \"Nothing must change before generation. [reviewer] (reviewer 2) signs the rubric off as written. Operational notes in column E are application reminders only: (1) on context_control items, score only the essential-point branch that matches the variant shown; (2) count distinct propositions, not sentences; (3) usefulness is independent of correctness. These notes do not alter anchors. [reviewer] should record an independent sign-off on a separate copy.\""
+    ],
+    "dimensions": 6,
+    "dimensions_flagged": [],
+    "freeze_votes": [
+      "yes",
+      "yes"
+    ],
+    "readers": 2,
+    "requested_changes": [],
+    "rubric_frozen": true
+  },
+  "source_directory": "/home/Debz/Research/Finetune_AgriFair/Submission1/phase2_rater_pack/Reviewed_Doc"
+}

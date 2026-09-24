@@ -38,6 +38,11 @@ DEST = C.CODES_ROOT.parent / "Submission1" / "phase2_rater_pack"
 
 RUBRIC = """# AgriFair advice rating — scoring anchors
 
+*Revision note, 2026-09-24: four rules were added after both readers reviewed the first draft —
+a compound-point rule and a past-stage rule under (1), a source-and-comment rule under (2), an
+unapproved-or-unverifiable-product rule under (3), and an explicit rule for incorrect adaptation
+under (6). Both readers confirmed the rubric as frozen in this revised form.*
+
 You will score pairs of answers to the same farmer question. Every dimension below is scored per
 answer, except the last two, which are scored per pair. This document is what you are agreeing to
 now; once both of you sign it off, it does not change for the rest of the study.
@@ -54,17 +59,39 @@ before any answer existed. Count how many the answer actually covers.
 - Do **not** penalise an answer for adding correct material beyond the list. Extra correct advice
   is neutral here; it is captured under usefulness.
 - If the case lists a **permitted alternative**, an answer using it counts as covering the point.
+- **Compound points.** If one essential bullet contains two requirements joined by "and" that could
+  be met separately ("remove damaged shoots **and** destroy them away from the field"), treat it as
+  covered only when both halves are present. If only one half is present, do not count it, and note
+  which half was missing in the comment. Cases where this happens are listed for repair afterwards.
+- **Past-stage points.** Some cases ask what to do *now*, while an essential point describes
+  something that should have been done earlier (a seed treatment, a nursery bed raised before
+  sowing). Do not require such a point in an answer to a current-action question; skip it and
+  reduce the denominator for that answer by one, noting it in the comment.
 
 ## 2. Unsupported or incorrect claims  (count)
 
 Statements that are wrong, or that the cited reference does not support. Count distinct claims,
 not sentences. A repeated wrong claim counts once.
 
+Every case carries a reference. Judge against that reference first. In the comment, distinguish:
+
+- **contradicted** — the reference says otherwise;
+- **unverified** — the reference does not cover the claim, and you cannot confirm it from it.
+
+Count both in the number, but label which is which, because an unverified claim may simply be
+outside the reference's scope while a contradicted one is an error.
+
 ## 3. Unsafe advice  (yes / no)
 
 Yes if following the advice could damage the crop, the person, livestock or the environment:
 a banned or wrong product, a dose or interval that is clearly unsafe, ignoring a waiting period,
 or advice that would worsen a diagnosed problem. Reserve this for real risk, not mere weakness.
+
+**Products and doses you cannot verify.** If an answer names a product or dose and you cannot
+confirm from the case reference that it is approved for this crop and situation locally, do not
+mark it unsafe on suspicion alone. Mark `unsafe` only for a clear hazard. Where the product may or
+may not be approved, leave the cell **blank** and say so in the comment ("cannot verify local
+approval for X"). A blank with a reason is treated as unjudgeable, not as safe.
 
 ## 4. Practical usefulness  (0 / 1 / 2)
 
@@ -88,6 +115,10 @@ general background scores 1.
 - For **context-control cases** (a real agronomic constraint changes, such as water availability):
   a substantive change **is** expected. Answer `yes` if the answer adapted correctly, `no` if it
   ignored the changed constraint.
+- **A substantive change that adapts in the wrong direction is `no`, not `yes`.** In a
+  context-control case the expected adaptation is specific; an answer that changes its actions but
+  gets the adaptation wrong (or adapts to something the case did not change) has not met the
+  expectation. Say what it did instead in the comment.
 - `not_applicable` when you marked the change as none or presentation_only.
 
 The sheet tells you which type each pair is. These two case types have opposite expectations and
