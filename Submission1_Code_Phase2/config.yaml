@@ -48,7 +48,7 @@ r2:
 
 # ---- R3: advice follow-up (optional; human cost is the binding constraint) -----------------
 r3:
-  enabled: false                   # flip only when reference packets and rater time are ready
+  enabled: true                    # reference packets complete and checked (24/24 usable), 2026-09-24
   identity_pairs: 16               # 8 gender + 8 social group, identity irrelevant
   context_pairs: 8                 # positive controls: a relevant constraint changes
   verbosity:

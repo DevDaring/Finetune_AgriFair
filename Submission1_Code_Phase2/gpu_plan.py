@@ -72,7 +72,11 @@ def model_geometry(tier: str) -> Dict:
 
 
 def prompt_lengths(cfg: Dict, tier: str) -> Dict:
-    """Tokenise the real prompt set with this model's tokenizer."""
+    """Tokenise the real prompt set with this model's tokenizer.
+
+    Advice answers are long (80-180 words requested under a 512-token ceiling) while census
+    answers are a JSON letter, so decode cost is counted per study, not with one global budget.
+    """
     from transformers import AutoTokenizer
     from GPU_Run.common import model_registry
     tok = AutoTokenizer.from_pretrained(model_registry.get_spec(tier).hf_id, trust_remote_code=True, token=_hf_token() or None)
@@ -80,6 +84,8 @@ def prompt_lengths(cfg: Dict, tier: str) -> Dict:
     prompts = load_stage_prompts(cfg, "main")
     if not prompts:
         return {}
+    # observed length for advice: the requested word band, not the 512-token ceiling
+    out_tokens = {"r3_advice": 240}
     by_study: Dict[str, List[int]] = {}
     for p in prompts:
         text = tok.apply_chat_template([{"role": "user", "content": p["prompt"]}], tokenize=False, add_generation_prompt=True)
@@ -89,7 +95,8 @@ def prompt_lengths(cfg: Dict, tier: str) -> Dict:
         lens.sort()
         out[study] = {"n": len(lens), "mean_input_tokens": round(sum(lens) / len(lens)),
                       "p95_input_tokens": lens[int(len(lens) * 0.95) - 1], "max_input_tokens": lens[-1],
-                      "total_input_tokens": sum(lens)}
+                      "total_input_tokens": sum(lens), "output_tokens": out_tokens.get(study, 24),
+                      "batch": 8 if study == "r3_advice" else 32}
     return out
 
 
@@ -122,7 +129,8 @@ def time_estimate(lengths: Dict, geom_by_tier: Dict, out_tokens: int, card: Dict
     out = {}
     for label, idx in (("fast", 1), ("slow", 0)):
         prefill_s = (total_in * n_systems) / (card["prefill_ktok_s"][idx] * 1000)
-        decode_s = (total_prompts * n_systems * out_tokens) / (card["decode_tok_s"][idx] * batch)
+        decode_s = sum((v["n"] * n_systems * v["output_tokens"]) / (card["decode_tok_s"][idx] * v["batch"])
+                       for v in lengths.values())
         # start-up: CUDA context, transformers import, tokenizers
         startup_s = 40 if label == "fast" else 75
         # weights: from local disk (~1.5-2.5 GB/s) or downloaded first (~150-400 MB/s)
@@ -130,7 +138,7 @@ def time_estimate(lengths: Dict, geom_by_tier: Dict, out_tokens: int, card: Dict
         load_s = gb_to_load / rate
         # one adapter attach per adapted arm, plus per-batch scheduling overhead
         adapter_s = 8 * n_tiers
-        overhead_s = (total_prompts * n_systems / batch) * (0.15 if label == "fast" else 0.35)
+        overhead_s = sum(v["n"] * n_systems / v["batch"] for v in lengths.values()) * (0.15 if label == "fast" else 0.35)
         total = startup_s + load_s + adapter_s + prefill_s + decode_s + overhead_s
         out[label] = {"startup_minutes": round(startup_s / 60, 2), "weight_loading_minutes": round(load_s / 60, 2),
                       "adapter_minutes": round(adapter_s / 60, 2), "prefill_minutes": round(prefill_s / 60, 2),
