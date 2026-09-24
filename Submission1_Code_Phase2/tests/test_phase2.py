@@ -167,3 +167,45 @@ def test_gpu_gate_blocks_a_real_run(tmp_path, monkeypatch):
     C.write_jsonl(d / "r2_main_prompts.jsonl", prompts[:4])
     with pytest.raises(SystemExit, match="gpu_enabled"):
         RI.run(cfg, "pilot", smoke=False)
+
+
+# ---- identity scrubbing on the returned rater work -------------------------------------------
+
+def test_scrubber_removes_dotted_initials_but_keeps_agronomy():
+    from Submission1_Code_Phase2.import_r3_ratings import scrub
+    keep = {"NPK", "AWD", "TNAU", "SC", "ST"}
+    # the failure that actually happened: every comment was signed with dotted initials, and the
+    # consecutive-caps pattern does not match them
+    assert "X.Y." not in scrub("X.Y. Both answers omit the day-35 pass.", keep)
+    assert "day-35" in scrub("X.Y. Both answers omit the day-35 pass.", keep)
+    # a fertiliser grade written with periods is a domain term, not initials
+    assert "N.P.K." in scrub("Recommends N.P.K. at sowing.", keep)
+    assert "AWD" in scrub("Uses AWD depletion by texture.", keep)
+    # contact details and attributions go regardless of case
+    assert "@" not in scrub("ask me at someone@example.com", keep)
+    assert "9876543210" not in scrub("call 9876543210", keep)
+    assert "reviewed by" not in scrub("Reviewed by the second reader; fine.", keep).lower()
+
+
+def test_scrubber_leaves_ordinary_text_untouched():
+    from Submission1_Code_Phase2.import_r3_ratings import scrub
+    t = "Both give timely hand-weeding of small weeds at day 20. Covered 2/3."
+    assert scrub(t, {"NPK"}) == t
+
+
+# ---- the adjudication principle ----------------------------------------------------------------
+
+def test_floor_and_ceiling_bracket_the_disputed_pairs():
+    """Floor counts only unanimous substantive calls; ceiling counts either. Floor <= ceiling."""
+    import csv, json
+    out = C.CODES_ROOT / CFG["output_directory"] / "advice"
+    f = out / "r3_adjudicated_change.csv"
+    if not f.exists():
+        pytest.skip("ratings not imported in this checkout")
+    rows = list(csv.DictReader(f.open(encoding="utf-8")))
+    assert rows, "adjudication file is empty"
+    for r in rows:
+        lo, hi = int(r["substantive_floor"]), int(r["substantive_ceiling"])
+        assert lo <= hi, f"floor above ceiling for {r['system']}"
+        assert hi - lo == int(r["disputed"]), "ceiling minus floor must equal the disputed count"
+        assert float(r["floor_ci_low"]) <= float(r["share_floor"]) <= float(r["floor_ci_high"])

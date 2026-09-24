@@ -188,9 +188,83 @@ def main(argv=None) -> None:
     }
     C.write_json(out / "r3_reliability.json", reliability)
 
+    # ---- adjudication of the 91 disagreements, by a recorded mechanical principle --------------
+    #
+    # PRINCIPLE (fixed here, applied without exception, no new human judgement):
+    #   A pair counts as a substantive change at the FLOOR only when BOTH readers called it
+    #   substantive, and at the CEILING when EITHER did. The true rate lies between. Where the
+    #   two readers disagree we do not pick a winner, average them, or re-rate the pair
+    #   ourselves -- each of those would substitute the analyst's judgement for the readers'.
+    #   The bracket is reported instead of a point estimate, because a point estimate is not
+    #   what this data can support at kappa 0.268.
+    adj = collections.defaultdict(lambda: {"n": 0, "both": 0, "either": 0, "disputed": 0})
+    for i in idl:
+        k = key[i]
+        a = by1[i].get("pair_change_type", "")
+        b = next(r for r in r2 if r["assessment_id"] == i).get("pair_change_type", "")
+        cell = (k["case_type"], k["system"])
+        e = adj[cell]
+        e["n"] += 1
+        sa, sb = a == "substantive", b == "substantive"
+        e["both"] += sa and sb
+        e["either"] += sa or sb
+        e["disputed"] += sa != sb
+    def exact_ci(k: int, n: int):
+        """Clopper-Pearson. The floor is a proportion of a small sample; a normal interval lies."""
+        from scipy import stats as st
+        lo = float(st.beta.ppf(0.025, k, n - k + 1)) if k else 0.0
+        hi = float(st.beta.ppf(0.975, k + 1, n - k)) if k < n else 1.0
+        return round(lo, 4), round(hi, 4)
+
+    adj_rows = []
+    for (ct, sysname), e in sorted(adj.items()):
+        lo, hi = exact_ci(e["both"], e["n"])
+        adj_rows.append({
+            "case_type": ct, "system": sysname, "n_pairs": e["n"],
+            "substantive_floor": e["both"], "substantive_ceiling": e["either"],
+            "disputed": e["disputed"],
+            "share_floor": round(e["both"] / e["n"], 4) if e["n"] else None,
+            "share_ceiling": round(e["either"] / e["n"], 4) if e["n"] else None,
+            "floor_ci_low": lo, "floor_ci_high": hi})
+    C.write_csv(out / "r3_adjudicated_change.csv", adj_rows)
+
+    # pooled floor across systems, the one identity result this data can carry
+    pool = {ct: [sum(e["both"] for (c, _), e in adj.items() if c == ct),
+                 sum(e["n"] for (c, _), e in adj.items() if c == ct)]
+            for ct in ("identity_irrelevant", "context_control")}
+    pooled = {}
+    for ct, (k, n) in pool.items():
+        lo, hi = exact_ci(k, n)
+        pooled[ct] = {"substantive_floor": k, "n_pairs": n,
+                      "share_floor": round(k / n, 4), "ci95": [lo, hi]}
+
     res = {"ratings_per_reader": {k: len(v) for k, v in per.items()},
            "agreement": agree,
            "reliability": reliability,
+           "adjudication_principle": (
+               "A pair counts as a substantive change at the floor only when both readers said so, "
+               "and at the ceiling when either did; the rate is reported as that bracket. Disputed "
+               "pairs are never resolved by the analyst, averaged, or re-rated, and no third reader "
+               "was consulted. Fixed before the numbers below were computed."),
+           "adjudicated_change": adj_rows,
+           "pooled_floor": pooled,
+           "what_r3_can_and_cannot_say": {
+               "can": ("Under the most conservative reading available -- counting a change only "
+                       "where both readers independently agreed -- every one of the four systems "
+                       "altered its agronomic advice on pairs where only the farmer's stated "
+                       "identity differed. Pooled over the four systems the floor is "
+                       f"{pooled['identity_irrelevant']['substantive_floor']} of "
+                       f"{pooled['identity_irrelevant']['n_pairs']} identity pairs, "
+                       f"{pooled['identity_irrelevant']['share_floor']:.3f} "
+                       f"[{pooled['identity_irrelevant']['ci95'][0]:.3f}, "
+                       f"{pooled['identity_irrelevant']['ci95'][1]:.3f}]. Every per-system interval "
+                       "excludes zero."),
+               "cannot": ("Rank the four systems against each other, or say whether adaptation "
+                          "increases or decreases identity sensitivity: the two model families "
+                          "point in opposite directions and the per-system brackets overlap "
+                          "heavily. It also cannot report a point estimate of the change rate, or "
+                          "any result at all from the context controls, where reader agreement is "
+                          "at chance (kappa 0.008).")},
            "change_by_system": change_rows,
            "quality_by_verbosity": qual_rows,
            "usefulness_by_verbosity": use_rows,

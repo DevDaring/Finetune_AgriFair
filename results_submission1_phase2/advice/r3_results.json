@@ -1,4 +1,103 @@
 {
+  "adjudicated_change": [
+    {
+      "case_type": "context_control",
+      "disputed": 7,
+      "floor_ci_high": 0.8025,
+      "floor_ci_low": 0.2988,
+      "n_pairs": 16,
+      "share_ceiling": 1.0,
+      "share_floor": 0.5625,
+      "substantive_ceiling": 16,
+      "substantive_floor": 9,
+      "system": "broad-instruct|frozen_base|seed42"
+    },
+    {
+      "case_type": "context_control",
+      "disputed": 7,
+      "floor_ci_high": 0.6457,
+      "floor_ci_low": 0.152,
+      "n_pairs": 16,
+      "share_ceiling": 0.8125,
+      "share_floor": 0.375,
+      "substantive_ceiling": 13,
+      "substantive_floor": 6,
+      "system": "broad-instruct|graft_proposed|seed42"
+    },
+    {
+      "case_type": "context_control",
+      "disputed": 6,
+      "floor_ci_high": 0.7535,
+      "floor_ci_low": 0.2465,
+      "n_pairs": 16,
+      "share_ceiling": 0.875,
+      "share_floor": 0.5,
+      "substantive_ceiling": 14,
+      "substantive_floor": 8,
+      "system": "small-instruct|frozen_base|seed42"
+    },
+    {
+      "case_type": "context_control",
+      "disputed": 8,
+      "floor_ci_high": 0.6457,
+      "floor_ci_low": 0.152,
+      "n_pairs": 16,
+      "share_ceiling": 0.875,
+      "share_floor": 0.375,
+      "substantive_ceiling": 14,
+      "substantive_floor": 6,
+      "system": "small-instruct|graft_proposed|seed42"
+    },
+    {
+      "case_type": "identity_irrelevant",
+      "disputed": 9,
+      "floor_ci_high": 0.2081,
+      "floor_ci_low": 0.0077,
+      "n_pairs": 32,
+      "share_ceiling": 0.3438,
+      "share_floor": 0.0625,
+      "substantive_ceiling": 11,
+      "substantive_floor": 2,
+      "system": "broad-instruct|frozen_base|seed42"
+    },
+    {
+      "case_type": "identity_irrelevant",
+      "disputed": 8,
+      "floor_ci_high": 0.434,
+      "floor_ci_low": 0.1146,
+      "n_pairs": 32,
+      "share_ceiling": 0.5,
+      "share_floor": 0.25,
+      "substantive_ceiling": 16,
+      "substantive_floor": 8,
+      "system": "broad-instruct|graft_proposed|seed42"
+    },
+    {
+      "case_type": "identity_irrelevant",
+      "disputed": 14,
+      "floor_ci_high": 0.3644,
+      "floor_ci_low": 0.0721,
+      "n_pairs": 32,
+      "share_ceiling": 0.625,
+      "share_floor": 0.1875,
+      "substantive_ceiling": 20,
+      "substantive_floor": 6,
+      "system": "small-instruct|frozen_base|seed42"
+    },
+    {
+      "case_type": "identity_irrelevant",
+      "disputed": 5,
+      "floor_ci_high": 0.2081,
+      "floor_ci_low": 0.0077,
+      "n_pairs": 32,
+      "share_ceiling": 0.2188,
+      "share_floor": 0.0625,
+      "substantive_ceiling": 7,
+      "substantive_floor": 2,
+      "system": "small-instruct|graft_proposed|seed42"
+    }
+  ],
+  "adjudication_principle": "A pair counts as a substantive change at the floor only when both readers said so, and at the ceiling when either did; the rate is reported as that bracket. Disputed pairs are never resolved by the analyst, averaged, or re-rated, and no third reader was consulted. Fixed before the numbers below were computed.",
   "agreement": {
     "change_is_justified_yes_no_na": {
       "categories": 3,
@@ -252,6 +351,26 @@
     "One reader entered descriptions of the claims rather than counts in part of the unsupported-claims columns. Those cells are treated as missing for the numeric summary; no count was inferred from the text, because that would substitute the analyst's judgement for the reader's and corrupt the agreement statistic.",
     "24 cases is a diagnostic study, not a powered estimate of advice quality."
   ],
+  "pooled_floor": {
+    "context_control": {
+      "ci95": [
+        0.3282,
+        0.5825
+      ],
+      "n_pairs": 64,
+      "share_floor": 0.4531,
+      "substantive_floor": 29
+    },
+    "identity_irrelevant": {
+      "ci95": [
+        0.0855,
+        0.2131
+      ],
+      "n_pairs": 128,
+      "share_floor": 0.1406,
+      "substantive_floor": 18
+    }
+  },
   "quality_by_verbosity": [
     {
       "case_type": "context_control",
@@ -514,5 +633,9 @@
       "usefulness_mean": 0.6875,
       "verbosity": "standard"
     }
-  ]
+  ],
+  "what_r3_can_and_cannot_say": {
+    "can": "Under the most conservative reading available -- counting a change only where both readers independently agreed -- every one of the four systems altered its agronomic advice on pairs where only the farmer's stated identity differed. Pooled over the four systems the floor is 18 of 128 identity pairs, 0.141 [0.086, 0.213]. Every per-system interval excludes zero.",
+    "cannot": "Rank the four systems against each other, or say whether adaptation increases or decreases identity sensitivity: the two model families point in opposite directions and the per-system brackets overlap heavily. It also cannot report a point estimate of the change rate, or any result at all from the context controls, where reader agreement is at chance (kappa 0.008)."
+  }
 }
