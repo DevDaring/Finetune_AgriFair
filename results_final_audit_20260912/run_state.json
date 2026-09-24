@@ -2886,7 +2886,7 @@
       "status": "ok"
     },
     "report": {
-      "input_hash": "91a34fae29dff36a9645c6c109b0c2f581485cb0ee998bda849efe3075d9e537",
+      "input_hash": "5e75d73c50b4d3c6dec5908d276e13d4e3950f34f3d5a6a3b5d8cbff11e97d0e",
       "result": {
         "claims": [
           {
@@ -2897,7 +2897,7 @@
           {
             "artifact": "sources/discrepancy_report.csv",
             "claim": "Census-derived labels were independently verified",
-            "status": "unsupported"
+            "status": "supported"
           },
           {
             "artifact": "cpu_baselines/cpu_baseline_summary.csv",
@@ -2922,12 +2922,12 @@
           {
             "artifact": "advice/human_study/ratings_analysis.json",
             "claim": "Blinded expert assessment links automated consistency to correctness/usefulness",
-            "status": "unsupported (study not completed - narrow the claim)"
+            "status": "supported"
           },
           {
             "artifact": "evidence_panel/evidence_panel_scores.csv",
             "claim": "Evidence-sensitivity panel results",
-            "status": "unsupported (P4 not run)"
+            "status": "supported"
           },
           {
             "artifact": "\u2014",
@@ -2941,8 +2941,8 @@
           "fig_loao_error_taxonomy.png"
         ]
       },
-      "runtime_s": 2.2,
-      "started_utc": "2026-09-13T03:27:12Z",
+      "runtime_s": 2.8,
+      "started_utc": "2026-09-18T13:51:58Z",
       "status": "ok"
     },
     "verify_sources": {

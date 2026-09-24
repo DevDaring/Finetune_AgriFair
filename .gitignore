@@ -53,5 +53,10 @@ Dataset_Translation/out/source/
 Dataset_Translation/out/*.log
 Dataset_Translation/out/RUN_DONE
 
-# Phase 2: prediction files are regenerated; packets and designs are committed
-results_submission1_phase2/predictions/
+# Phase 2: predictions ARE committed -- they came from a paid GPU rental that has since been
+# destroyed, so this repository holds the only copy of the evidence base. Scratch only is ignored.
+results_submission1_phase2/predictions/*.tmp
+results_submission1_phase2/predictions/*.partial
+
+# operational cron log for the mandi snapshots (the .manifest.json files are committed)
+data_submission2/mandi/mandi_cron.log
