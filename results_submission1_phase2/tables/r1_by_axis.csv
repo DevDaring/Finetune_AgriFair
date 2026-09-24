@@ -1,0 +1,13 @@
+system,axis,n,accuracy
+broad-instruct|frozen_base|seed42,gender,4,1.0
+broad-instruct|frozen_base|seed42,landholding,28,0.4643
+broad-instruct|frozen_base|seed42,social_group,28,0.3929
+broad-instruct|graft_proposed|seed42,gender,4,0.5
+broad-instruct|graft_proposed|seed42,landholding,28,0.6071
+broad-instruct|graft_proposed|seed42,social_group,28,0.7143
+small-instruct|frozen_base|seed42,gender,4,0.0
+small-instruct|frozen_base|seed42,landholding,28,0.3929
+small-instruct|frozen_base|seed42,social_group,28,0.1786
+small-instruct|graft_proposed|seed42,gender,4,1.0
+small-instruct|graft_proposed|seed42,landholding,28,0.6071
+small-instruct|graft_proposed|seed42,social_group,28,0.4286

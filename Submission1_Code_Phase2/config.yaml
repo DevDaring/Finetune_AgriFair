@@ -6,7 +6,7 @@
 # records to meet a quota.
 
 analysis_seed: 20260924
-gpu_enabled: false                 # no checkpoint is loaded and no token generated while false
+gpu_enabled: false                 # run completed 2026-09-24 on one RTX 3090; gate closed again
 allow_human_packets: true          # building blinded packets for human readers costs nothing
 
 output_directory: results_submission1_phase2
