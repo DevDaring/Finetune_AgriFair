@@ -58,5 +58,9 @@ Dataset_Translation/out/RUN_DONE
 results_submission1_phase2/predictions/*.tmp
 results_submission1_phase2/predictions/*.partial
 
+# R3 unblinding key: maps assessment_id -> system and left/right order. Never leaves this machine,
+# and must never be in a rater pack. The rating sheets themselves carry no system identity.
+results_submission1_phase2/advice/KEEP_FROM_RATERS_*.csv
+
 # operational cron log for the mandi snapshots (the .manifest.json files are committed)
 data_submission2/mandi/mandi_cron.log
