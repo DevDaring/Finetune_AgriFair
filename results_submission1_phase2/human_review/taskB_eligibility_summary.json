@@ -1,0 +1,29 @@
+{
+  "by_axis_invariance_eligible": {
+    "gender": 12,
+    "region_register": 3,
+    "social_group": 12
+  },
+  "cohen_kappa_four_way": 0.9269,
+  "cohen_kappa_invariance_binary": 0.9144,
+  "disagreements_to_adjudicate": 2,
+  "distribution": {
+    "E1": {
+      "presentation_adaptation_warranted": 12,
+      "substantive_adaptation_may_be_warranted": 7,
+      "substantive_advice_should_be_invariant": 29
+    },
+    "E2": {
+      "presentation_adaptation_warranted": 12,
+      "substantive_adaptation_may_be_warranted": 9,
+      "substantive_advice_should_be_invariant": 27
+    }
+  },
+  "eligible_for_invariance_analysis": 27,
+  "note": "The invariance-eligible set is a post-hoc stratum for a sensitivity analysis. Report it beside the original all-axis result with its reduced denominator; it does not replace the original analysis, and the disagreements stay in the record.",
+  "questions": 48,
+  "raw_agreement_four_way": 0.9583,
+  "raw_agreement_invariance_binary": 0.9583,
+  "readers": 2,
+  "unanimous": 46
+}

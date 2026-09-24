@@ -1,0 +1,100 @@
+{
+  "identity_columns_dropped": [
+    "checked_by",
+    "checker_initials",
+    "date_completed",
+    "prepared_by",
+    "reader_id"
+  ],
+  "identity_sheets_ignored": [
+    "Reader"
+  ],
+  "source_directory": "/home/Debz/Research/Finetune_AgriFair/Submission1/phase2_human_pack/Human_Reviewed",
+  "task_a": {
+    "agreement_rate": 0.9714,
+    "checked_by_checker_1": 35,
+    "checker1_vs_checker2": {
+      "answer_agreement": 0.9167,
+      "condition_agreement": 0.9167,
+      "overlap": 24,
+      "rows_differing": [
+        "fresh-014",
+        "fresh-015"
+      ]
+    },
+    "checker_arithmetic_problems": [],
+    "double_checked_by_checker_2": 24,
+    "excluded_after_checking": [
+      {
+        "checker_condition": "excluded",
+        "fresh_id": "fresh-031",
+        "panel_condition": "equal",
+        "reason": "excluded_by_checker"
+      }
+    ],
+    "independent_recomputation_agrees": 34,
+    "note": "Comparisons the independent checker did not confirm are removed from the panel that goes to inference; they are not corrected to match the original labels. The original fresh_panel.jsonl is unchanged.",
+    "panel_comparisons": 35,
+    "team_reported_disagreements": 9,
+    "verified_by_axis": {
+      "gender": 2,
+      "landholding": 16,
+      "social_group": 16
+    },
+    "verified_by_condition": {
+      "diff": 26,
+      "equal": 8
+    },
+    "verified_panel_size": 34
+  },
+  "task_b": {
+    "by_axis_invariance_eligible": {
+      "gender": 12,
+      "region_register": 3,
+      "social_group": 12
+    },
+    "cohen_kappa_four_way": 0.9269,
+    "cohen_kappa_invariance_binary": 0.9144,
+    "disagreements_to_adjudicate": 2,
+    "distribution": {
+      "E1": {
+        "presentation_adaptation_warranted": 12,
+        "substantive_adaptation_may_be_warranted": 7,
+        "substantive_advice_should_be_invariant": 29
+      },
+      "E2": {
+        "presentation_adaptation_warranted": 12,
+        "substantive_adaptation_may_be_warranted": 9,
+        "substantive_advice_should_be_invariant": 27
+      }
+    },
+    "eligible_for_invariance_analysis": 27,
+    "note": "The invariance-eligible set is a post-hoc stratum for a sensitivity analysis. Report it beside the original all-axis result with its reduced denominator; it does not replace the original analysis, and the disagreements stay in the record.",
+    "questions": 48,
+    "raw_agreement_four_way": 0.9583,
+    "raw_agreement_invariance_binary": 0.9583,
+    "readers": 2,
+    "unanimous": 46
+  },
+  "task_c": {
+    "by_axis": {
+      "agronomic_constraint": 8,
+      "gender": 8,
+      "social_group": 8
+    },
+    "by_type": {
+      "context_control": 8,
+      "identity_irrelevant": 16
+    },
+    "cases": 24,
+    "distinct_references": 9,
+    "essential_points_per_case": {
+      "max": 4,
+      "mean": 3.0,
+      "min": 2
+    },
+    "problems": [],
+    "usable": 24,
+    "written_to": "/home/Debz/Research/Finetune_AgriFair/Codes/results_submission1_phase2/advice/reference_packets.csv"
+  }
+}

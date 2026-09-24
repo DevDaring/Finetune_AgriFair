@@ -30,9 +30,9 @@
     "r1_fresh": {
       "max_input_tokens": 136,
       "mean_input_tokens": 125,
-      "n": 62,
+      "n": 68,
       "p95_input_tokens": 133,
-      "total_input_tokens": 7722
+      "total_input_tokens": 8476
     },
     "r2_diagnostic": {
       "max_input_tokens": 327,
@@ -68,8 +68,8 @@
       "if_weights_downloaded_first": 5.7,
       "slow": {
         "adapter_minutes": 0.27,
-        "batch_overhead_minutes": 0.28,
-        "decode_minutes": 0.21,
+        "batch_overhead_minutes": 0.29,
+        "decode_minutes": 0.22,
         "prefill_minutes": 0.15,
         "startup_minutes": 1.25,
         "total_minutes": 2.3,
@@ -81,30 +81,30 @@
     "A10G 24GB": {
       "estimated_cost_usd": [
         0.01,
-        0.05
+        0.06
       ],
       "fast": {
         "adapter_minutes": 0.27,
         "batch_overhead_minutes": 0.12,
         "decode_minutes": 0.3,
-        "prefill_minutes": 0.29,
+        "prefill_minutes": 0.3,
         "startup_minutes": 0.67,
-        "total_minutes": 1.7,
+        "total_minutes": 1.8,
         "weight_loading_minutes": 0.1
       },
       "fits_vram": true,
       "if_weights_downloaded_first": 6.6,
       "slow": {
         "adapter_minutes": 0.27,
-        "batch_overhead_minutes": 0.28,
-        "decode_minutes": 0.48,
+        "batch_overhead_minutes": 0.29,
+        "decode_minutes": 0.49,
         "prefill_minutes": 0.49,
         "startup_minutes": 1.25,
-        "total_minutes": 2.9,
+        "total_minutes": 3.0,
         "weight_loading_minutes": 0.17
       },
       "weights_source": "local disk",
-      "with_safety_factor_minutes": 4.3
+      "with_safety_factor_minutes": 4.5
     },
     "L4 24GB": {
       "estimated_cost_usd": [
@@ -114,7 +114,7 @@
       "fast": {
         "adapter_minutes": 0.27,
         "batch_overhead_minutes": 0.12,
-        "decode_minutes": 0.32,
+        "decode_minutes": 0.33,
         "prefill_minutes": 0.33,
         "startup_minutes": 0.67,
         "total_minutes": 1.8,
@@ -124,8 +124,8 @@
       "if_weights_downloaded_first": 6.9,
       "slow": {
         "adapter_minutes": 0.27,
-        "batch_overhead_minutes": 0.28,
-        "decode_minutes": 0.55,
+        "batch_overhead_minutes": 0.29,
+        "decode_minutes": 0.56,
         "prefill_minutes": 0.59,
         "startup_minutes": 1.25,
         "total_minutes": 3.1,
@@ -152,7 +152,7 @@
       "if_weights_downloaded_first": 5.8,
       "slow": {
         "adapter_minutes": 0.27,
-        "batch_overhead_minutes": 0.28,
+        "batch_overhead_minutes": 0.29,
         "decode_minutes": 0.26,
         "prefill_minutes": 0.2,
         "startup_minutes": 1.25,
@@ -180,15 +180,15 @@
       "if_weights_downloaded_first": 6.1,
       "slow": {
         "adapter_minutes": 0.27,
-        "batch_overhead_minutes": 0.28,
-        "decode_minutes": 0.35,
+        "batch_overhead_minutes": 0.29,
+        "decode_minutes": 0.36,
         "prefill_minutes": 0.33,
         "startup_minutes": 1.25,
-        "total_minutes": 2.6,
+        "total_minutes": 2.7,
         "weight_loading_minutes": 0.17
       },
       "weights_source": "local disk",
-      "with_safety_factor_minutes": 3.9
+      "with_safety_factor_minutes": 4.1
     },
     "RTX 4090 24GB": {
       "estimated_cost_usd": [
@@ -205,18 +205,18 @@
         "weight_loading_minutes": 0.1
       },
       "fits_vram": true,
-      "if_weights_downloaded_first": 5.8,
+      "if_weights_downloaded_first": 6.0,
       "slow": {
         "adapter_minutes": 0.27,
-        "batch_overhead_minutes": 0.28,
+        "batch_overhead_minutes": 0.29,
         "decode_minutes": 0.28,
         "prefill_minutes": 0.21,
         "startup_minutes": 1.25,
-        "total_minutes": 2.4,
+        "total_minutes": 2.5,
         "weight_loading_minutes": 0.17
       },
       "weights_source": "local disk",
-      "with_safety_factor_minutes": 3.6
+      "with_safety_factor_minutes": 3.8
     }
   },
   "vram": {

@@ -40,7 +40,9 @@ def load_stage_prompts(cfg: Dict, stage: str) -> List[Dict]:
     """Every prompt this run must answer, already carrying its scoring fields."""
     out = C.CODES_ROOT / cfg["output_directory"]
     prompts: List[Dict] = []
-    fresh = out / "source_validation" / "fresh_panel.jsonl"
+    # the independently checked panel supersedes the frozen one once the checkers have returned
+    verified = out / "human_review" / "fresh_panel_verified.jsonl"
+    fresh = verified if verified.exists() else out / "source_validation" / "fresh_panel.jsonl"
     if fresh.exists():
         for it in C.read_jsonl(fresh):
             for wording, text in it["wordings"].items():

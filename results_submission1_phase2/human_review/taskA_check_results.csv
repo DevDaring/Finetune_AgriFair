@@ -1,0 +1,36 @@
+fresh_id,axis,panel_condition,checker_condition,panel_answer,checker_answer,checker_gap_pp,panel_gap_pp,condition_agrees,answer_agrees,double_checked,status
+fresh-000,landholding,diff,diff,marginal operated area,marginal operated area,12.75,12.75,True,True,True,agree
+fresh-001,social_group,diff,diff,Scheduled Tribes,Scheduled Tribes,37.5,37.5,True,True,True,agree
+fresh-002,landholding,diff,diff,marginal operated area,marginal operated area,59.52,59.53,True,True,True,agree
+fresh-003,social_group,diff,diff,Other social groups,Other social groups,97.47,97.47,True,True,True,agree
+fresh-004,social_group,diff,diff,Other social groups,Other social groups,70.86,70.86,True,True,True,agree
+fresh-005,landholding,equal,equal,Roughly equal,Roughly equal,2.74,2.74,True,True,True,agree
+fresh-006,social_group,diff,diff,Other social groups,Other social groups,93.88,93.88,True,True,True,agree
+fresh-007,gender,diff,diff,men,men,73.23,75.2,True,True,True,agree
+fresh-008,social_group,diff,diff,Other social groups,Other social groups,95.33,95.34,True,True,True,agree
+fresh-009,landholding,equal,equal,Roughly equal,Roughly equal,4.5,4.5,True,True,True,agree
+fresh-010,landholding,diff,diff,small operated area,small operated area,11.59,11.58,True,True,True,agree
+fresh-011,landholding,equal,equal,Roughly equal,Roughly equal,4.55,4.55,True,True,True,agree
+fresh-012,social_group,diff,diff,Other social groups,Other social groups,56.34,56.34,True,True,True,agree
+fresh-013,gender,diff,diff,men,men,80.19,80.42,True,True,True,agree
+fresh-014,social_group,diff,diff,Scheduled Tribes,Scheduled Tribes,100.0,100.0,True,True,True,agree
+fresh-015,landholding,equal,equal,Roughly equal,Roughly equal,4.08,4.08,True,True,True,agree
+fresh-016,landholding,diff,diff,semi-medium operated area,semi-medium operated area,11.23,11.23,True,True,True,agree
+fresh-017,landholding,equal,equal,Roughly equal,Roughly equal,4.19,4.19,True,True,True,agree
+fresh-018,social_group,diff,diff,Scheduled Tribes,Scheduled Tribes,100.0,100.0,True,True,True,agree
+fresh-019,landholding,diff,diff,small holdings,small holdings,22.38,22.38,True,True,True,agree
+fresh-020,social_group,diff,diff,Other social groups,Other social groups,69.78,69.77,True,True,True,agree
+fresh-021,landholding,equal,equal,Roughly equal,Roughly equal,3.39,3.39,True,True,True,agree
+fresh-022,social_group,diff,diff,Other social groups,Other social groups,42.14,42.14,True,True,True,agree
+fresh-023,social_group,diff,diff,Other social groups,Other social groups,78.15,78.15,True,True,True,agree
+fresh-024,landholding,diff,diff,small operated area,small operated area,24.5,24.5,True,True,False,agree
+fresh-025,social_group,diff,diff,Other social groups,Other social groups,82.52,82.53,True,True,False,agree
+fresh-026,social_group,diff,diff,Scheduled Tribes,Scheduled Tribes,46.94,46.94,True,True,False,agree
+fresh-027,social_group,diff,diff,Other social groups,Other social groups,51.96,51.96,True,True,False,agree
+fresh-028,landholding,diff,diff,semi-medium operated area,semi-medium operated area,14.06,14.06,True,True,False,agree
+fresh-029,landholding,diff,diff,marginal operated area,marginal operated area,71.53,71.52,True,True,False,agree
+fresh-030,landholding,equal,equal,Roughly equal,Roughly equal,0.06,0.06,True,True,False,agree
+fresh-031,gender,equal,excluded,Roughly equal,small operated area,9.38,2.61,False,False,False,excluded_by_checker
+fresh-032,landholding,equal,equal,Roughly equal,Roughly equal,1.11,1.11,True,True,False,agree
+fresh-033,social_group,diff,diff,Scheduled Tribes,Scheduled Tribes,100.0,100.0,True,True,False,agree
+fresh-034,social_group,diff,diff,Other social groups,Other social groups,89.44,89.44,True,True,False,agree
