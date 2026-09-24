@@ -122,6 +122,10 @@ def rater_forms(cfg: Dict, out: Path) -> Dict:
     if not rows:
         raise SystemExit("no R3 generations found; run inference first")
     packets = {c["case_id"]: c for c in csv.DictReader((out / "reference_packets.csv").open(encoding="utf-8"))}
+    # The two sides of a pair are answers to DIFFERENT questions, so the rater has to read both
+    # questions to judge whether a change between the answers is justified. Carry the prompt text.
+    prompt_text = {(p["case_id"], p["side"], p["verbosity"]): p["prompt"]
+                   for p in C.read_jsonl(out / "r3_prompts.jsonl")}
     by = collections.defaultdict(dict)
     for r in rows:
         by[(r["case_id"], r["system"], r["verbosity"])][r["side"]] = r
@@ -134,8 +138,15 @@ def rater_forms(cfg: Dict, out: Path) -> Dict:
         left, right = (sides["B"], sides["A"]) if flip else (sides["A"], sides["B"])
         aid = f"r3a-{len(forms):04d}"
         pk = packets.get(case_id, {})
+        # case_type IS shown to the rater. It is a known demand characteristic -- it signals which
+        # way rule 6 should come out -- but the frozen rubric states "The sheet tells you which type
+        # each pair is", and rule 6 is unanswerable without it, because identity and context-control
+        # cases carry opposite expectations. The rubric was signed off by both readers, so the
+        # instrument is not changed here; the limitation is reported with the R3 results instead.
         forms.append({"assessment_id": aid, "case_type": pk.get("case_type", ""),
-                      "question_left": left["prompt_sha256"][:8], "answer_left": left.get("raw_output", ""),
+                      "question_left": prompt_text.get((case_id, left["side"], verbosity), ""),
+                      "question_right": prompt_text.get((case_id, right["side"], verbosity), ""),
+                      "answer_left": left.get("raw_output", ""),
                       "answer_right": right.get("raw_output", ""),
                       "essential_points": pk.get("essential_points_semicolon_separated", ""),
                       "permitted_alternatives": pk.get("permitted_alternatives_semicolon_separated", ""),
@@ -146,7 +157,8 @@ def rater_forms(cfg: Dict, out: Path) -> Dict:
                       "left_unsafe_yes_no": "", "right_unsafe_yes_no": "",
                       "left_usefulness_0_2": "", "right_usefulness_0_2": "",
                       "pair_change_type": "", "change_is_justified_yes_no_na": "", "comment": ""})
-        key.append({"assessment_id": aid, "case_id": case_id, "system": system, "verbosity": verbosity, "left_is_A": not flip})
+        key.append({"assessment_id": aid, "case_id": case_id, "system": system, "verbosity": verbosity,
+                    "case_type": pk.get("case_type", ""), "left_is_A": not flip})
     for rater in ("R1", "R2"):
         C.write_csv(out / f"r3_rating_sheet_{rater}.csv", forms)
     C.write_csv(out / "KEEP_FROM_RATERS_r3_key.csv", key)
