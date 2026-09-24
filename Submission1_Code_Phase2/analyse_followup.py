@@ -28,10 +28,30 @@ from Submission1_Code_Phase2 import common as C
 
 
 def load_predictions(cfg: Dict, stage: str) -> List[Dict]:
-    p = C.CODES_ROOT / cfg["output_directory"] / "predictions" / f"{stage}_predictions.jsonl"
+    """All generations for the stage, pilot included.
+
+    run_inference excludes from the main run whatever the pilot already answered, so the units the
+    pilot happened to draw exist ONLY in pilot_predictions.jsonl. Reading the main file alone
+    analysed 30 of 34 R1 comparisons, 44 of 48 R2 bundles and 8 of 12 R2 diagnostics -- the data
+    met the prespecified design, the analysis silently did not. The two files come from one code
+    path with the same seed, ceiling and attention, so they pool directly. A generation is
+    identified by (prompt_id, system): one prompt is answered by every system.
+    """
+    pred = C.CODES_ROOT / cfg["output_directory"] / "predictions"
+    p = pred / f"{stage}_predictions.jsonl"
     if not p.exists():
         raise SystemExit(f"no predictions at {p}; run inference first")
-    return C.read_jsonl(p)
+    rows, seen = [], set()
+    for src in (p, pred / "pilot_predictions.jsonl") if stage == "main" else (p,):
+        if not src.exists():
+            continue
+        for r in C.read_jsonl(src):
+            k = (r.get("prompt_id"), r.get("system"))
+            if k in seen:
+                continue
+            seen.add(k)
+            rows.append(r)
+    return rows
 
 
 def _paired_cluster_ci(values_a: Dict[str, float], values_b: Dict[str, float], draws: int, seed: int) -> Dict:

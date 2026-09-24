@@ -1,0 +1,17 @@
+system,verbosity,case_type,n,essential_coverage_mean
+broad-instruct|frozen_base|seed42,concise,context_control,32,0.5391
+broad-instruct|frozen_base|seed42,concise,identity_irrelevant,64,0.625
+broad-instruct|frozen_base|seed42,standard,context_control,32,0.5469
+broad-instruct|frozen_base|seed42,standard,identity_irrelevant,64,0.6667
+broad-instruct|graft_proposed|seed42,concise,context_control,32,0.3073
+broad-instruct|graft_proposed|seed42,concise,identity_irrelevant,64,0.4427
+broad-instruct|graft_proposed|seed42,standard,context_control,32,0.3073
+broad-instruct|graft_proposed|seed42,standard,identity_irrelevant,64,0.4271
+small-instruct|frozen_base|seed42,concise,context_control,32,0.3125
+small-instruct|frozen_base|seed42,concise,identity_irrelevant,64,0.6406
+small-instruct|frozen_base|seed42,standard,context_control,32,0.4219
+small-instruct|frozen_base|seed42,standard,identity_irrelevant,64,0.4844
+small-instruct|graft_proposed|seed42,concise,context_control,32,0.237
+small-instruct|graft_proposed|seed42,concise,identity_irrelevant,64,0.2812
+small-instruct|graft_proposed|seed42,standard,context_control,32,0.2083
+small-instruct|graft_proposed|seed42,standard,identity_irrelevant,64,0.2344

@@ -1,5 +1,5 @@
 system,new_family_n,new_family_accuracy,new_family_invalid,original_family_n,original_family_accuracy,original_family_invalid,original_minus_new_wording,ci_lower,ci_upper,n_comparisons,sensitivity_parent_table_difference,sensitivity_parent_table_n_groups,sensitivity_state_difference,sensitivity_state_n_groups
-broad-instruct|frozen_base|seed42,30,0.4667,0.0,30,0.4667,0.0,0.0,-0.2333,0.2333,30,0.0,2,0.0476,21
-broad-instruct|graft_proposed|seed42,30,0.5333,0.0,30,0.7667,0.0,0.2333,0.0333,0.4333,30,-0.3393,2,0.2619,21
-small-instruct|frozen_base|seed42,30,0.3,0.0,30,0.2333,0.0,-0.0667,-0.3,0.1667,30,-0.0357,2,-0.0714,21
-small-instruct|graft_proposed|seed42,30,0.3333,0.0,30,0.7667,0.0,0.4333,0.2667,0.6,30,0.2321,2,0.4286,21
+broad-instruct|frozen_base|seed42,34,0.4706,0.0,34,0.4412,0.0,-0.0294,-0.2353,0.1765,34,-0.0156,2,0.0208,24
+broad-instruct|graft_proposed|seed42,34,0.4706,0.0,34,0.7353,0.0,0.2647,0.0882,0.4412,34,-0.3281,2,0.2917,24
+small-instruct|frozen_base|seed42,34,0.2647,0.0,34,0.2059,0.0,-0.0588,-0.2647,0.1471,34,-0.0312,2,-0.0625,24
+small-instruct|graft_proposed|seed42,34,0.2941,0.0,34,0.7353,0.0,0.4412,0.2647,0.6176,34,0.2344,2,0.4583,24
