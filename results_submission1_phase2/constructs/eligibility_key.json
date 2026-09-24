@@ -1,0 +1,245 @@
+{
+  "note": "kept out of the reviewer packet; maps review_id back to the pair and side order",
+  "rows": [
+    {
+      "axis": "gender",
+      "pair_id": "p0000",
+      "review_id": "elig-000"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0035",
+      "review_id": "elig-001"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0079",
+      "review_id": "elig-002"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0091",
+      "review_id": "elig-003"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0103",
+      "review_id": "elig-004"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0112",
+      "review_id": "elig-005"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0114",
+      "review_id": "elig-006"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0125",
+      "review_id": "elig-007"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0132",
+      "review_id": "elig-008"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0143",
+      "review_id": "elig-009"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0157",
+      "review_id": "elig-010"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0214",
+      "review_id": "elig-011"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0238",
+      "review_id": "elig-012"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0254",
+      "review_id": "elig-013"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0258",
+      "review_id": "elig-014"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0264",
+      "review_id": "elig-015"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0284",
+      "review_id": "elig-016"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0297",
+      "review_id": "elig-017"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0305",
+      "review_id": "elig-018"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0308",
+      "review_id": "elig-019"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0321",
+      "review_id": "elig-020"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0327",
+      "review_id": "elig-021"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0345",
+      "review_id": "elig-022"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0349",
+      "review_id": "elig-023"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0362",
+      "review_id": "elig-024"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0388",
+      "review_id": "elig-025"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0443",
+      "review_id": "elig-026"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0454",
+      "review_id": "elig-027"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0463",
+      "review_id": "elig-028"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0477",
+      "review_id": "elig-029"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0491",
+      "review_id": "elig-030"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0502",
+      "review_id": "elig-031"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0505",
+      "review_id": "elig-032"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0525",
+      "review_id": "elig-033"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0560",
+      "review_id": "elig-034"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0570",
+      "review_id": "elig-035"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0596",
+      "review_id": "elig-036"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0601",
+      "review_id": "elig-037"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0630",
+      "review_id": "elig-038"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0652",
+      "review_id": "elig-039"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0655",
+      "review_id": "elig-040"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0700",
+      "review_id": "elig-041"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0710",
+      "review_id": "elig-042"
+    },
+    {
+      "axis": "gender",
+      "pair_id": "p0736",
+      "review_id": "elig-043"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0755",
+      "review_id": "elig-044"
+    },
+    {
+      "axis": "social_group",
+      "pair_id": "p0757",
+      "review_id": "elig-045"
+    },
+    {
+      "axis": "region_register",
+      "pair_id": "p0762",
+      "review_id": "elig-046"
+    },
+    {
+      "axis": "literacy_register",
+      "pair_id": "p0779",
+      "review_id": "elig-047"
+    }
+  ]
+}

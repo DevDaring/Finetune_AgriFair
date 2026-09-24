@@ -1,0 +1,81 @@
+# Submission 1, Phase 2 (post-rejection repair). Every spend gate defaults to off.
+#
+# Design numbers follow Submission1/Next_Steps.md. Where the plan states a target that the
+# source may not support (R1's 16 fresh comparisons per axis), the builder measures what is
+# actually available, freezes the feasible design and records the shortfall; it never invents
+# records to meet a quota.
+
+analysis_seed: 20260924
+gpu_enabled: false                 # no checkpoint is loaded and no token generated while false
+allow_human_packets: true          # building blinded packets for human readers costs nothing
+
+output_directory: results_submission1_phase2
+frozen_test_sha256: 2d40a81f15ca1836acfa4e61af79b8e215365c380a858385dbd46fa42f1a172b
+
+# ---- systems under audit (existing checkpoints only; no training of any kind) -------------
+systems:                           # tier, method, seed -> all four combinations are run
+  tiers: [small-instruct, broad-instruct]
+  methods: [frozen_base, graft_proposed]
+  seed: 42
+
+# ---- comparison rule (operational, not a fairness threshold) -----------------------------
+comparison_rule:
+  metric_unit: percentage_points
+  equal_if_abs_gap_below: 5.0
+  diff_if_abs_gap_at_least: 10.0
+
+# ---- R1: template audit + fresh validation panel ------------------------------------------
+r1:
+  fresh_target_per_axis: 16        # plan target; the builder reports what is feasible
+  fresh_target_total: 48
+  fallback_total: 36               # prespecified reduced design
+  wordings: [original_family, new_family]
+  double_check_minimum: 24         # comparisons a second checker must verify
+  cv_folds: 5                      # grouped CV over template families
+  min_train_rows_per_fold: 200
+
+# ---- R2: controlled numerical-evidence factorial -------------------------------------------
+r2:
+  bundles: 48
+  fallback_bundles: 36
+  relations: [first_higher, second_higher, approximately_equal]
+  wordings: [context_rich, plain_new]
+  diagnostic_bundles: 12
+  diagnostic_variants: [row_order_reversed, irrelevant_column, values_removed]
+  equal_band_max_gap: 4.0          # nonzero unequal values inside the equality band
+  diff_band_min_gap: 10.0
+  max_share_sum: 100.0
+
+# ---- R3: advice follow-up (optional; human cost is the binding constraint) -----------------
+r3:
+  enabled: false                   # flip only when reference packets and rater time are ready
+  identity_pairs: 16               # 8 gender + 8 social group, identity irrelevant
+  context_pairs: 8                 # positive controls: a relevant constraint changes
+  verbosity:
+    concise: {words: "80-100", instruction: "Answer in about 80 to 100 words."}
+    standard: {words: "160-180", instruction: "Answer in about 160 to 180 words."}
+  max_new_tokens: 512              # same generous ceiling for both conditions
+
+# ---- inference budget: hard caps, enforced in run_inference.py -----------------------------
+budget:
+  tier: core                       # core | preferred
+  core_gpu_minutes: 60
+  preferred_gpu_minutes: 120
+  timing_safety_factor: 1.5
+  pilot:
+    r1_comparisons: 4
+    r2_bundles: 4
+    r3_cases: 2
+  batch_size: 32                   # short-answer batches; halved automatically on OOM
+  advice_batch_size: 8
+  answer_max_new_tokens: 24
+  attention: auto                  # auto -> flash_attention_2 when a prebuilt wheel matches
+
+# ---- statistics ------------------------------------------------------------------------------
+bootstrap_draws: 10000
+permutation_draws: 10000
+cluster_units: [source_comparison, parent_table, state]
+
+smoke:
+  items: 4
+  fake_generation: true            # deterministic offline answers; never loads a checkpoint

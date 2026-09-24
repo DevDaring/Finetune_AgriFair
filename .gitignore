@@ -52,3 +52,6 @@ Dataset_Translation/out/cache*.sqlite
 Dataset_Translation/out/source/
 Dataset_Translation/out/*.log
 Dataset_Translation/out/RUN_DONE
+
+# Phase 2: prediction files are regenerated; packets and designs are committed
+results_submission1_phase2/predictions/

@@ -1,0 +1,240 @@
+{
+  "answer_tokens": 24,
+  "batch_size": 32,
+  "context_tokens_p95": 349,
+  "models": {
+    "broad-instruct": {
+      "declared_params_b": 4.0,
+      "head_dim": 128,
+      "hidden": 2560,
+      "kv_bytes_per_token": 147456,
+      "kv_heads": 8,
+      "layers": 36,
+      "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "params_billions": 4.41,
+      "tier": "broad-instruct"
+    },
+    "small-instruct": {
+      "declared_params_b": 3.2,
+      "head_dim": 128,
+      "hidden": 3072,
+      "kv_bytes_per_token": 114688,
+      "kv_heads": 8,
+      "layers": 28,
+      "model_id": "meta-llama/Llama-3.2-3B-Instruct",
+      "params_billions": 3.61,
+      "tier": "small-instruct"
+    }
+  },
+  "prompt_inventory": {
+    "r1_fresh": {
+      "max_input_tokens": 136,
+      "mean_input_tokens": 125,
+      "n": 62,
+      "p95_input_tokens": 133,
+      "total_input_tokens": 7722
+    },
+    "r2_diagnostic": {
+      "max_input_tokens": 327,
+      "mean_input_tokens": 297,
+      "n": 36,
+      "p95_input_tokens": 325,
+      "total_input_tokens": 10701
+    },
+    "r2_main": {
+      "max_input_tokens": 261,
+      "mean_input_tokens": 241,
+      "n": 288,
+      "p95_input_tokens": 256,
+      "total_input_tokens": 69526
+    }
+  },
+  "time_by_card": {
+    "A100 40GB": {
+      "estimated_cost_usd": [
+        0.02,
+        0.1
+      ],
+      "fast": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.12,
+        "decode_minutes": 0.14,
+        "prefill_minutes": 0.09,
+        "startup_minutes": 0.67,
+        "total_minutes": 1.4,
+        "weight_loading_minutes": 0.1
+      },
+      "fits_vram": true,
+      "if_weights_downloaded_first": 5.7,
+      "slow": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.28,
+        "decode_minutes": 0.21,
+        "prefill_minutes": 0.15,
+        "startup_minutes": 1.25,
+        "total_minutes": 2.3,
+        "weight_loading_minutes": 0.17
+      },
+      "weights_source": "local disk",
+      "with_safety_factor_minutes": 3.4
+    },
+    "A10G 24GB": {
+      "estimated_cost_usd": [
+        0.01,
+        0.05
+      ],
+      "fast": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.12,
+        "decode_minutes": 0.3,
+        "prefill_minutes": 0.29,
+        "startup_minutes": 0.67,
+        "total_minutes": 1.7,
+        "weight_loading_minutes": 0.1
+      },
+      "fits_vram": true,
+      "if_weights_downloaded_first": 6.6,
+      "slow": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.28,
+        "decode_minutes": 0.48,
+        "prefill_minutes": 0.49,
+        "startup_minutes": 1.25,
+        "total_minutes": 2.9,
+        "weight_loading_minutes": 0.17
+      },
+      "weights_source": "local disk",
+      "with_safety_factor_minutes": 4.3
+    },
+    "L4 24GB": {
+      "estimated_cost_usd": [
+        0.01,
+        0.04
+      ],
+      "fast": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.12,
+        "decode_minutes": 0.32,
+        "prefill_minutes": 0.33,
+        "startup_minutes": 0.67,
+        "total_minutes": 1.8,
+        "weight_loading_minutes": 0.1
+      },
+      "fits_vram": true,
+      "if_weights_downloaded_first": 6.9,
+      "slow": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.28,
+        "decode_minutes": 0.55,
+        "prefill_minutes": 0.59,
+        "startup_minutes": 1.25,
+        "total_minutes": 3.1,
+        "weight_loading_minutes": 0.17
+      },
+      "weights_source": "local disk",
+      "with_safety_factor_minutes": 4.7
+    },
+    "L40S 48GB": {
+      "estimated_cost_usd": [
+        0.02,
+        0.07
+      ],
+      "fast": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.12,
+        "decode_minutes": 0.16,
+        "prefill_minutes": 0.12,
+        "startup_minutes": 0.67,
+        "total_minutes": 1.4,
+        "weight_loading_minutes": 0.1
+      },
+      "fits_vram": true,
+      "if_weights_downloaded_first": 5.8,
+      "slow": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.28,
+        "decode_minutes": 0.26,
+        "prefill_minutes": 0.2,
+        "startup_minutes": 1.25,
+        "total_minutes": 2.4,
+        "weight_loading_minutes": 0.17
+      },
+      "weights_source": "local disk",
+      "with_safety_factor_minutes": 3.6
+    },
+    "RTX 3090 24GB": {
+      "estimated_cost_usd": [
+        0.0,
+        0.02
+      ],
+      "fast": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.12,
+        "decode_minutes": 0.23,
+        "prefill_minutes": 0.2,
+        "startup_minutes": 0.67,
+        "total_minutes": 1.6,
+        "weight_loading_minutes": 0.1
+      },
+      "fits_vram": true,
+      "if_weights_downloaded_first": 6.1,
+      "slow": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.28,
+        "decode_minutes": 0.35,
+        "prefill_minutes": 0.33,
+        "startup_minutes": 1.25,
+        "total_minutes": 2.6,
+        "weight_loading_minutes": 0.17
+      },
+      "weights_source": "local disk",
+      "with_safety_factor_minutes": 3.9
+    },
+    "RTX 4090 24GB": {
+      "estimated_cost_usd": [
+        0.01,
+        0.04
+      ],
+      "fast": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.12,
+        "decode_minutes": 0.18,
+        "prefill_minutes": 0.13,
+        "startup_minutes": 0.67,
+        "total_minutes": 1.5,
+        "weight_loading_minutes": 0.1
+      },
+      "fits_vram": true,
+      "if_weights_downloaded_first": 5.8,
+      "slow": {
+        "adapter_minutes": 0.27,
+        "batch_overhead_minutes": 0.28,
+        "decode_minutes": 0.28,
+        "prefill_minutes": 0.21,
+        "startup_minutes": 1.25,
+        "total_minutes": 2.4,
+        "weight_loading_minutes": 0.17
+      },
+      "weights_source": "local disk",
+      "with_safety_factor_minutes": 3.6
+    }
+  },
+  "vram": {
+    "broad-instruct": {
+      "activations_gb": 0.64,
+      "adapter_gb": 0.1,
+      "kv_cache_gb": 1.53,
+      "peak_gb": 10.49,
+      "weights_gb": 8.21,
+      "with_20pct_headroom_gb": 12.58
+    },
+    "small-instruct": {
+      "activations_gb": 0.77,
+      "adapter_gb": 0.1,
+      "kv_cache_gb": 1.19,
+      "peak_gb": 8.78,
+      "weights_gb": 6.72,
+      "with_20pct_headroom_gb": 10.54
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "design_decision": "reduced design of 35 comparisons with disclosed axis and condition imbalance",
+  "distinct_states": 34,
+  "fallback_total": 36,
+  "feasible_total": 35,
+  "note": "Equal-condition comparisons are nearly exhausted by the original benchmark, and the gender axis is all-India only, so few unused cells exist. The imbalance is a property of the source, not a sampling choice, and is reported with the results.",
+  "per_axis_plan": {
+    "gender": {
+      "available_diff": 2,
+      "available_equal": 1,
+      "take_diff": 2,
+      "take_equal": 1
+    },
+    "landholding": {
+      "available_diff": 602,
+      "available_equal": 8,
+      "take_diff": 8,
+      "take_equal": 8
+    },
+    "social_group": {
+      "available_diff": 235,
+      "available_equal": 0,
+      "take_diff": 16,
+      "take_equal": 0
+    }
+  },
+  "plan_target_total": 48,
+  "shortfalls": [
+    "gender: 3 of 16 available (equal 1, diff 2)"
+  ],
+  "unused_available": 848,
+  "unused_by_axis": {
+    "gender": 3,
+    "landholding": 610,
+    "social_group": 235
+  },
+  "unused_by_axis_condition": {
+    "gender/diff": 2,
+    "gender/equal": 1,
+    "landholding/diff": 602,
+    "landholding/equal": 8,
+    "social_group/diff": 235
+  },
+  "used_by_benchmark": 1178,
+  "validated_comparisons": 2026
+}

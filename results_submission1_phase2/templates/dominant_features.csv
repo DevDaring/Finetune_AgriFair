@@ -1,0 +1,46 @@
+class,feature,weight
+a,marginal holdings,1.0639
+a,men women,0.945
+a,men,0.8985
+a,area scheduled,0.8398
+a,women or,0.8083
+a,castes with,0.8002
+a,group operates,0.7673
+a,holdings large,0.7625
+a,operates,0.7428
+a,large,0.7383
+a,social,0.7244
+a,holdings marginal,0.6482
+a,holdings,0.6383
+a,with marginal,0.6345
+a,marginal,0.6308
+b,holdings marginal,1.2497
+b,men,1.2229
+b,castes other,0.901
+b,women or,0.8911
+b,groups or,0.7679
+b,social,0.7678
+b,with medium,0.7496
+b,other social,0.7136
+b,groups,0.7108
+b,by men,0.7098
+b,other,0.7094
+b,social groups,0.6811
+b,holdings small,0.6698
+b,india,0.6631
+b,all,0.6578
+c,operated,1.7172
+c,census in,1.6501
+c,area,1.5833
+c,operated area,1.5769
+c,area or,1.2679
+c,of operated,1.1651
+c,based,1.0666
+c,based on,1.0666
+c,on the,1.0666
+c,tribes or,1.0618
+c,proportion of,1.0605
+c,on,1.0368
+c,proportion,0.9693
+c,castes scheduled,0.9227
+c,semi medium,0.918
