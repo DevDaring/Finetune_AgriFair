@@ -7,6 +7,7 @@ failed on the version-1 panel.
 """
 from __future__ import annotations
 
+import re
 from typing import Dict, List
 
 from Submission1_DKE_Repair.source_schema import (SourceSpec, SOCIAL_GROUP, SIZE_CLASS, METRIC,
@@ -18,17 +19,32 @@ def _fail(spec: SourceSpec, rule: str, detail: str) -> Dict:
             "source_cell": spec.source_cell}
 
 
+_WS = re.compile(r"\s+")
+
+
+def _has_word(haystack: str, needle: str) -> bool:
+    """Whole-word containment. Plain substring matching reports the size class 'large' as
+    present inside 'a larger share', which silently hid six substituted-size-class cases."""
+    return re.search(r"(?<!\w)" + re.escape(needle) + r"(?!\w)", haystack) is not None
+
+
+def _norm(text: str) -> str:
+    """Collapse runs of whitespace. A reflowed or double-spaced sentence is a formatting
+    variant, not a source mismatch, and must not raise a flag."""
+    return _WS.sub(" ", text).strip().lower()
+
+
 def check_one(spec: SourceSpec, wordings: Dict[str, str]) -> List[Dict]:
     out: List[Dict] = []
     texts = list(wordings.values())
 
     for name, text in wordings.items():
-        low = text.lower()
+        low = _norm(text)
 
         # P1 the social-group restriction appears whenever the source has one, and never otherwise
         if spec.social_group:
-            want = SOCIAL_GROUP.get(spec.social_group, spec.social_group).lower()
-            if want not in low:
+            want = _norm(SOCIAL_GROUP.get(spec.social_group, spec.social_group))
+            if not _has_word(low, want):
                 out.append(_fail(spec, "P1_social_group_dropped",
                                  f"{name}: source restricts to {spec.social_group!r}; question omits it"))
             if "all farmers" in low or "all operational holdings" in low:
@@ -38,16 +54,26 @@ def check_one(spec: SourceSpec, wordings: Dict[str, str]) -> List[Dict]:
             # On the social-group axis the compared ENTITIES are themselves social groups, so the
             # words legitimately appear as entity names. Only a mention outside the entity names
             # would be an invented population restriction, so blank the entities before looking.
-            outside = low.replace(spec.entity1.lower(), " ").replace(spec.entity2.lower(), " ")
+            outside = low.replace(_norm(spec.entity1), " ").replace(_norm(spec.entity2), " ")
             for token in ("scheduled caste", "scheduled tribe"):
                 if token in outside:
                     out.append(_fail(spec, "P1_invented_social_group",
                                      f"{name}: question claims {token!r}; source has no such restriction"))
 
+        # P1b a NEGATED population keeps the expected substring while inverting its meaning
+        # ("holders who are not Scheduled Tribe holders"). A substring test cannot see that,
+        # so negation immediately before the population phrase is checked explicitly.
+        if spec.social_group:
+            want = _norm(SOCIAL_GROUP.get(spec.social_group, spec.social_group))
+            if re.search(r"\b(?:not|other than|excluding|apart from)\s+(?:\w+\s+){0,2}"
+                         + re.escape(want), low):
+                out.append(_fail(spec, "P1_population_negated",
+                                 f"{name}: the population phrase appears under a negation"))
+
         # P2 the size-class restriction, same rule
         if spec.size_class:
-            want = SIZE_CLASS.get(spec.size_class, spec.size_class).lower()
-            if want not in low:
+            want = _norm(SIZE_CLASS.get(spec.size_class, spec.size_class))
+            if not _has_word(low, want):
                 out.append(_fail(spec, "P2_size_class_dropped",
                                  f"{name}: source restricts to {spec.size_class!r}; question omits it"))
 
@@ -55,25 +81,25 @@ def check_one(spec: SourceSpec, wordings: Dict[str, str]) -> List[Dict]:
         if spec.geography == "all-India":
             if "all-india" not in low:
                 out.append(_fail(spec, "P3_geography_missing", f"{name}: all-India not stated"))
-        elif spec.geography.lower() not in low:
+        elif _norm(spec.geography) not in low:
             out.append(_fail(spec, "P3_geography_missing",
                              f"{name}: state {spec.geography!r} not stated"))
 
         # P4 metric and denominator are both explicit
-        if METRIC[spec.metric].lower() not in low:
+        if _norm(METRIC[spec.metric]) not in low:
             out.append(_fail(spec, "P4_metric_missing", f"{name}: metric not stated"))
-        if spec.denominator().lower() not in low:
+        if _norm(spec.denominator()) not in low:
             out.append(_fail(spec, "P5_denominator_missing", f"{name}: denominator not stated"))
 
         # P6 both compared entities appear, in the recorded order
-        i1, i2 = low.find(spec.entity1.lower()), low.find(spec.entity2.lower())
+        i1, i2 = low.find(_norm(spec.entity1)), low.find(_norm(spec.entity2))
         if i1 < 0 or i2 < 0:
             out.append(_fail(spec, "P6_entity_missing", f"{name}: a compared entity is absent"))
         elif i1 > i2:
             out.append(_fail(spec, "P6_entity_order", f"{name}: entities appear in reversed order"))
 
         # P7 the operational rule is stated, identically, in every wording
-        if RULE.lower() not in low:
+        if _norm(RULE) not in low:
             out.append(_fail(spec, "P7_rule_missing", f"{name}: the operational rule is not stated"))
         if "equality band" in low:
             out.append(_fail(spec, "P7_undefined_term",

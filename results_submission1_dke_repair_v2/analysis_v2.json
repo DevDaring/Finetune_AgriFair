@@ -233,11 +233,77 @@
       "system": "small-instruct|graft_proposed|seed42"
     }
   ],
+  "E5": {
+    "per_system": [
+      {
+        "accuracy_equality_at_c": 0.2353,
+        "accuracy_equality_moved": 0.3088,
+        "displayed_letter_stable": 0.0735,
+        "equality_share_equality_at_c": 0.9853,
+        "equality_share_equality_moved": 0.8676,
+        "letter_distribution_when_moved": {
+          "a": 30,
+          "b": 32,
+          "c": 6
+        },
+        "n_items": 68,
+        "semantic_answer_stable": 0.8824,
+        "system": "broad-instruct|frozen_base|seed42"
+      },
+      {
+        "accuracy_equality_at_c": 0.5588,
+        "accuracy_equality_moved": 0.4853,
+        "displayed_letter_stable": 0.0882,
+        "equality_share_equality_at_c": 0.6765,
+        "equality_share_equality_moved": 0.7353,
+        "letter_distribution_when_moved": {
+          "None": 1,
+          "a": 33,
+          "b": 22,
+          "c": 12
+        },
+        "n_items": 68,
+        "semantic_answer_stable": 0.9118,
+        "system": "broad-instruct|graft_proposed|seed42"
+      },
+      {
+        "accuracy_equality_at_c": 0.2353,
+        "accuracy_equality_moved": 0.2353,
+        "displayed_letter_stable": 0.0,
+        "equality_share_equality_at_c": 1.0,
+        "equality_share_equality_moved": 1.0,
+        "letter_distribution_when_moved": {
+          "a": 36,
+          "b": 32
+        },
+        "n_items": 68,
+        "semantic_answer_stable": 1.0,
+        "system": "small-instruct|frozen_base|seed42"
+      },
+      {
+        "accuracy_equality_at_c": 0.2353,
+        "accuracy_equality_moved": 0.3971,
+        "displayed_letter_stable": 0.1471,
+        "equality_share_equality_at_c": 1.0,
+        "equality_share_equality_moved": 0.8382,
+        "letter_distribution_when_moved": {
+          "a": 31,
+          "b": 27,
+          "c": 10
+        },
+        "n_items": 68,
+        "semantic_answer_stable": 0.8382,
+        "system": "small-instruct|graft_proposed|seed42"
+      }
+    ],
+    "reading": "If the equality share holds when equality moves off (c), the preference is semantic. If instead the displayed letter holds, it is a position preference. The assignment of equality to (a) or (b) was fixed by comparison identifier before any output was seen."
+  },
   "by_study": {
     "r1_corrected": 272,
+    "r1_option_permuted": 272,
     "r2_diagnostic_clean": 48,
     "r2_neutral": 288
   },
-  "n_predictions": 608,
+  "n_predictions": 880,
   "note": "Wording A versus wording B sensitivity. Neither wording reproduces an original template family under the paper's own identifier, so this is not a test of familiarity with a seen training template."
 }

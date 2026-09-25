@@ -19,167 +19,103 @@
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.591,
-      "seconds_per_prompt": 0.0497,
+      "seconds": 1.514,
+      "seconds_per_prompt": 0.0473,
       "system": "small-instruct|frozen_base|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 0.933,
-      "seconds_per_prompt": 0.0292,
+      "seconds": 0.898,
+      "seconds_per_prompt": 0.0281,
+      "system": "small-instruct|frozen_base|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 4,
+      "max_new_tokens": 24,
+      "seconds": 0.346,
+      "seconds_per_prompt": 0.0865,
       "system": "small-instruct|frozen_base|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.103,
-      "seconds_per_prompt": 0.0345,
-      "system": "small-instruct|frozen_base|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 1.122,
-      "seconds_per_prompt": 0.0351,
-      "system": "small-instruct|frozen_base|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 24,
-      "max_new_tokens": 24,
-      "seconds": 1.141,
-      "seconds_per_prompt": 0.0476,
-      "system": "small-instruct|frozen_base|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 1.274,
-      "seconds_per_prompt": 0.0398,
+      "seconds": 1.166,
+      "seconds_per_prompt": 0.0364,
       "system": "small-instruct|graft_proposed|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.252,
-      "seconds_per_prompt": 0.0391,
+      "seconds": 1.183,
+      "seconds_per_prompt": 0.037,
+      "system": "small-instruct|graft_proposed|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 4,
+      "max_new_tokens": 24,
+      "seconds": 0.464,
+      "seconds_per_prompt": 0.116,
       "system": "small-instruct|graft_proposed|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.464,
-      "seconds_per_prompt": 0.0457,
-      "system": "small-instruct|graft_proposed|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 1.485,
-      "seconds_per_prompt": 0.0464,
-      "system": "small-instruct|graft_proposed|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 24,
-      "max_new_tokens": 24,
-      "seconds": 1.421,
-      "seconds_per_prompt": 0.0592,
-      "system": "small-instruct|graft_proposed|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 1.237,
-      "seconds_per_prompt": 0.0387,
+      "seconds": 1.17,
+      "seconds_per_prompt": 0.0366,
       "system": "broad-instruct|frozen_base|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.212,
-      "seconds_per_prompt": 0.0379,
+      "seconds": 1.14,
+      "seconds_per_prompt": 0.0356,
+      "system": "broad-instruct|frozen_base|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 4,
+      "max_new_tokens": 24,
+      "seconds": 0.468,
+      "seconds_per_prompt": 0.117,
       "system": "broad-instruct|frozen_base|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.494,
-      "seconds_per_prompt": 0.0467,
-      "system": "broad-instruct|frozen_base|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 1.506,
-      "seconds_per_prompt": 0.0471,
-      "system": "broad-instruct|frozen_base|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 24,
-      "max_new_tokens": 24,
-      "seconds": 1.467,
-      "seconds_per_prompt": 0.0611,
-      "system": "broad-instruct|frozen_base|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 1.79,
-      "seconds_per_prompt": 0.0559,
+      "seconds": 1.552,
+      "seconds_per_prompt": 0.0485,
       "system": "broad-instruct|graft_proposed|seed42"
     },
     {
       "advice": false,
       "batch": 32,
       "max_new_tokens": 24,
-      "seconds": 1.771,
-      "seconds_per_prompt": 0.0553,
+      "seconds": 1.556,
+      "seconds_per_prompt": 0.0486,
       "system": "broad-instruct|graft_proposed|seed42"
     },
     {
       "advice": false,
-      "batch": 32,
+      "batch": 4,
       "max_new_tokens": 24,
-      "seconds": 2.134,
-      "seconds_per_prompt": 0.0667,
-      "system": "broad-instruct|graft_proposed|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 32,
-      "max_new_tokens": 24,
-      "seconds": 2.163,
-      "seconds_per_prompt": 0.0676,
-      "system": "broad-instruct|graft_proposed|seed42"
-    },
-    {
-      "advice": false,
-      "batch": 24,
-      "max_new_tokens": 24,
-      "seconds": 2.114,
-      "seconds_per_prompt": 0.0881,
+      "seconds": 0.672,
+      "seconds_per_prompt": 0.1681,
       "system": "broad-instruct|graft_proposed|seed42"
     }
   ],
   "capped": false,
-  "elapsed_minutes": 3.48,
-  "outputs_written": 608,
-  "seconds_per_output_mean": 0.0488,
+  "elapsed_minutes": 6.71,
+  "outputs_written": 272,
+  "seconds_per_output_mean": 0.0446,
   "stage": "v2",
   "systems": [
     "small-instruct|frozen_base|seed42",

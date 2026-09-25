@@ -46,7 +46,8 @@ def load_stage_prompts(cfg: Dict, stage: str) -> List[Dict]:
         v2 = C.CODES_ROOT / "results_submission1_dke_repair_v2"
         for name, tag in (("prompts_e1_r1_corrected.jsonl", "E1"),
                           ("prompts_e3_diagnostic_clean.jsonl", "E3"),
-                          ("prompts_e4_neutral.jsonl", "E4")):
+                          ("prompts_e4_neutral.jsonl", "E4"),
+                          ("prompts_e5_option_permuted.jsonl", "E5")):
             p = v2 / name
             if p.exists():
                 prompts += [{**r, "experiment": tag} for r in C.read_jsonl(p)]

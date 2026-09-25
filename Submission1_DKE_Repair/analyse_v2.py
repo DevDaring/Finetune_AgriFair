@@ -135,6 +135,49 @@ def e4(rows: List[Dict]) -> List[Dict]:
     return out
 
 
+# ------------------------------------------------------------------ E5 option permutation
+def e5(rows: List[Dict]) -> Dict:
+    """Is the near-constant equality answer semantic, or a preference for a display position?
+
+    The original panel always listed equality at (c). This compares each system's behaviour there
+    with the permuted panel, where equality sits at (a) or (b) by a rule fixed on the comparison
+    identifier. Two stabilities are reported: the SEMANTIC answer (did it still say equality?) and
+    the DISPLAYED LETTER (did it still say the same letter?). A system tracking meaning keeps the
+    first; a system tracking position keeps the second.
+    """
+    base = {(r["system"], r["comparison_id"], r["wording"]): r
+            for r in rows if r["study"] == "r1_corrected"}
+    perm = {(r["system"], r["comparison_id"], r["wording"]): r
+            for r in rows if r["study"] == "r1_option_permuted"}
+    out = []
+    for sysname in sorted({k[0] for k in perm}):
+        keys = [k for k in perm if k[0] == sysname and k in base]
+        if not keys:
+            continue
+        eq_base = sum(1 for k in keys if "roughly equal" in str(base[k].get("picked_choice","")).lower())
+        eq_perm = sum(1 for k in keys if "roughly equal" in str(perm[k].get("picked_choice","")).lower())
+        same_letter = sum(1 for k in keys
+                          if base[k].get("display_letter") == perm[k].get("display_letter"))
+        same_semantic = sum(1 for k in keys
+                            if base[k].get("picked_choice") == perm[k].get("picked_choice"))
+        acc_base = sum(1 for k in keys if base[k]["correct"]) / len(keys)
+        acc_perm = sum(1 for k in keys if perm[k]["correct"]) / len(keys)
+        letters = collections.Counter(str(perm[k].get("display_letter")) for k in keys)
+        out.append({"system": sysname, "n_items": len(keys),
+                    "equality_share_equality_at_c": round(eq_base / len(keys), 4),
+                    "equality_share_equality_moved": round(eq_perm / len(keys), 4),
+                    "semantic_answer_stable": round(same_semantic / len(keys), 4),
+                    "displayed_letter_stable": round(same_letter / len(keys), 4),
+                    "accuracy_equality_at_c": round(acc_base, 4),
+                    "accuracy_equality_moved": round(acc_perm, 4),
+                    "letter_distribution_when_moved": dict(letters)})
+    return {"per_system": out,
+            "reading": ("If the equality share holds when equality moves off (c), the preference is "
+                        "semantic. If instead the displayed letter holds, it is a position "
+                        "preference. The assignment of equality to (a) or (b) was fixed by "
+                        "comparison identifier before any output was seen.")}
+
+
 def main(argv=None) -> None:
     argparse.ArgumentParser().parse_args(argv)
     cfg = C.load_config()
@@ -143,19 +186,20 @@ def main(argv=None) -> None:
     draws = int(cfg.get("bootstrap_draws", 10000))
     seed = int(cfg.get("analysis_seed", 20260925))
 
-    r_e1, r_e3, r_e4 = e1(rows, draws, seed), e3(rows), e4(rows)
+    r_e1, r_e3, r_e4, r_e5 = e1(rows, draws, seed), e3(rows), e4(rows), e5(rows)
     C.write_csv(out / "r1_corrected_results.csv", r_e1["per_system"])
     C.write_csv(out / "r1_corrected_by_condition.csv", r_e1["by_condition"])
     C.write_csv(out / "r2_diagnostic_clean_control_results.csv", r_e3)
     C.write_csv(out / "r2_neutral_transfer_results.csv", r_e4)
+    C.write_csv(out / "r1_option_permutation_results.csv", r_e5["per_system"])
     C.write_json(out / "analysis_v2.json",
                  {"n_predictions": len(rows),
                   "by_study": dict(collections.Counter(r["study"] for r in rows)),
-                  "E1": r_e1, "E3": r_e3, "E4": r_e4,
+                  "E1": r_e1, "E3": r_e3, "E4": r_e4, "E5": r_e5,
                   "note": ("Wording A versus wording B sensitivity. Neither wording reproduces an "
                            "original template family under the paper's own identifier, so this is "
                            "not a test of familiarity with a seen training template.")})
-    print(json.dumps({"n": len(rows), "E1": r_e1["per_system"], "E4": r_e4}, indent=1))
+    print(json.dumps({"n": len(rows), "E5": r_e5["per_system"]}, indent=1))
 
 
 if __name__ == "__main__":
