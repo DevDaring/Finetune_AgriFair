@@ -30,7 +30,8 @@ SHORT = {"broad-instruct|frozen_base|seed42": "broad\nunmod.",
          "small-instruct|frozen_base|seed42": "small\nunmod.",
          "small-instruct|graft_proposed|seed42": "small\nadapt."}
 INK, ACC, GREY = "#1b2a3a", "#b4552d", "#8c94a0"
-plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False,
+TEXTWIDTH_IN = 5.40          # elsarticle preprint 12pt: \textwidth = 390pt
+plt.rcParams.update({"font.size": 8, "axes.spines.top": False, "axes.spines.right": False,
                      "axes.edgecolor": INK, "text.color": INK, "axes.labelcolor": INK,
                      "xtick.color": INK, "ytick.color": INK, "figure.dpi": 200})
 
@@ -56,24 +57,19 @@ def wording(base: Path, dest: Path) -> None:
         eq = sum(1 for p in v if "roughly equal" in str(p.get("picked_choice", "")).lower())
         share.append(eq / len(v) if v else 0.0)
 
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(7.4, 3.0),
-                                        gridspec_kw={"width_ratios": [1.15, 1, 1]})
+    fig, (ax1, ax3) = plt.subplots(1, 2, figsize=(TEXTWIDTH_IN, 2.5),
+                                   gridspec_kw={"width_ratios": [1.15, 1]})
     x = np.arange(len(rows))
     ax1.bar(x - 0.19, a, 0.38, label="wording A", color=GREY)
     ax1.bar(x + 0.19, b, 0.38, label="wording B", color=ACC)
-    ax1.set_xticks(x); ax1.set_xticklabels(labels, fontsize=7.5); ax1.set_ylim(0, 1)
+    ax1.set_xticks(x); ax1.set_xticklabels(labels, fontsize=8); ax1.set_ylim(0, 1)
     ax1.set_ylabel("accuracy, 34 corrected\ncomparisons")
     ax1.axhline(8 / 34, ls=":", lw=1, color=INK)
     ax1.text(-0.45, 8 / 34 + 0.02, "all-equal answer", fontsize=7)
     ax1.legend(frameon=False, fontsize=7.5, loc="upper right")
 
-    ax2.axhline(0, color=INK, lw=1)
-    ax2.errorbar(x, d, yerr=[lo, hi], fmt="o", color=ACC, capsize=3, lw=1.4, ms=5)
-    ax2.set_xticks(x); ax2.set_xticklabels(labels, fontsize=7.5)
-    ax2.set_ylabel("accuracy lost, A minus B")
-
     ax3.bar(x, share, 0.55, color=[ACC if s > 0.9 else GREY for s in share])
-    ax3.set_xticks(x); ax3.set_xticklabels(labels, fontsize=7.5); ax3.set_ylim(0, 1.05)
+    ax3.set_xticks(x); ax3.set_xticklabels(labels, fontsize=8); ax3.set_ylim(0, 1.05)
     ax3.set_ylabel("share answered\n“roughly equal”")
     fig.tight_layout()
     fig.savefig(dest / "fig_wording_v2.pdf"); plt.close(fig)
@@ -86,13 +82,14 @@ def evidence(base: Path, dest: Path) -> None:
     labels = [SHORT[r["system"]] for r in sem]
     x = np.arange(len(sem))
 
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.1, 2.9), gridspec_kw={"width_ratios": [1.25, 1]})
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(TEXTWIDTH_IN, 2.5),
+                                 gridspec_kw={"width_ratios": [1.25, 1]})
     for i, (k, lab, col) in enumerate([("first_group", "first higher", GREY),
                                        ("second_group", "second higher", INK),
                                        ("roughly_equal", "about equal", ACC)]):
         vals = [int(r[k]) / int(r["n"]) for r in sem]
         a1.bar(x + (i - 1) * 0.27, vals, 0.26, label=lab, color=col)
-    a1.set_xticks(x); a1.set_xticklabels(labels); a1.set_ylim(0, 1)
+    a1.set_xticks(x); a1.set_xticklabels(labels, fontsize=8); a1.set_ylim(0, 1)
     a1.set_ylabel("share of responses\nin each semantic category")
     a1.axhline(1 / 3, ls=":", lw=1, color=INK)
     a1.legend(frameon=False, fontsize=7.5, loc="upper left")
@@ -103,7 +100,7 @@ def evidence(base: Path, dest: Path) -> None:
     for i, (k, lab, col) in enumerate(rel):
         vals = [float(acc[r["system"]][k]) for r in sem]
         a2.bar(x + (i - 1) * 0.27, vals, 0.26, color=col)
-    a2.set_xticks(x); a2.set_xticklabels(labels); a2.set_ylim(0, 1)
+    a2.set_xticks(x); a2.set_xticklabels(labels, fontsize=8); a2.set_ylim(0, 1)
     a2.set_ylabel("accuracy, by the relation\nthe numbers encode")
     a2.axhline(1 / 3, ls=":", lw=1, color=INK)
     fig.tight_layout()
@@ -119,13 +116,13 @@ def advice(base: Path, dest: Path) -> None:
     hi = [float(r["case_cluster_upper"]) - b for b, r in zip(both, rows)]
     either = [int(r["either_reader_substantive"]) / int(r["n_pairs"]) for r in rows]
 
-    fig, ax = plt.subplots(figsize=(4.8, 2.9))
+    fig, ax = plt.subplots(figsize=(TEXTWIDTH_IN * 0.72, 2.4))
     x = np.arange(len(rows))
     for i, (b, e) in enumerate(zip(both, either)):
         ax.plot([i, i], [b, e], color=GREY, lw=6, solid_capstyle="butt", zorder=1)
     ax.errorbar(x, both, yerr=[lo, hi], fmt="o", color=ACC, capsize=3, lw=1.4, ms=5, zorder=2)
     ax.axhline(0, color=INK, lw=1)
-    ax.set_xticks(x); ax.set_xticklabels(labels)
+    ax.set_xticks(x); ax.set_xticklabels(labels, fontsize=8)
     ax.set_ylabel("identity pairs labelled a\nsubstantive change")
     ax.set_ylim(-0.02, max(either) * 1.35)
     h = [plt.Line2D([], [], color=GREY, lw=6, label="both-reader to either-reader"),
