@@ -40,6 +40,19 @@ def load_stage_prompts(cfg: Dict, stage: str) -> List[Dict]:
     """Every prompt this run must answer, already carrying its scoring fields."""
     out = C.CODES_ROOT / cfg["output_directory"]
     prompts: List[Dict] = []
+    if stage == "v2":
+        # The DKE repair sets (E1 corrected wording, E3 clean diagnostic control, E4 neutral
+        # entities). They live in their own directory so that version 1 is never overwritten.
+        v2 = C.CODES_ROOT / "results_submission1_dke_repair_v2"
+        for name, tag in (("prompts_e1_r1_corrected.jsonl", "E1"),
+                          ("prompts_e3_diagnostic_clean.jsonl", "E3"),
+                          ("prompts_e4_neutral.jsonl", "E4")):
+            p = v2 / name
+            if p.exists():
+                prompts += [{**r, "experiment": tag} for r in C.read_jsonl(p)]
+        if not prompts:
+            raise SystemExit("no v2 prompts; run Submission1_DKE_Repair.build_prompts_v2 first")
+        return prompts
     # the independently checked panel supersedes the frozen one once the checkers have returned
     verified = out / "human_review" / "fresh_panel_verified.jsonl"
     fresh = verified if verified.exists() else out / "source_validation" / "fresh_panel.jsonl"
@@ -204,7 +217,10 @@ def score_row(p: Dict, raw: str) -> Dict:
 # ------------------------------------------------------------------ the run
 
 def run(cfg: Dict, stage: str, smoke: bool) -> Dict:
-    out_dir = C.out_dir(cfg, "predictions")
+    # The DKE repair run writes to its own versioned directory; version 1 is never overwritten.
+    out_dir = (C.CODES_ROOT / "results_submission1_dke_repair_v2" if stage == "v2"
+               else C.out_dir(cfg, "predictions"))
+    out_dir.mkdir(parents=True, exist_ok=True)
     budget = cfg["budget"]
     cap_minutes = float(budget["core_gpu_minutes"] if budget["tier"] == "core" else budget["preferred_gpu_minutes"])
     prompts = load_stage_prompts(cfg, stage)
@@ -307,7 +323,7 @@ def _remaining_main_count(cfg: Dict) -> int:
 
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", choices=["pilot", "main"], default="pilot")
+    ap.add_argument("--stage", choices=["pilot", "main", "v2"], default="pilot")
     ap.add_argument("--smoke", action="store_true"); a = ap.parse_args(argv)
     run(C.load_config(), a.stage, a.smoke)
 

@@ -1,0 +1,58 @@
+{
+  "analysis_chronology": "The intersection/union rule was written and applied after the ratings were returned and after reader agreement had been computed. It was applied uniformly to every pair and no pair was re-rated, but it was not specified before the outcomes were seen and is therefore not a prospectively declared endpoint.",
+  "context_controls": {
+    "n_pairs": 64,
+    "reason": "reader agreement on the change field is at chance here (kappa 0.008)",
+    "reported": false
+  },
+  "fatigue_claim": "removed: the quarter kappas are 0.400, 0.199, 0.240, 0.088, which are not monotone, and sheet order alone cannot separate fatigue from item composition",
+  "identity": {
+    "both_reader_proportion_case_clustered": {
+      "draws": 10000,
+      "lower": 0.0703,
+      "n_cases": 16,
+      "n_pairs": 128,
+      "point": 0.1406,
+      "upper": 0.2188
+    },
+    "both_reader_substantive": 18,
+    "disputed": 36,
+    "either_reader_proportion_case_clustered": {
+      "draws": 10000,
+      "lower": 0.3438,
+      "n_cases": 16,
+      "n_pairs": 128,
+      "point": 0.4219,
+      "upper": 0.5078
+    },
+    "either_reader_substantive": 54,
+    "n_cases": 16,
+    "n_pairs": 128,
+    "pairs_per_case": 8
+  },
+  "justification_on_both_reader_substantive_pairs": {
+    "joint_labels": {
+      "no|no": 18
+    },
+    "missing_either": 0,
+    "note": "Agreement that a change was unwarranted is descriptive agreement between the same two readers; it does not remove the possibility of shared error.",
+    "pairs": 18
+  },
+  "per_reader": {
+    "R1": {
+      "context_n": 64,
+      "context_substantive": 37,
+      "identity_n": 128,
+      "identity_substantive": 50
+    },
+    "R2": {
+      "context_n": 64,
+      "context_substantive": 49,
+      "identity_n": 128,
+      "identity_substantive": 22
+    }
+  },
+  "rubric_field": "pair_change_type holds none / presentation_only / substantive. Whether a change was warranted is a separate yes/no/not_applicable field. The reported kappa is computed on the three-way change field.",
+  "status": "exploratory",
+  "what_these_quantities_are": "Summaries of two readers' labels, not bounds on a true rate. Both readers can err in the same direction, and an intersection is not a lower bound on truth without an error model or a validated reference standard. No adjudication was performed."
+}

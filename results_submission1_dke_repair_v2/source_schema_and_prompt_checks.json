@@ -1,0 +1,1511 @@
+{
+  "by_axis": {
+    "gender": 2,
+    "landholding": 16,
+    "social_group": 16
+  },
+  "by_condition": {
+    "diff": 26,
+    "equal": 8
+  },
+  "n_comparisons": 34,
+  "note": "Version 1 is preserved unchanged. Version 2 is rendered from a typed schema in which a restriction can only be absent from the question if it is absent from the source row.",
+  "restrictions_restored": 30,
+  "version_1": {
+    "by_rule": {
+      "P1_false_all_farmers": 32,
+      "P1_social_group_dropped": 32,
+      "P2_size_class_dropped": 4,
+      "P4_metric_missing": 6,
+      "P5_denominator_missing": 68,
+      "P7_rule_missing": 68,
+      "P7_undefined_term": 34,
+      "P9_question_collides": 2
+    },
+    "n_failures": 246,
+    "verdict": "the generated panel does not describe its own source rows"
+  },
+  "version_1_failures": [
+    {
+      "detail": "wording_a: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-000",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-000",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-000",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-000",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-000",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-000",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-000",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-000",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-000",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Andhra Pradesh/SC/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-001",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Manipur/Marginal/area/SCvsST"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-001",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Manipur/Marginal/area/SCvsST"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-001",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Manipur/Marginal/area/SCvsST"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-001",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Manipur/Marginal/area/SCvsST"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-001",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Manipur/Marginal/area/SCvsST"
+    },
+    {
+      "detail": "wording_a: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-002",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-002",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-002",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-002",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-002",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-002",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-002",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-002",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-002",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/SC/area/MarginalvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-003",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tamil Nadu/Large/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-003",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tamil Nadu/Large/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-003",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tamil Nadu/Large/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-003",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tamil Nadu/Large/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-003",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Tamil Nadu/Large/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: metric not stated",
+      "fresh_id": "fresh-004",
+      "rule": "P4_metric_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-004",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-004",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: metric not stated",
+      "fresh_id": "fresh-004",
+      "rule": "P4_metric_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-004",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-004",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-004",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/Medium/number/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-005",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-005",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-005",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-005",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-005",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-005",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-005",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-005",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-005",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-006",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-006",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-006",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-006",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-006",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-007",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-007",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_a: source restricts to 'Small'; question omits it",
+      "fresh_id": "fresh-007",
+      "rule": "P2_size_class_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-007",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-007",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-007",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-007",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_b: source restricts to 'Small'; question omits it",
+      "fresh_id": "fresh-007",
+      "rule": "P2_size_class_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-007",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-007",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-007",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Small/area/MvF"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-008",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Punjab/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-008",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Punjab/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-008",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Punjab/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-008",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Punjab/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-008",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Punjab/Large/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-009",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-009",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-009",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-009",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-009",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-009",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-009",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-009",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-009",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-010",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-010",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-010",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-010",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-010",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-010",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-010",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-010",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-010",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Gujarat/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-011",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-011",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-011",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-011",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-011",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-011",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-011",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-011",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-011",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Goa/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-012",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/Medium/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-012",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/Medium/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-012",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/Medium/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-012",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/Medium/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-012",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/Medium/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-013",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-013",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_a: source restricts to 'Medium'; question omits it",
+      "fresh_id": "fresh-013",
+      "rule": "P2_size_class_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-013",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-013",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-013",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-013",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b: source restricts to 'Medium'; question omits it",
+      "fresh_id": "fresh-013",
+      "rule": "P2_size_class_dropped",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-013",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-013",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-013",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-014",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Meghalaya/Semi-medium/area/SCvsST"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-014",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Meghalaya/Semi-medium/area/SCvsST"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-014",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Meghalaya/Semi-medium/area/SCvsST"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-014",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Meghalaya/Semi-medium/area/SCvsST"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-014",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Meghalaya/Semi-medium/area/SCvsST"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-015",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-015",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-015",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-015",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-015",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-015",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-015",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-015",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-015",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/ST/area/SmallvsSemi-medium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-016",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-016",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-016",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-016",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-016",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-017",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-017",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-017",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-017",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-017",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-017",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-017",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-017",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-017",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: metric not stated",
+      "fresh_id": "fresh-018",
+      "rule": "P4_metric_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-018",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-018",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_b: metric not stated",
+      "fresh_id": "fresh-018",
+      "rule": "P4_metric_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-018",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-018",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-018",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Nagaland/Medium/number/SCvsST"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-019",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-019",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: metric not stated",
+      "fresh_id": "fresh-019",
+      "rule": "P4_metric_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-019",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-019",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-019",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-019",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: metric not stated",
+      "fresh_id": "fresh-019",
+      "rule": "P4_metric_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-019",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-019",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-019",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Odisha/ST/number/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-020",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Telangana/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-020",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Telangana/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-020",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Telangana/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-020",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Telangana/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-020",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Telangana/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-021",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-021",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-021",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-021",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-021",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-021",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-021",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-021",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-021",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/ST/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-022",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/Marginal/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-022",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/Marginal/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-022",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/Marginal/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-022",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/Marginal/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-022",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Rajasthan/Marginal/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-023",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-023",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-023",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-023",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-023",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Maharashtra/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-024",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/All/area/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-024",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/All/area/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-024",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/All/area/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-024",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/All/area/SmallvsLarge"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-024",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/All/area/SmallvsLarge"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-025",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-025",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-025",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-025",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-025",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Uttarakhand/Small/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-026",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-026",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-026",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-026",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-026",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Tripura/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-027",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-027",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-027",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-027",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-027",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 West Bengal/All Classes/area/SCvsOthers"
+    },
+    {
+      "detail": "wording_a: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-028",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-028",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-028",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-028",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-028",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-028",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-028",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-028",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-028",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Jammu & Kashmir/SC/area/Semi-mediumvsMedium"
+    },
+    {
+      "detail": "wording_a: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-029",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-029",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-029",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-029",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'SC'; question omits it",
+      "fresh_id": "fresh-029",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-029",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-029",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-029",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-029",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Bihar/SC/area/MarginalvsMedium"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-030",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-030",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-030",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-030",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-030",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-030",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-030",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-030",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-030",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Madhya Pradesh/ST/area/SmallvsMedium"
+    },
+    {
+      "detail": "wording_a: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-032",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-032",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-032",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-032",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: source restricts to 'ST'; question omits it",
+      "fresh_id": "fresh-032",
+      "rule": "P1_social_group_dropped",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: restricted row rendered as an unrestricted population",
+      "fresh_id": "fresh-032",
+      "rule": "P1_false_all_farmers",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-032",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-032",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-032",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Uttar Pradesh/ST/area/MarginalvsSmall"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-033",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Mizoram/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-033",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Mizoram/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-033",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Mizoram/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-033",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Mizoram/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-033",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Mizoram/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: denominator not stated",
+      "fresh_id": "fresh-034",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Kerala/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a: the operational rule is not stated",
+      "fresh_id": "fresh-034",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Kerala/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: denominator not stated",
+      "fresh_id": "fresh-034",
+      "rule": "P5_denominator_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Kerala/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: the operational rule is not stated",
+      "fresh_id": "fresh-034",
+      "rule": "P7_rule_missing",
+      "source_cell": "AgCensus2015-16 T2-4 Kerala/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_b: refers to an 'equality band' the prompt never defines",
+      "fresh_id": "fresh-034",
+      "rule": "P7_undefined_term",
+      "source_cell": "AgCensus2015-16 T2-4 Kerala/Semi-medium/area/STvsOthers"
+    },
+    {
+      "detail": "wording_a is identical to that of AgCensus2015-16 T14-16 ST/Small/area/MvF",
+      "fresh_id": "fresh-013",
+      "rule": "P9_question_collides",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    },
+    {
+      "detail": "wording_b is identical to that of AgCensus2015-16 T14-16 ST/Small/area/MvF",
+      "fresh_id": "fresh-013",
+      "rule": "P9_question_collides",
+      "source_cell": "AgCensus2015-16 T14-16 ST/Medium/area/MvF"
+    }
+  ],
+  "version_2": {
+    "by_rule": {},
+    "n_failures": 0,
+    "verdict": "clean"
+  }
+}

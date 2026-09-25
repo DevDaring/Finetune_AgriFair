@@ -1,0 +1,47 @@
+{
+  "invariants": [
+    {
+      "detail": "0/200 mismatches",
+      "invariant": "1_row_reversal_preserves_answer",
+      "passed": true
+    },
+    {
+      "detail": "0/200 mismatches",
+      "invariant": "2_value_swap_flips_winner",
+      "passed": true
+    },
+    {
+      "detail": "0/200 mismatches",
+      "invariant": "3_equality_band_maps_to_equal",
+      "passed": true
+    },
+    {
+      "detail": "0/200 mismatches",
+      "invariant": "4_irrelevant_row_is_ignored",
+      "passed": true
+    },
+    {
+      "detail": "0 failures",
+      "invariant": "5_missing_value_abstains",
+      "passed": true
+    },
+    {
+      "detail": "0/200 mismatches",
+      "invariant": "6_option_shuffle_preserves_scoring",
+      "passed": true
+    },
+    {
+      "detail": "0 failures over 34 comparisons",
+      "invariant": "7_questions_match_their_source",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "rule": {
+    "diff_if_gap_at_least_pp": 10.0,
+    "equal_if_gap_below_pp": 5.0,
+    "intermediate_band": "excluded; the executor abstains"
+  },
+  "total": 7,
+  "what_a_perfect_score_means": "The synthetic task is mechanically solvable under the declared rule from the rendered table alone, so a model that fails an item is not defeated by an ill-posed question. It is not evidence of reasoning, and the executor is not a fair comparator for a closed-book model: it is given the table."
+}

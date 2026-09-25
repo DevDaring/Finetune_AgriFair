@@ -1,0 +1,12 @@
+{
+  "E1_prompts": 68,
+  "E3_prompts": 12,
+  "E4_prompts": 72,
+  "expected": {
+    "E1": 68,
+    "E3": 12,
+    "E4": 72
+  },
+  "responses_at_4_systems": 608,
+  "total_prompts": 152
+}

@@ -1,0 +1,20 @@
+2026-09-25 04:24:09,725 INFO [flash_attn_setup] Installing the pre-built wheel flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+Collecting flash-attn==2.8.3+cu12torch2.4cxx11abiFALSE
+  Downloading https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp311-cp311-linux_x86_64.whl (256.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 256.0/256.0 MB 19.2 MB/s eta 0:00:00
+Installing collected packages: flash-attn
+Successfully installed flash-attn-2.8.3
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [01:02<01:02, 62.94s/it]Fetching 2 files: 100%|██████████| 2/2 [01:02<00:00, 31.47s/it]
+2026-09-25 04:25:48,472 WARNING [model_registry] AutoModelForCausalLM with attn_implementation=flash_attention_2 rejected for meta-llama/Llama-3.2-3B-Instruct (ModuleNotFoundError); trying the next option.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.76it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.59it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  216 outputs, 1.4 min elapsed
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files:  33%|███▎      | 1/3 [01:08<02:17, 68.81s/it]Fetching 3 files: 100%|██████████| 3/3 [01:08<00:00, 22.94s/it]
+2026-09-25 04:27:25,059 WARNING [model_registry] AutoModelForCausalLM with attn_implementation=flash_attention_2 rejected for Qwen/Qwen3-4B-Instruct-2507 (ModuleNotFoundError); trying the next option.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:03<00:07,  3.78s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:14<00:08,  8.14s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  4.51s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:15<00:00,  5.06s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  400 outputs, 3.2 min elapsed
+  608 outputs, 3.5 min elapsed
+[run_inference] v2: 608 outputs in 3.5 min (0.05 s/output) -> /root/Codes/results_submission1_dke_repair_v2
