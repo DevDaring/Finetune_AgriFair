@@ -1,5 +1,0 @@
-tier,wording,endpoint,graft_minus_frozen,ci_lower,ci_upper,n_bundles
-small-instruct,context_rich,all_three_relations_correct,0.0625,0.0,0.1458,48
-small-instruct,plain_new,all_three_relations_correct,-0.0417,-0.1042,0.0,48
-broad-instruct,context_rich,all_three_relations_correct,-0.0417,-0.2083,0.125,48
-broad-instruct,plain_new,all_three_relations_correct,-0.4375,-0.5833,-0.312,48

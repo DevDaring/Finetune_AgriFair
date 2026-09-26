@@ -1,5 +1,0 @@
-system,n,first_group,second_group,roughly_equal,unmapped,max_semantic_category_share
-broad-instruct|frozen_base|seed42,288,124,125,39,0,0.434
-broad-instruct|graft_proposed|seed42,288,62,50,176,0,0.6111
-small-instruct|frozen_base|seed42,288,27,29,232,0,0.8056
-small-instruct|graft_proposed|seed42,288,19,21,248,0,0.8611

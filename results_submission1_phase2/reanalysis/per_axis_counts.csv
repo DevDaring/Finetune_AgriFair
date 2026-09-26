@@ -1,7 +1,0 @@
-axis,condition,items,source_cells,states,parent_tables,small_cluster_warning
-gender,equal,90,25,3,1,
-gender,diff,90,22,3,1,
-landholding,equal,458,162,32,1,
-landholding,diff,455,455,31,1,
-social_group,equal,452,59,12,1,
-social_group,diff,455,455,33,1,

@@ -1,16 +1,0 @@
-`torch_dtype` is deprecated! Use `dtype` instead!
-2026-09-24 10:38:05,242 WARNING [model_registry] AutoModelForCausalLM with attn_implementation=flash_attention_2 rejected for meta-llama/Llama-3.2-3B-Instruct (ModuleNotFoundError); trying the next option.
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.05it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.78it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.61it/s]
-The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
-  224 outputs, 0.8 min elapsed
-  416 outputs, 1.0 min elapsed
-  628 outputs, 2.1 min elapsed
-  820 outputs, 2.2 min elapsed
-2026-09-24 10:40:20,595 WARNING [model_registry] AutoModelForCausalLM with attn_implementation=flash_attention_2 rejected for Qwen/Qwen3-4B-Instruct-2507 (ModuleNotFoundError); trying the next option.
-Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:01,  1.29it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:01<00:00,  1.28it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:01<00:00,  1.89it/s]
-The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
-  1000 outputs, 3.0 min elapsed
-  1224 outputs, 3.3 min elapsed
-  1404 outputs, 4.9 min elapsed
-  1628 outputs, 5.9 min elapsed
-[run_inference] main: 1744 outputs in 6.0 min (0.20 s/output) -> /root/Codes/results_submission1_phase2/predictions

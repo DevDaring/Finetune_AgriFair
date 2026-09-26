@@ -1,5 +1,0 @@
-system,n_matched_items,agricultural_accuracy,neutral_accuracy,neutral_minus_agricultural
-broad-instruct|frozen_base|seed42,72,0.8056,0.6944,-0.1111
-broad-instruct|graft_proposed|seed42,72,0.5556,0.7639,0.2083
-small-instruct|frozen_base|seed42,72,0.4583,0.5,0.0417
-small-instruct|graft_proposed|seed42,72,0.4583,0.4444,-0.0139

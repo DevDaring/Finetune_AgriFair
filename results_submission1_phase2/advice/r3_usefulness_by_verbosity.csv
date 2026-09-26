@@ -1,9 +1,0 @@
-system,verbosity,n,usefulness_mean,unsafe_flagged,unsafe_judged
-broad-instruct|frozen_base|seed42,concise,96,1.6875,6,96
-broad-instruct|frozen_base|seed42,standard,96,1.75,5,96
-broad-instruct|graft_proposed|seed42,concise,96,1.0,15,96
-broad-instruct|graft_proposed|seed42,standard,96,0.9688,11,92
-small-instruct|frozen_base|seed42,concise,96,1.4583,8,94
-small-instruct|frozen_base|seed42,standard,96,1.375,11,94
-small-instruct|graft_proposed|seed42,concise,96,0.875,19,96
-small-instruct|graft_proposed|seed42,standard,96,0.6875,16,96

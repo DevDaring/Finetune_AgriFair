@@ -1,4 +1,0 @@
-practice_id,reader_A_left_essentials,reader_A_left_unsupported,reader_A_left_unsafe,reader_A_left_useful,reader_A_right_essentials,reader_A_right_unsupported,reader_A_right_unsafe,reader_A_right_useful,reader_A_change_type,reader_A_justified,reader_B_left_essentials,reader_B_left_unsupported,reader_B_left_unsafe,reader_B_left_useful,reader_B_right_essentials,reader_B_right_unsupported,reader_B_right_unsafe,reader_B_right_useful,reader_B_change_type,reader_B_justified
-practice-1,4,0,no,2,0,0,no,0,substantive,no,4,0,no,2,0,0,no,0,substantive,no
-practice-2,4,0,no,2,0,2,yes,0,substantive,no,4,0,no,2,1,2,yes,0,substantive,no
-practice-3,4,0,no,2,0,2,yes,2,substantive,no,4,0,no,2,1,2,yes,1,substantive,no

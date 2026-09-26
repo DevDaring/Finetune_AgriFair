@@ -69,3 +69,14 @@ results_submission1_phase2/advice/r3_ratings_scrubbed_R*.csv
 
 # operational cron log for the mandi snapshots (the .manifest.json files are committed)
 data_submission2/mandi/mandi_cron.log
+
+# Submission-specific code and data stay on this machine; the public repository holds the general
+# AgriFair code only (removed from the tracked tree on 2026-09-26 at the author's request).
+Submission1_Code_Phase2/
+Submission1_DKE_Repair/
+results_submission1_*/
+Submission2_Run/
+Submission2/
+data_submission2/
+results_submission2*/
+Dataset_Translation/

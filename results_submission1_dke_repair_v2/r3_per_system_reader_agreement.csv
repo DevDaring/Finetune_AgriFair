@@ -1,5 +1,0 @@
-system,n_pairs,n_cases,both_reader_substantive,either_reader_substantive,both_reader_proportion,case_cluster_lower,case_cluster_upper
-broad-instruct|frozen_base|seed42,32,16,2,11,0.0625,0.0,0.1562
-broad-instruct|graft_proposed|seed42,32,16,8,16,0.25,0.0938,0.4375
-small-instruct|frozen_base|seed42,32,16,6,20,0.1875,0.0625,0.3438
-small-instruct|graft_proposed|seed42,32,16,2,7,0.0625,0.0,0.1562

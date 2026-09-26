@@ -1,5 +1,0 @@
-system,n_outputs,overall_accuracy,invalid_rate,accuracy_approximately_equal,accuracy_first_higher,accuracy_second_higher,most_frequent_answer_share,all_three_relations_correct_context_rich,bundles_context_rich,all_three_relations_correct_plain_new,bundles_plain_new
-broad-instruct|frozen_base|seed42,288,0.7882,0.0,0.3958,0.9792,0.9896,0.1354,0.25,48,0.4792,48
-broad-instruct|graft_proposed|seed42,288,0.5625,0.0,0.7917,0.4688,0.4271,0.6111,0.2083,48,0.0417,48
-small-instruct|frozen_base|seed42,288,0.4201,0.0,0.9062,0.1979,0.1562,0.8056,0.0,48,0.0417,48
-small-instruct|graft_proposed|seed42,288,0.4201,0.0,0.9479,0.1458,0.1667,0.8611,0.0625,48,0.0,48

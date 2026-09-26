@@ -1,4 +1,0 @@
-masking,note,group_key,folds,n_groups,accuracy_mean,accuracy_min,accuracy_max,status
-unmasked,full question text,template_id,5,813,0.699,0.4575,0.9425,ok
-state_masked,"state names blanked; task partly destroyed, diagnostic only",template_id,5,813,0.6965,0.4725,0.9425,ok
-group_masked,"group names blanked; the question can no longer be answered faithfully, diagnostic only",template_id,5,813,0.6775,0.435,0.9325,ok
