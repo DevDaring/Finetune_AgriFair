@@ -45,7 +45,9 @@ FILES = {
     "bedrock_altered48_predictions.jsonl": (lambda: G.load_prompts("altered48"), HOSTED, True),
     "bedrock_round2_predictions.jsonl": (lambda: G.load_prompts("round2"), HOSTED, True),
     # Bedrock ran the renamed items as their own stream, so its round-3 file excludes them
-    "bedrock_round3_predictions.jsonl": (lambda: [q for q in G.load_prompts("round3") if q["experiment"] != "renamed"], HOSTED, True),
+    # its last repair pass also answered the renamed items (added to the round-3 list after this stream began);
+    # those prompts are known and hash-checked, but the expected count and the analysis use the renamed file
+    "bedrock_round3_predictions.jsonl": (lambda: G.load_prompts("round3"), HOSTED, True),
     "bedrock_renamed_predictions.jsonl": (lambda: G.load_prompts("renamed"), HOSTED, True),
 }
 
@@ -84,7 +86,11 @@ def check(name: str, loader, n_systems: int, rescore: bool) -> dict:
     low = sorted(((s, e, round(a / n, 3)) for (s, e), (a, n) in per.items() if n and a / n < 0.95), key=lambda x: x[2])
     expected = n_systems * len(prompts)
     covered = len(keys)
-    return {"present": True, "rows_ok": len(ok), "unique_ok": covered, "expected": expected,
+    if name == "bedrock_round3_predictions.jsonl":       # renamed items belong to their own stream's file
+        expected = n_systems * sum(1 for q in prompts.values() if q["experiment"] != "renamed")
+        covered = len({k for k in keys if prompts.get(k[0], {}).get("experiment") != "renamed"})
+    second_run = sum(1 for k in keys if prompts.get(k[0], {}).get("experiment") == "renamed") if name.startswith("bedrock_round3") else 0
+    return {"present": True, "rows_ok": len(ok), "unique_ok": covered, "expected": expected, "renamed_second_run_rows": second_run,
             "complete": covered >= expected, "systems": len(systems), "expected_systems": n_systems,
             "error_rows": len(errors), "duplicates": dups, "unknown_prompt_ids": len(unknown),
             "prompt_hash_mismatch": len(hash_bad), "rescore_mismatch": score_bad, "low_parse_cells": low[:12]}

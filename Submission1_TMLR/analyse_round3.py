@@ -27,16 +27,33 @@ EQ = "roughly equal"
 
 
 def load() -> List[Dict]:
-    rows = []
-    for name in ("gpu_round3_predictions.jsonl", "bedrock_round3_predictions.jsonl", "bedrock_renamed_predictions.jsonl"):
+    """One row per (prompt, system) across files. The renamed items come only from their own files: the
+    Bedrock round-3 repair pass answered them a second time (see api_determinism)."""
+    rows, seen = [], set()
+    for name in ("gpu_round3_predictions.jsonl", "bedrock_renamed_predictions.jsonl", "bedrock_round3_predictions.jsonl"):
         found = A.rows_of(OUT / name)
-        if found:
-            seen = set()
-            for r in found:
-                k = (r["prompt_id"], r["system"])
-                if k not in seen and not r.get("error"):
-                    seen.add(k); rows.append(r)
+        for r in found or []:
+            if name == "bedrock_round3_predictions.jsonl" and r.get("experiment") == "renamed":
+                continue
+            k = (r["prompt_id"], r["system"])
+            if k not in seen and not r.get("error"):
+                seen.add(k); rows.append(r)
     return rows
+
+
+def api_determinism() -> Dict:
+    """Hosted models answered the renamed prompts twice at temperature 0 (their own stream, and the round-3
+    repair pass). Share of identical chosen options per model, over the prompts answered both times."""
+    first = {(r["prompt_id"], r["system"]): r for r in (A.rows_of(OUT / "bedrock_renamed_predictions.jsonl") or []) if not r.get("error")}
+    second = {(r["prompt_id"], r["system"]): r for r in (A.rows_of(OUT / "bedrock_round3_predictions.jsonl") or [])
+              if r.get("experiment") == "renamed" and not r.get("error")}
+    both = sorted(set(first) & set(second))
+    out = {}
+    for s in sorted({k[1] for k in both}):
+        ks = [k for k in both if k[1] == s]
+        out[A.label(s)] = {"pairs": len(ks), "same_choice": round(float(np.mean([first[k].get("picked_choice") == second[k].get("picked_choice") for k in ks])), 4),
+                           "same_text": round(float(np.mean([first[k].get("raw_output") == second[k].get("raw_output") for k in ks])), 4)}
+    return out
 
 
 def unmod(sid: str) -> bool:
@@ -349,7 +366,7 @@ def main() -> None:
     summary = {"n_rows": len(rows), "systems": len({r["system"] for r in rows}),
                "by_experiment": dict(collections.Counter(r["experiment"] for r in rows)),
                "p3": p3(rows, main_rows), "p1": p1(rows), "p5": p5(rows), "p2": p2(rows), "p6": p6(rows, main_rows),
-               "p7": p7(rows, main_rows)}
+               "p7": p7(rows, main_rows), "api_determinism": api_determinism()}
     C.write_json(AN / "summary_round3.json", summary)
     print(json.dumps(summary, indent=1)[:4000])
 

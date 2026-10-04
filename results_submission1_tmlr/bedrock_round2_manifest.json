@@ -6,57 +6,71 @@
   "max_tokens": 256,
   "minutes": 0.01,
   "models": {
+    "bedrock|deepseek-v3.2|unmodified": "deepseek.v3.2",
     "bedrock|gemma-3-27b|unmodified": "google.gemma-3-27b-it",
     "bedrock|glm-5|unmodified": "zai.glm-5",
     "bedrock|gpt-oss-120b|unmodified": "openai.gpt-oss-120b-1:0",
     "bedrock|kimi-k2.5|unmodified": "moonshotai.kimi-k2.5",
     "bedrock|llama-3.3-70b|unmodified": "us.meta.llama3-3-70b-instruct-v1:0",
     "bedrock|mistral-large-3|unmodified": "mistral.mistral-large-3-675b-instruct",
-    "bedrock|qwen3-32b|unmodified": "qwen.qwen3-32b-v1:0"
+    "bedrock|qwen3-32b|unmodified": "qwen.qwen3-32b-v1:0",
+    "bedrock|qwen3-next-80b-a3b|unmodified": "qwen.qwen3-next-80b-a3b"
   },
   "region": "us-east-1",
   "summary": {
+    "bedrock|deepseek-v3.2|unmodified": {
+      "errors": 0,
+      "output_tokens": 15268,
+      "parse_ok": 1.0,
+      "rows": 1374
+    },
     "bedrock|gemma-3-27b|unmodified": {
       "errors": 0,
-      "output_tokens": 47679,
-      "parse_ok": 1.0,
-      "rows": 930
+      "output_tokens": 137363,
+      "parse_ok": 0.9985,
+      "rows": 1374
     },
     "bedrock|glm-5|unmodified": {
       "errors": 0,
-      "output_tokens": 10788,
-      "parse_ok": 1.0,
-      "rows": 930
+      "output_tokens": 15568,
+      "parse_ok": 0.9978,
+      "rows": 1374
     },
     "bedrock|gpt-oss-120b|unmodified": {
       "errors": 0,
-      "output_tokens": 195783,
-      "parse_ok": 1.0,
-      "rows": 930
+      "output_tokens": 566682,
+      "parse_ok": 0.9214,
+      "rows": 1374
     },
     "bedrock|kimi-k2.5|unmodified": {
       "errors": 0,
-      "output_tokens": 271452,
-      "parse_ok": 0.9828,
-      "rows": 930
+      "output_tokens": 532927,
+      "parse_ok": 0.9789,
+      "rows": 1374
     },
     "bedrock|llama-3.3-70b|unmodified": {
-      "errors": 164,
-      "output_tokens": 8516,
-      "parse_ok": 0.8382,
-      "rows": 1094
+      "errors": 166,
+      "output_tokens": 27705,
+      "parse_ok": 0.8682,
+      "rows": 1540
     },
     "bedrock|mistral-large-3|unmodified": {
       "errors": 0,
-      "output_tokens": 14146,
-      "parse_ok": 0.9957,
-      "rows": 930
+      "output_tokens": 20720,
+      "parse_ok": 0.9964,
+      "rows": 1374
     },
     "bedrock|qwen3-32b|unmodified": {
       "errors": 0,
-      "output_tokens": 11890,
+      "output_tokens": 16282,
       "parse_ok": 1.0,
-      "rows": 930
+      "rows": 1374
+    },
+    "bedrock|qwen3-next-80b-a3b|unmodified": {
+      "errors": 0,
+      "output_tokens": 12366,
+      "parse_ok": 1.0,
+      "rows": 1374
     }
   },
   "temperature": 0.0

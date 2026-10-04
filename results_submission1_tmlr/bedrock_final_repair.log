@@ -1,0 +1,301 @@
+== original main Sun Oct  4 12:54:50 UTC 2026
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 7074
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 8646
+ }
+}
+== new main Sun Oct  4 12:54:51 UTC 2026
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 57024
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 10062
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 861,
+  "errors": 75,
+  "parse_ok": 0.9117,
+  "output_tokens": 8170
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9987,
+  "output_tokens": 11376
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9224,
+  "output_tokens": 246723
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9796,
+  "output_tokens": 207316
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9987,
+  "output_tokens": 9626
+ }
+}
+== original followups Sun Oct  4 12:56:33 UTC 2026
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 8370
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 10230
+ }
+}
+== new followups Sun Oct  4 12:56:34 UTC 2026
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 47679
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 11890
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 1093,
+  "errors": 164,
+  "parse_ok": 0.8381,
+  "output_tokens": 8507
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 0.9957,
+  "output_tokens": 14146
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 195783
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 0.9828,
+  "output_tokens": 271452
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 10788
+ }
+}
+== original cot Sun Oct  4 12:59:57 UTC 2026
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 0.8419,
+  "output_tokens": 180081
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 0.9774,
+  "output_tokens": 137148
+ }
+}
+== new cot Sun Oct  4 12:59:57 UTC 2026
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 84358
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 91344
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 330,
+  "errors": 20,
+  "parse_ok": 0.9394,
+  "output_tokens": 148455
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 0.9968,
+  "output_tokens": 64907
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 96498
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 0.8774,
+  "output_tokens": 211486
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 310,
+  "errors": 0,
+  "parse_ok": 0.9645,
+  "output_tokens": 144802
+ }
+}
+== original altered48 Sun Oct  4 13:00:10 UTC 2026
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1296
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1588
+ }
+}
+== new altered48 Sun Oct  4 13:00:10 UTC 2026
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1996
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1760
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 158,
+  "errors": 14,
+  "parse_ok": 0.8987,
+  "output_tokens": 1294
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1860
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 24890
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 0.9861,
+  "output_tokens": 21482
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1877
+ }
+}
+== original round2 Sun Oct  4 13:00:10 UTC 2026
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 12366
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 15268
+ }
+}
+== new round2 Sun Oct  4 13:00:11 UTC 2026
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 0.9985,
+  "output_tokens": 137363
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 16282
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 1539,
+  "errors": 166,
+  "parse_ok": 0.8681,
+  "output_tokens": 27696
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 0.9964,
+  "output_tokens": 20720
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 0.9214,
+  "output_tokens": 566682
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 0.9789,
+  "output_tokens": 532927
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 1374,
+  "errors": 0,
+  "parse_ok": 0.9978,
+  "output_tokens": 15568
+ }
+}
+BEDROCK_FINAL_REPAIR_DONE Sun Oct  4 13:03:54 UTC 2026

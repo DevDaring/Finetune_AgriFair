@@ -1,8 +1,8 @@
 {
   "bedrock_altered48_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
-    "error_rows": 12,
+    "error_rows": 14,
     "expected": 1296,
     "expected_systems": 9,
     "low_parse_cells": [
@@ -14,46 +14,49 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 1278,
+    "rows_ok": 1296,
     "systems": 9,
-    "unique_ok": 1278,
+    "unique_ok": 1296,
     "unknown_prompt_ids": 0
   },
   "bedrock_cot_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
-    "error_rows": 0,
+    "error_rows": 20,
     "expected": 2790,
     "expected_systems": 9,
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 620,
-    "systems": 2,
-    "unique_ok": 620,
+    "rows_ok": 2790,
+    "systems": 9,
+    "unique_ok": 2790,
     "unknown_prompt_ids": 0
   },
   "bedrock_followups_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
-    "error_rows": 158,
+    "error_rows": 164,
     "expected": 8370,
     "expected_systems": 9,
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 8212,
+    "rows_ok": 8370,
     "systems": 9,
-    "unique_ok": 8212,
+    "unique_ok": 8370,
     "unknown_prompt_ids": 0
   },
   "bedrock_main_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
-    "error_rows": 70,
+    "error_rows": 75,
     "expected": 7074,
     "expected_systems": 9,
     "low_parse_cells": [
@@ -85,10 +88,11 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 7004,
+    "rows_ok": 7074,
     "systems": 9,
-    "unique_ok": 7004,
+    "unique_ok": 7074,
     "unknown_prompt_ids": 0
   },
   "bedrock_renamed_predictions.jsonl": {
@@ -111,6 +115,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 2664,
     "systems": 9,
@@ -118,32 +123,82 @@
     "unknown_prompt_ids": 0
   },
   "bedrock_round2_predictions.jsonl": {
-    "present": false
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 166,
+    "expected": 12366,
+    "expected_systems": 9,
+    "low_parse_cells": [
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "rule_2_20",
+        0.795
+      ],
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "reordered",
+        0.842
+      ],
+      [
+        "bedrock|llama-3.3-70b|unmodified",
+        "rule_first",
+        0.886
+      ],
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "rule_reversed",
+        0.919
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 12366,
+    "systems": 9,
+    "unique_ok": 12366,
+    "unknown_prompt_ids": 0
   },
   "bedrock_round3_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
-    "error_rows": 162,
+    "error_rows": 366,
     "expected": 27990,
     "expected_systems": 9,
     "low_parse_cells": [
       [
         "bedrock|llama-3.3-70b|unmodified",
         "wdi_norule",
-        0.774
+        0.767
       ],
       [
         "bedrock|gpt-oss-120b|unmodified",
         "adversarial",
-        0.778
+        0.815
+      ],
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "renamed",
+        0.865
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "adversarial",
+        0.94
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "renamed",
+        0.946
       ]
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 2664,
     "rescore_mismatch": 0,
-    "rows_ok": 11285,
+    "rows_ok": 30654,
     "systems": 9,
-    "unique_ok": 11285,
+    "unique_ok": 27990,
     "unknown_prompt_ids": 0
   },
   "gpu_altered48_predictions.jsonl": {
@@ -155,6 +210,7 @@
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 4608,
     "systems": 32,
@@ -170,6 +226,7 @@
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 2480,
     "systems": 8,
@@ -191,6 +248,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 7440,
     "systems": 8,
@@ -217,6 +275,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 18864,
     "systems": 24,
@@ -232,6 +291,7 @@
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 29760,
     "systems": 32,
@@ -247,6 +307,7 @@
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 36320,
     "systems": 40,
@@ -273,6 +334,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 25152,
     "systems": 32,
@@ -288,6 +350,7 @@
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 1572,
     "systems": 2,
@@ -303,6 +366,7 @@
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 1374,
     "systems": 1,
@@ -334,6 +398,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 6812,
     "systems": 2,
@@ -355,6 +420,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 54960,
     "systems": 40,
@@ -391,6 +457,7 @@
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
+    "renamed_second_run_rows": 0,
     "rescore_mismatch": 0,
     "rows_ok": 136240,
     "systems": 40,

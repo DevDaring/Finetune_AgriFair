@@ -56,3 +56,215 @@
   10600/27625 calls, 156.3 min
   10800/27625 calls, 161.4 min
   11000/27625 calls, 164.4 min
+  11200/27625 calls, 167.0 min
+  11400/27625 calls, 169.1 min
+  11600/27625 calls, 171.4 min
+  11800/27625 calls, 173.9 min
+  12000/27625 calls, 177.3 min
+  12200/27625 calls, 178.6 min
+  12400/27625 calls, 180.1 min
+  12600/27625 calls, 183.1 min
+  12800/27625 calls, 185.7 min
+  13000/27625 calls, 187.3 min
+  13200/27625 calls, 189.1 min
+  13400/27625 calls, 191.2 min
+  13600/27625 calls, 193.2 min
+  13800/27625 calls, 195.2 min
+  14000/27625 calls, 197.1 min
+  14200/27625 calls, 199.6 min
+  14400/27625 calls, 203.0 min
+  14600/27625 calls, 205.5 min
+  14800/27625 calls, 207.4 min
+  15000/27625 calls, 209.1 min
+  15200/27625 calls, 211.0 min
+  15400/27625 calls, 212.2 min
+  15600/27625 calls, 215.9 min
+  15800/27625 calls, 218.5 min
+  16000/27625 calls, 221.4 min
+  16200/27625 calls, 223.3 min
+  16400/27625 calls, 225.4 min
+  16600/27625 calls, 230.0 min
+  16800/27625 calls, 231.7 min
+  17000/27625 calls, 233.6 min
+  17200/27625 calls, 237.6 min
+  17400/27625 calls, 240.8 min
+  17600/27625 calls, 244.2 min
+  17800/27625 calls, 247.8 min
+  18000/27625 calls, 249.6 min
+  18200/27625 calls, 252.9 min
+  18400/27625 calls, 256.3 min
+  18600/27625 calls, 259.7 min
+  18800/27625 calls, 261.8 min
+  19000/27625 calls, 267.6 min
+  19200/27625 calls, 270.3 min
+  19400/27625 calls, 272.3 min
+  19600/27625 calls, 274.5 min
+  19800/27625 calls, 277.7 min
+  20000/27625 calls, 279.8 min
+  20200/27625 calls, 282.3 min
+  20400/27625 calls, 286.1 min
+  20600/27625 calls, 289.5 min
+  20800/27625 calls, 292.8 min
+  21000/27625 calls, 296.0 min
+  21200/27625 calls, 299.3 min
+  21400/27625 calls, 301.5 min
+  21600/27625 calls, 304.6 min
+  21800/27625 calls, 307.1 min
+  22000/27625 calls, 309.8 min
+  22200/27625 calls, 311.9 min
+  22400/27625 calls, 313.6 min
+  22600/27625 calls, 316.0 min
+  22800/27625 calls, 318.1 min
+  23000/27625 calls, 319.8 min
+  23200/27625 calls, 322.7 min
+  23400/27625 calls, 325.3 min
+  23600/27625 calls, 328.7 min
+  23800/27625 calls, 330.7 min
+  24000/27625 calls, 333.8 min
+  24200/27625 calls, 337.0 min
+  24400/27625 calls, 341.1 min
+  24600/27625 calls, 343.9 min
+  24800/27625 calls, 345.6 min
+  25000/27625 calls, 349.3 min
+  25200/27625 calls, 352.4 min
+  25400/27625 calls, 354.3 min
+  25600/27625 calls, 356.3 min
+  25800/27625 calls, 358.5 min
+  26000/27625 calls, 359.7 min
+  26200/27625 calls, 361.1 min
+  26400/27625 calls, 363.7 min
+  26600/27625 calls, 367.4 min
+  26800/27625 calls, 369.5 min
+  27000/27625 calls, 371.3 min
+  27200/27625 calls, 373.0 min
+  27400/27625 calls, 374.6 min
+  27600/27625 calls, 376.9 min
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9505,
+  "output_tokens": 30374
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9505,
+  "output_tokens": 36228
+ },
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9415,
+  "output_tokens": 96750
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9505,
+  "output_tokens": 42341
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 3110,
+  "errors": 358,
+  "parse_ok": 0.8161,
+  "output_tokens": 29009
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9476,
+  "output_tokens": 47630
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.937,
+  "output_tokens": 764047
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9457,
+  "output_tokens": 343720
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 3110,
+  "errors": 0,
+  "parse_ok": 0.9505,
+  "output_tokens": 38789
+ }
+}
+== repair Sun Oct  4 12:30:46 UTC 2026
+  200/3022 calls, 4.0 min
+  400/3022 calls, 10.2 min
+  600/3022 calls, 17.5 min
+  800/3022 calls, 21.3 min
+  1000/3022 calls, 23.7 min
+  1200/3022 calls, 26.6 min
+  1400/3022 calls, 29.7 min
+  1600/3022 calls, 32.5 min
+  1800/3022 calls, 36.2 min
+  2000/3022 calls, 38.7 min
+  2200/3022 calls, 41.7 min
+  2400/3022 calls, 45.2 min
+  2600/3022 calls, 47.9 min
+  2800/3022 calls, 50.9 min
+  3000/3022 calls, 53.2 min
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9548,
+  "output_tokens": 33038
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9548,
+  "output_tokens": 39484
+ },
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9466,
+  "output_tokens": 139024
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9548,
+  "output_tokens": 46049
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 3764,
+  "errors": 366,
+  "parse_ok": 0.8385,
+  "output_tokens": 35050
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9518,
+  "output_tokens": 52242
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9307,
+  "output_tokens": 923902
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9457,
+  "output_tokens": 487448
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 3406,
+  "errors": 0,
+  "parse_ok": 0.9545,
+  "output_tokens": 42280
+ }
+}
+BEDROCK_R3_DONE Sun Oct  4 13:24:33 UTC 2026
