@@ -1,0 +1,16 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.79it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.61it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  small-instruct|frozen_base|seed42: done, 20 outputs so far, 0.1 min
+/opt/conda/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['alora_invocation_tokens', 'arrow_config', 'ensure_weight_tying', 'lora_ga_config', 'monteclora_config', 'peft_version', 'use_bdlora', 'velora_config'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+  small-instruct|graft_proposed|seed42: done, 40 outputs so far, 0.1 min
+/opt/conda/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+  small-instruct|graft_proposed|seed43: done, 60 outputs so far, 0.2 min
+  small-instruct|graft_proposed|seed44: done, 80 outputs so far, 0.2 min
+  small-instruct|reference_vanilla_lora|seed42: done, 100 outputs so far, 0.2 min
+  small-instruct|reference_vanilla_lora|seed43: done, 120 outputs so far, 0.2 min
+  small-instruct|reference_vanilla_lora|seed44: done, 140 outputs so far, 0.2 min
+  small-instruct|ablation_placement_random|seed42: done, 160 outputs so far, 0.3 min
+[run_gpu] round3_check: 160 outputs in 0.27 min (0.048 s/output) -> /workspace/Codes/results_submission1_tmlr/gpu_round3_check_predictions.jsonl

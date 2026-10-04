@@ -36,6 +36,9 @@ FILES = {
     "gpu_round2_predictions.jsonl": (lambda: G.load_prompts("round2"), GPU40, True),
     "gpu_round3_predictions.jsonl": (lambda: G.load_prompts("round3"), GPU40, True),
     "gpu_logprobs_predictions.jsonl": (lambda: prompts_for_logprobs(0), GPU40, False),
+    # budget re-runs at 256 tokens: the low-parse systems listed in retry256_r23_plan.json
+    "gpu_retry256_round2_predictions.jsonl": (lambda: G.load_prompts("round2"), 1, False),
+    "gpu_retry256_round3_predictions.jsonl": (lambda: G.load_prompts("round3"), 2, False),
     "bedrock_main_predictions.jsonl": (lambda: G.load_prompts("main"), HOSTED, True),
     "bedrock_followups_predictions.jsonl": (lambda: G.load_prompts("followups"), HOSTED, True),
     "bedrock_cot_predictions.jsonl": (lambda: G.load_prompts("cot"), HOSTED, False),

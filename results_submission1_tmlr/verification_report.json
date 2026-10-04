@@ -2,16 +2,22 @@
   "bedrock_altered48_predictions.jsonl": {
     "complete": false,
     "duplicates": 0,
-    "error_rows": 0,
+    "error_rows": 12,
     "expected": 1296,
     "expected_systems": 9,
-    "low_parse_cells": [],
+    "low_parse_cells": [
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "unchanged",
+        0.944
+      ]
+    ],
     "present": true,
     "prompt_hash_mismatch": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 288,
-    "systems": 2,
-    "unique_ok": 288,
+    "rows_ok": 1278,
+    "systems": 9,
+    "unique_ok": 1278,
     "unknown_prompt_ids": 0
   },
   "bedrock_cot_predictions.jsonl": {
@@ -32,16 +38,16 @@
   "bedrock_followups_predictions.jsonl": {
     "complete": false,
     "duplicates": 0,
-    "error_rows": 0,
+    "error_rows": 158,
     "expected": 8370,
     "expected_systems": 9,
     "low_parse_cells": [],
     "present": true,
     "prompt_hash_mismatch": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 1860,
-    "systems": 2,
-    "unique_ok": 1860,
+    "rows_ok": 8212,
+    "systems": 9,
+    "unique_ok": 8212,
     "unknown_prompt_ids": 0
   },
   "bedrock_main_predictions.jsonl": {
@@ -80,30 +86,35 @@
     "present": true,
     "prompt_hash_mismatch": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 6871,
+    "rows_ok": 7004,
     "systems": 9,
-    "unique_ok": 6871,
+    "unique_ok": 7004,
     "unknown_prompt_ids": 0
   },
   "bedrock_renamed_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
-    "error_rows": 0,
+    "error_rows": 46,
     "expected": 2664,
     "expected_systems": 9,
     "low_parse_cells": [
       [
         "bedrock|gpt-oss-120b|unmodified",
         "renamed",
-        0.833
+        0.834
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "renamed",
+        0.929
       ]
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 189,
+    "rows_ok": 2664,
     "systems": 9,
-    "unique_ok": 189,
+    "unique_ok": 2664,
     "unknown_prompt_ids": 0
   },
   "bedrock_round2_predictions.jsonl": {
@@ -112,37 +123,27 @@
   "bedrock_round3_predictions.jsonl": {
     "complete": false,
     "duplicates": 0,
-    "error_rows": 39,
-    "expected": 30654,
+    "error_rows": 162,
+    "expected": 27990,
     "expected_systems": 9,
     "low_parse_cells": [
       [
         "bedrock|llama-3.3-70b|unmodified",
         "wdi_norule",
-        0.711
+        0.774
       ],
       [
         "bedrock|gpt-oss-120b|unmodified",
         "adversarial",
-        0.815
-      ],
-      [
-        "bedrock|kimi-k2.5|unmodified",
-        "adversarial",
-        0.92
-      ],
-      [
-        "bedrock|kimi-k2.5|unmodified",
-        "wdi_standard",
-        0.935
+        0.778
       ]
     ],
     "present": true,
     "prompt_hash_mismatch": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 3554,
+    "rows_ok": 11285,
     "systems": 9,
-    "unique_ok": 3554,
+    "unique_ok": 11285,
     "unknown_prompt_ids": 0
   },
   "gpu_altered48_predictions.jsonl": {
@@ -293,8 +294,54 @@
     "unique_ok": 1572,
     "unknown_prompt_ids": 0
   },
+  "gpu_retry256_round2_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 1374,
+    "expected_systems": 1,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 1374,
+    "systems": 1,
+    "unique_ok": 1374,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_retry256_round3_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 6812,
+    "expected_systems": 2,
+    "low_parse_cells": [
+      [
+        "general-instruct|graft_proposed|seed42",
+        "mnli_strict",
+        0.31
+      ],
+      [
+        "general-instruct|graft_proposed|seed42",
+        "mnli_plain",
+        0.508
+      ],
+      [
+        "general-instruct|graft_proposed|seed42",
+        "mnli_lenient",
+        0.552
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 6812,
+    "systems": 2,
+    "unique_ok": 6812,
+    "unknown_prompt_ids": 0
+  },
   "gpu_round2_predictions.jsonl": {
-    "complete": false,
+    "complete": true,
     "duplicates": 0,
     "error_rows": 0,
     "expected": 54960,
@@ -309,12 +356,45 @@
     "present": true,
     "prompt_hash_mismatch": 0,
     "rescore_mismatch": 0,
-    "rows_ok": 54418,
+    "rows_ok": 54960,
     "systems": 40,
-    "unique_ok": 54418,
+    "unique_ok": 54960,
     "unknown_prompt_ids": 0
   },
   "gpu_round3_predictions.jsonl": {
-    "present": false
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 136240,
+    "expected_systems": 40,
+    "low_parse_cells": [
+      [
+        "general-instruct|graft_proposed|seed42",
+        "mnli_strict",
+        0.31
+      ],
+      [
+        "general-instruct|graft_proposed|seed42",
+        "mnli_plain",
+        0.508
+      ],
+      [
+        "general-instruct-2|frozen_base|seed42",
+        "renamed",
+        0.53
+      ],
+      [
+        "general-instruct|graft_proposed|seed42",
+        "mnli_lenient",
+        0.552
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 136240,
+    "systems": 40,
+    "unique_ok": 136240,
+    "unknown_prompt_ids": 0
   }
 }

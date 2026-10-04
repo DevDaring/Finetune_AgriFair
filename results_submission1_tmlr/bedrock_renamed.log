@@ -1,1 +1,126 @@
   200/2664 calls, 2.3 min
+  400/2664 calls, 5.1 min
+  600/2664 calls, 9.5 min
+  800/2664 calls, 16.7 min
+  1000/2664 calls, 26.3 min
+  1200/2664 calls, 38.6 min
+  1400/2664 calls, 46.2 min
+  1600/2664 calls, 53.9 min
+  1800/2664 calls, 60.6 min
+  2000/2664 calls, 72.3 min
+  2200/2664 calls, 80.0 min
+  2400/2664 calls, 88.3 min
+  2600/2664 calls, 92.1 min
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 2664
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 3256
+ },
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 42406
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 3684
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 296,
+  "errors": 43,
+  "parse_ok": 0.8547,
+  "output_tokens": 2277
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 0.9932,
+  "output_tokens": 4871
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 0.8345,
+  "output_tokens": 162013
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 0.9291,
+  "output_tokens": 150852
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 3196
+ }
+}
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 2664
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 3256
+ },
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 42406
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 3684
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 339,
+  "errors": 46,
+  "parse_ok": 0.8643,
+  "output_tokens": 2637
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 0.9932,
+  "output_tokens": 4871
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 0.8345,
+  "output_tokens": 162013
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 0.9291,
+  "output_tokens": 150852
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 296,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 3196
+ }
+}
+BEDROCK_RENAMED_DONE Sun Oct  4 08:38:24 UTC 2026

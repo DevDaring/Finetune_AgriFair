@@ -71,3 +71,85 @@
  }
 }
 == --models new --sets followups --workers 8 Sun Oct  4 06:56:37 UTC 2026
+  200/6510 calls, 3.9 min
+  400/6510 calls, 7.2 min
+  600/6510 calls, 9.4 min
+  800/6510 calls, 12.1 min
+  1000/6510 calls, 15.7 min
+  1200/6510 calls, 18.9 min
+  1400/6510 calls, 22.1 min
+  1600/6510 calls, 25.5 min
+  1800/6510 calls, 29.6 min
+  2000/6510 calls, 32.1 min
+  2200/6510 calls, 34.7 min
+  2400/6510 calls, 38.1 min
+  2600/6510 calls, 42.8 min
+  2800/6510 calls, 46.2 min
+  3000/6510 calls, 48.7 min
+  3200/6510 calls, 53.1 min
+  3400/6510 calls, 56.0 min
+  3600/6510 calls, 59.0 min
+  3800/6510 calls, 62.0 min
+  4000/6510 calls, 64.8 min
+  4200/6510 calls, 67.5 min
+  4400/6510 calls, 70.3 min
+  4600/6510 calls, 73.7 min
+  4800/6510 calls, 76.7 min
+  5000/6510 calls, 79.5 min
+  5200/6510 calls, 83.5 min
+  5400/6510 calls, 87.2 min
+  5600/6510 calls, 91.2 min
+  5800/6510 calls, 94.4 min
+  6000/6510 calls, 97.1 min
+  6200/6510 calls, 99.5 min
+  6400/6510 calls, 103.2 min
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 47679
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 11890
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 930,
+  "errors": 158,
+  "parse_ok": 0.8172,
+  "output_tokens": 7095
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 0.9957,
+  "output_tokens": 14146
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 195783
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 0.9828,
+  "output_tokens": 271452
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 10788
+ }
+}
+== --models new --sets altered48 --workers 8 Sun Oct  4 08:44:14 UTC 2026
+  200/1008 calls, 1.6 min
+  400/1008 calls, 5.0 min
+  600/1008 calls, 7.9 min
+  800/1008 calls, 10.2 min
+  1000/1008 calls, 13.1 min

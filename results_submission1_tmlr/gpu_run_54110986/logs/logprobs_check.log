@@ -1,0 +1,15 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.20it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  2.05it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.85it/s]
+  small-instruct|frozen_base|seed42: done, 8 rows so far, 0.3 min
+/opt/conda/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['alora_invocation_tokens', 'arrow_config', 'ensure_weight_tying', 'lora_ga_config', 'monteclora_config', 'peft_version', 'use_bdlora', 'velora_config'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+  small-instruct|graft_proposed|seed42: done, 16 rows so far, 0.3 min
+/opt/conda/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+  small-instruct|graft_proposed|seed43: done, 24 rows so far, 0.3 min
+  small-instruct|graft_proposed|seed44: done, 32 rows so far, 0.4 min
+  small-instruct|reference_vanilla_lora|seed42: done, 40 rows so far, 0.4 min
+  small-instruct|reference_vanilla_lora|seed43: done, 48 rows so far, 0.4 min
+  small-instruct|reference_vanilla_lora|seed44: done, 56 rows so far, 0.5 min
+  small-instruct|ablation_placement_random|seed42: done, 64 rows so far, 0.5 min
+[logprobs] 64 rows -> /workspace/Codes/results_submission1_tmlr/gpu_logprobs_check_predictions.jsonl

@@ -1,0 +1,54 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.20it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  2.06it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.86it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  small-instruct|frozen_base|seed42: done, 1374 outputs so far, 0.5 min
+/opt/conda/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['alora_invocation_tokens', 'arrow_config', 'ensure_weight_tying', 'lora_ga_config', 'monteclora_config', 'peft_version', 'use_bdlora', 'velora_config'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+  small-instruct|graft_proposed|seed42: done, 2748 outputs so far, 1.1 min
+/opt/conda/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+  small-instruct|graft_proposed|seed43: done, 4122 outputs so far, 1.6 min
+  small-instruct|graft_proposed|seed44: done, 5496 outputs so far, 2.2 min
+  small-instruct|reference_vanilla_lora|seed42: done, 6870 outputs so far, 2.8 min
+  small-instruct|reference_vanilla_lora|seed43: done, 8244 outputs so far, 3.5 min
+  small-instruct|reference_vanilla_lora|seed44: done, 9618 outputs so far, 4.2 min
+  small-instruct|ablation_placement_random|seed42: done, 10992 outputs so far, 4.7 min
+  small-instruct|ablation_placement_random_draw2|seed42: done, 12366 outputs so far, 5.3 min
+  small-instruct|ablation_placement_random_draw3|seed42: done, 13740 outputs so far, 5.8 min
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:01,  1.23it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:01<00:00,  1.21it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:01<00:00,  1.80it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  broad-instruct|frozen_base|seed42: done, 15114 outputs so far, 6.4 min
+  broad-instruct|graft_proposed|seed42: done, 16488 outputs so far, 7.3 min
+  broad-instruct|graft_proposed|seed43: done, 17862 outputs so far, 8.1 min
+  broad-instruct|graft_proposed|seed44: done, 19236 outputs so far, 8.9 min
+  broad-instruct|reference_vanilla_lora|seed42: done, 20610 outputs so far, 9.8 min
+  broad-instruct|reference_vanilla_lora|seed43: done, 21984 outputs so far, 10.7 min
+  broad-instruct|reference_vanilla_lora|seed44: done, 23358 outputs so far, 11.6 min
+  broad-instruct|ablation_placement_random|seed42: done, 24732 outputs so far, 12.4 min
+  broad-instruct|ablation_placement_random_draw2|seed42: done, 26106 outputs so far, 13.2 min
+  broad-instruct|ablation_placement_random_draw3|seed42: done, 27480 outputs so far, 14.0 min
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama_fast.LlamaTokenizerFast'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.02s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.02s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.01s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.45it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.23it/s]
+  general-instruct-2|frozen_base|seed42: done, 28854 outputs so far, 15.2 min
+  general-instruct-2|graft_proposed|seed42: done, 30228 outputs so far, 16.8 min
+  general-instruct-2|graft_proposed|seed43: done, 31602 outputs so far, 18.0 min
+  general-instruct-2|graft_proposed|seed44: done, 32976 outputs so far, 19.1 min
+  general-instruct-2|reference_vanilla_lora|seed42: done, 34350 outputs so far, 20.4 min
+  general-instruct-2|reference_vanilla_lora|seed43: done, 35724 outputs so far, 21.7 min
+  general-instruct-2|reference_vanilla_lora|seed44: done, 37098 outputs so far, 23.0 min
+  general-instruct-2|ablation_placement_random|seed42: done, 38472 outputs so far, 24.4 min
+  general-instruct-2|ablation_placement_random_draw2|seed42: done, 39846 outputs so far, 25.5 min
+  general-instruct-2|ablation_placement_random_draw3|seed42: done, 41220 outputs so far, 27.0 min
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:04,  1.04s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:03,  1.01s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:03<00:02,  1.01s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:04<00:00,  1.00it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:04<00:00,  1.03it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:04<00:00,  1.01it/s]
+The following generation flags are not valid and may be ignored: ['top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  general-instruct|frozen_base|seed42: done, 42594 outputs so far, 29.0 min
+  general-instruct|graft_proposed|seed42: done, 43968 outputs so far, 31.4 min
+  general-instruct|graft_proposed|seed43: done, 45342 outputs so far, 34.4 min
+  general-instruct|graft_proposed|seed44: done, 46716 outputs so far, 37.7 min
+  general-instruct|reference_vanilla_lora|seed42: done, 48090 outputs so far, 40.3 min
+  general-instruct|reference_vanilla_lora|seed43: done, 49464 outputs so far, 43.0 min
+  general-instruct|reference_vanilla_lora|seed44: done, 50838 outputs so far, 45.6 min
+  general-instruct|ablation_placement_random|seed42: done, 52212 outputs so far, 48.1 min
+  general-instruct|ablation_placement_random_draw2|seed42: done, 53586 outputs so far, 50.5 min
+  general-instruct|ablation_placement_random_draw3|seed42: done, 54960 outputs so far, 52.9 min
+[run_gpu] round2: 54960 outputs in 52.88 min (0.057 s/output) -> /workspace/Codes/results_submission1_tmlr/gpu_round2_predictions.jsonl
