@@ -1,6 +1,11 @@
 system,system_id,n_matched,agricultural_accuracy,neutral_accuracy,neutral_minus_agricultural
 DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,72,0.9028,0.9722,0.0694
 Gemma-3-27B,bedrock|gemma-3-27b|unmodified,72,0.6667,0.6667,0.0
+GLM-5,bedrock|glm-5|unmodified,72,0.9583,0.9861,0.0278
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,72,1.0,1.0,0.0
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,72,1.0,1.0,0.0
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,72,0.7639,0.7083,-0.0556
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,72,0.9028,0.9861,0.0833
 Qwen3-32B,bedrock|qwen3-32b|unmodified,72,0.9583,0.9722,0.0139
 Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,72,0.875,0.8333,-0.0417
 "Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,72,0.6806,0.8056,0.125

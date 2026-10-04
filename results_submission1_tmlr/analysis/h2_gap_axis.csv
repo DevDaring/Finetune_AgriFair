@@ -1,7 +1,11 @@
 system,system_id,gap 10-25_n,gap 10-25_equal_share,gap 10-25_accuracy,gap 25-50_n,gap 25-50_equal_share,gap 25-50_accuracy,gap 50+_n,gap 50+_equal_share,gap 50+_accuracy,landholding_equal_share,landholding_accuracy,social_group_equal_share,social_group_accuracy
 DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,114,0.0526,0.693,38,0.0263,0.7895,140,0.0143,0.9214,0.0441,0.7353,0.0197,0.8816
 Gemma-3-27B,bedrock|gemma-3-27b|unmodified,114,0.2632,0.5526,38,0.1579,0.7368,140,0.1357,0.6857,0.2132,0.6471,0.1711,0.625
-Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,81,0.0617,0.6914,19,0.0,0.7895,39,0.0,1.0,0.0476,0.7238,0.0,1.0
+GLM-5,bedrock|glm-5|unmodified,114,0.193,0.5965,38,0.0526,0.8158,140,0.0143,0.9214,0.1765,0.6471,0.0132,0.8947
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,114,0.0702,0.4298,38,0.0,0.6579,140,0.0286,0.7571,0.0515,0.4926,0.0329,0.7171
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,114,0.3947,0.4561,38,0.1053,0.7632,140,0.0429,0.9214,0.3309,0.5441,0.0658,0.8684
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,114,0.0439,0.7105,38,0.0,0.7895,140,0.0,1.0,0.0368,0.7279,0.0,0.9737
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,114,0.0263,0.6404,38,0.0,0.8158,140,0.0,1.0,0.0147,0.6985,0.0066,0.9539
 Qwen3-32B,bedrock|qwen3-32b|unmodified,114,0.5526,0.3158,38,0.6053,0.2895,140,0.8286,0.1714,0.5074,0.3897,0.8553,0.1118
 Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,114,0.7719,0.193,38,0.8158,0.1579,140,0.8857,0.1143,0.7206,0.2426,0.9342,0.0658
 "Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,114,0.9737,0.0263,38,0.9211,0.0789,140,0.8714,0.1286,0.9338,0.0662,0.9145,0.0855

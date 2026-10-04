@@ -5,9 +5,21 @@ DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,all verified (154),308,0.776,0.81
 Gemma-3-27B,bedrock|gemma-3-27b|unmodified,verified (34),68,0.6324,0.6923,52,0.4375,16,0.2353,False
 Gemma-3-27B,bedrock|gemma-3-27b|unmodified,extended (120),240,0.6292,0.6292,240,,0,0.1917,False
 Gemma-3-27B,bedrock|gemma-3-27b|unmodified,all verified (154),308,0.6299,0.6404,292,0.4375,16,0.2013,False
-Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,verified (34),63,0.7619,0.9592,49,0.0714,14,0.0317,False
-Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,extended (120),90,0.7,0.7,90,,0,0.0444,False
-Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,all verified (154),153,0.7255,0.7914,139,0.0714,14,0.0392,False
+GLM-5,bedrock|glm-5|unmodified,verified (34),68,0.8088,0.9038,52,0.5,16,0.1618,False
+GLM-5,bedrock|glm-5|unmodified,extended (120),240,0.7542,0.7542,240,,0,0.0958,False
+GLM-5,bedrock|glm-5|unmodified,all verified (154),308,0.7662,0.7808,292,0.5,16,0.1104,False
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,verified (34),68,0.5882,0.7308,52,0.125,16,0.0735,False
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,extended (120),240,0.5917,0.5917,240,,0,0.0375,False
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,all verified (154),308,0.5909,0.6164,292,0.125,16,0.0455,False
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,verified (34),68,0.7353,0.75,52,0.6875,16,0.25,False
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,extended (120),240,0.7125,0.7125,240,,0,0.2042,False
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,all verified (154),308,0.7175,0.7192,292,0.6875,16,0.2143,False
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,verified (34),68,0.7353,0.9423,52,0.0625,16,0.0294,False
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,extended (120),240,0.8417,0.8417,240,,0,0.0167,False
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,all verified (154),308,0.8182,0.8596,292,0.0625,16,0.0195,False
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,verified (34),68,0.7059,0.9038,52,0.0625,16,0.0294,False
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,extended (120),240,0.8208,0.8208,240,,0,0.0083,False
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,all verified (154),308,0.7955,0.8356,292,0.0625,16,0.013,False
 Qwen3-32B,bedrock|qwen3-32b|unmodified,verified (34),68,0.3088,0.2115,52,0.625,16,0.7206,False
 Qwen3-32B,bedrock|qwen3-32b|unmodified,extended (120),240,0.25,0.25,240,,0,0.6792,False
 Qwen3-32B,bedrock|qwen3-32b|unmodified,all verified (154),308,0.263,0.2432,292,0.625,16,0.6883,False

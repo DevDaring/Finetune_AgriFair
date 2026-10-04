@@ -1,0 +1,3 @@
+system,system_id,parse_rate,median_abs_error_pp,implied_accuracy,mc_accuracy_same_items,implied_minus_mc,ci,p,implied_correct_when_mc_said_equal_on_diff,p_holm
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,1.0,13.09,0.5974,0.1201,0.4773,"[0.3831, 0.5714]",0.0,0.6139,0.0
+"Gemma-3-12B, attribution-guided LoRA, seed 42",general-instruct|graft_proposed|seed42,1.0,9.61,0.6818,0.3247,0.3571,"[0.2792, 0.4318]",6.9e-05,0.6207,6.9e-05

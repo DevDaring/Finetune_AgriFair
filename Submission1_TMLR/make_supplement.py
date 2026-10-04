@@ -29,7 +29,9 @@ DATA_FILES = ["results_submission1_dke_repair_v2/r1_corrected_panel.jsonl",
               # published outputs of the four original systems, for the reproduction check
               "results_submission1_dke_repair_v2/v2_predictions.jsonl",
               "results_submission1_phase2/predictions/main_predictions.jsonl",
-              "results_submission1_phase2/predictions/pilot_predictions.jsonl"]
+              "results_submission1_phase2/predictions/pilot_predictions.jsonl",
+              # validated census cells (public census data), needed for the cross-state prior baseline
+              "Source_Records/extracted/Dataset/data/interim/agrifacts_facts.csv"]
 _SECRETS = r"AKIA[0-9A-Z]{12}|hf_[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}"
 # identifying terms (names, handles, paths) are kept in a local, untracked file so the code itself names no one
 _TERMS = CODES / "Submission1_TMLR" / ".anonymity_terms"
@@ -61,27 +63,28 @@ def main() -> None:
             for p in sorted((CODES / d).rglob("*")):
                 if p.is_file() and p.suffix in (".py", ".sh", ".yaml", ".yml") and p.name not in SKIP_FILES \
                         and "__pycache__" not in p.parts:
-                    add_text(f"code/{p.relative_to(CODES)}", p.read_text(encoding="utf-8"))
+                    add_text(f"code/{p.relative_to(CODES)}", p.read_bytes().decode("utf-8"))
         for f in DATA_FILES:
-            add_text(f"code/{f}", (CODES / f).read_text(encoding="utf-8"))
+            add_text(f"code/{f}", (CODES / f).read_bytes().decode("utf-8"))
         res = CODES / "results_submission1_tmlr"
         for p in sorted(res.glob("*")):
             if not p.is_file() or p.suffix not in (".jsonl", ".json") or "smoke" in p.name or "check" in p.name \
                     or "pilot" in p.name:
                 continue
             arc = f"code/results_submission1_tmlr/{p.name}"
-            text = scrub(p.read_text(encoding="utf-8"))
+            text = scrub(p.read_bytes().decode("utf-8"))
             if BLOCKED.search(text):
                 leaks.append(arc)
             if p.suffix == ".jsonl" and p.stat().st_size > 2_000_000:
                 z.writestr(arc + ".gz", gzip.compress(text.encode("utf-8")))
             else:
                 z.writestr(arc, text)
-        for sub in ("analysis", "agrifacts_audit", "checker_challenge_154"):
+        for sub in ("analysis", "analysis_round3", "analysis_round3/budget256", "agrifacts_audit", "checker_challenge_154",
+                    "wdi", "wdi/raw"):
             for p in sorted((res / sub).glob("*")):
-                if p.is_file():
-                    add_text(f"code/results_submission1_tmlr/{sub}/{p.name}", p.read_text(encoding="utf-8"))
-        add_text("PLAN.md", (CODES.parent / "Submission1" / "TMLR_Research_Plan.md").read_text(encoding="utf-8"))
+                if p.is_file() and p.suffix in (".csv", ".json", ".jsonl", ".log"):
+                    add_text(f"code/results_submission1_tmlr/{sub}/{p.name}", p.read_bytes().decode("utf-8"))
+        add_text("PLAN.md", (CODES.parent / "Submission1" / "TMLR_Research_Plan.md").read_bytes().decode("utf-8"))
         add_text("README.txt", (
             "Supplementary material (anonymous).\n\n"
             "code/                       analysis, inference and checking code; run from code/ with PYTHONPATH=.\n"

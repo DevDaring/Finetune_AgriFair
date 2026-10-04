@@ -1,0 +1,50 @@
+system,system_id,n_prompts,accuracy,ci,share_prior_answer,share_roughly_equal,prior_beats_correct
+DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,200,0.585,"[0.500, 0.675]",0.345,0.02,False
+Gemma-3-27B,bedrock|gemma-3-27b|unmodified,200,0.465,"[0.380, 0.555]",0.375,0.18,False
+GLM-5,bedrock|glm-5|unmodified,200,0.55,"[0.470, 0.630]",0.325,0.17,False
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,200,0.37,"[0.290, 0.455]",0.255,0.055,False
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,200,0.385,"[0.305, 0.465]",0.35,0.36,False
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,200,0.525,"[0.430, 0.620]",0.395,0.01,False
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,200,0.66,"[0.575, 0.740]",0.255,0.045,False
+Qwen3-32B,bedrock|qwen3-32b|unmodified,200,0.23,"[0.170, 0.295]",0.42,0.485,True
+Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,200,0.05,"[0.025, 0.080]",0.405,0.78,True
+"Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Qwen3-4B, random-placement LoRA, draw 3",broad-instruct|ablation_placement_random_draw3|seed42,200,0.015,"[0.000, 0.035]",0.25,0.985,True
+"Qwen3-4B, random-placement LoRA, draw 1",broad-instruct|ablation_placement_random|seed42,200,0.0,"[0.000, 0.000]",0.25,0.99,True
+"Qwen3-4B, unmodified",broad-instruct|frozen_base|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Qwen3-4B, attribution-guided LoRA, seed 42",broad-instruct|graft_proposed|seed42,200,0.03,"[0.010, 0.055]",0.25,0.97,True
+"Qwen3-4B, attribution-guided LoRA, seed 43",broad-instruct|graft_proposed|seed43,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Qwen3-4B, attribution-guided LoRA, seed 44",broad-instruct|graft_proposed|seed44,200,0.0,"[0.000, 0.000]",0.285,0.965,True
+"Qwen3-4B, plain LoRA, seed 42",broad-instruct|reference_vanilla_lora|seed42,200,0.0,"[0.000, 0.000]",0.29,0.96,True
+"Qwen3-4B, plain LoRA, seed 43",broad-instruct|reference_vanilla_lora|seed43,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Qwen3-4B, plain LoRA, seed 44",broad-instruct|reference_vanilla_lora|seed44,200,0.0,"[0.000, 0.000]",0.255,0.995,True
+"Ministral-8B, random-placement LoRA, draw 2",general-instruct-2|ablation_placement_random_draw2|seed42,200,0.0,"[0.000, 0.000]",0.255,0.995,True
+"Ministral-8B, random-placement LoRA, draw 3",general-instruct-2|ablation_placement_random_draw3|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Ministral-8B, random-placement LoRA, draw 1",general-instruct-2|ablation_placement_random|seed42,200,0.05,"[0.020, 0.080]",0.25,0.95,True
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,200,0.0,"[0.000, 0.000]",0.25,0.95,True
+"Ministral-8B, attribution-guided LoRA, seed 42",general-instruct-2|graft_proposed|seed42,200,0.0,"[0.000, 0.000]",0.325,0.925,True
+"Ministral-8B, attribution-guided LoRA, seed 43",general-instruct-2|graft_proposed|seed43,200,0.055,"[0.025, 0.090]",0.255,0.94,True
+"Ministral-8B, attribution-guided LoRA, seed 44",general-instruct-2|graft_proposed|seed44,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Ministral-8B, plain LoRA, seed 42",general-instruct-2|reference_vanilla_lora|seed42,200,0.02,"[0.005, 0.040]",0.265,0.965,True
+"Ministral-8B, plain LoRA, seed 43",general-instruct-2|reference_vanilla_lora|seed43,200,0.0,"[0.000, 0.000]",0.3,0.95,True
+"Ministral-8B, plain LoRA, seed 44",general-instruct-2|reference_vanilla_lora|seed44,200,0.0,"[0.000, 0.000]",0.305,0.945,True
+"Gemma-3-12B, random-placement LoRA, draw 2",general-instruct|ablation_placement_random_draw2|seed42,200,0.05,"[0.020, 0.080]",0.25,0.95,True
+"Gemma-3-12B, random-placement LoRA, draw 3",general-instruct|ablation_placement_random_draw3|seed42,200,0.045,"[0.020, 0.075]",0.25,0.955,True
+"Gemma-3-12B, random-placement LoRA, draw 1",general-instruct|ablation_placement_random|seed42,200,0.05,"[0.020, 0.080]",0.25,0.95,True
+"Gemma-3-12B, unmodified",general-instruct|frozen_base|seed42,200,0.295,"[0.230, 0.360]",0.215,0.54,False
+"Gemma-3-12B, attribution-guided LoRA, seed 42",general-instruct|graft_proposed|seed42,200,0.065,"[0.030, 0.110]",0.25,0.935,True
+"Gemma-3-12B, attribution-guided LoRA, seed 43",general-instruct|graft_proposed|seed43,200,0.06,"[0.030, 0.100]",0.25,0.94,True
+"Gemma-3-12B, attribution-guided LoRA, seed 44",general-instruct|graft_proposed|seed44,200,0.105,"[0.050, 0.170]",0.25,0.895,True
+"Gemma-3-12B, plain LoRA, seed 42",general-instruct|reference_vanilla_lora|seed42,200,0.005,"[0.000, 0.015]",0.25,0.995,True
+"Gemma-3-12B, plain LoRA, seed 43",general-instruct|reference_vanilla_lora|seed43,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Gemma-3-12B, plain LoRA, seed 44",general-instruct|reference_vanilla_lora|seed44,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, random-placement LoRA, draw 2",small-instruct|ablation_placement_random_draw2|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, random-placement LoRA, draw 3",small-instruct|ablation_placement_random_draw3|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, random-placement LoRA, draw 1",small-instruct|ablation_placement_random|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, unmodified",small-instruct|frozen_base|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, attribution-guided LoRA, seed 42",small-instruct|graft_proposed|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, attribution-guided LoRA, seed 43",small-instruct|graft_proposed|seed43,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, attribution-guided LoRA, seed 44",small-instruct|graft_proposed|seed44,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, plain LoRA, seed 42",small-instruct|reference_vanilla_lora|seed42,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, plain LoRA, seed 43",small-instruct|reference_vanilla_lora|seed43,200,0.0,"[0.000, 0.000]",0.25,1.0,True
+"Llama-3.2-3B, plain LoRA, seed 44",small-instruct|reference_vanilla_lora|seed44,200,0.0,"[0.000, 0.000]",0.25,1.0,True

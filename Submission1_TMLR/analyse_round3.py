@@ -124,11 +124,21 @@ def p3(rows, main_rows) -> Dict:
 
 
 # ---------------------------------------------------------------- P1: MNLI instruction effect
+MNLI_LETTERS = {"a": "entailment", "b": "contradiction", "c": "neither"}
+
+
 def p1(rows) -> Dict:
     m = [r for r in rows if r["experiment"].startswith("mnli_")]
     if not m:
         return {}
     neither = lambda r: str(r.get("picked_choice") or "") == "neither"
+
+    def lenient(r):
+        """Secondary reading (labelled as such): a reply that is a bare option letter counts as that option."""
+        if r.get("parse_ok"):
+            return r.get("picked_choice")
+        raw = (r.get("raw_output") or "").strip().strip("().").lower()
+        return MNLI_LETTERS.get(raw)
     out, contrasts = [], []
     for s in sorted({r["system"] for r in m}):
         rec = {"system": A.label(s), "system_id": s, "unmodified": unmod(s)}
@@ -140,6 +150,8 @@ def p1(rows) -> Dict:
                 rec[f"{c}_accuracy"] = round(float(np.mean([bool(r["correct"]) for r in v.values()])), 4)
                 rec[f"{c}_neither_share"] = round(float(np.mean([neither(r) for r in v.values()])), 4)
                 rec[f"{c}_parse_rate"] = round(float(np.mean([bool(r["parse_ok"]) for r in v.values()])), 4)
+                rec[f"{c}_neither_share_lenient"] = round(float(np.mean([lenient(r) == "neither" for r in v.values()])), 4)
+                rec[f"{c}_accuracy_lenient"] = round(float(np.mean([str(lenient(r) or "").lower() == r["gold_choice_text"].lower() for r in v.values()])), 4)
         for c in ("mnli_strict", "mnli_lenient"):
             if cond.get(c) and cond.get("mnli_plain"):
                 a = {k: float(neither(r)) for k, r in cond[c].items()}
@@ -162,7 +174,7 @@ def p1(rows) -> Dict:
     ft = []
     plain = {s: {r["item_id"]: float(neither(r)) for r in m if r["system"] == s and r["experiment"] == "mnli_plain"}
              for s in {r["system"] for r in m}}
-    for s, v in plain.items():
+    for s, v in sorted(plain.items()):                     # sorted: set order differs between runs
         if s.startswith("bedrock") or unmod(s):
             continue
         base = f"{A.family(s)}|frozen_base|seed42"
@@ -357,6 +369,31 @@ def p7(rows, main_rows) -> Dict:
             "default_status_changes": [r["system"] for r in out if r["default_status_changes"]]}
 
 
+def budget_256(main_rows) -> Dict:
+    """Budget sensitivity (logged in the plan): for the GPU systems re-run at 256 tokens, recompute P6 and
+    P7 from the 256-token outputs and write them beside the primary 24/40-token results."""
+    retry = A.rows_of(OUT / "gpu_retry256_round3_predictions.jsonl")
+    if not retry:
+        return {}
+    retry = [r for r in retry if not r.get("error")]
+    # compare like with like: where a system's main-set answers were also re-run at 256 tokens (round 1),
+    # use those as its baseline instead of the 24-token answers
+    r1 = [r for r in (A.rows_of(OUT / "gpu_retry256_predictions.jsonl") or []) if not r.get("error")]
+    r1_sys = {r["system"] for r in r1}
+    main_rows = [r for r in main_rows if r["system"] not in r1_sys] + r1
+    out = {"baseline_256_for": sorted(A.label(x) for x in r1_sys)}
+    global AN
+    saved = AN
+    try:
+        AN = AN / "budget256"; AN.mkdir(parents=True, exist_ok=True)
+        out["p6"] = p6(retry, main_rows)
+        out["p7"] = p7(retry, main_rows)
+        out["systems"] = sorted({A.label(r["system"]) for r in retry})
+    finally:
+        AN = saved
+    return out
+
+
 def main() -> None:
     AN.mkdir(parents=True, exist_ok=True)
     rows = load()
@@ -366,7 +403,8 @@ def main() -> None:
     summary = {"n_rows": len(rows), "systems": len({r["system"] for r in rows}),
                "by_experiment": dict(collections.Counter(r["experiment"] for r in rows)),
                "p3": p3(rows, main_rows), "p1": p1(rows), "p5": p5(rows), "p2": p2(rows), "p6": p6(rows, main_rows),
-               "p7": p7(rows, main_rows), "api_determinism": api_determinism()}
+               "p7": p7(rows, main_rows), "api_determinism": api_determinism(),
+               "budget256": budget_256(main_rows)}
     C.write_json(AN / "summary_round3.json", summary)
     print(json.dumps(summary, indent=1)[:4000])
 

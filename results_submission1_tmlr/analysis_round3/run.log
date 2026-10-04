@@ -1,0 +1,169 @@
+{
+ "n_rows": 166894,
+ "systems": 49,
+ "by_experiment": {
+  "mnli_plain": 29400,
+  "drifted": 3332,
+  "wdi_norule": 14700,
+  "recall": 7546,
+  "mnli_lenient": 29400,
+  "mnli_strict": 29400,
+  "renamed": 14504,
+  "adversarial": 9800,
+  "wdi_standard": 14700,
+  "wdi_numerical": 14112
+ },
+ "p3": {
+  "h12_drifted_vs_corrected": {
+   "n_systems": 49,
+   "kendall_tau": 0.5986,
+   "ci_lower": 0.3895,
+   "ci_upper": 0.6565,
+   "discordant_pairs": 196,
+   "total_pairs": 1176
+  },
+  "drifted_vs_norule": {
+   "n_systems": 41,
+   "kendall_tau": 0.4646,
+   "ci_lower": 0.3317,
+   "ci_upper": 0.6134,
+   "discordant_pairs": 186,
+   "total_pairs": 820
+  },
+  "top5_corrected_and_their_drifted_rank": {
+   "GLM-5": {
+    "corrected": 1,
+    "drifted": 8
+   },
+   "Gemma-3-12B, attribution-guided LoRA, seed 44": {
+    "corrected": 2,
+    "drifted": 6
+   },
+   "Kimi-K2.5": {
+    "corrected": 3,
+    "drifted": 1
+   },
+   "Llama-3.3-70B": {
+    "corrected": 4,
+    "drifted": 7
+   },
+   "Mistral-Large-3": {
+    "corrected": 5,
+    "drifted": 13
+   }
+  }
+ },
+ "p1": {
+  "h11_unmodified_with_more_neither_under_strict": 13,
+  "h11_unmodified_systems": 13,
+  "tau_plain_vs_strict_all": {
+   "n_systems": 49,
+   "kendall_tau": 0.8835,
+   "ci_lower": 0.801,
+   "ci_upper": 0.8878,
+   "discordant_pairs": 60,
+   "total_pairs": 1176
+  },
+  "tau_plain_vs_strict_unmodified": {
+   "n_systems": 13,
+   "kendall_tau": 0.7051,
+   "ci_lower": 0.5769,
+   "ci_upper": 0.7949,
+   "discordant_pairs": 11,
+   "total_pairs": 78
+  },
+  "tau_plain_vs_lenient_all": {
+   "n_systems": 49,
+   "kendall_tau": 0.8231,
+   "ci_lower": 0.7593,
+   "ci_upper": 0.8563,
+   "discordant_pairs": 99,
+   "total_pairs": 1176
+  },
+  "adapters_with_more_neither_than_base_plain": 32,
+  "adapters_with_less_neither_than_base_plain": 1,
+  "adapters": 36
+ },
+ "p5": {
+  "h14_systems_choosing_prior_more_than_correct": 41,
+  "systems": 49,
+  "best": "Mistral-Large-3",
+  "best_accuracy": 0.66
+ },
+ "p2": {
+  "systems": 49,
+  "h15a_defaulting_systems": [
+   "Qwen3-4B, random-placement LoRA, draw 2",
+   "Qwen3-4B, random-placement LoRA, draw 1",
+   "Qwen3-4B, plain LoRA, seed 43",
+   "Ministral-8B, random-placement LoRA, draw 2",
+   "Ministral-8B, random-placement LoRA, draw 3",
+   "Ministral-8B, unmodified",
+   "Ministral-8B, attribution-guided LoRA, seed 42",
+   "Ministral-8B, attribution-guided LoRA, seed 44",
+   "Llama-3.2-3B, random-placement LoRA, draw 2",
+   "Llama-3.2-3B, random-placement LoRA, draw 3",
+   "Llama-3.2-3B, random-placement LoRA, draw 1",
+   "Llama-3.2-3B, unmodified",
+   "Llama-3.2-3B, attribution-guided LoRA, seed 42",
+   "Llama-3.2-3B, attribution-guided LoRA, seed 43",
+   "Llama-3.2-3B, attribution-guided LoRA, seed 44",
+   "Llama-3.2-3B, plain LoRA, seed 42",
+   "Llama-3.2-3B, plain LoRA, seed 43",
+   "Llama-3.2-3B, plain LoRA, seed 44"
+  ],
+  "h15b_defaulting_with_lower_equal_share_without_rule": 17,
+  "h15c_tau_memory_vs_supplied": {
+   "n_systems": 49,
+   "kendall_tau": 0.466,
+   "ci_lower": 0.3553,
+   "ci_upper": 0.5077,
+   "discordant_pairs": 304,
+   "total_pairs": 1176
+  },
+  "wording_effects_holm": 15,
+  "baselines": {
+   "constant_equal": 0.3333,
+   "constant_first": 0.1267,
+   "constant_second": 0.54,
+   "regional_prior": 0.62
+  },
+  "systems_above_regional_prior": 4
+ },
+ "p6": {
+  "systems": 49
+ },
+ "p7": {
+  "systems": 49,
+  "holm_significant_accuracy_changes": 8,
+  "holm_significant_equal_share_changes": 13,
+  "default_status_changes": [
+   "Qwen3-Next-80B",
+   "Qwen3-4B, plain LoRA, seed 43",
+   "Llama-3.2-3B, attribution-guided LoRA, seed 43"
+  ]
+ },
+ "api_determinism": {
+  "DeepSeek-V3.2": {
+   "pairs": 296,
+   "same_choice": 0.9797,
+   "same_text": 0.9797
+  },
+  "Gemma-3-27B": {
+   "pairs": 296,
+   "same_choice": 0.9899,
+   "same_text": 0.3007
+  },
+  "GLM-5": {
+   "pairs": 296,
+   "same_choice": 0.7568,
+   "same_text": 0.4358
+  },
+  "gpt-oss-120B": {
+   "pairs": 296,
+   "same_choice": 0.5608,
+   "same_text": 0.4324
+  },
+  "Kimi-K2.5": {
+   "pairs": 296,
+   "same_choice": 0.6

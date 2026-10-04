@@ -1,16 +1,20 @@
 {
   "by_experiment": {
-    "abstain": 10472,
-    "altered": 6120,
-    "cot": 3080,
-    "extended": 10650,
-    "neutral": 3168,
-    "norule": 10472,
-    "numerical": 12672,
-    "realtable": 10472,
-    "reordered": 3055,
-    "unchanged": 2040,
-    "verified": 3055
+    "abstain": 12628,
+    "altered": 7056,
+    "cot": 5236,
+    "extended": 11760,
+    "fewshot": 15092,
+    "neutral": 3528,
+    "norule": 12628,
+    "numerical": 14112,
+    "realtable": 12628,
+    "reordered": 15092,
+    "rule_2_20": 10290,
+    "rule_first": 15092,
+    "rule_reversed": 15092,
+    "unchanged": 2352,
+    "verified": 3332
   },
   "h3_significant_after_holm": [
     "Qwen3-Next-80B",
@@ -82,15 +86,15 @@
     "Llama-3.2-3B, attribution-guided LoRA, seed 44: accuracy from memory (154 verified comparisons) 0.0487"
   ],
   "h5_ranking": {
-    "ci_lower": 0.185,
-    "ci_upper": 0.2791,
-    "discordant_pairs": 352,
-    "kendall_tau": 0.2315,
-    "n_systems": 44,
-    "total_pairs": 946
+    "ci_lower": 0.3095,
+    "ci_upper": 0.3861,
+    "discordant_pairs": 373,
+    "kendall_tau": 0.3461,
+    "n_systems": 49,
+    "total_pairs": 1176
   },
-  "n_predictions": 75256,
-  "systems": 45,
+  "n_predictions": 155918,
+  "systems": 49,
   "systems_defaulting_to_equal_154": [
     "Qwen3-Next-80B",
     "Qwen3-4B, random-placement LoRA, draw 2",

@@ -1,33 +1,212 @@
 {
+  "api_determinism": {
+    "DeepSeek-V3.2": {
+      "pairs": 296,
+      "same_choice": 0.9797,
+      "same_text": 0.9797
+    },
+    "GLM-5": {
+      "pairs": 296,
+      "same_choice": 0.7568,
+      "same_text": 0.4358
+    },
+    "Gemma-3-27B": {
+      "pairs": 296,
+      "same_choice": 0.9899,
+      "same_text": 0.3007
+    },
+    "Kimi-K2.5": {
+      "pairs": 296,
+      "same_choice": 0.6284,
+      "same_text": 0.0912
+    },
+    "Llama-3.3-70B": {
+      "pairs": 296,
+      "same_choice": 0.9932,
+      "same_text": 0.9932
+    },
+    "Mistral-Large-3": {
+      "pairs": 296,
+      "same_choice": 0.9527,
+      "same_text": 0.8818
+    },
+    "Qwen3-32B": {
+      "pairs": 296,
+      "same_choice": 0.8311,
+      "same_text": 0.7061
+    },
+    "Qwen3-Next-80B": {
+      "pairs": 296,
+      "same_choice": 0.9291,
+      "same_text": 0.9291
+    },
+    "gpt-oss-120B": {
+      "pairs": 296,
+      "same_choice": 0.5608,
+      "same_text": 0.4324
+    }
+  },
+  "budget256": {
+    "baseline_256_for": [
+      "Llama-3.2-3B, plain LoRA, seed 43",
+      "Ministral-8B, unmodified"
+    ],
+    "p6": {
+      "systems": 2
+    },
+    "p7": {
+      "default_status_changes": [],
+      "holm_significant_accuracy_changes": 1,
+      "holm_significant_equal_share_changes": 1,
+      "systems": 2
+    },
+    "systems": [
+      "Gemma-3-12B, attribution-guided LoRA, seed 42",
+      "Ministral-8B, unmodified"
+    ]
+  },
   "by_experiment": {
-    "drifted": 68,
-    "mnli_lenient": 67,
-    "mnli_plain": 67,
-    "mnli_strict": 66
+    "adversarial": 9800,
+    "drifted": 3332,
+    "mnli_lenient": 29400,
+    "mnli_plain": 29400,
+    "mnli_strict": 29400,
+    "recall": 7546,
+    "renamed": 14504,
+    "wdi_norule": 14700,
+    "wdi_numerical": 14112,
+    "wdi_standard": 14700
   },
-  "n_rows": 268,
+  "n_rows": 166894,
   "p1": {
-    "adapters": 0,
-    "adapters_with_less_neither_than_base_plain": 0,
-    "adapters_with_more_neither_than_base_plain": 0,
-    "h11_unmodified_systems": 1,
-    "h11_unmodified_with_more_neither_under_strict": 1,
-    "tau_plain_vs_lenient_all": null,
-    "tau_plain_vs_strict_all": null,
-    "tau_plain_vs_strict_unmodified": null
+    "adapters": 36,
+    "adapters_with_less_neither_than_base_plain": 1,
+    "adapters_with_more_neither_than_base_plain": 32,
+    "h11_unmodified_systems": 13,
+    "h11_unmodified_with_more_neither_under_strict": 13,
+    "tau_plain_vs_lenient_all": {
+      "ci_lower": 0.7593,
+      "ci_upper": 0.8563,
+      "discordant_pairs": 99,
+      "kendall_tau": 0.8231,
+      "n_systems": 49,
+      "total_pairs": 1176
+    },
+    "tau_plain_vs_strict_all": {
+      "ci_lower": 0.801,
+      "ci_upper": 0.8878,
+      "discordant_pairs": 60,
+      "kendall_tau": 0.8835,
+      "n_systems": 49,
+      "total_pairs": 1176
+    },
+    "tau_plain_vs_strict_unmodified": {
+      "ci_lower": 0.5769,
+      "ci_upper": 0.7949,
+      "discordant_pairs": 11,
+      "kendall_tau": 0.7051,
+      "n_systems": 13,
+      "total_pairs": 78
+    }
   },
-  "p2": {},
+  "p2": {
+    "baselines": {
+      "constant_equal": 0.3333,
+      "constant_first": 0.1267,
+      "constant_second": 0.54,
+      "regional_prior": 0.62
+    },
+    "h15a_defaulting_systems": [
+      "Qwen3-4B, random-placement LoRA, draw 2",
+      "Qwen3-4B, random-placement LoRA, draw 1",
+      "Qwen3-4B, plain LoRA, seed 43",
+      "Ministral-8B, random-placement LoRA, draw 2",
+      "Ministral-8B, random-placement LoRA, draw 3",
+      "Ministral-8B, unmodified",
+      "Ministral-8B, attribution-guided LoRA, seed 42",
+      "Ministral-8B, attribution-guided LoRA, seed 44",
+      "Llama-3.2-3B, random-placement LoRA, draw 2",
+      "Llama-3.2-3B, random-placement LoRA, draw 3",
+      "Llama-3.2-3B, random-placement LoRA, draw 1",
+      "Llama-3.2-3B, unmodified",
+      "Llama-3.2-3B, attribution-guided LoRA, seed 42",
+      "Llama-3.2-3B, attribution-guided LoRA, seed 43",
+      "Llama-3.2-3B, attribution-guided LoRA, seed 44",
+      "Llama-3.2-3B, plain LoRA, seed 42",
+      "Llama-3.2-3B, plain LoRA, seed 43",
+      "Llama-3.2-3B, plain LoRA, seed 44"
+    ],
+    "h15b_defaulting_with_lower_equal_share_without_rule": 17,
+    "h15c_tau_memory_vs_supplied": {
+      "ci_lower": 0.3553,
+      "ci_upper": 0.5077,
+      "discordant_pairs": 304,
+      "kendall_tau": 0.466,
+      "n_systems": 49,
+      "total_pairs": 1176
+    },
+    "systems": 49,
+    "systems_above_regional_prior": 4,
+    "wording_effects_holm": 15
+  },
   "p3": {
-    "drifted_vs_norule": null,
-    "h12_drifted_vs_corrected": null,
+    "drifted_vs_norule": {
+      "ci_lower": 0.3317,
+      "ci_upper": 0.6134,
+      "discordant_pairs": 186,
+      "kendall_tau": 0.4646,
+      "n_systems": 41,
+      "total_pairs": 820
+    },
+    "h12_drifted_vs_corrected": {
+      "ci_lower": 0.3895,
+      "ci_upper": 0.6565,
+      "discordant_pairs": 196,
+      "kendall_tau": 0.5986,
+      "n_systems": 49,
+      "total_pairs": 1176
+    },
     "top5_corrected_and_their_drifted_rank": {
-      "Qwen3-Next-80B": {
+      "GLM-5": {
         "corrected": 1,
+        "drifted": 8
+      },
+      "Gemma-3-12B, attribution-guided LoRA, seed 44": {
+        "corrected": 2,
+        "drifted": 6
+      },
+      "Kimi-K2.5": {
+        "corrected": 3,
         "drifted": 1
+      },
+      "Llama-3.3-70B": {
+        "corrected": 4,
+        "drifted": 7
+      },
+      "Mistral-Large-3": {
+        "corrected": 5,
+        "drifted": 13
       }
     }
   },
-  "p5": {},
-  "p6": {},
-  "systems": 1
+  "p5": {
+    "best": "Mistral-Large-3",
+    "best_accuracy": 0.66,
+    "h14_systems_choosing_prior_more_than_correct": 41,
+    "systems": 49
+  },
+  "p6": {
+    "systems": 49
+  },
+  "p7": {
+    "default_status_changes": [
+      "Qwen3-Next-80B",
+      "Qwen3-4B, plain LoRA, seed 43",
+      "Llama-3.2-3B, attribution-guided LoRA, seed 43"
+    ],
+    "holm_significant_accuracy_changes": 8,
+    "holm_significant_equal_share_changes": 13,
+    "systems": 49
+  },
+  "systems": 49
 }

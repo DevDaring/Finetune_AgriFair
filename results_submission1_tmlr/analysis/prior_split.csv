@@ -1,7 +1,11 @@
 system,system_id,n_typical_comparisons,n_atypical_comparisons,accuracy_154,accuracy_typical,accuracy_atypical,accuracy_atypical_ci,share_answers_equal_to_prior,share_atypical_answers_equal_to_prior,skill_above_prior
 DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,117,37,0.776,0.8761,0.4595,"[0.311, 0.608]",0.7532,0.3649,0.0676
 Gemma-3-27B,bedrock|gemma-3-27b|unmodified,117,37,0.6299,0.6709,0.5,"[0.378, 0.622]",0.5779,0.2838,-0.5405
-Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,117,37,0.7255,0.9182,0.2326,"[0.087, 0.413]",0.8039,0.5116,-0.1426
+GLM-5,bedrock|glm-5|unmodified,117,37,0.7662,0.8333,0.5541,"[0.419, 0.689]",0.7045,0.2973,0.027
+gpt-oss-120B,bedrock|gpt-oss-120b|unmodified,117,37,0.5909,0.6624,0.3649,"[0.243, 0.486]",0.5844,0.3378,-0.7027
+Kimi-K2.5,bedrock|kimi-k2.5|unmodified,117,37,0.7175,0.7906,0.4865,"[0.351, 0.622]",0.6688,0.2838,-0.1757
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,117,37,0.8182,0.9487,0.4054,"[0.257, 0.554]",0.8214,0.4189,0.2432
+Mistral-Large-3,bedrock|mistral-large-3|unmodified,117,37,0.7955,0.8803,0.527,"[0.392, 0.662]",0.737,0.2838,0.1486
 Qwen3-32B,bedrock|qwen3-32b|unmodified,117,37,0.263,0.265,0.2568,"[0.149, 0.378]",0.2695,0.2838,-2.0676
 Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,117,37,0.1948,0.2009,0.1757,"[0.068, 0.297]",0.2143,0.2568,-2.3514
 "Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,117,37,0.1299,0.1282,0.1351,"[0.027, 0.243]",0.1429,0.1892,-2.6216
