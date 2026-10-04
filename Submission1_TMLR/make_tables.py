@@ -68,7 +68,7 @@ def write(name, body):
 def tab_overview():
     """One row per family x method: memory accuracy, share 'roughly equal', supplied-number accuracy,
     fully correct scenarios. Mean over seeds with [min, max]."""
-    mem = {r["system"]: r for r in read("h2_item_type.csv") if r["set"] == "all verified (155)"}
+    mem = {r["system"]: r for r in read("h2_item_type.csv") if r["set"] == "all verified (154)"}
     num = {r["system"]: r for r in read("h4_numerical.csv")}
     groups = collections.defaultdict(list)
     for s in mem:
@@ -208,8 +208,8 @@ def tab_repro():
 
 # ---------------------------------------------------------------- appendix: every system
 def tab_all_systems():
-    mem = {r["system"]: r for r in read("h2_item_type.csv") if r["set"] == "all verified (155)"}
-    wd = {r["system"]: r for r in read("h3_wording.csv") if r["set"] == "all verified (155)"}
+    mem = {r["system"]: r for r in read("h2_item_type.csv") if r["set"] == "all verified (154)"}
+    wd = {r["system"]: r for r in read("h3_wording.csv") if r["set"] == "all verified (154)"}
     num = {r["system"]: r for r in read("h4_numerical.csv")}
     ro = {r["system"]: r for r in read("reordered_options.csv")}
     order = LARGE + FAMS

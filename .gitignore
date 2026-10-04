@@ -86,3 +86,4 @@ results_submission1_tmlr/*_predictions.jsonl
 results_submission1_tmlr/gpu_run_*/
 results_submission1_tmlr/watchdog.log
 results_submission1_tmlr/analysis/run.log
+results_submission1_tmlr/spotcheck/

@@ -72,7 +72,7 @@ def main() -> None:
                 z.writestr(arc + ".gz", gzip.compress(text.encode("utf-8")))
             else:
                 z.writestr(arc, text)
-        for sub in ("analysis", "agrifacts_audit", "checker_challenge_155"):
+        for sub in ("analysis", "agrifacts_audit", "checker_challenge_154"):
             for p in sorted((res / sub).glob("*")):
                 if p.is_file():
                     add_text(f"code/results_submission1_tmlr/{sub}/{p.name}", p.read_text(encoding="utf-8"))

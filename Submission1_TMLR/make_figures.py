@@ -2,7 +2,7 @@
 
     python -m Submission1_TMLR.make_figures
 
-fig_ranking.pdf    accuracy from memory (155 verified comparisons) against accuracy with supplied
+fig_ranking.pdf    accuracy from memory (154 verified comparisons) against accuracy with supplied
                    numbers (288 numerical prompts), one point per system (34).
 fig_followups.pdf  share of "roughly equal" answers under the standard prompt and the follow-up
                    conditions, for the unmodified models.
@@ -40,10 +40,10 @@ def fig_ranking():
     fig, ax = plt.subplots(figsize=(5.4, 3.6))
     for r in rows:
         fam, meth = family_method(r["system"])
-        ax.scatter(float(r["accuracy_from_memory_155"]), float(r["accuracy_supplied_numbers"]),
+        ax.scatter(float(r["accuracy_from_memory_154"]), float(r["accuracy_supplied_numbers"]),
                    c=FAM_COLOR[fam], marker=MARKER[meth], s=28 if meth == "unmodified" else 18,
                    edgecolors="white", linewidths=0.4, zorder=3)
-    ax.set_xlabel("Accuracy from memory (155 verified comparisons)")
+    ax.set_xlabel("Accuracy from memory (154 verified comparisons)")
     ax.set_ylabel("Accuracy with supplied numbers\n(288 numerical prompts)")
     ax.set_xlim(0, 0.85); ax.set_ylim(0.3, 0.9)
     fh = [plt.Line2D([], [], marker="o", ls="", c=c, label=f) for f, c in FAM_COLOR.items()]
@@ -61,7 +61,7 @@ COND_COLOR = {"standard": "#4D4D4D", "no rule": "#E69F00", "+ cannot tell": "#56
 
 def fig_followups():
     """Two panels for the six unmodified models: share of 'roughly equal' answers and accuracy, under
-    the standard prompt and each follow-up condition (155 verified comparisons, both wordings)."""
+    the standard prompt and each follow-up condition (154 verified comparisons, both wordings)."""
     order = list(FAM_COLOR)
     rows = [r for r in read("followups.csv") if family_method(r["system"])[1] == "unmodified"]
     rows.sort(key=lambda r: order.index(family_method(r["system"])[0]))
@@ -83,7 +83,7 @@ def fig_followups():
         ax.set_title(title, fontsize=8)
         ax.set_ylim(0, 1.05)
         ax.grid(axis="y", lw=0.3, alpha=0.5)
-    axes[0].set_ylabel("Proportion of 310 prompts\n(155 comparisons x 2 wordings)")
+    axes[0].set_ylabel("Proportion of 308 prompts\n(154 comparisons x 2 wordings)")
     handles = {lab: plt.Rectangle((0, 0), 1, 1, color=c) for lab, c in COND_COLOR.items()}
     fig.legend(handles.values(), handles.keys(), loc="upper center", ncol=5, frameon=False, fontsize=7,
                bbox_to_anchor=(0.5, 0.99))

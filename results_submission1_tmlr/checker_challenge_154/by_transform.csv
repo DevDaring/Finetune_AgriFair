@@ -1,0 +1,48 @@
+scope,transform,kind,n_cases,share_flagged
+original 34,population_deleted,corruption,32,1.0
+original 34,population_substituted,corruption,32,1.0
+original 34,population_negated,corruption,16,1.0
+original 34,wrong_geography,corruption,64,1.0
+original 34,wrong_denominator,corruption,68,1.0
+original 34,denominator_swapped_with_audit_note,corruption,68,0.0
+original 34,wrong_metric,corruption,68,1.0
+original 34,entity_order_swapped,corruption,68,1.0
+original 34,operational_rule_removed,corruption,68,1.0
+original 34,formatting_whitespace,valid control,68,0.0
+original 34,sentence_reflow,valid control,34,0.0
+original 34,polite_prefix,valid control,68,0.0
+original 34,harmless_trailing_note,valid control,68,0.0
+original 34,synonym_for_larger,valid control,34,0.0
+original 34,size_class_substituted,corruption,32,1.0
+original 34,size_class_deleted,corruption,4,1.0
+extended 120,population_deleted,corruption,54,1.0
+extended 120,population_substituted,corruption,54,1.0
+extended 120,population_negated,corruption,27,1.0
+extended 120,wrong_geography,corruption,230,1.0
+extended 120,wrong_denominator,corruption,240,1.0
+extended 120,denominator_swapped_with_audit_note,corruption,240,0.0
+extended 120,wrong_metric,corruption,240,1.0
+extended 120,entity_order_swapped,corruption,240,1.0
+extended 120,operational_rule_removed,corruption,240,1.0
+extended 120,formatting_whitespace,valid control,240,0.0
+extended 120,sentence_reflow,valid control,120,0.0
+extended 120,polite_prefix,valid control,240,0.0
+extended 120,harmless_trailing_note,valid control,240,0.0
+extended 120,synonym_for_larger,valid control,120,0.0
+extended 120,size_class_substituted,corruption,106,1.0
+all 154,population_deleted,corruption,86,1.0
+all 154,population_substituted,corruption,86,1.0
+all 154,population_negated,corruption,43,1.0
+all 154,wrong_geography,corruption,294,1.0
+all 154,wrong_denominator,corruption,308,1.0
+all 154,denominator_swapped_with_audit_note,corruption,308,0.0
+all 154,wrong_metric,corruption,308,1.0
+all 154,entity_order_swapped,corruption,308,1.0
+all 154,operational_rule_removed,corruption,308,1.0
+all 154,formatting_whitespace,valid control,308,0.0
+all 154,sentence_reflow,valid control,154,0.0
+all 154,polite_prefix,valid control,308,0.0
+all 154,harmless_trailing_note,valid control,308,0.0
+all 154,synonym_for_larger,valid control,154,0.0
+all 154,size_class_substituted,corruption,138,1.0
+all 154,size_class_deleted,corruption,4,1.0

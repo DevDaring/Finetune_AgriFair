@@ -55,13 +55,18 @@ def rescore_cot(r: Dict) -> Dict:
 def rows_of(p):
     """A predictions file, or its gzipped copy (the public repository stores the large files gzipped)."""
     import gzip
+    from Submission1_TMLR.exclusions import EXCLUDED_COMPARISONS
+    rows = None
     if p.exists():
-        return C.read_jsonl(p)
-    gz = p.with_name(p.name + ".gz")
-    if gz.exists():
-        with gzip.open(gz, "rt", encoding="utf-8") as f:
-            return [json.loads(line) for line in f if line.strip()]
-    return None
+        rows = C.read_jsonl(p)
+    else:
+        gz = p.with_name(p.name + ".gz")
+        if gz.exists():
+            with gzip.open(gz, "rt", encoding="utf-8") as f:
+                rows = [json.loads(line) for line in f if line.strip()]
+    if rows is None:
+        return None
+    return [r for r in rows if r.get("comparison_id") not in EXCLUDED_COMPARISONS]
 
 
 def load() -> List[Dict]:
@@ -221,8 +226,8 @@ def comparisons(rows: List[Dict]) -> Dict[str, List[Dict]]:
     wording, itemtype = [], []
     for sid in systems:
         s = [r for r in sel if r["system"] == sid]
-        for scope, exps in (("verified (34)", {"verified"}), ("extended (121)", {"extended"}),
-                            ("all verified (155)", {"verified", "extended"})):
+        for scope, exps in (("verified (34)", {"verified"}), ("extended (120)", {"extended"}),
+                            ("all verified (154)", {"verified", "extended"})):
             v = [r for r in s if r["experiment"] in exps]
             a = {r["comparison_id"]: float(bool(r["correct"])) for r in v if r["wording"] == "wording_a"}
             b = {r["comparison_id"]: float(bool(r["correct"])) for r in v if r["wording"] == "wording_b"}
@@ -241,8 +246,8 @@ def comparisons(rows: List[Dict]) -> Dict[str, List[Dict]]:
                              "n_equal_responses": len(eq),
                              "share_roughly_equal_answers": round(sum(is_equal(r) for r in v) / len(v), 4) if v else None,
                              "defaults_to_equal": bool(v) and sum(is_equal(r) for r in v) / len(v) >= 0.8})
-    # Holm within H3: one contrast per system, on the 155-comparison scope (primary)
-    prim = [w for w in wording if w["set"] == "all verified (155)"]
+    # Holm within H3: one contrast per system, on the 154-comparison scope (primary)
+    prim = [w for w in wording if w["set"] == "all verified (154)"]
     for w, adj in zip(prim, holm([w["p_mcnemar"] for w in prim])):
         w["p_holm_h3"] = round(adj, 6)
     return {"wording": wording, "itemtype": itemtype}
@@ -309,7 +314,7 @@ def finetune_contrasts(joint: Dict[str, Dict], comp_acc: Dict[str, Dict]) -> Lis
         if sid in comp_acc and base in comp_acc:
             r2 = paired_cluster(comp_acc[sid], comp_acc[base], first)
             out.append({"family": FAMILY_NAME[family(sid)], "method": METHOD_NAME[canon(method(sid))], "seed": seed_of(sid),
-                        "variant": variant(sid), "outcome": "accuracy from memory (155 verified comparisons)", **r2})
+                        "variant": variant(sid), "outcome": "accuracy from memory (154 verified comparisons)", **r2})
     for outcome in {o["outcome"] for o in out}:
         fam = [o for o in out if o["outcome"] == outcome]
         for o, adj in zip(fam, holm([o["p_signflip"] for o in fam])):
@@ -328,7 +333,7 @@ def method_contrasts(joint: Dict[str, Dict], comp_acc: Dict[str, Dict]) -> List[
         rows = []
         for a, b in pairs:
             for outcome, src in (("fully correct scenarios (numerical set)", joint),
-                                 ("accuracy from memory (155 verified comparisons)", comp_acc)):
+                                 ("accuracy from memory (154 verified comparisons)", comp_acc)):
                 if a in src and b in src:
                     rows.append({"family": FAMILY_NAME[fam], "contrast": f"{label(a)} minus {label(b)}",
                                  "outcome": outcome, **paired_cluster(src[a], src[b], first)})
@@ -343,7 +348,7 @@ def method_contrasts(joint: Dict[str, Dict], comp_acc: Dict[str, Dict]) -> List[
 def seed_summary(num_rows: List[Dict], item_rows: List[Dict]) -> List[Dict]:
     by = collections.defaultdict(list)
     num = {r["system_id"]: r for r in num_rows}
-    mem = {r["system_id"]: r for r in item_rows if r["set"] == "all verified (155)"}
+    mem = {r["system_id"]: r for r in item_rows if r["set"] == "all verified (154)"}
     for sid in num:
         if sid.startswith("bedrock") or method(sid) == "frozen_base":
             continue
@@ -352,8 +357,8 @@ def seed_summary(num_rows: List[Dict], item_rows: List[Dict]) -> List[Dict]:
     for (fam, meth), sids in sorted(by.items()):
         for metric, src, key in (("numerical accuracy", num, "accuracy_overall"),
                                  ("fully correct scenarios", num, "fully_correct_scenarios_pooled"),
-                                 ("memory accuracy (155)", mem, "accuracy_overall"),
-                                 ("share of 'roughly equal' (155)", mem, "share_roughly_equal_answers")):
+                                 ("memory accuracy (154)", mem, "accuracy_overall"),
+                                 ("share of 'roughly equal' (154)", mem, "share_roughly_equal_answers")):
             vals = [src[s][key] for s in sids if s in src and src[s][key] is not None]
             if vals:
                 out.append({"family": FAMILY_NAME[fam], "method": METHOD_NAME[meth], "metric": metric,
@@ -363,7 +368,7 @@ def seed_summary(num_rows: List[Dict], item_rows: List[Dict]) -> List[Dict]:
 
 
 def ranking(rows: List[Dict]) -> Dict:
-    """H5: Kendall's tau between accuracy from memory (155 verified) and numerical-set accuracy."""
+    """H5: Kendall's tau between accuracy from memory (154 verified) and numerical-set accuracy."""
     mem = collections.defaultdict(dict); num = collections.defaultdict(dict); clus = {}
     for r in rows:
         if r["experiment"] in ("verified", "extended"):
@@ -397,7 +402,7 @@ def ranking(rows: List[Dict]) -> Dict:
         ni = np.concatenate([ncl[k] for k in rng.integers(0, len(ncl), len(ncl))])
         boots.append(tau(M[:, mi].mean(1), N[:, ni].mean(1))[0])
     lo, hi = np.percentile(boots, [2.5, 97.5])
-    per = [{"system": label(s), "system_id": s, "accuracy_from_memory_155": round(float(M[k].mean()), 4),
+    per = [{"system": label(s), "system_id": s, "accuracy_from_memory_154": round(float(M[k].mean()), 4),
             "accuracy_supplied_numbers": round(float(N[k].mean()), 4)} for k, s in enumerate(systems)]
     return {"n_systems": len(systems), "kendall_tau": round(t, 4), "ci_lower": round(float(lo), 4),
             "ci_upper": round(float(hi), 4), "discordant_pairs": d,
@@ -535,8 +540,8 @@ def budget_sensitivity(rows: List[Dict]) -> List[Dict]:
                 groups[(r["bundle_id"], r["wording"])].append(bool(r["correct"]))
             out.append({"system": label(sid), "system_id": sid, "budget": tag,
                         "parse_rate_memory": round(np.mean([bool(r["parse_ok"]) for r in mem]), 4),
-                        "accuracy_memory_155": round(np.mean([bool(r["correct"]) for r in mem]), 4),
-                        "equal_share_memory_155": round(np.mean([is_equal(r) for r in mem]), 4),
+                        "accuracy_memory_154": round(np.mean([bool(r["correct"]) for r in mem]), 4),
+                        "equal_share_memory_154": round(np.mean([is_equal(r) for r in mem]), 4),
                         "defaults_to_equal": bool(np.mean([is_equal(r) for r in mem]) >= 0.8),
                         "parse_rate_numerical": round(np.mean([bool(r["parse_ok"]) for r in num]), 4),
                         "accuracy_numerical": round(np.mean([bool(r["correct"]) for r in num]), 4),
@@ -609,8 +614,8 @@ def main(argv=None) -> None:
     summary = {"n_predictions": len(rows), "systems": len({r["system"] for r in rows}),
                "by_experiment": dict(collections.Counter(r["experiment"] for r in rows)),
                "h5_ranking": {k: v for k, v in rk.items() if k != "per_system"},
-               "systems_defaulting_to_equal_155": [r["system"] for r in comp["itemtype"]
-                                                   if r["set"] == "all verified (155)" and r["defaults_to_equal"]],
+               "systems_defaulting_to_equal_154": [r["system"] for r in comp["itemtype"]
+                                                   if r["set"] == "all verified (154)" and r["defaults_to_equal"]],
                "h3_significant_after_holm": [w["system"] for w in comp["wording"] if w.get("p_holm_h3", 1) < 0.05],
                "h4_significant_after_holm": [f"{o['family']}, {o['method']}, seed {o['seed']}: {o['outcome']} {o['difference']}"
                                              for o in ft if o.get("p_holm_h4", 1) < 0.05]}

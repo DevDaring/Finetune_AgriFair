@@ -1,0 +1,23 @@
+{
+  "all 154": {
+    "caught": 1883,
+    "controls": 1232,
+    "corrupted": 2191,
+    "detection_rate": 0.8594,
+    "false_alarms": 0
+  },
+  "extended 120": {
+    "caught": 1431,
+    "controls": 960,
+    "corrupted": 1671,
+    "detection_rate": 0.8564,
+    "false_alarms": 0
+  },
+  "original 34": {
+    "caught": 452,
+    "controls": 272,
+    "corrupted": 520,
+    "detection_rate": 0.8692,
+    "false_alarms": 0
+  }
+}
