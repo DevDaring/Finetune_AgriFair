@@ -30,10 +30,15 @@ DATA_FILES = ["results_submission1_dke_repair_v2/r1_corrected_panel.jsonl",
               "results_submission1_dke_repair_v2/v2_predictions.jsonl",
               "results_submission1_phase2/predictions/main_predictions.jsonl",
               "results_submission1_phase2/predictions/pilot_predictions.jsonl"]
-SCRUB = [(re.compile(r"Debk/AgriFair-GRAFT-adapters"), "ANONYMOUS/adapters"),
-         (re.compile(r"Debk/AgriFair"), "ANONYMOUS/AgriFair"),
+_SECRETS = r"AKIA[0-9A-Z]{12}|hf_[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}"
+# identifying terms (names, handles, paths) are kept in a local, untracked file so the code itself names no one
+_TERMS = CODES / "Submission1_TMLR" / ".anonymity_terms"
+_extra = [t.strip() for t in _TERMS.read_text().splitlines() if t.strip()] if _TERMS.exists() else []
+BLOCKED = re.compile("|".join([_SECRETS] + [re.escape(t) for t in _extra]), re.I)
+_HANDLE = (_extra[0] if _extra else "ANONYMOUS")
+SCRUB = [(re.compile(re.escape(_HANDLE) + r"/AgriFair-GRAFT-adapters"), "ANONYMOUS/adapters"),
+         (re.compile(re.escape(_HANDLE) + r"/AgriFair"), "ANONYMOUS/AgriFair"),
          (re.compile(r"/home/[A-Za-z0-9_]+/"), "/home/USER/")]
-BLOCKED = re.compile(r"debk|devdaring|koushik|debz|AKIA[0-9A-Z]{12}|hf_[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}", re.I)
 
 
 def scrub(text: str) -> str:

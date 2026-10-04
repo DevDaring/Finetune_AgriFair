@@ -325,7 +325,7 @@ study. Please plan for it before we generate, not after.
 
 Names are not published; ratings are reported in aggregate.
 
-Questions: Koushik Deb, koushik_phd21@iiitkalyani.ac.in
+Questions: contact the study lead.
 """
 
 

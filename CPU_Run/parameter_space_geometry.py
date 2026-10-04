@@ -40,7 +40,7 @@ in the code below.
 #   [link between off-principal updates and reduced forgetting / capability preservation]
 # Hill, B. M. "A Simple General Approach to Inference About the Tail of a Distribution."
 #   The Annals of Statistics, 3(5):1163-1174, 1975. [Hill tail exponent]
-# Deb, K., Basu, A. "Language-Specific Bias Circuits in Multilingual Language Models."
+# [citation withheld for anonymous review]
 #   ACM Transactions on Asian and Low-Resource Language Processing, 2026.
 #   [companion verification: the minimal cut shows bias units are removed, while these
 #    geometry diagnostics show the surrounding pretrained structure is left intact]

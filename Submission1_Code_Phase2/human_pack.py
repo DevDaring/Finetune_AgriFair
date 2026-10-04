@@ -304,7 +304,7 @@ useful than a guess.
 Names are not published. Ratings and checks are reported in aggregate, and any private correspondence
 stays private.
 
-Questions: Koushik Deb, koushik_phd21@iiitkalyani.ac.in
+Questions: contact the study lead.
 """
 
 
