@@ -1,0 +1,23 @@
+  200/1860 calls, 0.2 min
+  400/1860 calls, 1.0 min
+  600/1860 calls, 2.0 min
+  800/1860 calls, 3.0 min
+  1000/1860 calls, 3.7 min
+  1200/1860 calls, 4.0 min
+  1400/1860 calls, 5.0 min
+  1600/1860 calls, 6.0 min
+  1800/1860 calls, 7.0 min
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 8370
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 930,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 10230
+ }
+}

@@ -1,0 +1,5 @@
+system,system_id,budget,parse_rate_memory,accuracy_memory_155,equal_share_memory_155,defaults_to_equal,parse_rate_numerical,accuracy_numerical,fully_correct_scenarios
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,24 tokens (main),0.7677,0.0581,0.7677,False,1.0,0.5278,0.1354
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,256 tokens,0.971,0.1258,0.8935,True,1.0,0.5278,0.1354
+"Llama-3.2-3B, plain LoRA, seed 43",small-instruct|reference_vanilla_lora|seed43,24 tokens (main),1.0,0.0935,0.9645,True,0.9583,0.3611,0.0
+"Llama-3.2-3B, plain LoRA, seed 43",small-instruct|reference_vanilla_lora|seed43,256 tokens,1.0,0.0935,0.9645,True,0.9583,0.3611,0.0

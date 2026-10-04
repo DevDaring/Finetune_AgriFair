@@ -1,0 +1,43 @@
+system,system_id,gap 10-25_n,gap 10-25_equal_share,gap 10-25_accuracy,gap 25-50_n,gap 25-50_equal_share,gap 25-50_accuracy,gap 50+_n,gap 50+_equal_share,gap 50+_accuracy,landholding_equal_share,landholding_accuracy,social_group_equal_share,social_group_accuracy
+DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,114,0.0526,0.693,38,0.0263,0.7895,140,0.0143,0.9214,0.0441,0.7353,0.0197,0.8816
+Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,114,0.7719,0.193,38,0.8158,0.1579,140,0.8857,0.1143,0.7206,0.2426,0.9342,0.0658
+"Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,114,0.9737,0.0263,38,0.9211,0.0789,140,0.8714,0.1286,0.9338,0.0662,0.9145,0.0855
+"Qwen3-4B, random-placement LoRA, draw 3",broad-instruct|ablation_placement_random_draw3|seed42,114,0.9561,0.0439,38,0.8421,0.1579,140,0.5571,0.4429,0.9412,0.0588,0.5855,0.4145
+"Qwen3-4B, random-placement LoRA, draw 1",broad-instruct|ablation_placement_random|seed42,114,0.9561,0.0263,38,0.8421,0.1579,140,0.6214,0.3786,0.9485,0.0368,0.6513,0.3487
+"Qwen3-4B, unmodified",broad-instruct|frozen_base|seed42,114,0.9912,0.0,38,1.0,0.0,140,1.0,0.0,0.9926,0.0,1.0,0.0
+"Qwen3-4B, attribution-guided LoRA, seed 42",broad-instruct|graft_proposed|seed42,114,0.9737,0.0263,38,0.8421,0.1579,140,0.5357,0.4643,0.9632,0.0368,0.5658,0.4342
+"Qwen3-4B, attribution-guided LoRA, seed 43",broad-instruct|graft_proposed|seed43,114,0.9912,0.0088,38,0.8947,0.1053,140,0.5714,0.4286,0.9853,0.0147,0.6118,0.3882
+"Qwen3-4B, attribution-guided LoRA, seed 44",broad-instruct|graft_proposed|seed44,114,0.8947,0.0877,38,0.7105,0.2105,140,0.2143,0.7571,0.9265,0.0735,0.2171,0.7237
+"Qwen3-4B, plain LoRA, seed 42",broad-instruct|reference_vanilla_lora|seed42,114,0.9386,0.0439,38,0.8684,0.0789,140,0.5357,0.4429,0.9632,0.0368,0.5526,0.4013
+"Qwen3-4B, plain LoRA, seed 43",broad-instruct|reference_vanilla_lora|seed43,114,0.9825,0.0175,38,0.8684,0.1316,140,0.6571,0.3429,0.9559,0.0441,0.7039,0.2961
+"Qwen3-4B, plain LoRA, seed 44",broad-instruct|reference_vanilla_lora|seed44,114,0.9737,0.0263,38,0.8684,0.1316,140,0.6143,0.3857,1.0,0.0,0.6053,0.3947
+"Ministral-8B, random-placement LoRA, draw 2",general-instruct-2|ablation_placement_random_draw2|seed42,114,0.9649,0.0351,38,0.9737,0.0263,140,0.9286,0.0714,0.9265,0.0735,0.9934,0.0066
+"Ministral-8B, random-placement LoRA, draw 3",general-instruct-2|ablation_placement_random_draw3|seed42,114,1.0,0.0,38,1.0,0.0,140,0.9857,0.0143,1.0,0.0,1.0,0.0
+"Ministral-8B, random-placement LoRA, draw 1",general-instruct-2|ablation_placement_random|seed42,114,0.9211,0.0702,38,0.8158,0.1842,140,0.5286,0.4714,0.9265,0.0735,0.5526,0.4408
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,114,0.8947,0.0,38,0.8684,0.0,140,0.6071,0.0,0.9044,0.0,0.6118,0.0
+"Ministral-8B, attribution-guided LoRA, seed 42",general-instruct-2|graft_proposed|seed42,114,0.9035,0.0789,38,0.7895,0.1316,140,0.2357,0.7143,0.9265,0.0735,0.2632,0.6579
+"Ministral-8B, attribution-guided LoRA, seed 43",general-instruct-2|graft_proposed|seed43,114,0.9123,0.0614,38,0.7895,0.2105,140,0.5071,0.45,0.9265,0.0735,0.5197,0.4211
+"Ministral-8B, attribution-guided LoRA, seed 44",general-instruct-2|graft_proposed|seed44,114,1.0,0.0,38,1.0,0.0,140,0.9643,0.0357,1.0,0.0,0.9803,0.0197
+"Ministral-8B, plain LoRA, seed 42",general-instruct-2|reference_vanilla_lora|seed42,114,0.9386,0.0526,38,0.8947,0.0789,140,0.55,0.4286,0.9265,0.0735,0.6053,0.3618
+"Ministral-8B, plain LoRA, seed 43",general-instruct-2|reference_vanilla_lora|seed43,114,0.9211,0.0614,38,0.8684,0.0789,140,0.5643,0.3929,0.9265,0.0735,0.5987,0.3355
+"Ministral-8B, plain LoRA, seed 44",general-instruct-2|reference_vanilla_lora|seed44,114,0.9386,0.0439,38,0.8684,0.0789,140,0.5786,0.3786,0.9559,0.0441,0.5987,0.3355
+"Gemma-3-12B, random-placement LoRA, draw 2",general-instruct|ablation_placement_random_draw2|seed42,114,0.9386,0.0614,38,0.8158,0.1842,140,0.3,0.7,0.9265,0.0735,0.3553,0.6447
+"Gemma-3-12B, random-placement LoRA, draw 3",general-instruct|ablation_placement_random_draw3|seed42,114,0.9474,0.0263,38,0.8421,0.1316,140,0.2143,0.7857,1.0,0.0,0.2237,0.75
+"Gemma-3-12B, random-placement LoRA, draw 1",general-instruct|ablation_placement_random|seed42,114,0.9211,0.0614,38,0.8421,0.1579,140,0.7429,0.2571,0.9265,0.0735,0.7566,0.2303
+"Gemma-3-12B, unmodified",general-instruct|frozen_base|seed42,114,0.5965,0.1842,38,0.5789,0.3158,140,0.3286,0.6286,0.5735,0.2059,0.3816,0.5921
+"Gemma-3-12B, attribution-guided LoRA, seed 42",general-instruct|graft_proposed|seed42,114,0.886,0.0877,38,0.7368,0.2368,140,0.5286,0.4643,0.9265,0.0735,0.5066,0.4605
+"Gemma-3-12B, attribution-guided LoRA, seed 43",general-instruct|graft_proposed|seed43,114,0.9298,0.0614,38,0.8158,0.1842,140,0.4786,0.5214,0.9265,0.0735,0.5132,0.4803
+"Gemma-3-12B, attribution-guided LoRA, seed 44",general-instruct|graft_proposed|seed44,114,0.8596,0.1316,38,0.6053,0.3684,140,0.0643,0.9357,0.8529,0.1471,0.0921,0.8947
+"Gemma-3-12B, plain LoRA, seed 42",general-instruct|reference_vanilla_lora|seed42,114,0.9649,0.0351,38,0.9737,0.0263,140,0.8643,0.1357,0.9265,0.0735,0.9342,0.0658
+"Gemma-3-12B, plain LoRA, seed 43",general-instruct|reference_vanilla_lora|seed43,114,0.9474,0.0526,38,0.8684,0.1316,140,0.3857,0.6143,0.8897,0.1103,0.4868,0.5132
+"Gemma-3-12B, plain LoRA, seed 44",general-instruct|reference_vanilla_lora|seed44,114,0.9912,0.0088,38,0.9474,0.0526,140,0.6571,0.3429,1.0,0.0,0.6908,0.3092
+"Llama-3.2-3B, random-placement LoRA, draw 2",small-instruct|ablation_placement_random_draw2|seed42,114,1.0,0.0,38,1.0,0.0,140,1.0,0.0,1.0,0.0,1.0,0.0
+"Llama-3.2-3B, random-placement LoRA, draw 3",small-instruct|ablation_placement_random_draw3|seed42,114,1.0,0.0,38,1.0,0.0,140,0.9214,0.0786,1.0,0.0,0.9342,0.0658
+"Llama-3.2-3B, random-placement LoRA, draw 1",small-instruct|ablation_placement_random|seed42,114,1.0,0.0,38,1.0,0.0,140,1.0,0.0,1.0,0.0,1.0,0.0
+"Llama-3.2-3B, unmodified",small-instruct|frozen_base|seed42,114,1.0,0.0,38,1.0,0.0,140,0.9929,0.0071,0.9926,0.0074,1.0,0.0
+"Llama-3.2-3B, attribution-guided LoRA, seed 42",small-instruct|graft_proposed|seed42,114,1.0,0.0,38,1.0,0.0,140,0.9857,0.0143,0.9926,0.0074,0.9934,0.0066
+"Llama-3.2-3B, attribution-guided LoRA, seed 43",small-instruct|graft_proposed|seed43,114,0.9649,0.0351,38,0.9474,0.0526,140,0.7571,0.2429,0.9265,0.0735,0.8289,0.1711
+"Llama-3.2-3B, attribution-guided LoRA, seed 44",small-instruct|graft_proposed|seed44,114,1.0,0.0,38,1.0,0.0,140,0.8857,0.1143,1.0,0.0,0.9211,0.0789
+"Llama-3.2-3B, plain LoRA, seed 42",small-instruct|reference_vanilla_lora|seed42,114,1.0,0.0,38,1.0,0.0,140,0.9857,0.0143,1.0,0.0,1.0,0.0
+"Llama-3.2-3B, plain LoRA, seed 43",small-instruct|reference_vanilla_lora|seed43,114,1.0,0.0,38,1.0,0.0,140,0.9214,0.0786,1.0,0.0,0.9539,0.0461
+"Llama-3.2-3B, plain LoRA, seed 44",small-instruct|reference_vanilla_lora|seed44,114,1.0,0.0,38,1.0,0.0,140,0.9714,0.0286,1.0,0.0,1.0,0.0

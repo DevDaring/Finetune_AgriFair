@@ -1,0 +1,14 @@
+{
+  "by_axis_condition": {
+    "gender/equal": 1,
+    "landholding/diff": 60,
+    "social_group/diff": 60
+  },
+  "check_failures": 0,
+  "items": 121,
+  "label_recheck_failures": 0,
+  "prompts": 242,
+  "selection_seed": 20261004,
+  "states": 34,
+  "target_per_axis": 60
+}

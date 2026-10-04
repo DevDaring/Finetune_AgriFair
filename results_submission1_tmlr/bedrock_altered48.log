@@ -1,0 +1,15 @@
+  200/288 calls, 0.3 min
+{
+ "bedrock|qwen3-next-80b-a3b|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1296
+ },
+ "bedrock|deepseek-v3.2|unmodified": {
+  "rows": 144,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 1588
+ }
+}

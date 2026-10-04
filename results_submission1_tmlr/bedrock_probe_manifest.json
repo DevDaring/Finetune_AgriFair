@@ -1,0 +1,28 @@
+{
+  "accounts_used": [
+    "aws-1",
+    "aws-2"
+  ],
+  "max_tokens": 256,
+  "minutes": 0.03,
+  "models": {
+    "bedrock|deepseek-v3.2|unmodified": "deepseek.v3.2",
+    "bedrock|qwen3-next-80b-a3b|unmodified": "qwen.qwen3-next-80b-a3b"
+  },
+  "region": "us-east-1",
+  "summary": {
+    "bedrock|deepseek-v3.2|unmodified": {
+      "errors": 0,
+      "output_tokens": 44,
+      "parse_ok": 1.0,
+      "rows": 4
+    },
+    "bedrock|qwen3-next-80b-a3b|unmodified": {
+      "errors": 0,
+      "output_tokens": 36,
+      "parse_ok": 1.0,
+      "rows": 4
+    }
+  },
+  "temperature": 0.0
+}

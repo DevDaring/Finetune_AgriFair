@@ -75,8 +75,14 @@ data_submission2/mandi/mandi_cron.log
 Submission1_Code_Phase2/
 Submission1_DKE_Repair/
 results_submission1_*/
+!results_submission1_tmlr/
 Submission2_Run/
 Submission2/
 data_submission2/
 results_submission2*/
 Dataset_Translation/
+# TMLR results: predictions are committed gzipped; the raw copies and the GPU download mirror stay local
+results_submission1_tmlr/*_predictions.jsonl
+results_submission1_tmlr/gpu_run_*/
+results_submission1_tmlr/watchdog.log
+results_submission1_tmlr/analysis/run.log

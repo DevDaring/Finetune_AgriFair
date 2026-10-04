@@ -1,0 +1,54 @@
+{
+  "attention": {
+    "installed": null,
+    "requested": "sdpa"
+  },
+  "environment": {
+    "cuda": "12.1",
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peft": "0.17.1",
+    "platform": "Linux-5.15.0-179-generic-x86_64-with-glibc2.35",
+    "python": "3.11.9",
+    "torch": "2.4.0",
+    "transformers": "4.56.2"
+  },
+  "minutes": 6.96,
+  "outputs_written": 7440,
+  "plan_sha256": "f66d5d4b4ec07f5ce9f662d284508c7583410f871d40b5515b2f3db63784471d",
+  "prompt_file_sha256": {
+    "results_submission1_dke_repair_v2/prompts_e1_r1_corrected.jsonl": "18b6bd73930dd9d191de3303d4076bf40f2041f210c4659603279dcfdaf3b8b1",
+    "results_submission1_dke_repair_v2/prompts_e3_diagnostic_clean.jsonl": "11a0b2faea291390518d1930a7c6ffc859070838df3b8d61ecd66d478ad4d8ef",
+    "results_submission1_dke_repair_v2/prompts_e4_neutral.jsonl": "646e6c22f90e7c0d08940b63522ab81ca4eaa35b5140b47fbdd3c7ac00919570",
+    "results_submission1_dke_repair_v2/prompts_e5_option_permuted.jsonl": "6b52b57b1f9e4c3e87214d50200710963355a70faed78460f68371f5d93b1c48",
+    "results_submission1_phase2/evidence/r2_diagnostic_prompts.jsonl": "c05dd5a8a1a8bb7889adcefd99a398c89eb225fed8b7c3481e5583dffc4e2b9d",
+    "results_submission1_phase2/evidence/r2_main_prompts.jsonl": "0698b01e3109f1e30f8b5cbda5e6b66e1dc2d5756a1d1bfb576022ab98c71f80",
+    "results_submission1_tmlr/prompts_altered48.jsonl": "5c6e0fb4f4b59d9f7ce0f1154773868be233ab5ea4e3bda0c5a42e4c764388ae",
+    "results_submission1_tmlr/prompts_cot.jsonl": "38c642369c1af9ace5a68ca52699f401a2785df5b49715e3ff8294722c8fae20",
+    "results_submission1_tmlr/prompts_followups.jsonl": "c99522bac363dfbd3dc4e4ef753a6d3b6b4918ba79eed44161aabeb8fd091eda",
+    "results_submission1_tmlr/prompts_r1_extended.jsonl": "d01c043026099a0060ca7bbd84874f1fd9bf2c2c0cafb7748213f514a222bfe6"
+  },
+  "prompt_sets": "main+altered48",
+  "prompts_per_system": 930,
+  "seconds_per_output": 0.0492,
+  "stage": "draws",
+  "systems": [
+    "small-instruct|ablation_placement_random_draw2|seed42",
+    "small-instruct|ablation_placement_random_draw3|seed42",
+    "broad-instruct|ablation_placement_random_draw2|seed42",
+    "broad-instruct|ablation_placement_random_draw3|seed42",
+    "general-instruct-2|ablation_placement_random_draw2|seed42",
+    "general-instruct-2|ablation_placement_random_draw3|seed42",
+    "general-instruct|ablation_placement_random_draw2|seed42",
+    "general-instruct|ablation_placement_random_draw3|seed42"
+  ],
+  "timings_by_system": {
+    "broad-instruct|ablation_placement_random_draw2|seed42": 28.6,
+    "broad-instruct|ablation_placement_random_draw3|seed42": 28.7,
+    "general-instruct-2|ablation_placement_random_draw2|seed42": 39.6,
+    "general-instruct-2|ablation_placement_random_draw3|seed42": 58.2,
+    "general-instruct|ablation_placement_random_draw2|seed42": 85.4,
+    "general-instruct|ablation_placement_random_draw3|seed42": 85.2,
+    "small-instruct|ablation_placement_random_draw2|seed42": 20.6,
+    "small-instruct|ablation_placement_random_draw3|seed42": 19.7
+  }
+}

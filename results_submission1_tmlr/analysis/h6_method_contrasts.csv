@@ -1,0 +1,73 @@
+family,contrast,outcome,n_units,n_clusters,difference,ci_lower,ci_upper,discordant_a_only,discordant_b_only,p_signflip,p_holm_h6_within_family
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, plain LoRA, seed 42",fully correct scenarios (numerical set),96,48,-0.2188,-0.3333,-0.1042,6,27,0.0017,0.0102
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, plain LoRA, seed 42",accuracy from memory (155 verified comparisons),310,155,0.0129,-0.029,0.0581,17,13,0.645235,1.0
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 43 minus Qwen3-4B, plain LoRA, seed 43",fully correct scenarios (numerical set),96,48,-0.1354,-0.2292,-0.0521,2,15,0.008999,0.044995
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 43 minus Qwen3-4B, plain LoRA, seed 43",accuracy from memory (155 verified comparisons),310,155,0.0323,0.0032,0.0613,16,6,0.053095,0.265475
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 44 minus Qwen3-4B, plain LoRA, seed 44",fully correct scenarios (numerical set),96,48,-0.0417,-0.1146,0.0312,4,8,0.436456,1.0
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 44 minus Qwen3-4B, plain LoRA, seed 44",accuracy from memory (155 verified comparisons),310,155,0.2,0.1613,0.2387,63,1,0.0001,0.0009
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,-0.4375,-0.5521,-0.3125,2,44,0.0001,0.0009
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,0.0387,0.0161,0.0645,14,2,0.0038,0.0228
+Qwen3-4B,"Qwen3-4B, plain LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,-0.2188,-0.3333,-0.1146,4,25,0.0007,0.0049
+Qwen3-4B,"Qwen3-4B, plain LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,0.0258,-0.0065,0.0581,17,9,0.166583,0.666332
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,-0.0312,-0.1354,0.0729,10,13,0.689631,1.0
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,0.1613,0.1194,0.2065,55,5,0.0001,0.0009
+Qwen3-4B,"Qwen3-4B, plain LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,0.1875,0.1042,0.2708,20,2,0.0002,0.0016
+Qwen3-4B,"Qwen3-4B, plain LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,0.1484,0.1,0.1968,57,11,0.0001,0.0009
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,-0.0625,-0.1667,0.0417,10,16,0.347565,1.0
+Qwen3-4B,"Qwen3-4B, attribution-guided LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,0.0032,-0.0226,0.029,9,8,1.0,1.0
+Qwen3-4B,"Qwen3-4B, plain LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,0.1562,0.0417,0.2708,26,11,0.022998,0.091992
+Qwen3-4B,"Qwen3-4B, plain LoRA, seed 42 minus Qwen3-4B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,-0.0097,-0.0452,0.0258,13,16,0.714529,1.0
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, plain LoRA, seed 42",fully correct scenarios (numerical set),96,48,0.0833,0.0312,0.1354,8,0,0.007299,0.036495
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, plain LoRA, seed 42",accuracy from memory (155 verified comparisons),310,155,0.1935,0.1484,0.2419,60,0,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 43 minus Gemma-3-12B, plain LoRA, seed 43",fully correct scenarios (numerical set),96,48,-0.1354,-0.2604,-0.0208,6,19,0.053495,0.21398
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 43 minus Gemma-3-12B, plain LoRA, seed 43",accuracy from memory (155 verified comparisons),310,155,-0.0323,-0.0871,0.029,30,40,0.326967,0.326967
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 44 minus Gemma-3-12B, plain LoRA, seed 44",fully correct scenarios (numerical set),96,48,-0.0521,-0.1562,0.0521,8,13,0.427957,1.0
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 44 minus Gemma-3-12B, plain LoRA, seed 44",accuracy from memory (155 verified comparisons),310,155,0.3516,0.2935,0.4129,109,0,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,-0.3542,-0.4583,-0.25,0,34,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,0.1129,0.0774,0.1516,39,4,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, plain LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,-0.4375,-0.5521,-0.3229,0,42,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, plain LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,-0.0806,-0.1097,-0.0548,0,25,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,-0.0104,-0.0729,0.0521,5,6,1.0,1.0
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,-0.0903,-0.1355,-0.0452,9,37,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, plain LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,-0.0938,-0.1562,-0.0417,0,9,0.0041,0.0246
+Gemma-3-12B,"Gemma-3-12B, plain LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,-0.2839,-0.3419,-0.229,0,88,0.0001,0.0009
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,-0.0312,-0.1042,0.0417,5,8,0.582142,1.0
+Gemma-3-12B,"Gemma-3-12B, attribution-guided LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,-0.1097,-0.171,-0.0484,23,57,0.0008,0.0016
+Gemma-3-12B,"Gemma-3-12B, plain LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,-0.1146,-0.1771,-0.0625,0,11,0.0012,0.0084
+Gemma-3-12B,"Gemma-3-12B, plain LoRA, seed 42 minus Gemma-3-12B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,-0.3032,-0.3774,-0.229,10,104,0.0001,0.0009
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, plain LoRA, seed 42",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, plain LoRA, seed 42",accuracy from memory (155 verified comparisons),310,155,0.1452,0.1065,0.1871,50,5,0.0001,0.0009
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 43 minus Ministral-8B, plain LoRA, seed 43",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 43 minus Ministral-8B, plain LoRA, seed 43",accuracy from memory (155 verified comparisons),310,155,0.0419,0.0097,0.0742,21,8,0.026997,0.026997
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 44 minus Ministral-8B, plain LoRA, seed 44",fully correct scenarios (numerical set),96,48,-0.0104,-0.0312,0.0,0,1,1.0,1.0
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 44 minus Ministral-8B, plain LoRA, seed 44",accuracy from memory (155 verified comparisons),310,155,-0.1806,-0.2194,-0.1419,0,56,0.0001,0.0009
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,-0.0104,-0.0312,0.0,0,1,1.0,1.0
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,0.1065,0.0516,0.1613,54,21,0.0004,0.0012
+Ministral-8B,"Ministral-8B, plain LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,-0.0104,-0.0312,0.0,0,1,1.0,1.0
+Ministral-8B,"Ministral-8B, plain LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,-0.0387,-0.0677,-0.0129,4,16,0.012999,0.025998
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,0.3194,0.2484,0.3935,99,0,0.0001,0.0009
+Ministral-8B,"Ministral-8B, plain LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Ministral-8B,"Ministral-8B, plain LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,0.1742,0.1387,0.2129,54,0,0.0001,0.0009
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Ministral-8B,"Ministral-8B, attribution-guided LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,0.3613,0.2903,0.4323,112,0,0.0001,0.0009
+Ministral-8B,"Ministral-8B, plain LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Ministral-8B,"Ministral-8B, plain LoRA, seed 42 minus Ministral-8B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,0.2161,0.1774,0.2548,67,0,0.0001,0.0009
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, plain LoRA, seed 42",fully correct scenarios (numerical set),96,48,-0.0104,-0.0521,0.0312,2,3,1.0,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, plain LoRA, seed 42",accuracy from memory (155 verified comparisons),310,155,0.0,-0.0129,0.0129,2,2,1.0,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 43 minus Llama-3.2-3B, plain LoRA, seed 43",fully correct scenarios (numerical set),96,48,0.0,0.0,0.0,0,0,1.0,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 43 minus Llama-3.2-3B, plain LoRA, seed 43",accuracy from memory (155 verified comparisons),310,155,0.0935,0.0613,0.129,31,2,0.0001,0.0009
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 44 minus Llama-3.2-3B, plain LoRA, seed 44",fully correct scenarios (numerical set),96,48,0.0,-0.0312,0.0312,1,1,1.0,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 44 minus Llama-3.2-3B, plain LoRA, seed 44",accuracy from memory (155 verified comparisons),310,155,0.0387,0.0194,0.0613,12,0,0.0006,0.0048
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,0.0208,0.0,0.0521,2,0,0.50305,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,0.0065,0.0,0.0161,2,0,0.505049,1.0
+Llama-3.2-3B,"Llama-3.2-3B, plain LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 1",fully correct scenarios (numerical set),96,48,0.0312,0.0,0.0729,3,0,0.256474,1.0
+Llama-3.2-3B,"Llama-3.2-3B, plain LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 1",accuracy from memory (155 verified comparisons),310,155,0.0065,0.0,0.0161,2,0,0.50065,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,0.0208,0.0,0.0521,2,0,0.50305,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,0.0065,0.0,0.0161,2,0,0.505049,1.0
+Llama-3.2-3B,"Llama-3.2-3B, plain LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 2",fully correct scenarios (numerical set),96,48,0.0312,0.0,0.0729,3,0,0.256474,1.0
+Llama-3.2-3B,"Llama-3.2-3B, plain LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 2",accuracy from memory (155 verified comparisons),310,155,0.0065,0.0,0.0161,2,0,0.50065,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,0.0104,-0.0208,0.0521,2,1,1.0,1.0
+Llama-3.2-3B,"Llama-3.2-3B, attribution-guided LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,-0.029,-0.0613,-0.0032,2,11,0.092891,0.557346
+Llama-3.2-3B,"Llama-3.2-3B, plain LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 3",fully correct scenarios (numerical set),96,48,0.0208,0.0,0.0521,2,0,0.507449,1.0
+Llama-3.2-3B,"Llama-3.2-3B, plain LoRA, seed 42 minus Llama-3.2-3B, random-placement LoRA, draw 3",accuracy from memory (155 verified comparisons),310,155,-0.029,-0.0613,-0.0032,1,10,0.059294,0.415058

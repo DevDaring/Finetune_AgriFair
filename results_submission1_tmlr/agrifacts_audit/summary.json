@@ -1,0 +1,22 @@
+{
+  "flags_by_rule": {
+    "P1_social_group_dropped": 574,
+    "P2_size_class_dropped": 91,
+    "P3_geography_missing": 58,
+    "P4_metric_missing": 1217,
+    "P5_denominator_missing": 2000,
+    "P6_entity_order": 23,
+    "P7_rule_missing": 2000
+  },
+  "items": 2000,
+  "items_with_any_flag": 2000,
+  "items_with_semantic_flags": 614,
+  "semantic_flags_by_axis_rule": {
+    "gender/P1_social_group_dropped": 123,
+    "gender/P2_size_class_dropped": 90,
+    "gender/P3_geography_missing": 58,
+    "landholding/P1_social_group_dropped": 451,
+    "social_group/P2_size_class_dropped": 1
+  },
+  "unmatched_to_records": 0
+}
