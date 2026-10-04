@@ -1,0 +1,5 @@
+system,n_items,equality_share_equality_at_c,equality_share_equality_moved,semantic_answer_stable,displayed_letter_stable,accuracy_equality_at_c,accuracy_equality_moved,letter_distribution_when_moved
+broad-instruct|frozen_base|seed42,68,0.9853,0.8676,0.8824,0.0735,0.2353,0.3088,"{'b': 32, 'c': 6, 'a': 30}"
+broad-instruct|graft_proposed|seed42,68,0.6765,0.7353,0.9118,0.0882,0.5588,0.4853,"{'a': 33, 'c': 12, 'b': 22, 'None': 1}"
+small-instruct|frozen_base|seed42,68,1.0,1.0,1.0,0.0,0.2353,0.2353,"{'b': 32, 'a': 36}"
+small-instruct|graft_proposed|seed42,68,1.0,0.8382,0.8382,0.1471,0.2353,0.3971,"{'b': 27, 'a': 31, 'c': 10}"

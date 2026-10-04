@@ -1,5 +1,7 @@
 system,system_id,n_matched,agricultural_accuracy,neutral_accuracy,neutral_minus_agricultural
 DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,72,0.9028,0.9722,0.0694
+Gemma-3-27B,bedrock|gemma-3-27b|unmodified,72,0.6667,0.6667,0.0
+Qwen3-32B,bedrock|qwen3-32b|unmodified,72,0.9583,0.9722,0.0139
 Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,72,0.875,0.8333,-0.0417
 "Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,72,0.6806,0.8056,0.125
 "Qwen3-4B, random-placement LoRA, draw 3",broad-instruct|ablation_placement_random_draw3|seed42,72,0.6389,0.8472,0.2083

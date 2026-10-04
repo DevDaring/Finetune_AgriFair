@@ -1,0 +1,22 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.08it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.83it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.66it/s]
+/opt/conda/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['alora_invocation_tokens', 'arrow_config', 'ensure_weight_tying', 'lora_ga_config', 'monteclora_config', 'peft_version', 'use_bdlora', 'velora_config'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  small-instruct|ablation_placement_random_draw2|seed42: done, 930 outputs so far, 0.5 min
+/opt/conda/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+  small-instruct|ablation_placement_random_draw3|seed42: done, 1860 outputs so far, 0.9 min
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:01,  1.47it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:01<00:00,  1.50it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:01<00:00,  2.22it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  broad-instruct|ablation_placement_random_draw2|seed42: done, 2790 outputs so far, 1.5 min
+  broad-instruct|ablation_placement_random_draw3|seed42: done, 3720 outputs so far, 2.0 min
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama_fast.LlamaTokenizerFast'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.22it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.27it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.27it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.85it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.58it/s]
+  general-instruct-2|ablation_placement_random_draw2|seed42: done, 4650 outputs so far, 2.8 min
+  general-instruct-2|ablation_placement_random_draw3|seed42: done, 5580 outputs so far, 3.8 min
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:00<00:03,  1.07it/s]Loading checkpoint shards:  40%|████      | 2/5 [00:01<00:02,  1.18it/s]Loading checkpoint shards:  60%|██████    | 3/5 [00:02<00:01,  1.23it/s]Loading checkpoint shards:  80%|████████  | 4/5 [00:03<00:00,  1.25it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:04<00:00,  1.28it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:04<00:00,  1.24it/s]
+The following generation flags are not valid and may be ignored: ['top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  general-instruct|ablation_placement_random_draw2|seed42: done, 6510 outputs so far, 5.4 min
+  general-instruct|ablation_placement_random_draw3|seed42: done, 7440 outputs so far, 6.9 min
+[run_gpu] draws: 7440 outputs in 6.96 min (0.049 s/output) -> /workspace/Codes/results_submission1_tmlr/gpu_draws_predictions.jsonl

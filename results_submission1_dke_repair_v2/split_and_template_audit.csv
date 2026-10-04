@@ -1,0 +1,5 @@
+quantity,train_only,train_plus_validation
+template families on the non-test side,475,518
+families shared with test,35,38
+test items sharing such a family,448,451
+share of the 749 test items,0.5981,0.6021

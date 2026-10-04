@@ -1,0 +1,9 @@
+system,condition,n_responses,accuracy
+broad-instruct|frozen_base|seed42,diff,52,0.0
+broad-instruct|frozen_base|seed42,equal,16,1.0
+broad-instruct|graft_proposed|seed42,diff,52,0.4231
+broad-instruct|graft_proposed|seed42,equal,16,1.0
+small-instruct|frozen_base|seed42,diff,52,0.0
+small-instruct|frozen_base|seed42,equal,16,1.0
+small-instruct|graft_proposed|seed42,diff,52,0.0
+small-instruct|graft_proposed|seed42,equal,16,1.0

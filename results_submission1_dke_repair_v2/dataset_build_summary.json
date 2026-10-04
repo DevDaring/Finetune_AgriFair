@@ -1,0 +1,37 @@
+{
+  "agriadvice": {
+    "by_axis": {
+      "gender": 200,
+      "literacy_register": 200,
+      "region_register": 200,
+      "social_group": 200
+    },
+    "query_verbatim_in_both_versions_and_versions_differ": 800,
+    "released_pairs": 800,
+    "source_dataset": [
+      "KisanVaani/agriculture-qa-english-only"
+    ]
+  },
+  "agrifacts": {
+    "by_axis": {
+      "gender": 180,
+      "landholding": 913,
+      "social_group": 907
+    },
+    "by_condition": {
+      "diff": 1000,
+      "equal": 1000
+    },
+    "census_audit": "run Source_Records/extracted/Dataset/verify_agrifacts.py; it aborts on the first mismatch",
+    "judged_candidates": 2431,
+    "kept_unanimously": 2420,
+    "released_file_equals_build_output": true,
+    "released_items": 2000,
+    "states_extracted": 36,
+    "validated_comparisons": 2026
+  },
+  "release_sha256": {
+    "agriadvice.jsonl": "3227db489c0164db450c3ac62654e81e892e34f897a30079083b58147bed813b",
+    "agrifacts.jsonl": "441ec632e05f9765632afcbcf865e427ea7208882e3f4417debee565ec65cfae"
+  }
+}

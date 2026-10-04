@@ -1,0 +1,46 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.26it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  2.13it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.93it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  small-instruct|frozen_base|seed42: done, 930 outputs so far, 0.3 min
+/opt/conda/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['alora_invocation_tokens', 'arrow_config', 'ensure_weight_tying', 'lora_ga_config', 'monteclora_config', 'peft_version', 'use_bdlora', 'velora_config'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+  small-instruct|graft_proposed|seed42: done, 1860 outputs so far, 0.6 min
+/opt/conda/lib/python3.11/site-packages/peft/tuners/tuners_utils.py:196: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+  small-instruct|graft_proposed|seed43: done, 2790 outputs so far, 0.9 min
+  small-instruct|graft_proposed|seed44: done, 3720 outputs so far, 1.2 min
+  small-instruct|reference_vanilla_lora|seed42: done, 4650 outputs so far, 1.6 min
+  small-instruct|reference_vanilla_lora|seed43: done, 5580 outputs so far, 1.9 min
+  small-instruct|reference_vanilla_lora|seed44: done, 6510 outputs so far, 2.3 min
+  small-instruct|ablation_placement_random|seed42: done, 7440 outputs so far, 2.6 min
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:01,  1.54it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:01<00:00,  1.54it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:01<00:00,  2.28it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  broad-instruct|frozen_base|seed42: done, 8370 outputs so far, 2.9 min
+  broad-instruct|graft_proposed|seed42: done, 9300 outputs so far, 3.4 min
+  broad-instruct|graft_proposed|seed43: done, 10230 outputs so far, 3.8 min
+  broad-instruct|graft_proposed|seed44: done, 11160 outputs so far, 4.2 min
+  broad-instruct|reference_vanilla_lora|seed42: done, 12090 outputs so far, 4.7 min
+  broad-instruct|reference_vanilla_lora|seed43: done, 13020 outputs so far, 5.2 min
+  broad-instruct|reference_vanilla_lora|seed44: done, 13950 outputs so far, 5.7 min
+  broad-instruct|ablation_placement_random|seed42: done, 14880 outputs so far, 6.1 min
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama_fast.LlamaTokenizerFast'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565 - if you loaded a llama tokenizer from a GGUF file you can ignore this message.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.26it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.30it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.29it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.88it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.61it/s]
+  general-instruct-2|frozen_base|seed42: done, 15810 outputs so far, 6.6 min
+  general-instruct-2|graft_proposed|seed42: done, 16740 outputs so far, 7.6 min
+  general-instruct-2|graft_proposed|seed43: done, 17670 outputs so far, 8.2 min
+  general-instruct-2|graft_proposed|seed44: done, 18600 outputs so far, 8.8 min
+  general-instruct-2|reference_vanilla_lora|seed42: done, 19530 outputs so far, 9.4 min
+  general-instruct-2|reference_vanilla_lora|seed43: done, 20460 outputs so far, 10.1 min
+  general-instruct-2|reference_vanilla_lora|seed44: done, 21390 outputs so far, 10.8 min
+  general-instruct-2|ablation_placement_random|seed42: done, 22320 outputs so far, 11.3 min
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:00<00:03,  1.21it/s]Loading checkpoint shards:  40%|████      | 2/5 [00:01<00:02,  1.25it/s]Loading checkpoint shards:  60%|██████    | 3/5 [00:02<00:01,  1.27it/s]Loading checkpoint shards:  80%|████████  | 4/5 [00:03<00:00,  1.28it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:03<00:00,  1.31it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:03<00:00,  1.29it/s]
+The following generation flags are not valid and may be ignored: ['top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  general-instruct|frozen_base|seed42: done, 23250 outputs so far, 12.4 min
+  general-instruct|graft_proposed|seed42: done, 24180 outputs so far, 13.7 min
+  general-instruct|graft_proposed|seed43: done, 25110 outputs so far, 15.4 min
+  general-instruct|graft_proposed|seed44: done, 26040 outputs so far, 17.5 min
+  general-instruct|reference_vanilla_lora|seed42: done, 26970 outputs so far, 18.9 min
+  general-instruct|reference_vanilla_lora|seed43: done, 27900 outputs so far, 20.4 min
+  general-instruct|reference_vanilla_lora|seed44: done, 28830 outputs so far, 21.8 min
+  general-instruct|ablation_placement_random|seed42: done, 29760 outputs so far, 23.1 min
+[run_gpu] followups: 29760 outputs in 23.15 min (0.045 s/output) -> /workspace/Codes/results_submission1_tmlr/gpu_followups_predictions.jsonl

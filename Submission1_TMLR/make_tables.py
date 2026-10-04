@@ -16,7 +16,10 @@ from Submission1_Code_Phase2 import common as C
 AN = C.CODES_ROOT / "results_submission1_tmlr" / "analysis"
 DEST = C.CODES_ROOT.parent / "Submission1" / "tables_tmlr"
 FAMS = ["Llama-3.2-3B", "Qwen3-4B", "Ministral-8B", "Gemma-3-12B"]
-LARGE = ["Qwen3-Next-80B", "DeepSeek-V3.2"]
+SIBLING = {"Llama-3.2-3B": "Llama-3.3-70B", "Qwen3-4B": "Qwen3-32B", "Ministral-8B": "Mistral-Large-3",
+           "Gemma-3-12B": "Gemma-3-27B"}                       # larger hosted sibling of each GPU family (round 2)
+LARGE = ["Qwen3-Next-80B", "DeepSeek-V3.2", "gpt-oss-120B", "Kimi-K2.5", "GLM-5"]   # frontier open-weight, hosted
+ORDER = [n for f in FAMS for n in (f, SIBLING[f])] + LARGE
 METHODS = ["unmodified", "attribution-guided LoRA", "plain LoRA", "random-placement LoRA"]
 SHORT = {"unmodified": "unmodified", "attribution-guided LoRA": "attribution-guided",
          "plain LoRA": "plain LoRA", "random-placement LoRA": "random placement"}
@@ -74,28 +77,33 @@ def tab_overview():
     for s in mem:
         fam, meth, _ = split(s)
         groups[(fam, meth)].append(s)
+    def cells(ss):
+        return [rng([mem[s]["accuracy_overall"] for s in ss]), rng([mem[s]["accuracy_difference_items"] for s in ss]),
+                rng([mem[s]["share_roughly_equal_answers"] for s in ss]),
+                rng([num[s]["accuracy_overall"] for s in ss if s in num]),
+                rng([num[s]["fully_correct_scenarios_pooled"] for s in ss if s in num])]
     lines = []
-    for fam in LARGE + FAMS:
-        meths = ["unmodified"] if fam in LARGE else METHODS
-        for i, meth in enumerate(meths):
+    for fam in FAMS:
+        for i, meth in enumerate(METHODS):
             ss = groups.get((fam, meth), [])
-            if not ss:
-                continue
-            cell = [rng([mem[s]["accuracy_overall"] for s in ss]), rng([mem[s]["accuracy_difference_items"] for s in ss]),
-                    rng([mem[s]["share_roughly_equal_answers"] for s in ss]),
-                    rng([num[s]["accuracy_overall"] for s in ss if s in num]),
-                    rng([num[s]["fully_correct_scenarios_pooled"] for s in ss if s in num])]
-            name = fam if i == 0 else ""
-            lines.append(f"{name} & {SHORT[meth]} & {len(ss)} & " + " & ".join(cell) + r" \\")
+            if ss:
+                lines.append(f"{fam if i == 0 else ''} & {SHORT[meth]} & {len(ss)} & " + " & ".join(cells(ss)) + r" \\")
+        sib = groups.get((SIBLING[fam], "unmodified"), [])
+        if sib:
+            lines.append(f"{SIBLING[fam]} & unmodified, hosted & 1 & " + " & ".join(cells(sib)) + r" \\")
         lines.append(r"\midrule")
-    lines[-1] = r"\bottomrule"
+    for fam in LARGE:
+        ss = groups.get((fam, "unmodified"), [])
+        if ss:
+            lines.append(f"{fam} & unmodified, hosted & 1 & " + " & ".join(cells(ss)) + r" \\")
+    lines.append(r"\bottomrule")
     write("tab_overview.tex", "\n".join(lines) + "\n")
 
 
 def tab_followups():
     rows = read("followups.csv")
     lines = []
-    order = LARGE + FAMS
+    order = ORDER
     rows = sorted(rows, key=lambda r: (order.index(split(r["system"])[0]), METHODS.index(split(r["system"])[1])))
     for r in rows:
         fam, meth, seed = split(r["system"])
@@ -169,7 +177,7 @@ def tab_altered():
     by = collections.defaultdict(dict)
     for r in rows:
         by[r["system"]][r["alteration"]] = r
-    order = LARGE + FAMS
+    order = ORDER
     lines = []
     for s in sorted(by, key=lambda s: (order.index(split(s)[0]), METHODS.index(split(s)[1]), split(s)[2] or 0)):
         fam, meth, seed = split(s)
@@ -212,9 +220,11 @@ def tab_all_systems():
     wd = {r["system"]: r for r in read("h3_wording.csv") if r["set"] == "all verified (154)"}
     num = {r["system"]: r for r in read("h4_numerical.csv")}
     ro = {r["system"]: r for r in read("reordered_options.csv")}
-    order = LARGE + FAMS
+    order = ORDER
     lines = []
-    for s in sorted(mem, key=lambda s: (order.index(split(s)[0]), METHODS.index(split(s)[1]), split(s)[2] or 0)):
+    for s in sorted(mem, key=lambda s: (order.index(split(s)[0]), METHODS.index(split(s)[1]), str(split(s)[2] or 0))):
+        if s not in wd or s not in num:          # a system whose run is still incomplete
+            continue
         fam, meth, seed = split(s)
         name = f"{fam}, {SHORT[meth]}" + (f" {seed}" if seed else "")
         w = wd[s]
@@ -228,7 +238,7 @@ def tab_all_systems():
 
 def tab_altered_full():
     rows = read("altered_tables.csv")
-    order = LARGE + FAMS
+    order = ORDER
     by = collections.defaultdict(dict)
     for r in rows:
         by[r["system"]][(r["alteration"], r.get("scope", "all 48"))] = r
@@ -248,7 +258,7 @@ def tab_altered_full():
 
 def tab_neutral():
     rows = read("neutral_wording.csv")
-    order = LARGE + FAMS
+    order = ORDER
     lines = []
     for r in sorted(rows, key=lambda r: (order.index(split(r["system"])[0]), METHODS.index(split(r["system"])[1]), split(r["system"])[2] or 0)):
         fam, meth, seed = split(r["system"])
@@ -311,9 +321,60 @@ def tab_methods_compact():
     write("tab_methods_compact.tex", "\n".join(lines) + "\n")
 
 
+def tab_rules():
+    """E3/E4: share of 'roughly equal' answers under the standard rule, the three rule variants and few-shot,
+    plus few-shot accuracy, for every unmodified model and the attribution-guided seed-42 adapters."""
+    rows = read("followups.csv")
+    if not rows or "fewshot_equal_share" not in rows[0] and "rule_first_equal_share" not in rows[0]:
+        return
+    rows = sorted(rows, key=lambda r: (ORDER.index(split(r["system"])[0]), METHODS.index(split(r["system"])[1])))
+    lines = []
+    for r in rows:
+        fam, meth, seed = split(r["system"])
+        if meth not in ("unmodified", "attribution-guided LoRA") or seed not in (None, "seed 42", 42):
+            continue
+        name = fam + ("" if meth == "unmodified" else ", attr.-guided")
+        star = lambda k: "$^{*}$" if r.get(f"{k}_p_holm") not in (None, "") and float(r[f"{k}_p_holm"]) < 0.05 else ""
+        lines.append(" & ".join([name, f3(r["standard_equal_share"]), f3(r.get("norule_equal_share")) + star("norule"),
+                                 f3(r.get("rule_2_20_equal_share")) + star("rule_2_20"),
+                                 f3(r.get("rule_reversed_equal_share")) + star("rule_reversed"),
+                                 f3(r.get("rule_first_equal_share")) + star("rule_first"),
+                                 f3(r.get("fewshot_equal_share")), f3(r["standard_accuracy"]),
+                                 f3(r.get("fewshot_accuracy")) + star("fewshot")]) + r" \\")
+    write("tab_rules.tex", "\n".join(lines) + "\n")
+
+
+def tab_logprobs():
+    rows = read("logprobs.csv")
+    if not rows:
+        return
+    rows = sorted(rows, key=lambda r: (ORDER.index(split(r["system"])[0]), METHODS.index(split(r["system"])[1]), str(split(r["system"])[2] or 0)))
+    lines = []
+    for r in rows:
+        fam, meth, seed = split(r["system"])
+        name = f"{fam}, {SHORT[meth]}" + (f" {seed}" if seed else "")
+        lines.append(" & ".join([name, f3(r.get("standard_mean_p_equal")), f3(r.get("standard_share_p_equal_over_0.8")),
+                                 f3(r.get("standard_near_tie_share")), f3(r.get("standard_argmax_accuracy")),
+                                 f3(r.get("standard_ece")), f3(r.get("norule_mean_p_equal")),
+                                 f3(r.get("numerical_mean_p_equal")), f3(r.get("numerical_argmax_accuracy"))]) + r" \\")
+    write("tab_logprobs.tex", "\n".join(lines) + "\n")
+    main_rows = [l for l, r in zip(lines, rows) if split(r["system"])[1] == "unmodified"
+                 or (split(r["system"])[1] == "attribution-guided LoRA" and split(r["system"])[2] in ("seed 42", 42))]
+    write("tab_logprobs_main.tex", "\n".join(main_rows) + "\n")
+
+
+def tab_baselines():
+    rows = read("baselines.csv")
+    names = {"cross_state_prior": "Cross-state prior (leave one state out)", "constant_equal": "Constant ``roughly equal''",
+             "constant_first": "Constant first entity", "constant_second": "Constant second entity"}
+    lines = [f"{names[r['policy']]} & {f3(r['accuracy_154'])} & {f3(r['accuracy_difference_items'])} & "
+             f"{f3(r['accuracy_equal_items'])} & {f3(r['share_roughly_equal_answers'])} \\\\" for r in rows]
+    write("tab_baselines.tex", "\n".join(lines) + "\n")
+
+
 def tab_gap():
     rows = read("h2_gap_axis.csv")
-    order = LARGE + FAMS
+    order = ORDER
     lines = []
     for r in sorted(rows, key=lambda r: (order.index(split(r["system"])[0]), METHODS.index(split(r["system"])[1]), str(split(r["system"])[2] or 0))):
         fam, meth, seed = split(r["system"])
@@ -323,9 +384,62 @@ def tab_gap():
     write("tab_gap.tex", "\n".join(lines) + "\n")
 
 
+AN3 = C.CODES_ROOT / "results_submission1_tmlr" / "analysis_round3"
+
+
+def read3(name):
+    p = AN3 / name
+    return list(csv.DictReader(p.open(encoding="utf-8"))) if p.exists() else []
+
+
+def _key(r):
+    fam, meth, seed = split(r["system"])
+    return (ORDER.index(fam) if fam in ORDER else 99, METHODS.index(meth), str(seed or 0))
+
+
+def _name(r):
+    fam, meth, seed = split(r["system"])
+    return fam if meth == "unmodified" else f"{fam}, {SHORT[meth]}" + (f" {seed}" if seed else "")
+
+
+def _rows3(name, unmodified_only):
+    rows = sorted(read3(name), key=_key)
+    return [r for r in rows if not unmodified_only or split(r["system"])[1] == "unmodified"]
+
+
+def tab_round3():
+    """Round-3 tables: main-text versions (unmodified models) and appendix versions (every system)."""
+    specs = {
+        "wdi": ("p2_wdi.csv", ["accuracy_memory", "equal_share", "norule_equal_share", "accuracy_supplied_numbers",
+                               "fully_correct_scenarios", "share_prior_answer"]),
+        "mnli": ("p1_mnli.csv", ["mnli_plain_accuracy", "mnli_strict_accuracy", "mnli_lenient_accuracy",
+                                 "mnli_plain_neither_share", "mnli_strict_neither_share", "mnli_lenient_neither_share"]),
+        "adv": ("p5_adversarial.csv", ["accuracy", "share_prior_answer", "share_roughly_equal"]),
+        "recall": ("p6_recall.csv", ["parse_rate", "median_abs_error_pp", "implied_accuracy", "mc_accuracy_same_items",
+                                     "implied_correct_when_mc_said_equal_on_diff"]),
+        "drift": ("p3_drifted_leaderboard.csv", ["accuracy_drifted_v1", "accuracy_corrected", "accuracy_norule",
+                                                 "rank_drifted", "rank_corrected"]),
+    }
+    for tag, (fname, cols) in specs.items():
+        for suffix, only in (("", True), ("_full", False)):
+            rows = _rows3(fname, only)
+            if not rows:
+                continue
+            lines = []
+            for r in rows:
+                cells = []
+                for c in cols:
+                    v = r.get(c)
+                    cells.append(str(v) if c.startswith("rank") or c == "median_abs_error_pp" and v not in (None, "") else f3(v))
+                if tag == "adv":
+                    cells.insert(1, r.get("ci", "").replace("[", "{\\scriptsize[").replace("]", "]}"))
+                lines.append(" & ".join([_name(r)] + cells) + r" \\")
+            write(f"tab_r3_{tag}{suffix}.tex", "\n".join(lines) + "\n")
+
+
 def main():
     for fn in (tab_overview, tab_followups, tab_finetune, tab_methods, tab_altered, tab_repro,
-               tab_all_systems, tab_altered_full, tab_neutral, tab_finetune_compact, tab_methods_compact, tab_gap):
+               tab_all_systems, tab_altered_full, tab_neutral, tab_finetune_compact, tab_methods_compact, tab_gap, tab_baselines, tab_rules, tab_logprobs, tab_round3):
         fn()
     print("tables ->", DEST, sorted(p.name for p in DEST.iterdir()))
 

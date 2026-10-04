@@ -1,0 +1,5 @@
+tier,n_question_clusters,endpoint,graft_minus_frozen,ci_lower,ci_upper,predeclared
+broad-instruct,48,unsupported_substantive_change,-0.0625,-0.1458,0.0208,co-primary
+broad-instruct,48,both_answers_meet_minimum,-0.0104,-0.0312,0.0,co-primary
+small-instruct,48,unsupported_substantive_change,-0.0729,-0.1667,0.0104,co-primary
+small-instruct,48,both_answers_meet_minimum,0.0104,-0.0208,0.0521,co-primary

@@ -1,0 +1,19 @@
+{
+  "analysis_seed": 20260924,
+  "cases": 24,
+  "ceiling_tokens": 512,
+  "comparison_rule": {
+    "diff_if_abs_gap_at_least": 10.0,
+    "equal_if_abs_gap_below": 5.0,
+    "metric_unit": "percentage_points"
+  },
+  "context_cases": 8,
+  "design_sha256": "d995ca7dcc62e0fa13c69881d5c7c6a9f1cac912a2021ba1e5a70468bd5658de",
+  "generations": 384,
+  "identity_cases": 16,
+  "note": "both verbosity conditions share one generous ceiling; actual length is recorded per answer",
+  "pair_assessments_per_rater": 192,
+  "prompts": 96,
+  "stage": "r3_advice",
+  "systems": 4
+}

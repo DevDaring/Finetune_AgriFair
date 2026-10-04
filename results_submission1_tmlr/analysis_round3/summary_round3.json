@@ -1,0 +1,33 @@
+{
+  "by_experiment": {
+    "drifted": 68,
+    "mnli_lenient": 67,
+    "mnli_plain": 67,
+    "mnli_strict": 66
+  },
+  "n_rows": 268,
+  "p1": {
+    "adapters": 0,
+    "adapters_with_less_neither_than_base_plain": 0,
+    "adapters_with_more_neither_than_base_plain": 0,
+    "h11_unmodified_systems": 1,
+    "h11_unmodified_with_more_neither_under_strict": 1,
+    "tau_plain_vs_lenient_all": null,
+    "tau_plain_vs_strict_all": null,
+    "tau_plain_vs_strict_unmodified": null
+  },
+  "p2": {},
+  "p3": {
+    "drifted_vs_norule": null,
+    "h12_drifted_vs_corrected": null,
+    "top5_corrected_and_their_drifted_rank": {
+      "Qwen3-Next-80B": {
+        "corrected": 1,
+        "drifted": 1
+      }
+    }
+  },
+  "p5": {},
+  "p6": {},
+  "systems": 1
+}

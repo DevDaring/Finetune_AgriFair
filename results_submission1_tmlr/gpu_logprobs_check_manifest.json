@@ -1,0 +1,35 @@
+{
+  "attention": "sdpa",
+  "environment": {
+    "cuda": "12.1",
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peft": "0.17.1",
+    "platform": "Linux-5.15.0-179-generic-x86_64-with-glibc2.35",
+    "python": "3.11.9",
+    "torch": "2.4.0",
+    "transformers": "4.56.2"
+  },
+  "letter_token_ids": {
+    "small-instruct": {
+      "a": 64,
+      "b": 65,
+      "c": 66,
+      "d": 67
+    }
+  },
+  "minutes": 0.51,
+  "prefix": "{\"answer_choice_letter\": \"",
+  "prompts_per_system": 8,
+  "rows_written": 64,
+  "stage": "logprobs_check",
+  "systems": [
+    "small-instruct|frozen_base|seed42",
+    "small-instruct|graft_proposed|seed42",
+    "small-instruct|graft_proposed|seed43",
+    "small-instruct|graft_proposed|seed44",
+    "small-instruct|reference_vanilla_lora|seed42",
+    "small-instruct|reference_vanilla_lora|seed43",
+    "small-instruct|reference_vanilla_lora|seed44",
+    "small-instruct|ablation_placement_random|seed42"
+  ]
+}

@@ -1,0 +1,27 @@
+2026-10-04T03:02:26+00:00 status=None hours=0.00 
+2026-10-04T03:07:28+00:00 status=running hours=0.08 
+2026-10-04T03:12:31+00:00 status=running hours=0.17 
+2026-10-04T03:17:33+00:00 status=running hours=0.25 python 3.11.9 torch 2.4.0 cuda 12.1
+2026-10-04T03:22:35+00:00 status=running hours=0.34 python 3.11.9 torch 2.4.0 cuda 12.1
+2026-10-04T03:27:37+00:00 status=running hours=0.42 python 3.11.9 torch 2.4.0 cuda 12.1
+2026-10-04T03:34:48+00:00 status=running hours=0.00 python 3.11.9 torch 2.4.0 cuda 12.1
+2026-10-04T03:38:04+00:00 status=running hours=0.00 main (sdpa) done Sun Oct  4 03:37:20 UTC 2026
+2026-10-04T03:43:06+00:00 status=running hours=0.08 main (sdpa) done Sun Oct  4 03:37:20 UTC 2026
+2026-10-04T03:48:08+00:00 status=running hours=0.17 main (sdpa) done Sun Oct  4 03:37:20 UTC 2026
+2026-10-04T03:52:18+00:00 status=running hours=0.00 followups start Sun Oct  4 03:49:25 UTC 2026
+2026-10-04T03:57:20+00:00 status=running hours=0.08 followups start Sun Oct  4 03:49:25 UTC 2026
+2026-10-04T04:02:22+00:00 status=running hours=0.17 followups start Sun Oct  4 03:49:25 UTC 2026
+2026-10-04T04:07:24+00:00 status=running hours=0.25 followups start Sun Oct  4 03:49:25 UTC 2026
+2026-10-04T04:09:20+00:00 status=running hours=0.00 followups start Sun Oct  4 03:49:25 UTC 2026
+2026-10-04T04:14:22+00:00 status=running hours=0.08 cot start Sun Oct  4 04:12:40 UTC 2026
+2026-10-04T04:17:42+00:00 status=running hours=0.00 cot start Sun Oct  4 04:12:40 UTC 2026
+2026-10-04T04:22:44+00:00 status=running hours=0.08 cot start Sun Oct  4 04:12:40 UTC 2026
+2026-10-04T04:27:46+00:00 status=running hours=0.17 cot start Sun Oct  4 04:12:40 UTC 2026
+2026-10-04T04:32:48+00:00 status=running hours=0.25 cot start Sun Oct  4 04:12:40 UTC 2026
+2026-10-04T04:37:50+00:00 status=running hours=0.34 cot start Sun Oct  4 04:12:40 UTC 2026
+2026-10-04T04:42:52+00:00 status=running hours=0.42 altered48 start Sun Oct  4 04:41:56 UTC 2026
+2026-10-04T04:47:54+00:00 status=running hours=0.50 draws start Sun Oct  4 04:47:47 UTC 2026
+2026-10-04T04:52:56+00:00 status=running hours=0.59 draws start Sun Oct  4 04:47:47 UTC 2026
+2026-10-04T04:57:58+00:00 status=running hours=0.67 retry256 done Sun Oct  4 04:57:39 UTC 2026
+2026-10-04T04:58:01+00:00 downloaded to /home/Debz/Research/Finetune_AgriFair/Codes/results_submission1_tmlr/gpu_run_54096569; verification {"gpu_main_predictions.jsonl": {"rows": 25152, "expected": 25152, "complete": true}, "gpu_flash_predictions.jsonl": {"rows": 18864, "expected": 18864, "complete": true}, "gpu_followups_predictions.jsonl": {"rows": 29760, "expected": 29760, "complete": true}, "gpu_cot_predictions.jsonl": {"rows": 2480, "expected": 2480, "complete": true}, "gpu_altered48_predictions.jsonl": {"rows": 4608, "expected": 4608, "complete": true}, "gpu_draws_predictions.jsonl": {"rows": 7440, "expected": 7440, "complete": true}, "gpu_retry256_predictions.jsonl": {"rows": 1572, "expected": 1572, "complete": true}}
+2026-10-04T05:00:42+00:00 WARNING: destroy of 54096569 not confirmed; check the Vast console

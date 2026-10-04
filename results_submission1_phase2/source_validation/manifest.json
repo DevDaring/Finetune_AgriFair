@@ -1,0 +1,25 @@
+{
+  "analysis_seed": 20260924,
+  "by_axis": {
+    "gender": 3,
+    "landholding": 16,
+    "social_group": 16
+  },
+  "by_condition": {
+    "diff": 26,
+    "equal": 9
+  },
+  "comparison_rule": {
+    "diff_if_abs_gap_at_least": 10.0,
+    "equal_if_abs_gap_below": 5.0,
+    "metric_unit": "percentage_points"
+  },
+  "design_decision": "reduced design of 35 comparisons with disclosed axis and condition imbalance",
+  "design_sha256": "980559020af5c4215033bbf11a9dcc65feef44154cf0381e6ca2a1d944c8f977",
+  "distinct_states": 24,
+  "inference_count": 280,
+  "n_comparisons": 35,
+  "new_template_families": 6,
+  "stage": "r1_fresh_panel",
+  "validation": "all deterministic invariants passed"
+}

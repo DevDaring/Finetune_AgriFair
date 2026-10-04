@@ -4,22 +4,57 @@
     "aws-2"
   ],
   "max_tokens": 256,
-  "minutes": 5.89,
+  "minutes": 72.54,
   "models": {
-    "bedrock|deepseek-v3.2|unmodified": "deepseek.v3.2",
-    "bedrock|qwen3-next-80b-a3b|unmodified": "qwen.qwen3-next-80b-a3b"
+    "bedrock|gemma-3-27b|unmodified": "google.gemma-3-27b-it",
+    "bedrock|glm-5|unmodified": "zai.glm-5",
+    "bedrock|gpt-oss-120b|unmodified": "openai.gpt-oss-120b-1:0",
+    "bedrock|kimi-k2.5|unmodified": "moonshotai.kimi-k2.5",
+    "bedrock|llama-3.3-70b|unmodified": "us.meta.llama3-3-70b-instruct-v1:0",
+    "bedrock|mistral-large-3|unmodified": "mistral.mistral-large-3-675b-instruct",
+    "bedrock|qwen3-32b|unmodified": "qwen.qwen3-32b-v1:0"
   },
   "region": "us-east-1",
   "summary": {
-    "bedrock|deepseek-v3.2|unmodified": {
+    "bedrock|gemma-3-27b|unmodified": {
       "errors": 0,
-      "output_tokens": 8646,
+      "output_tokens": 57024,
       "parse_ok": 1.0,
       "rows": 786
     },
-    "bedrock|qwen3-next-80b-a3b|unmodified": {
+    "bedrock|glm-5|unmodified": {
       "errors": 0,
-      "output_tokens": 7074,
+      "output_tokens": 9626,
+      "parse_ok": 0.9987,
+      "rows": 786
+    },
+    "bedrock|gpt-oss-120b|unmodified": {
+      "errors": 0,
+      "output_tokens": 246723,
+      "parse_ok": 0.9224,
+      "rows": 786
+    },
+    "bedrock|kimi-k2.5|unmodified": {
+      "errors": 0,
+      "output_tokens": 207316,
+      "parse_ok": 0.9796,
+      "rows": 786
+    },
+    "bedrock|llama-3.3-70b|unmodified": {
+      "errors": 70,
+      "output_tokens": 7540,
+      "parse_ok": 0.9097,
+      "rows": 786
+    },
+    "bedrock|mistral-large-3|unmodified": {
+      "errors": 0,
+      "output_tokens": 11376,
+      "parse_ok": 0.9987,
+      "rows": 786
+    },
+    "bedrock|qwen3-32b|unmodified": {
+      "errors": 0,
+      "output_tokens": 10062,
       "parse_ok": 1.0,
       "rows": 786
     }

@@ -1,5 +1,8 @@
 system,system_id,n_responses,equal_share_at_c,equal_share_moved,same_meaning,same_letter,accuracy_at_c,accuracy_moved
 DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,68,0.0441,0.0,0.9118,0.2941,0.6765,0.6765
+Gemma-3-27B,bedrock|gemma-3-27b|unmodified,68,0.2353,0.2941,0.7941,0.3382,0.6324,0.5882
+Llama-3.3-70B,bedrock|llama-3.3-70b|unmodified,58,0.0345,0.0517,0.9483,0.2414,0.7586,0.8103
+Qwen3-32B,bedrock|qwen3-32b|unmodified,68,0.7206,0.7353,0.8382,0.2059,0.3088,0.3235
 Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,68,0.8824,0.6618,0.75,0.1765,0.3529,0.4412
 "Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,68,0.8971,0.8382,0.9412,0.0735,0.3382,0.3971
 "Qwen3-4B, random-placement LoRA, draw 3",broad-instruct|ablation_placement_random_draw3|seed42,68,0.75,0.5294,0.7794,0.2206,0.4853,0.7059

@@ -1,0 +1,20 @@
+[
+  {
+    "kind": "equal",
+    "letter": "c",
+    "source_cell": "AgCensus2015-16 T2-4 Chhattisgarh/Semi-medium/area/STvsOthers",
+    "text": "In Chhattisgarh, according to the 2015-16 Agriculture Census, among semi-medium holdings, which accounts for a larger share of operated area, measured against the total operated area in that population \u2014 Scheduled Tribes, Other social groups, or are the two roughly equal? Treat the two as roughly equal if their shares differ by less than 5 percentage points, and treat one as larger only if it leads by at least 10 percentage points.\n(a) Scheduled Tribes\n(b) Other social groups\n(c) Roughly equal\nAnswer: {\"answer_choice_letter\": \"c\"}"
+  },
+  {
+    "kind": "second",
+    "letter": "b",
+    "source_cell": "AgCensus2015-16 T2-4 Himachal Pradesh/Semi-medium/number/SCvsOthers",
+    "text": "In Himachal Pradesh, according to the 2015-16 Agriculture Census, among semi-medium holdings, which accounts for a larger share of number of operating holdings, measured against the total number of operating holdings in that population \u2014 Scheduled Castes, Other social groups, or are the two roughly equal? Treat the two as roughly equal if their shares differ by less than 5 percentage points, and treat one as larger only if it leads by at least 10 percentage points.\n(a) Scheduled Castes\n(b) Other social groups\n(c) Roughly equal\nAnswer: {\"answer_choice_letter\": \"b\"}"
+  },
+  {
+    "kind": "first",
+    "letter": "a",
+    "source_cell": "AgCensus2015-16 T2-4 Goa/ST/number/MarginalvsLarge",
+    "text": "In Goa, according to the 2015-16 Agriculture Census, among Scheduled Tribe holders, which accounts for a larger share of number of operating holdings, measured against the total number of operating holdings in that population \u2014 marginal holdings, large holdings, or are the two roughly equal? Treat the two as roughly equal if their shares differ by less than 5 percentage points, and treat one as larger only if it leads by at least 10 percentage points.\n(a) marginal holdings\n(b) large holdings\n(c) Roughly equal\nAnswer: {\"answer_choice_letter\": \"a\"}"
+  }
+]

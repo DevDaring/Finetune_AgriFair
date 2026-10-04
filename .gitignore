@@ -72,10 +72,19 @@ data_submission2/mandi/mandi_cron.log
 
 # Submission-specific code and data stay on this machine; the public repository holds the general
 # AgriFair code only (removed from the tracked tree on 2026-09-26 at the author's request).
-Submission1_Code_Phase2/
-Submission1_DKE_Repair/
+# Submission 1 code, results and logs are published at the user's request (4 Oct 2026).
+# Annotator and rater work, the paper and every .md file stay local.
 results_submission1_*/
 !results_submission1_tmlr/
+!results_submission1_phase2/
+!results_submission1_dke_repair_v2/
+results_submission1_phase2/human_review/
+results_submission1_phase2/rater_protocol/
+results_submission1_phase2/constructs/
+results_submission1_phase2/advice/*rating*
+results_submission1_phase2/advice/*rater*
+results_submission1_phase2/advice/*RATERS*
+results_submission1_phase2/advice/*adjudicat*
 Submission2_Run/
 Submission2/
 data_submission2/
@@ -83,7 +92,6 @@ results_submission2*/
 Dataset_Translation/
 # TMLR results: predictions are committed gzipped; the raw copies and the GPU download mirror stay local
 results_submission1_tmlr/*_predictions.jsonl
-results_submission1_tmlr/gpu_run_*/
-results_submission1_tmlr/watchdog.log
+results_submission1_tmlr/gpu_run_*/results_submission1_tmlr/
 results_submission1_tmlr/analysis/run.log
 results_submission1_tmlr/spotcheck/

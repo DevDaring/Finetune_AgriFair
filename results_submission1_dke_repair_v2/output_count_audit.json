@@ -1,0 +1,75 @@
+{
+  "per_study": [
+    {
+      "description": "numerical set, 48 bundles x 3 relations x 2 wordings",
+      "outputs": 1152,
+      "run": "phase2",
+      "status": "reported",
+      "study": "r2_main",
+      "unit": "model output"
+    },
+    {
+      "description": "altered tables, 12 bundles x 3 alterations",
+      "outputs": 144,
+      "run": "phase2",
+      "status": "reported",
+      "study": "r2_diagnostic",
+      "unit": "model output"
+    },
+    {
+      "description": "advice answers; two per rated pair",
+      "outputs": 384,
+      "run": "phase2",
+      "status": "reported",
+      "study": "r3_advice",
+      "unit": "model output"
+    },
+    {
+      "description": "original wording panel, before the repair",
+      "outputs": 272,
+      "run": "phase2",
+      "status": "withdrawn",
+      "study": "r1_fresh",
+      "unit": "model output"
+    },
+    {
+      "description": "corrected wording panel, 34 comparisons x 2 wordings",
+      "outputs": 272,
+      "run": "repair_v2",
+      "status": "reported",
+      "study": "E1",
+      "unit": "model output"
+    },
+    {
+      "description": "unchanged-table control, 12 bundles",
+      "outputs": 48,
+      "run": "repair_v2",
+      "status": "reported",
+      "study": "E3",
+      "unit": "model output"
+    },
+    {
+      "description": "neutral wording, 72 prompts",
+      "outputs": 288,
+      "run": "repair_v2",
+      "status": "reported",
+      "study": "E4",
+      "unit": "model output"
+    },
+    {
+      "description": "permuted option order, 34 comparisons x 2 wordings",
+      "outputs": 272,
+      "run": "repair_v2",
+      "status": "reported",
+      "study": "E5",
+      "unit": "model output"
+    }
+  ],
+  "totals": {
+    "advice_rated_pairs": 192,
+    "all": 2832,
+    "phase2": 1952,
+    "repair_v2": 880,
+    "withdrawn": 272
+  }
+}

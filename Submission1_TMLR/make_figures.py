@@ -20,8 +20,12 @@ from Submission1_Code_Phase2 import common as C
 
 AN = C.CODES_ROOT / "results_submission1_tmlr" / "analysis"
 DEST = C.CODES_ROOT.parent / "Submission1" / "figures_tmlr"
-FAM_COLOR = {"Llama-3.2-3B": "#0072B2", "Qwen3-4B": "#D55E00", "Ministral-8B": "#009E73",
-             "Gemma-3-12B": "#CC79A7", "Qwen3-Next-80B": "#E69F00", "DeepSeek-V3.2": "#000000"}
+FAM_COLOR = {"Llama-3.2-3B": "#0072B2", "Qwen3-4B": "#D55E00", "Ministral-8B": "#009E73", "Gemma-3-12B": "#CC79A7",
+             "Llama-3.3-70B": "#0072B2", "Qwen3-32B": "#D55E00", "Mistral-Large-3": "#009E73", "Gemma-3-27B": "#CC79A7",
+             "Qwen3-Next-80B": "#E69F00", "DeepSeek-V3.2": "#000000", "gpt-oss-120B": "#56B4E9", "Kimi-K2.5": "#F0E442",
+             "GLM-5": "#999999"}
+HOSTED = {"Llama-3.3-70B", "Qwen3-32B", "Mistral-Large-3", "Gemma-3-27B", "Qwen3-Next-80B", "DeepSeek-V3.2",
+          "gpt-oss-120B", "Kimi-K2.5", "GLM-5"}
 MARKER = {"unmodified": "o", "attribution-guided LoRA": "^", "plain LoRA": "s", "random-placement LoRA": "D"}
 plt.rcParams.update({"font.size": 8, "axes.spines.top": False, "axes.spines.right": False, "figure.dpi": 200})
 
@@ -41,13 +45,14 @@ def fig_ranking():
     for r in rows:
         fam, meth = family_method(r["system"])
         ax.scatter(float(r["accuracy_from_memory_154"]), float(r["accuracy_supplied_numbers"]),
-                   c=FAM_COLOR[fam], marker=MARKER[meth], s=28 if meth == "unmodified" else 18,
+                   c=FAM_COLOR[fam], marker="P" if fam in HOSTED else MARKER[meth], s=34 if fam in HOSTED else (28 if meth == "unmodified" else 18),
                    edgecolors="white", linewidths=0.4, zorder=3)
     ax.set_xlabel("Accuracy from memory (154 verified comparisons)")
     ax.set_ylabel("Accuracy with supplied numbers\n(288 numerical prompts)")
-    ax.set_xlim(0, 0.85); ax.set_ylim(0.3, 0.9)
+    ax.set_xlim(0, 0.9); ax.set_ylim(0.3, 1.0)
     fh = [plt.Line2D([], [], marker="o", ls="", c=c, label=f) for f, c in FAM_COLOR.items()]
     mh = [plt.Line2D([], [], marker=m, ls="", c="grey", label=k) for k, m in MARKER.items()]
+    mh.append(plt.Line2D([], [], marker="P", ls="", c="grey", label="hosted, unmodified"))
     leg1 = ax.legend(handles=fh, loc="upper left", bbox_to_anchor=(1.01, 1.0), frameon=False, title="Family")
     ax.add_artist(leg1)
     ax.legend(handles=mh, loc="lower left", bbox_to_anchor=(1.01, 0.0), frameon=False, title="Version")
@@ -69,7 +74,7 @@ def fig_followups():
                                                       ("abstain_equal_share", "+ cannot tell"), ("cot_equal_share", "reasoning")]),
               ("Accuracy", [("standard_accuracy", "standard"), ("norule_accuracy", "no rule"),
                             ("realtable_accuracy", "real table"), ("cot_accuracy", "reasoning")])]
-    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.6), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.9), sharey=True)
     for ax, (title, conds) in zip(axes, panels):
         w = 0.8 / len(conds)
         for i, (key, lab) in enumerate(conds):
@@ -79,7 +84,7 @@ def fig_followups():
                     xs.append(j + (i - (len(conds) - 1) / 2) * w); ys.append(float(r[key]))
             ax.bar(xs, ys, w * 0.92, label=lab, color=COND_COLOR[lab])
         ax.set_xticks(range(len(rows)))
-        ax.set_xticklabels([family_method(r["system"])[0] for r in rows], rotation=30, ha="right", fontsize=7)
+        ax.set_xticklabels([family_method(r["system"])[0] for r in rows], rotation=45, ha="right", fontsize=6)
         ax.set_title(title, fontsize=8)
         ax.set_ylim(0, 1.05)
         ax.grid(axis="y", lw=0.3, alpha=0.5)

@@ -1,0 +1,5 @@
+policy,n_comparisons,accuracy_154,accuracy_difference_items,accuracy_equal_items,share_roughly_equal_answers,accuracy_numerical_288,fallbacks_to_equal
+cross_state_prior,154,0.7597,0.7808,0.375,0.0649,,0
+constant_equal,154,0.0519,0.0,1.0,1.0,0.3333,
+constant_first,154,0.4156,0.4384,0.0,0.0,0.3333,
+constant_second,154,0.5325,0.5616,0.0,0.0,0.3333,

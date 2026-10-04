@@ -1,0 +1,16 @@
+start Sun Oct  4 03:15:57 UTC 2026
+name, memory.total [MiB], driver_version
+NVIDIA RTX 6000 Ada Generation, 49140 MiB, 580.119.02
+python 3.11.9 torch 2.4.0 cuda 12.1
+main (sdpa) done Sun Oct  4 03:37:20 UTC 2026
+flash done Sun Oct  4 03:49:15 UTC 2026
+followups start Sun Oct  4 03:49:25 UTC 2026
+followups done Sun Oct  4 04:12:34 UTC 2026
+cot start Sun Oct  4 04:12:40 UTC 2026
+cot done Sun Oct  4 04:41:40 UTC 2026
+altered48 start Sun Oct  4 04:41:56 UTC 2026
+altered48 done Sun Oct  4 04:47:29 UTC 2026
+draws start Sun Oct  4 04:47:47 UTC 2026
+draws done Sun Oct  4 04:54:45 UTC 2026
+retry256 start Sun Oct  4 04:54:51 UTC 2026
+retry256 done Sun Oct  4 04:57:39 UTC 2026

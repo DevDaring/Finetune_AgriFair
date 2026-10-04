@@ -1,0 +1,11 @@
+condition,n,parse_rate,accuracy,abstention_rate
+r2_diagnostic:irrelevant_column,12,1.0,1.0,0.0
+r2_diagnostic:row_order_reversed,12,1.0,1.0,0.0
+r2_diagnostic:values_removed,12,1.0,1.0,1.0
+r2_diagnostic_clean:clean_control,12,1.0,1.0,0.0
+r2_main:approximately_equal,96,1.0,1.0,0.0
+r2_main:first_higher,96,1.0,1.0,0.0
+r2_main:second_higher,96,1.0,1.0,0.0
+r2_neutral:approximately_equal,24,1.0,1.0,0.0
+r2_neutral:first_higher,24,1.0,1.0,0.0
+r2_neutral:second_higher,24,1.0,1.0,0.0

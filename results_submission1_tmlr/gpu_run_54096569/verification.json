@@ -1,0 +1,37 @@
+{
+ "gpu_main_predictions.jsonl": {
+  "rows": 25152,
+  "expected": 25152,
+  "complete": true
+ },
+ "gpu_flash_predictions.jsonl": {
+  "rows": 18864,
+  "expected": 18864,
+  "complete": true
+ },
+ "gpu_followups_predictions.jsonl": {
+  "rows": 29760,
+  "expected": 29760,
+  "complete": true
+ },
+ "gpu_cot_predictions.jsonl": {
+  "rows": 2480,
+  "expected": 2480,
+  "complete": true
+ },
+ "gpu_altered48_predictions.jsonl": {
+  "rows": 4608,
+  "expected": 4608,
+  "complete": true
+ },
+ "gpu_draws_predictions.jsonl": {
+  "rows": 7440,
+  "expected": 7440,
+  "complete": true
+ },
+ "gpu_retry256_predictions.jsonl": {
+  "rows": 1572,
+  "expected": 1572,
+  "complete": true
+ }
+}

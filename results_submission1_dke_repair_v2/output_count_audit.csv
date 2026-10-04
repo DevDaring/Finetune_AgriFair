@@ -1,0 +1,9 @@
+run,study,outputs,unit,description,status
+phase2,r2_main,1152,model output,"numerical set, 48 bundles x 3 relations x 2 wordings",reported
+phase2,r2_diagnostic,144,model output,"altered tables, 12 bundles x 3 alterations",reported
+phase2,r3_advice,384,model output,advice answers; two per rated pair,reported
+phase2,r1_fresh,272,model output,"original wording panel, before the repair",withdrawn
+repair_v2,E1,272,model output,"corrected wording panel, 34 comparisons x 2 wordings",reported
+repair_v2,E3,48,model output,"unchanged-table control, 12 bundles",reported
+repair_v2,E4,288,model output,"neutral wording, 72 prompts",reported
+repair_v2,E5,272,model output,"permuted option order, 34 comparisons x 2 wordings",reported

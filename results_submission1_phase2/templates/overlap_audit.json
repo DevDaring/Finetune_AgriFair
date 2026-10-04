@@ -1,0 +1,35 @@
+{
+  "largest_families": [
+    [
+      "0d519282b5bf",
+      395
+    ],
+    [
+      "353e4c8e6432",
+      341
+    ],
+    [
+      "ef8dead38902",
+      257
+    ],
+    [
+      "b3f80e9bf61c",
+      119
+    ],
+    [
+      "4f0f2d6b7728",
+      9
+    ]
+  ],
+  "n_frozen_test": 749,
+  "n_items": 2000,
+  "n_train_like": 1251,
+  "note": "The original split withheld structural keys, not linguistic templates. A test item whose template family also occurs in training can be answered from wording alone.",
+  "share_of_test_items_with_seen_template": 0.6021,
+  "source_cells_test_also_in_train": 0,
+  "template_families_test": 333,
+  "template_families_total": 813,
+  "template_families_train": 518,
+  "test_families_also_in_train": 38,
+  "test_items_whose_family_is_in_train": 451
+}

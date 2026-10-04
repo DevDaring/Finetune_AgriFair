@@ -1,0 +1,35 @@
+{
+  "r1_wording_family_match": {
+    "matches_an_original_family": {
+      "wording_a": 0,
+      "wording_b": 0
+    },
+    "n_panel": 34,
+    "reading": "Neither wording reproduces a template family seen in the original data under the paper's own identifier function. The experiment is therefore a wording-A versus wording-B sensitivity test, not a demonstration of familiarity with a seen training template."
+  },
+  "split_audit": {
+    "counts": {
+      "test": 749,
+      "train": 1132,
+      "validation": 119
+    },
+    "families": {
+      "all": 813,
+      "test": 333,
+      "train_only": 475,
+      "train_plus_validation": 518,
+      "validation": 52
+    },
+    "note": "The published figure pooled training and validation and labelled the result 'training'. Train-only is the defensible number; both are reported.",
+    "shared_with_test": {
+      "pooled": 38,
+      "train_only": 35
+    },
+    "test_items_sharing_a_family": {
+      "pooled": 451,
+      "pooled_share": 0.6021,
+      "train_only": 448,
+      "train_only_share": 0.5981
+    }
+  }
+}

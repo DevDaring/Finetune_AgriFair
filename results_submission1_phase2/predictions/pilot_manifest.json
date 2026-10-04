@@ -1,0 +1,101 @@
+{
+  "attention": {
+    "attention_fallback": "flash_attention_2",
+    "built_from_source": false,
+    "environment": {
+      "cuda_full": "12.4",
+      "cuda_major": "12",
+      "cxx11abi": "FALSE",
+      "machine": "x86_64",
+      "python_tag": "cp311",
+      "torch_version": "2.5"
+    },
+    "installed": true,
+    "reason": "flash-attn 2.8.3 already importable.",
+    "wheel_url": ""
+  },
+  "batch_timings": [
+    {
+      "advice": true,
+      "batch": 32,
+      "max_new_tokens": 512,
+      "seconds": 10.493,
+      "seconds_per_prompt": 0.3279,
+      "system": "small-instruct|frozen_base|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 20,
+      "max_new_tokens": 24,
+      "seconds": 0.929,
+      "seconds_per_prompt": 0.0465,
+      "system": "small-instruct|frozen_base|seed42"
+    },
+    {
+      "advice": true,
+      "batch": 32,
+      "max_new_tokens": 512,
+      "seconds": 4.796,
+      "seconds_per_prompt": 0.1499,
+      "system": "small-instruct|graft_proposed|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 20,
+      "max_new_tokens": 24,
+      "seconds": 1.183,
+      "seconds_per_prompt": 0.0591,
+      "system": "small-instruct|graft_proposed|seed42"
+    },
+    {
+      "advice": true,
+      "batch": 32,
+      "max_new_tokens": 512,
+      "seconds": 10.689,
+      "seconds_per_prompt": 0.334,
+      "system": "broad-instruct|frozen_base|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 20,
+      "max_new_tokens": 24,
+      "seconds": 1.25,
+      "seconds_per_prompt": 0.0625,
+      "system": "broad-instruct|frozen_base|seed42"
+    },
+    {
+      "advice": true,
+      "batch": 32,
+      "max_new_tokens": 512,
+      "seconds": 39.123,
+      "seconds_per_prompt": 1.2226,
+      "system": "broad-instruct|graft_proposed|seed42"
+    },
+    {
+      "advice": false,
+      "batch": 20,
+      "max_new_tokens": 24,
+      "seconds": 1.709,
+      "seconds_per_prompt": 0.0855,
+      "system": "broad-instruct|graft_proposed|seed42"
+    }
+  ],
+  "capped": false,
+  "elapsed_minutes": 1.52,
+  "main_projection": {
+    "cap_minutes": 60.0,
+    "decision": "run the full main design",
+    "fits": true,
+    "projected_minutes_with_safety_factor": 14.7,
+    "remaining_outputs": 1744
+  },
+  "outputs_written": 208,
+  "seconds_per_output_mean": 0.3374,
+  "stage": "pilot",
+  "systems": [
+    "small-instruct|frozen_base|seed42",
+    "small-instruct|graft_proposed|seed42",
+    "broad-instruct|frozen_base|seed42",
+    "broad-instruct|graft_proposed|seed42"
+  ]
+}

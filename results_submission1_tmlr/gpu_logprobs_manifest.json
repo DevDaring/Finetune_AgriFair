@@ -1,0 +1,85 @@
+{
+  "attention": "sdpa",
+  "environment": {
+    "cuda": "12.1",
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "peft": "0.17.1",
+    "platform": "Linux-5.15.0-179-generic-x86_64-with-glibc2.35",
+    "python": "3.11.9",
+    "torch": "2.4.0",
+    "transformers": "4.56.2"
+  },
+  "letter_token_ids": {
+    "broad-instruct": {
+      "a": 64,
+      "b": 65,
+      "c": 66,
+      "d": 67
+    },
+    "general-instruct": {
+      "a": 236746,
+      "b": 236763,
+      "c": 236755,
+      "d": 236753
+    },
+    "general-instruct-2": {
+      "a": 1097,
+      "b": 1098,
+      "c": 1099,
+      "d": 1100
+    },
+    "small-instruct": {
+      "a": 64,
+      "b": 65,
+      "c": 66,
+      "d": 67
+    }
+  },
+  "minutes": 17.06,
+  "prefix": "{\"answer_choice_letter\": \"",
+  "prompts_per_system": 908,
+  "rows_written": 36320,
+  "stage": "logprobs",
+  "systems": [
+    "small-instruct|frozen_base|seed42",
+    "small-instruct|graft_proposed|seed42",
+    "small-instruct|graft_proposed|seed43",
+    "small-instruct|graft_proposed|seed44",
+    "small-instruct|reference_vanilla_lora|seed42",
+    "small-instruct|reference_vanilla_lora|seed43",
+    "small-instruct|reference_vanilla_lora|seed44",
+    "small-instruct|ablation_placement_random|seed42",
+    "small-instruct|ablation_placement_random_draw2|seed42",
+    "small-instruct|ablation_placement_random_draw3|seed42",
+    "broad-instruct|frozen_base|seed42",
+    "broad-instruct|graft_proposed|seed42",
+    "broad-instruct|graft_proposed|seed43",
+    "broad-instruct|graft_proposed|seed44",
+    "broad-instruct|reference_vanilla_lora|seed42",
+    "broad-instruct|reference_vanilla_lora|seed43",
+    "broad-instruct|reference_vanilla_lora|seed44",
+    "broad-instruct|ablation_placement_random|seed42",
+    "broad-instruct|ablation_placement_random_draw2|seed42",
+    "broad-instruct|ablation_placement_random_draw3|seed42",
+    "general-instruct-2|frozen_base|seed42",
+    "general-instruct-2|graft_proposed|seed42",
+    "general-instruct-2|graft_proposed|seed43",
+    "general-instruct-2|graft_proposed|seed44",
+    "general-instruct-2|reference_vanilla_lora|seed42",
+    "general-instruct-2|reference_vanilla_lora|seed43",
+    "general-instruct-2|reference_vanilla_lora|seed44",
+    "general-instruct-2|ablation_placement_random|seed42",
+    "general-instruct-2|ablation_placement_random_draw2|seed42",
+    "general-instruct-2|ablation_placement_random_draw3|seed42",
+    "general-instruct|frozen_base|seed42",
+    "general-instruct|graft_proposed|seed42",
+    "general-instruct|graft_proposed|seed43",
+    "general-instruct|graft_proposed|seed44",
+    "general-instruct|reference_vanilla_lora|seed42",
+    "general-instruct|reference_vanilla_lora|seed43",
+    "general-instruct|reference_vanilla_lora|seed44",
+    "general-instruct|ablation_placement_random|seed42",
+    "general-instruct|ablation_placement_random_draw2|seed42",
+    "general-instruct|ablation_placement_random_draw3|seed42"
+  ]
+}

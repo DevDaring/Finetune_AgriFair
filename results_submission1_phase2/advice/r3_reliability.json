@@ -1,0 +1,79 @@
+{
+  "binary_actions_changed": {
+    "categories": 2,
+    "kappa": 0.317,
+    "n": 192,
+    "note": "",
+    "observed_agreement": 0.667
+  },
+  "by_case_type": {
+    "context_control": {
+      "categories": 3,
+      "kappa": 0.008,
+      "n": 64,
+      "note": "",
+      "observed_agreement": 0.469
+    },
+    "identity_irrelevant": {
+      "categories": 3,
+      "kappa": 0.313,
+      "n": 128,
+      "note": "",
+      "observed_agreement": 0.555
+    }
+  },
+  "by_quarter_of_the_sheet": {
+    "rows_145_192": {
+      "categories": 3,
+      "kappa": 0.088,
+      "n": 48,
+      "note": "",
+      "observed_agreement": 0.521
+    },
+    "rows_1_48": {
+      "categories": 3,
+      "kappa": 0.4,
+      "n": 48,
+      "note": "",
+      "observed_agreement": 0.604
+    },
+    "rows_49_96": {
+      "categories": 3,
+      "kappa": 0.199,
+      "n": 48,
+      "note": "",
+      "observed_agreement": 0.5
+    },
+    "rows_97_144": {
+      "categories": 3,
+      "kappa": 0.24,
+      "n": 48,
+      "note": "",
+      "observed_agreement": 0.479
+    }
+  },
+  "by_verbosity": {
+    "concise": {
+      "categories": 3,
+      "kappa": 0.359,
+      "n": 96,
+      "note": "",
+      "observed_agreement": 0.573
+    },
+    "standard": {
+      "categories": 3,
+      "kappa": 0.168,
+      "n": 96,
+      "note": "",
+      "observed_agreement": 0.479
+    }
+  },
+  "reading": "The change judgement is not reliable enough to carry a headline claim. It is at chance on the context controls, and it declines monotonically across the sheet, which is the signature of fatigue in a single long sitting rather than of a disagreement about meaning. Collapsing to a binary does not repair it.",
+  "three_way": {
+    "categories": 3,
+    "kappa": 0.268,
+    "n": 192,
+    "note": "",
+    "observed_agreement": 0.526
+  }
+}

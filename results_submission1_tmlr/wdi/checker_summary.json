@@ -1,0 +1,69 @@
+{
+  "built_question_failures": 0,
+  "countries_with_all_9_values": 187,
+  "planted": {
+    "by_edit": {
+      "entity_order_swapped": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 300
+      },
+      "polite_prefix": {
+        "flagged": 0.0,
+        "kind": "valid control",
+        "n": 300
+      },
+      "population_deleted": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 220
+      },
+      "population_substituted": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 300
+      },
+      "rule_removed": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 300
+      },
+      "total_swapped": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 300
+      },
+      "whitespace": {
+        "flagged": 0.0,
+        "kind": "valid control",
+        "n": 300
+      },
+      "wrong_country": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 300
+      },
+      "wrong_measure": {
+        "flagged": 1.0,
+        "kind": "corruption",
+        "n": 300
+      }
+    },
+    "caught": 2020,
+    "controls": 600,
+    "corrupted": 2020,
+    "false_alarms": 0
+  },
+  "raw_sha256": {
+    "SL.AGR.EMPL.FE.ZS.json": "90cf6cc4673523526f73b94d7d0c0aae81ea48b8064a2f19811ccf763da098fc",
+    "SL.AGR.EMPL.MA.ZS.json": "a8f0b618393ea4ce330c5c411cb7c13b890e74e01e32d36423213f7ee22e2da2",
+    "SL.AGR.EMPL.ZS.json": "e7ad8e33cc97b815006449d2742e3fc733d5cd0aec764516307f8cd21bafb9e6",
+    "SL.IND.EMPL.FE.ZS.json": "fdc0b500834edef41d087b99342266434bf91d84daf904d938257ba2f172c1c2",
+    "SL.IND.EMPL.MA.ZS.json": "3549fe2645a0e1a12b1bc21d5b226c55d93203091131d7862a0fc86e59e038cd",
+    "SL.IND.EMPL.ZS.json": "6881624debaf05a6157d988ff5c19e230fc5422932b095057b495ac2b4b7d524",
+    "SL.SRV.EMPL.FE.ZS.json": "c1b4f872c7e7958d06942083388696ed4374f5d32b827bff2d2134eddb1f96e2",
+    "SL.SRV.EMPL.MA.ZS.json": "181e5d42eb6034aeea82973a8e9d3825ab185200821b2be7e264bf70f9763b66",
+    "SL.SRV.EMPL.ZS.json": "baa552f263780c50296834ce8880a226476903aa6396d7ee0b6f4adf97749c38",
+    "countries.json": "d29d57f8adf954c5e2a1520a02fb2c7b45575d8db3bd327a9dff47d66914231c"
+  }
+}

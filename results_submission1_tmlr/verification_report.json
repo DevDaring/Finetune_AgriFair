@@ -1,0 +1,320 @@
+{
+  "bedrock_altered48_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 1296,
+    "expected_systems": 9,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 288,
+    "systems": 2,
+    "unique_ok": 288,
+    "unknown_prompt_ids": 0
+  },
+  "bedrock_cot_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 2790,
+    "expected_systems": 9,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 620,
+    "systems": 2,
+    "unique_ok": 620,
+    "unknown_prompt_ids": 0
+  },
+  "bedrock_followups_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 8370,
+    "expected_systems": 9,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 1860,
+    "systems": 2,
+    "unique_ok": 1860,
+    "unknown_prompt_ids": 0
+  },
+  "bedrock_main_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 70,
+    "expected": 7074,
+    "expected_systems": 9,
+    "low_parse_cells": [
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "extended",
+        0.831
+      ],
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "verified",
+        0.853
+      ],
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "reordered",
+        0.853
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "verified",
+        0.941
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "reordered",
+        0.941
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 6871,
+    "systems": 9,
+    "unique_ok": 6871,
+    "unknown_prompt_ids": 0
+  },
+  "bedrock_renamed_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 2664,
+    "expected_systems": 9,
+    "low_parse_cells": [
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "renamed",
+        0.833
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 189,
+    "systems": 9,
+    "unique_ok": 189,
+    "unknown_prompt_ids": 0
+  },
+  "bedrock_round2_predictions.jsonl": {
+    "present": false
+  },
+  "bedrock_round3_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 39,
+    "expected": 30654,
+    "expected_systems": 9,
+    "low_parse_cells": [
+      [
+        "bedrock|llama-3.3-70b|unmodified",
+        "wdi_norule",
+        0.711
+      ],
+      [
+        "bedrock|gpt-oss-120b|unmodified",
+        "adversarial",
+        0.815
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "adversarial",
+        0.92
+      ],
+      [
+        "bedrock|kimi-k2.5|unmodified",
+        "wdi_standard",
+        0.935
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 3554,
+    "systems": 9,
+    "unique_ok": 3554,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_altered48_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 4608,
+    "expected_systems": 32,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 4608,
+    "systems": 32,
+    "unique_ok": 4608,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_cot_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 2480,
+    "expected_systems": 8,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 2480,
+    "systems": 8,
+    "unique_ok": 2480,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_draws_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 7440,
+    "expected_systems": 8,
+    "low_parse_cells": [
+      [
+        "small-instruct|ablation_placement_random_draw2|seed42",
+        "numerical",
+        0.92
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 7440,
+    "systems": 8,
+    "unique_ok": 7440,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_flash_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 18864,
+    "expected_systems": 24,
+    "low_parse_cells": [
+      [
+        "general-instruct-2|frozen_base|seed42",
+        "extended",
+        0.764
+      ],
+      [
+        "general-instruct-2|frozen_base|seed42",
+        "verified",
+        0.794
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 18864,
+    "systems": 24,
+    "unique_ok": 18864,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_followups_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 29760,
+    "expected_systems": 32,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 29760,
+    "systems": 32,
+    "unique_ok": 29760,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_logprobs_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 36320,
+    "expected_systems": 40,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 36320,
+    "systems": 40,
+    "unique_ok": 36320,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_main_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 25152,
+    "expected_systems": 32,
+    "low_parse_cells": [
+      [
+        "general-instruct-2|frozen_base|seed42",
+        "extended",
+        0.76
+      ],
+      [
+        "general-instruct-2|frozen_base|seed42",
+        "verified",
+        0.794
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 25152,
+    "systems": 32,
+    "unique_ok": 25152,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_retry256_predictions.jsonl": {
+    "complete": true,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 1572,
+    "expected_systems": 2,
+    "low_parse_cells": [],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 1572,
+    "systems": 2,
+    "unique_ok": 1572,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_round2_predictions.jsonl": {
+    "complete": false,
+    "duplicates": 0,
+    "error_rows": 0,
+    "expected": 54960,
+    "expected_systems": 40,
+    "low_parse_cells": [
+      [
+        "general-instruct-2|frozen_base|seed42",
+        "rule_2_20",
+        0.543
+      ]
+    ],
+    "present": true,
+    "prompt_hash_mismatch": 0,
+    "rescore_mismatch": 0,
+    "rows_ok": 54418,
+    "systems": 40,
+    "unique_ok": 54418,
+    "unknown_prompt_ids": 0
+  },
+  "gpu_round3_predictions.jsonl": {
+    "present": false
+  }
+}

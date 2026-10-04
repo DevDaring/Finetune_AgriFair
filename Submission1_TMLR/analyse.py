@@ -27,7 +27,12 @@ DRAWS, SEED = 10000, 20261004
 EQUAL = "roughly equal"
 FAMILY_NAME = {"small-instruct": "Llama-3.2-3B", "broad-instruct": "Qwen3-4B",
                "general-instruct-2": "Ministral-8B", "general-instruct": "Gemma-3-12B",
-               "qwen3-next-80b-a3b": "Qwen3-Next-80B", "deepseek-v3.2": "DeepSeek-V3.2"}
+               "qwen3-next-80b-a3b": "Qwen3-Next-80B", "deepseek-v3.2": "DeepSeek-V3.2",
+               # round 2 (E5): larger siblings of the four GPU families, then frontier open-weight models
+               "gemma-3-27b": "Gemma-3-27B", "qwen3-32b": "Qwen3-32B", "llama-3.3-70b": "Llama-3.3-70B",
+               "mistral-large-3": "Mistral-Large-3", "gpt-oss-120b": "gpt-oss-120B", "kimi-k2.5": "Kimi-K2.5",
+               "glm-5": "GLM-5"}
+ROUND2_EXPS = ("rule_2_20", "rule_reversed", "rule_first", "fewshot")
 METHOD_NAME = {"frozen_base": "unmodified", "graft_proposed": "attribution-guided LoRA",
                "reference_vanilla_lora": "plain LoRA", "ablation_placement_random": "random-placement LoRA",
                "unmodified": "unmodified"}
@@ -75,7 +80,7 @@ def load() -> List[Dict]:
                  "gpu_followups_predictions.jsonl", "bedrock_followups_predictions.jsonl",
                  "gpu_cot_predictions.jsonl", "bedrock_cot_predictions.jsonl",
                  "gpu_altered48_predictions.jsonl", "bedrock_altered48_predictions.jsonl",
-                 "gpu_draws_predictions.jsonl"):
+                 "gpu_draws_predictions.jsonl", "gpu_round2_predictions.jsonl", "bedrock_round2_predictions.jsonl"):
         found = rows_of(OUT / name)
         if found is not None:
             seen = set()
@@ -254,7 +259,7 @@ def comparisons(rows: List[Dict]) -> Dict[str, List[Dict]]:
 
 
 def reordered(rows: List[Dict]) -> List[Dict]:
-    base = {(r["system"], r["comparison_id"], r["wording"]): r for r in rows if r["experiment"] == "verified"}
+    base = {(r["system"], r["comparison_id"], r["wording"]): r for r in rows if r["experiment"] in ("verified", "extended")}
     perm = {(r["system"], r["comparison_id"], r["wording"]): r for r in rows if r["experiment"] == "reordered"}
     out = []
     for sid in sorted({k[0] for k in perm}):
@@ -484,12 +489,12 @@ def followups(rows: List[Dict]) -> List[Dict]:
     same comparison and wording under the standard prompt (verified + extended sets)."""
     std = {(r["system"], r["comparison_id"], r["wording"]): r for r in rows if r["experiment"] in ("verified", "extended")}
     out = []
-    for sid in sorted({r["system"] for r in rows if r["experiment"] in ("norule", "abstain", "realtable", "cot")}):
+    for sid in sorted({r["system"] for r in rows if r["experiment"] in ("norule", "abstain", "realtable", "cot") + ROUND2_EXPS}):
         rec = {"system": label(sid), "system_id": sid}
         base = {k: v for k, v in std.items() if k[0] == sid}
         rec["standard_accuracy"] = round(np.mean([bool(v["correct"]) for v in base.values()]), 4) if base else None
         rec["standard_equal_share"] = round(np.mean([is_equal(v) for v in base.values()]), 4) if base else None
-        for exp in ("norule", "abstain", "realtable", "cot"):
+        for exp in ("norule", "abstain", "realtable", "cot") + ROUND2_EXPS:
             sel = {(r["system"], r["comparison_id"], r["wording"]): r for r in rows if r["experiment"] == exp and r["system"] == sid}
             keys = [k for k in sel if k in base]
             if not keys:
@@ -507,7 +512,7 @@ def followups(rows: List[Dict]) -> List[Dict]:
             if exp == "abstain":
                 rec["abstain_cant_tell_share"] = round(np.mean([sel[k].get("picked_choice") == CANT_TELL for k in keys]), 4)
             # paired: condition minus standard; equal-answer share for norule/abstain, accuracy for realtable
-            if exp in ("realtable", "cot"):
+            if exp in ("realtable", "cot", "fewshot"):
                 a = {k[1:]: float(bool(sel[k]["correct"])) for k in keys}; b = {k[1:]: float(bool(base[k]["correct"])) for k in keys}
             else:
                 a = {k[1:]: float(is_equal(sel[k])) for k in keys}; b = {k[1:]: float(is_equal(base[k])) for k in keys}
@@ -516,7 +521,7 @@ def followups(rows: List[Dict]) -> List[Dict]:
             rec[f"{exp}_ci_lower"], rec[f"{exp}_ci_upper"] = res["ci_lower"], res["ci_upper"]
             rec[f"{exp}_p"] = res["p_signflip"]
         out.append(rec)
-    for exp in ("norule", "abstain", "realtable", "cot"):
+    for exp in ("norule", "abstain", "realtable", "cot") + ROUND2_EXPS:
         have = [r for r in out if f"{exp}_p" in r]
         for r, adj in zip(have, holm([r[f"{exp}_p"] for r in have])):
             r[f"{exp}_p_holm"] = round(adj, 6)
@@ -546,6 +551,66 @@ def budget_sensitivity(rows: List[Dict]) -> List[Dict]:
                         "parse_rate_numerical": round(np.mean([bool(r["parse_ok"]) for r in num]), 4),
                         "accuracy_numerical": round(np.mean([bool(r["correct"]) for r in num]), 4),
                         "fully_correct_scenarios": round(np.mean([len(v) == 3 and all(v) for v in groups.values()]), 4)})
+    return out
+
+
+def prior_split(rows: List[Dict]) -> List[Dict]:
+    """P4 (round 3, exploratory: outputs existed): memory accuracy where the leave-one-state-out prior is
+    right ('typical') and wrong ('atypical'); share of answers equal to the prior's answer; skill above
+    the prior = (acc - prior_acc) / (1 - prior_acc) on the 154."""
+    p = OUT / "analysis" / "baseline_cross_state_prior_answers.json"
+    if not p.exists():
+        return []
+    prior = json.loads(p.read_text())
+    gold = {r["comparison_id"]: r["gold_choice_text"] for r in rows if r["experiment"] in ("verified", "extended")}
+    typical = {c for c in gold if prior.get(c) == gold[c]}
+    prior_acc = len(typical) / len(gold)
+    out = []
+    sel = [r for r in rows if r["experiment"] in ("verified", "extended")]
+    for sid in sorted({r["system"] for r in sel}):
+        s = [r for r in sel if r["system"] == sid]
+        acc = np.mean([bool(r["correct"]) for r in s])
+        ty = [r for r in s if r["comparison_id"] in typical]; at = [r for r in s if r["comparison_id"] not in typical]
+        a_at = {(r["comparison_id"], r["wording"]): float(bool(r["correct"])) for r in at}
+        lo, hi = boot_ci(np.array([np.mean([v for (c, w), v in a_at.items() if c == cc])
+                                   for cc in sorted({c for c, _ in a_at})]))
+        out.append({"system": label(sid), "system_id": sid, "n_typical_comparisons": len(typical),
+                    "n_atypical_comparisons": len(gold) - len(typical),
+                    "accuracy_154": round(float(acc), 4),
+                    "accuracy_typical": round(float(np.mean([bool(r["correct"]) for r in ty])), 4),
+                    "accuracy_atypical": round(float(np.mean(list(a_at.values()))), 4),
+                    "accuracy_atypical_ci": f"[{lo:.3f}, {hi:.3f}]",
+                    "share_answers_equal_to_prior": round(float(np.mean([r.get("picked_choice") == prior.get(r["comparison_id"]) for r in s])), 4),
+                    "share_atypical_answers_equal_to_prior": round(float(np.mean([r.get("picked_choice") == prior.get(r["comparison_id"]) for r in at])), 4),
+                    "skill_above_prior": round(float((acc - prior_acc) / (1 - prior_acc)), 4)})
+    return out
+
+
+def logprob_summary() -> List[Dict]:
+    """E2 (round 2): option-letter probabilities per system. Standard = verified + extended prompts."""
+    rows = rows_of(OUT / "gpu_logprobs_predictions.jsonl")
+    if not rows:
+        return []
+    out = []
+    for sid in sorted({r["system"] for r in rows}):
+        s = [r for r in rows if r["system"] == sid]
+        rec = {"system": label(sid), "system_id": sid}
+        for scope, exps in (("standard", ("verified", "extended")), ("norule", ("norule",)), ("numerical", ("numerical",))):
+            v = [r for r in s if r["experiment"] in exps]
+            if not v:
+                continue
+            pe = np.array([r["p_equal"] for r in v]); mg = np.array([r["margin_top2"] for r in v], float)
+            conf = np.array([max(r[k] for k in r if k.startswith("p_") and k != "p_equal") for r in v])
+            corr = np.array([bool(r["argmax_correct"]) for r in v], float)
+            bins = np.minimum((conf * 10).astype(int), 9)
+            ece = sum(abs(corr[bins == b].mean() - conf[bins == b].mean()) * (bins == b).mean() for b in range(10) if (bins == b).any())
+            rec.update({f"{scope}_n": len(v), f"{scope}_mean_p_equal": round(float(pe.mean()), 4),
+                        f"{scope}_share_p_equal_over_0.8": round(float((pe >= 0.8).mean()), 4),
+                        f"{scope}_near_tie_share": round(float((mg < 0.1).mean()), 4),
+                        f"{scope}_argmax_accuracy": round(float(corr.mean()), 4),
+                        f"{scope}_mean_confidence": round(float(conf.mean()), 4), f"{scope}_ece": round(float(ece), 4),
+                        f"{scope}_mean_letter_mass": round(float(np.mean([r["letter_mass"] for r in v])), 4)})
+        out.append(rec)
     return out
 
 
@@ -605,7 +670,8 @@ def main(argv=None) -> None:
               "h5_ranking_per_system.csv": rk["per_system"], "altered_tables.csv": alt,
               "neutral_wording.csv": neu, "reproducibility.csv": reproducibility(),
               "followups.csv": followups(rows), "h2_gap_axis.csv": gap_axis(rows),
-              "budget_sensitivity.csv": budget_sensitivity(rows)}
+              "budget_sensitivity.csv": budget_sensitivity(rows), "logprobs.csv": logprob_summary(),
+              "prior_split.csv": prior_split(rows)}
     for name, t in tables.items():
         if t:
             # the writer drops keys missing from the first row, so pass the union of keys in order

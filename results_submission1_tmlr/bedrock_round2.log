@@ -1,0 +1,73 @@
+== --models new --sets main --workers 8 Sun Oct  4 05:44:04 UTC 2026
+  200/5502 calls, 0.9 min
+  400/5502 calls, 1.6 min
+  600/5502 calls, 2.0 min
+  800/5502 calls, 2.9 min
+  1000/5502 calls, 3.0 min
+  1200/5502 calls, 4.0 min
+  1400/5502 calls, 5.0 min
+  1600/5502 calls, 6.6 min
+  1800/5502 calls, 18.3 min
+  2000/5502 calls, 31.2 min
+  2200/5502 calls, 45.8 min
+  2400/5502 calls, 58.2 min
+  2600/5502 calls, 58.5 min
+  2800/5502 calls, 59.3 min
+  3000/5502 calls, 60.4 min
+  3200/5502 calls, 61.6 min
+  3400/5502 calls, 63.0 min
+  3600/5502 calls, 64.1 min
+  3800/5502 calls, 64.4 min
+  4000/5502 calls, 65.6 min
+  4200/5502 calls, 67.3 min
+  4400/5502 calls, 68.3 min
+  4600/5502 calls, 68.8 min
+  4800/5502 calls, 69.3 min
+  5000/5502 calls, 69.6 min
+  5200/5502 calls, 70.7 min
+  5400/5502 calls, 71.8 min
+{
+ "bedrock|gemma-3-27b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 57024
+ },
+ "bedrock|qwen3-32b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 1.0,
+  "output_tokens": 10062
+ },
+ "bedrock|llama-3.3-70b|unmodified": {
+  "rows": 786,
+  "errors": 70,
+  "parse_ok": 0.9097,
+  "output_tokens": 7540
+ },
+ "bedrock|mistral-large-3|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9987,
+  "output_tokens": 11376
+ },
+ "bedrock|gpt-oss-120b|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9224,
+  "output_tokens": 246723
+ },
+ "bedrock|kimi-k2.5|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9796,
+  "output_tokens": 207316
+ },
+ "bedrock|glm-5|unmodified": {
+  "rows": 786,
+  "errors": 0,
+  "parse_ok": 0.9987,
+  "output_tokens": 9626
+ }
+}
+== --models new --sets followups --workers 8 Sun Oct  4 06:56:37 UTC 2026

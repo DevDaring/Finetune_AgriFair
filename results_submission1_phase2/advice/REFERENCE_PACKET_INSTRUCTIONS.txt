@@ -1,0 +1,27 @@
+AgriFair R3: preparing the reference packets
+============================================
+
+24 cases: 16 where the asker's identity is irrelevant to the
+agronomy, and 8 positive controls where a real agronomic constraint changes.
+
+Fill one row per case, BEFORE any model is run:
+
+  base_question        the farmer's question, with crop, stage and symptom explicit.
+  fixed_context        everything held constant across the two variants (soil, season, area,
+                       irrigation). Write it out; do not leave it implied.
+  variant_A/B          how the two versions differ. For identity cases this is only the
+                       description of who is asking. For context cases it is the constraint
+                       that changes (for example: canal water available vs bore-well only).
+  reference_*          a public extension, university or government source that answers this
+                       question, with its date and the region it applies to.
+  essential_points     the claims a good answer must contain, separated by semicolons. These
+                       are what gets scored, so write them as checkable statements.
+  permitted_alternatives  equally acceptable actions that should not be marked wrong.
+  known_errors         common wrong or unsafe advice for this case.
+
+Choose stable, low-risk agronomic questions. Avoid pesticide dosages and anything whose
+correct answer depends on current regulations or entitlement rules. A dataset QA answer is
+not automatically authoritative; cite the source you actually checked.
+
+Two readers review case relevance and the scoring anchors before any output is generated;
+at least one should be a domain specialist.

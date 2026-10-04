@@ -1,0 +1,31 @@
+{
+  "analysis_seed": 20260924,
+  "bundles": 48,
+  "comparison_rule": {
+    "diff_if_abs_gap_at_least": 10.0,
+    "equal_if_abs_gap_below": 5.0,
+    "metric_unit": "percentage_points"
+  },
+  "constant_label_baseline": {
+    "accuracy": 0.3333333333333333,
+    "all_three_relations_correct": 0.0
+  },
+  "design_sha256": "84faa8b0ef5140375fb1f2af57672a041d44c528fe6270ab10ea0d15519dde8a",
+  "diagnostic_outputs": 144,
+  "diagnostic_prompts": 36,
+  "framing": "every table is hypothetical with identical warning, rule text, units and layout; only the numbers move",
+  "main_outputs": 1152,
+  "main_prompts": 288,
+  "relations": [
+    "first_higher",
+    "second_higher",
+    "approximately_equal"
+  ],
+  "stage": "r2_evidence",
+  "systems": 4,
+  "validation": "all deterministic invariants passed",
+  "wordings": [
+    "context_rich",
+    "plain_new"
+  ]
+}

@@ -63,6 +63,11 @@ COT = "results_submission1_tmlr/prompts_cot.jsonl"                 # step-by-ste
 CORE_ARMS = [("frozen_base", 42), ("graft_proposed", 42)]
 ALTERED48 = "results_submission1_tmlr/prompts_altered48.jsonl"     # altered tables on the 36 remaining scenarios
 DRAW_ARMS = [("ablation_placement_random_draw2", 42), ("ablation_placement_random_draw3", 42)]   # added 4 Oct 2026
+ROUND2 = ["results_submission1_tmlr/prompts_rulevariants.jsonl", "results_submission1_tmlr/prompts_fewshot.jsonl",
+          "results_submission1_tmlr/prompts_reordered_ext.jsonl"]                                   # round 2 (E3, E4, E6)
+ROUND3 = ["results_submission1_tmlr/prompts_drifted_v1.jsonl", "results_submission1_tmlr/prompts_mnli.jsonl",
+          "results_submission1_tmlr/prompts_adversarial.jsonl", "results_submission1_tmlr/prompts_wdi.jsonl",
+          "results_submission1_tmlr/prompts_recall.jsonl", "results_submission1_tmlr/prompts_renamed.jsonl"]   # round 3 (P1-P3, P5-P7)
 
 
 def load_prompts(which: str = "main") -> List[Dict]:
@@ -81,6 +86,14 @@ def load_prompts(which: str = "main") -> List[Dict]:
     if which == "main+altered48":
         for rel, tag in PROMPT_SETS:
             out += [{**r, "experiment": tag} for r in C.read_jsonl(C.CODES_ROOT / rel)]
+    if which == "round2":
+        for rel in ROUND2:
+            out += list(C.read_jsonl(C.CODES_ROOT / rel))
+    if which == "round3":
+        for rel in ROUND3:
+            out += list(C.read_jsonl(C.CODES_ROOT / rel))
+    if which == "renamed":                                       # P7 alone (Bedrock runs it as its own stream)
+        out += list(C.read_jsonl(C.CODES_ROOT / "results_submission1_tmlr/prompts_renamed.jsonl"))
     ids = [r["prompt_id"] for r in out]
     if len(ids) != len(set(ids)):
         raise SystemExit("duplicate prompt ids across sets")
@@ -128,14 +141,14 @@ ORIGINAL_ARMS = [("frozen_base", 42), ("graft_proposed", 42)]
 
 def run(smoke: bool, pilot: int, families: List[str], attention: str = "auto", repro: bool = False,
         stage_name: str = "", sets: str = "main", core_only: bool = False, random_draws: bool = False,
-        max_new_tokens: int = 0, only_systems: List[str] = ()) -> Dict:
+        max_new_tokens: int = 0, only_systems: List[str] = (), all_arms: bool = False) -> Dict:
     out = C.CODES_ROOT / OUT_DIR
     out.mkdir(parents=True, exist_ok=True)
     prompts = load_prompts(sets)
     if max_new_tokens:   # budget sensitivity (added 4 Oct 2026): the same budget as the API models
         prompts = [{**p, "max_new_tokens": max_new_tokens} for p in prompts]
     stage = stage_name or ("smoke" if smoke else ("pilot" if pilot else ("repro_sdpa" if repro else "main")))
-    arms = CORE_ARMS if core_only else (DRAW_ARMS if random_draws else ARMS)
+    arms = CORE_ARMS if core_only else (DRAW_ARMS if random_draws else (ARMS + DRAW_ARMS if all_arms else ARMS))
     if repro:   # the published systems, on the published sets, with the published attention (sdpa)
         prompts = [p for p in prompts if p["experiment"] in ORIGINAL_SETS]
         families = [f for f in families if f in ("small-instruct", "broad-instruct")]
@@ -202,7 +215,7 @@ def run(smoke: bool, pilot: int, families: List[str], attention: str = "auto", r
            "attention": attn, "environment": environment(),
            "plan_sha256": sha256_file(PLAN) if PLAN.exists() else None,
            "prompt_sets": sets,
-           "prompt_file_sha256": {rel: sha256_file(C.CODES_ROOT / rel) for rel in [r for r, _ in PROMPT_SETS] + [FOLLOWUPS, COT, ALTERED48]
+           "prompt_file_sha256": {rel: sha256_file(C.CODES_ROOT / rel) for rel in [r for r, _ in PROMPT_SETS] + [FOLLOWUPS, COT, ALTERED48] + ROUND2 + ROUND3
                                   if (C.CODES_ROOT / rel).exists()},
            "timings_by_system": {s: round(sum(t["seconds"] for t in timings if t["system"] == s), 1)
                                  for s in sorted({t["system"] for t in timings})}}
@@ -219,14 +232,15 @@ def main(argv=None) -> None:
     ap.add_argument("--attention", choices=["auto", "sdpa"], default="auto")
     ap.add_argument("--repro", action="store_true", help="published systems and sets, sdpa, for the exact-match check")
     ap.add_argument("--stage-name", default="", help="output file stem, e.g. main or flash")
-    ap.add_argument("--sets", choices=["main", "followups", "all", "cot", "altered48", "main+altered48"], default="main")
+    ap.add_argument("--sets", choices=["main", "followups", "all", "cot", "altered48", "main+altered48", "round2", "round3"], default="main")
     ap.add_argument("--core-only", action="store_true", help="unmodified and attribution-guided seed 42 only")
     ap.add_argument("--random-draws", action="store_true", help="the two further random-placement draws only")
     ap.add_argument("--max-new-tokens", type=int, default=0, help="override every prompt's answer budget")
     ap.add_argument("--only-systems", nargs="*", default=[], help="system ids to run (others skipped)")
+    ap.add_argument("--all-arms", action="store_true", help="the 8 arms plus the two further random draws (40 systems)")
     a = ap.parse_args(argv)
     run(a.smoke, a.pilot, a.families, a.attention, a.repro, a.stage_name, a.sets, a.core_only, a.random_draws,
-        a.max_new_tokens, a.only_systems)
+        a.max_new_tokens, a.only_systems, a.all_arms)
 
 
 if __name__ == "__main__":

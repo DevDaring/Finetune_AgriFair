@@ -19,6 +19,8 @@ from pathlib import Path
 CODES = Path(__file__).resolve().parents[1]
 OUT = CODES / "results_submission1_tmlr"
 MAX_HOURS = 6.0
+EXPECTED_ROUND2 = {"gpu_logprobs_predictions.jsonl": 40 * 904, "gpu_round2_predictions.jsonl": 40 * 1374,
+                   "gpu_round3_predictions.jsonl": 40 * 3406}
 EXPECTED = {"gpu_main_predictions.jsonl": 32 * 786, "gpu_flash_predictions.jsonl": 24 * 786,
             "gpu_followups_predictions.jsonl": 32 * 930, "gpu_cot_predictions.jsonl": 8 * 310,
             "gpu_altered48_predictions.jsonl": 32 * 144, "gpu_draws_predictions.jsonl": 8 * 930,
@@ -75,7 +77,8 @@ def download(host, port, dest: Path) -> None:
 
 def verify(dest: Path) -> dict:
     res = {}
-    for name, n in EXPECTED.items():
+    expected = EXPECTED_ROUND2 if "--round2" in sys.argv else EXPECTED
+    for name, n in expected.items():
         p = dest / "results_submission1_tmlr" / name
         rows = sum(1 for _ in p.open()) if p.exists() else 0
         res[name] = {"rows": rows, "expected": n, "complete": rows >= n}
@@ -91,10 +94,10 @@ def main() -> None:
         hours = (time.time() - start) / 3600
         marker = ""
         if host and status == "running":
-            r = remote(host, port, "ls /workspace/RUN6_DONE /workspace/RUN6_FAILED /workspace/RUN5_FAILED /workspace/RUN4_FAILED /workspace/RUN3_FAILED /workspace/RUN2_FAILED /workspace/RUN_FAILED 2>/dev/null; tail -1 /workspace/Codes/logs/status.log 2>/dev/null")
+            r = remote(host, port, "ls /workspace/RUN_R4_DONE /workspace/RUN_R4_FAILED /workspace/RUN_R3_FAILED /workspace/RUN6_DONE /workspace/RUN6_FAILED /workspace/RUN5_FAILED /workspace/RUN4_FAILED /workspace/RUN3_FAILED /workspace/RUN2_FAILED /workspace/RUN_FAILED 2>/dev/null; tail -1 /workspace/Codes/logs/status.log 2>/dev/null")
             marker = r.stdout.strip()
         log(f"status={status} hours={hours:.2f} {marker.splitlines()[-1] if marker else ''}")
-        finished = any(m in marker for m in ("RUN6_DONE", "RUN6_FAILED", "RUN5_FAILED", "RUN4_FAILED", "RUN3_FAILED", "RUN2_FAILED", "RUN_FAILED"))
+        finished = any(m in marker for m in ("RUN6_DONE", "RUN6_FAILED", "RUN5_FAILED", "RUN4_FAILED", "RUN3_FAILED", "RUN2_FAILED", "RUN_FAILED", "RUN_R4_DONE", "RUN_R4_FAILED", "RUN_R3_FAILED"))
         if finished or hours > MAX_HOURS:
             if host:
                 download(host, port, dest)

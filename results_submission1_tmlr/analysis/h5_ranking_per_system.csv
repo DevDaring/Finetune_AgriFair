@@ -1,5 +1,7 @@
 system,system_id,accuracy_from_memory_154,accuracy_supplied_numbers
 DeepSeek-V3.2,bedrock|deepseek-v3.2|unmodified,0.776,0.8403
+Gemma-3-27B,bedrock|gemma-3-27b|unmodified,0.6299,0.7118
+Qwen3-32B,bedrock|qwen3-32b|unmodified,0.263,0.8611
 Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,0.1948,0.8333
 "Qwen3-4B, random-placement LoRA, draw 2",broad-instruct|ablation_placement_random_draw2|seed42,0.1299,0.6007
 "Qwen3-4B, random-placement LoRA, draw 3",broad-instruct|ablation_placement_random_draw3|seed42,0.289,0.6076
