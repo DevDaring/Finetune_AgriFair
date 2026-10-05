@@ -65,9 +65,9 @@ Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,all verified (154),308,0.19
 "Ministral-8B, random-placement LoRA, draw 1",general-instruct-2|ablation_placement_random|seed42,verified (34),68,0.5294,0.3846,52,1.0,16,0.7059,False
 "Ministral-8B, random-placement LoRA, draw 1",general-instruct-2|ablation_placement_random|seed42,extended (120),240,0.2542,0.2542,240,,0,0.7417,False
 "Ministral-8B, random-placement LoRA, draw 1",general-instruct-2|ablation_placement_random|seed42,all verified (154),308,0.3149,0.2774,292,1.0,16,0.7338,False
-"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,verified (34),68,0.2353,0.0,52,1.0,16,0.7941,False
-"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,extended (120),240,0.0,0.0,240,,0,0.7583,False
-"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,all verified (154),308,0.0519,0.0,292,1.0,16,0.7662,False
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,verified (34),68,0.3088,0.0962,52,1.0,16,0.9118,True
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,extended (120),240,0.0667,0.0667,240,,0,0.8875,True
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,all verified (154),308,0.1201,0.0719,292,1.0,16,0.8929,True
 "Ministral-8B, attribution-guided LoRA, seed 42",general-instruct-2|graft_proposed|seed42,verified (34),68,0.6324,0.5192,52,1.0,16,0.5588,False
 "Ministral-8B, attribution-guided LoRA, seed 42",general-instruct-2|graft_proposed|seed42,extended (120),240,0.3625,0.3625,240,,0,0.6,False
 "Ministral-8B, attribution-guided LoRA, seed 42",general-instruct-2|graft_proposed|seed42,all verified (154),308,0.4221,0.3904,292,1.0,16,0.5909,False

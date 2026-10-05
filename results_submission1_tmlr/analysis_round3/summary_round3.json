@@ -159,10 +159,10 @@
       "total_pairs": 820
     },
     "h12_drifted_vs_corrected": {
-      "ci_lower": 0.3895,
-      "ci_upper": 0.6565,
-      "discordant_pairs": 196,
-      "kendall_tau": 0.5986,
+      "ci_lower": 0.3724,
+      "ci_upper": 0.6446,
+      "discordant_pairs": 205,
+      "kendall_tau": 0.585,
       "n_systems": 49,
       "total_pairs": 1176
     },

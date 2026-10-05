@@ -437,9 +437,110 @@ def tab_round3():
             write(f"tab_r3_{tag}{suffix}.tex", "\n".join(lines) + "\n")
 
 
+# ---------------------------------------------------------------- revision tables (5 Oct 2026)
+ANR = C.CODES_ROOT / "results_submission1_tmlr" / "analysis_review"
+
+
+def readr(name):
+    p = ANR / name
+    return list(csv.DictReader(p.open(encoding="utf-8"))) if p.exists() else []
+
+
+def ci2(text):
+    a, b = (float(x) for x in text.strip("[]").split(","))
+    return f"{{\\scriptsize[{a:+.2f}, {b:+.2f}]}}"
+
+
+def tau_cell(t):
+    return f"{t['kendall_tau']:.2f} {{\\scriptsize[{t['ci_lower']:.2f}, {t['ci_upper']:.2f}]}}"
+
+
+def tab_review():
+    import re
+    # main-text overview without the adapter ranges (the appendix lists every adapter)
+    ov = (DEST / "tab_overview.tex").read_text(encoding="utf-8")
+    write("tab_overview_main.tex", re.sub(r" \{\\scriptsize\[[^\]]*\]\}", "", ov))
+    summ = json.loads((ANR / "summary_review.json").read_text())
+    d = summ["R1_drift"]
+    names = [("drift_only (drifted vs corrected, both without rule)", "Drift only", "drifted vs corrected, both without the rule"),
+             ("rule_only (corrected without vs with rule)", "Rule only", "corrected, without vs with the rule"),
+             ("both (drifted without rule vs corrected with rule)", "Both", "drifted without the rule vs corrected with it")]
+    write("tab_drift_iso.tex", "\n".join(f"{a} & {b} & {tau_cell(d['all'][k])} & {tau_cell(d['unmodified'][k])} \\\\"
+                                           for k, a, b in names) + "\n")
+    rt = summ["R3_real_table"]
+    lines = [f"Closed book vs real table (same 154 comparisons) & {tau_cell(rt['all']['closed_book_vs_real_table'])} & {tau_cell(rt['unmodified']['closed_book_vs_real_table'])} \\\\",
+             f"Closed book vs numerical set & {tau_cell(rt['all']['closed_book_vs_numerical_set'])} & {tau_cell(rt['unmodified']['closed_book_vs_numerical_set'])} \\\\",
+             f"Real table vs numerical set & {tau_cell(rt['all']['real_table_vs_numerical_set'])} & {tau_cell(rt['unmodified']['real_table_vs_numerical_set'])} \\\\"]
+    write("tab_rank_matched.tex", "\n".join(lines) + "\n")
+    # matched real table, per system
+    rows = sorted(readr("r3_real_table_matched.csv"), key=_key)
+    lines = [" & ".join([_name(r), f3(r["closed_book"]), f3(r["real_table"]), sgn(r["real_table_minus_closed_book"]),
+                         ci2(r["ci"]), f3(r["closed_book_diff_items"]),
+                         f3(r["real_table_diff_items"]), f3(r["real_table_equal_share"])]) + r" \\" for r in rows]
+    write("tab_realtable_full.tex", "\n".join(lines) + "\n")
+    # placement, every seed and draw averaged
+    pl = readr("r6_placement_all_seeds.csv")
+    cname = {"mean attribution-guided minus mean random": "attribution-guided $-$ random placement",
+             "mean plain minus mean random": "plain LoRA $-$ random placement",
+             "mean attribution-guided minus mean plain": "attribution-guided $-$ plain LoRA"}
+    lines = []
+    for fam in FAMS:
+        for k, (con, lab) in enumerate(cname.items()):
+            m = next(r for r in pl if r["family"] == fam and r["contrast"] == con and r["outcome"] == "memory accuracy")
+            fc = next(r for r in pl if r["family"] == fam and r["contrast"] == con and r["outcome"] == "fully correct")
+            cell = lambda r: f"{sgn(r['difference'])} {{\\scriptsize[{float(r['ci_lower']):+.2f}, {float(r['ci_upper']):+.2f}]}}"
+            lines.append(" & ".join([fam if k == 0 else "", lab, cell(m), cell(fc)]) + r" \\")
+        lines.append(r"\midrule")
+    lines[-1] = r"\bottomrule"
+    write("tab_placement.tex", "\n".join(lines) + "\n")
+    # hosted repeatability
+    rows = sorted(readr("r5_hosted_repeatability.csv"), key=_key)
+    lines = [" & ".join([_name(r), f3(r["same_choice"]), f3(r["accuracy_run1"]), f3(r["accuracy_run2"]), sgn(r["run1_minus_run2"]),
+                         ci2(r["ci"])]) + r" \\" for r in rows]
+    write("tab_repeat.tex", "\n".join(lines) + "\n")
+    # lenient reading: systems with any unparsed answer on the 154 comparisons
+    rows = sorted([r for r in readr("r4_lenient_reading.csv") if float(r["unparsed_strict"]) > 0], key=_key)
+    lines = [" & ".join([_name(r), f3(r["unparsed_strict"]), str(int(r["recovered_other_key"]) + int(r["recovered_bare_letter"]) + int(r["recovered_option_text"])),
+                         f3(r["accuracy_strict"]), f3(r["accuracy_lenient"]), f3(r["equal_share_strict"]), f3(r["equal_share_lenient"])]) + r" \\" for r in rows]
+    write("tab_lenient.tex", "\n".join(lines) + "\n")
+    # numeric recall with the tolerance subset (unmodified models)
+    rows = sorted([r for r in readr("r2_recall_tolerance.csv") if r["unmodified"] == "True"], key=_key)
+    p6 = {r["system"]: r for r in read3("p6_recall.csv")}
+    lines = []
+    for r in rows:
+        q = p6.get(r["system"], {})
+        lines.append(" & ".join([_name(r), str(r["parsed"]), q.get("median_abs_error_pp") or "--", f3(r.get("implied_accuracy")),
+                                 f3(r.get("mc_accuracy")), str(r.get("within_10_n") or 0), f3(r.get("within_10_implied_accuracy")),
+                                 f3(r.get("within_10_mc_accuracy")), f3(r.get("within_10_prior_accuracy"))]) + r" \\")
+    write("tab_recall_tol.tex", "\n".join(lines) + "\n")
+    # MNLI answers by gold label, pooled over the 13 unmodified models
+    rows = readr("r8_mnli_by_gold.csv")
+    lines = [" & ".join([r["condition"], r["gold"], f3(r["answered_entailment"]), f3(r["answered_contradiction"]),
+                         f3(r["answered_neither"])]) + r" \\" for r in rows]
+    write("tab_mnli_gold.tex", "\n".join(lines) + "\n")
+    # rule variants with the standard prompt on the 105 comparisons the 2/20 variant keeps
+    std105 = {r["system"]: r for r in readr("r7_rule_2_20_matched.csv")}
+    rows = read("followups.csv")
+    rows = sorted(rows, key=lambda r: (ORDER.index(split(r["system"])[0]), METHODS.index(split(r["system"])[1])))
+    lines = []
+    for r in rows:
+        fam, meth, seed = split(r["system"])
+        if meth not in ("unmodified", "attribution-guided LoRA") or seed not in (None, "seed 42", 42):
+            continue
+        name = fam + ("" if meth == "unmodified" else ", attr.-guided")
+        star = lambda k: "$^{*}$" if r.get(f"{k}_p_holm") not in (None, "") and float(r[f"{k}_p_holm"]) < 0.05 else ""
+        lines.append(" & ".join([name, f3(r["standard_equal_share"]), f3(r.get("norule_equal_share")) + star("norule"),
+                                 f3(std105.get(r["system"], {}).get("standard_equal_share_same_items")),
+                                 f3(r.get("rule_2_20_equal_share")),
+                                 f3(r.get("rule_reversed_equal_share")) + star("rule_reversed"),
+                                 f3(r.get("rule_first_equal_share")) + star("rule_first"),
+                                 f3(r.get("fewshot_equal_share"))]) + r" \\")
+    write("tab_rules.tex", "\n".join(lines) + "\n")
+
+
 def main():
     for fn in (tab_overview, tab_followups, tab_finetune, tab_methods, tab_altered, tab_repro,
-               tab_all_systems, tab_altered_full, tab_neutral, tab_finetune_compact, tab_methods_compact, tab_gap, tab_baselines, tab_rules, tab_logprobs, tab_round3):
+               tab_all_systems, tab_altered_full, tab_neutral, tab_finetune_compact, tab_methods_compact, tab_gap, tab_baselines, tab_rules, tab_logprobs, tab_round3, tab_review):
         fn()
     print("tables ->", DEST, sorted(p.name for p in DEST.iterdir()))
 

@@ -74,7 +74,22 @@ def rows_of(p):
     return [r for r in rows if r.get("comparison_id") not in EXCLUDED_COMPARISONS]
 
 
-def load() -> List[Dict]:
+RETRY256 = ("gpu_retry256_predictions.jsonl", "gpu_retry256_round2_predictions.jsonl")
+
+
+def substitute_256(rows: List[Dict], files) -> List[Dict]:
+    """Budget rule (adopted 5 Oct 2026 for the primary results): where a GPU system was re-run at 256 tokens
+    because its 24-token answers were cut off, the 256-token answer replaces the 24-token answer for that
+    prompt in every analysis. The 24-token answers stay in budget_sensitivity.csv."""
+    retry = {}
+    for name in files:
+        for r in rows_of(OUT / name) or []:
+            if not r.get("error"):
+                retry[(r["prompt_id"], r["system"])] = r
+    return [retry.get((r["prompt_id"], r["system"]), r) for r in rows]
+
+
+def load(primary_budget: bool = True) -> List[Dict]:
     rows = []
     for name in ("gpu_main_predictions.jsonl", "bedrock_main_predictions.jsonl",
                  "gpu_followups_predictions.jsonl", "bedrock_followups_predictions.jsonl",
@@ -88,7 +103,7 @@ def load() -> List[Dict]:
                 k = (r["prompt_id"], r["system"])
                 if k not in seen and not r.get("error"):
                     seen.add(k); rows.append(rescore_cot(r) if r.get("experiment") == "cot" else r)
-    return rows
+    return substitute_256(rows, RETRY256) if primary_budget else rows
 
 
 DRAW = {"ablation_placement_random": 1, "ablation_placement_random_draw2": 2, "ablation_placement_random_draw3": 3}
@@ -535,6 +550,7 @@ def budget_sensitivity(rows: List[Dict]) -> List[Dict]:
     if retry is None:
         return []
     out = []
+    rows = load(primary_budget=False)      # the original 24-token answers
     for sid in sorted({r["system"] for r in retry}):
         for tag, src in (("24 tokens (main)", [r for r in rows if r["system"] == sid]),
                          ("256 tokens", [r for r in retry if r["system"] == sid])):

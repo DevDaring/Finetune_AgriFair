@@ -1,0 +1,7 @@
+condition,gold,n,answered_entailment,answered_contradiction,answered_neither,answered_unparsed
+plain,entailment,2600,0.8938,0.0135,0.0927,0.0
+plain,contradiction,2600,0.0627,0.6554,0.2815,0.0004
+plain,neither,2600,0.2831,0.0242,0.6923,0.0004
+strict,entailment,2600,0.7669,0.0135,0.2177,0.0019
+strict,contradiction,2600,0.0312,0.5719,0.3919,0.005
+strict,neither,2600,0.1535,0.0196,0.8246,0.0023

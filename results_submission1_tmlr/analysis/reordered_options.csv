@@ -21,7 +21,7 @@ Qwen3-Next-80B,bedrock|qwen3-next-80b-a3b|unmodified,308,0.8409,0.6396,0.7792,0.
 "Ministral-8B, random-placement LoRA, draw 2",general-instruct-2|ablation_placement_random_draw2|seed42,308,0.9513,0.9221,0.9708,0.0617,0.1006,0.1299
 "Ministral-8B, random-placement LoRA, draw 3",general-instruct-2|ablation_placement_random_draw3|seed42,308,0.9935,0.987,0.9935,0.0065,0.0584,0.0649
 "Ministral-8B, random-placement LoRA, draw 1",general-instruct-2|ablation_placement_random|seed42,308,0.7338,0.7338,1.0,0.0519,0.3149,0.3149
-"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,308,0.7662,1.0,0.7662,0.0,0.0519,0.0519
+"Ministral-8B, unmodified",general-instruct-2|frozen_base|seed42,308,0.8929,1.0,0.8929,0.039,0.1201,0.0519
 "Ministral-8B, attribution-guided LoRA, seed 42",general-instruct-2|graft_proposed|seed42,308,0.5909,0.5617,0.9708,0.0617,0.4221,0.4351
 "Ministral-8B, attribution-guided LoRA, seed 43",general-instruct-2|graft_proposed|seed43,308,0.7175,0.7305,0.9675,0.0812,0.3052,0.2727
 "Ministral-8B, attribution-guided LoRA, seed 44",general-instruct-2|graft_proposed|seed44,308,0.9838,0.7695,0.7857,0.2078,0.0682,0.25

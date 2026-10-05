@@ -38,7 +38,7 @@ def load() -> List[Dict]:
             k = (r["prompt_id"], r["system"])
             if k not in seen and not r.get("error"):
                 seen.add(k); rows.append(r)
-    return rows
+    return A.substitute_256(rows, ("gpu_retry256_round3_predictions.jsonl",))
 
 
 def api_determinism() -> Dict:

@@ -1,0 +1,25 @@
+family,outcome,contrast,difference,ci_lower,ci_upper,excludes_zero,spread_attribution-guided,spread_random,spread_plain
+Qwen3-4B,memory accuracy,mean attribution-guided minus mean random,0.1126,0.0855,0.1407,True,0.1916,0.1591,
+Qwen3-4B,memory accuracy,mean plain minus mean random,0.0303,0.0097,0.0519,True,,0.1591,0.0487
+Qwen3-4B,memory accuracy,mean attribution-guided minus mean plain,0.0823,0.0617,0.1028,True,0.1916,,0.0487
+Qwen3-4B,fully correct,mean attribution-guided minus mean random,-0.2361,-0.2917,-0.1806,True,0.1146,0.4062,
+Qwen3-4B,fully correct,mean plain minus mean random,-0.1042,-0.1701,-0.0417,True,,0.4062,0.2396
+Qwen3-4B,fully correct,mean attribution-guided minus mean plain,-0.1319,-0.1944,-0.0729,True,0.1146,,0.2396
+Gemma-3-12B,memory accuracy,mean attribution-guided minus mean random,0.0563,0.0314,0.0823,True,0.2468,0.224,
+Gemma-3-12B,memory accuracy,mean plain minus mean random,-0.1158,-0.1494,-0.0855,True,,0.224,0.237
+Gemma-3-12B,memory accuracy,mean attribution-guided minus mean plain,0.1721,0.1353,0.2132,True,0.2468,,0.237
+Gemma-3-12B,fully correct,mean attribution-guided minus mean random,-0.1181,-0.1701,-0.066,True,0.0312,0.3438,
+Gemma-3-12B,fully correct,mean plain minus mean random,-0.0833,-0.1389,-0.0243,True,,0.3438,0.25
+Gemma-3-12B,fully correct,mean attribution-guided minus mean plain,-0.0347,-0.1042,0.0347,False,0.0312,,0.25
+Ministral-8B,memory accuracy,mean attribution-guided minus mean random,0.1071,0.0823,0.1331,True,0.3539,0.2565,
+Ministral-8B,memory accuracy,mean plain minus mean random,0.105,0.0768,0.1342,True,,0.2565,0.026
+Ministral-8B,memory accuracy,mean attribution-guided minus mean plain,0.0022,-0.0108,0.0152,False,0.3539,,0.026
+Ministral-8B,fully correct,mean attribution-guided minus mean random,-0.0035,-0.0104,0.0,False,0.0,0.0104,
+Ministral-8B,fully correct,mean plain minus mean random,0.0,-0.0104,0.0104,False,,0.0104,0.0104
+Ministral-8B,fully correct,mean attribution-guided minus mean plain,-0.0035,-0.0104,0.0,False,0.0,,0.0104
+Llama-3.2-3B,memory accuracy,mean attribution-guided minus mean random,0.0509,0.0314,0.0703,True,0.1234,0.0357,
+Llama-3.2-3B,memory accuracy,mean plain minus mean random,0.0065,-0.0097,0.0249,False,,0.0357,0.0292
+Llama-3.2-3B,memory accuracy,mean attribution-guided minus mean plain,0.0444,0.0303,0.0584,True,0.1234,,0.0292
+Llama-3.2-3B,fully correct,mean attribution-guided minus mean random,0.0069,-0.0069,0.0243,False,0.0208,0.0104,
+Llama-3.2-3B,fully correct,mean plain minus mean random,0.0104,0.0,0.0243,False,,0.0104,0.0312
+Llama-3.2-3B,fully correct,mean attribution-guided minus mean plain,-0.0035,-0.0243,0.0174,False,0.0208,,0.0312

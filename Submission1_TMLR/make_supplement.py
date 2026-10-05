@@ -79,7 +79,7 @@ def main() -> None:
                 z.writestr(arc + ".gz", gzip.compress(text.encode("utf-8")))
             else:
                 z.writestr(arc, text)
-        for sub in ("analysis", "analysis_round3", "analysis_round3/budget256", "agrifacts_audit", "checker_challenge_154",
+        for sub in ("analysis", "analysis_round3", "analysis_round3/budget256", "analysis_review", "agrifacts_audit", "checker_challenge_154",
                     "wdi", "wdi/raw"):
             for p in sorted((res / sub).glob("*")):
                 if p.is_file() and p.suffix in (".csv", ".json", ".jsonl", ".log"):
@@ -91,7 +91,8 @@ def main() -> None:
             "code/results_submission1_tmlr/  prompts, model outputs (.jsonl.gz), manifests and analysis tables\n"
             "PLAN.md                     the written plan, with its dated log of changes\n\n"
             "Reproduce the tables (the .gz files are read directly):  cd code;\n"
-            "  PYTHONPATH=. python -m Submission1_TMLR.analyse && PYTHONPATH=. python -m Submission1_TMLR.make_tables\n"
+            "  PYTHONPATH=. python -m Submission1_TMLR.analyse && PYTHONPATH=. python -m Submission1_TMLR.analyse_round3 &&\n"
+            "  PYTHONPATH=. python -m Submission1_TMLR.analyse_review && PYTHONPATH=. python -m Submission1_TMLR.make_tables\n"
             "The adapters are identified in the manifests and will be released after review.\n"))
     if leaks:
         raise SystemExit(f"blocked strings remain in: {leaks}")
